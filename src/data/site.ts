@@ -54,6 +54,22 @@ export const IMAGES: Record<string, string> = {
 
 export const img = (key: string) => (IMAGES[key] ? withBase(IMAGES[key]) : '');
 
+/** Ảnh robot / thiết bị đã tách nền nền trong suốt, đặt ở public/images/robots/<tên>.webp. */
+export const bot = (name: string) => withBase(`/images/robots/${name}.webp`);
+
+/** Robot nhỏ đứng ở mép ảnh mỗi thẻ giải pháp, bật lên khi rê chuột (khoá = khoá ảnh giải pháp). */
+export const SOL_BOTS: Record<string, string> = {
+  'sol-ihub': 'ugot-up',
+  'sol-lab': 'yanshee',
+  'sol-k12': 'ukit-transformer',
+  'sol-ngayhoi': 'am-jump',
+  'sol-cuocthi': 'ugot-dog',
+  'sol-tour': 'cruzr',
+  'sol-huanluyen': 'ugot-car',
+  'sol-traihe': 'stickem-robot',
+  'sol-doitac': 'weeemake-bot',
+};
+
 /**
  * Logo đối tác (dải logo chạy ngang ở trang chủ và trang Hợp tác).
  * Đặt file PNG nền trong suốt vào public/images/partners/ rồi thêm một dòng vào đây.

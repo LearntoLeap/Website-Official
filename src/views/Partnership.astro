@@ -17,7 +17,7 @@ const p = t.partnership;
 const initial = (s: string) => s.trim().charAt(0).toUpperCase();
 ---
 <Base lang={lang} page="partnership" title={t.meta.partnership.title} description={t.meta.partnership.description}>
-  <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.partnership} />
+  <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.partnership} bots={['yanshee', 'ukit-transformer']} />
 
   <section class="sp">
     <div class="wrap">

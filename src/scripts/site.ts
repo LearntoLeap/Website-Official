@@ -79,7 +79,8 @@ if ('IntersectionObserver' in window && !reduce) {
   reveals.forEach((el) => el.classList.add('in'));
 }
 
-/* ----- Hero: sân khấu robot nghiêng theo chuột + log gõ chữ ----- */
+/* ----- Hero: sân khấu sản phẩm ----- */
+// Rê chuột: cả hero nhận --tx/--ty (-1…1) để chữ nền, sân khấu và từng ảnh trôi theo độ sâu.
 const tilt = document.querySelector<HTMLElement>('[data-tilt]');
 if (tilt && !reduce && matchMedia('(pointer: fine)').matches) {
   const hero = tilt.closest<HTMLElement>('.hero') ?? tilt;
@@ -91,38 +92,54 @@ if (tilt && !reduce && matchMedia('(pointer: fine)').matches) {
       const r = tilt.getBoundingClientRect();
       const x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
       const y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
-      tilt.style.setProperty('--tx', x.toFixed(3));
-      tilt.style.setProperty('--ty', y.toFixed(3));
+      hero.style.setProperty('--tx', x.toFixed(3));
+      hero.style.setProperty('--ty', y.toFixed(3));
     });
   });
-  hero.addEventListener('pointerleave', () => { tilt.style.setProperty('--tx', '0'); tilt.style.setProperty('--ty', '0'); });
+  hero.addEventListener('pointerleave', () => { hero.style.setProperty('--tx', '0'); hero.style.setProperty('--ty', '0'); });
 }
-const log = document.querySelector<HTMLElement>('[data-log]');
-if (log) {
-  const lines: string[] = JSON.parse(log.dataset.log || '[]').map((l: string) => '> ' + l);
-  const cur = document.createElement('span');
-  cur.className = 'cur';
-  if (reduce) {
-    log.lastElementChild?.append(cur);
-  } else {
-    // Bản HTML đã có sẵn đủ chữ (cho máy tắt JS); ở đây xoá đi rồi gõ lại từng dòng.
-    log.replaceChildren();
-    let li = 0;
-    const typeLine = () => {
-      if (li >= lines.length) return;
-      const row = document.createElement('div');
-      const txt = document.createTextNode('');
-      row.append(txt, cur);
-      log.append(row);
-      let ci = 0;
-      const step = () => {
-        txt.data = lines[li].slice(0, ++ci);
-        if (ci < lines[li].length) setTimeout(step, 24);
-        else { li++; setTimeout(typeLine, 380); }
-      };
-      step();
-    };
-    setTimeout(typeLine, 1500);
+const stage = document.querySelector<HTMLElement>('[data-stage]');
+if (stage) {
+  const tabs = [...stage.querySelectorAll<HTMLButtonElement>('[data-pick]')];
+  const parts = (sel: string) => [...stage.querySelectorAll<HTMLElement>(sel)];
+  const slides = parts('.stg-slide'), giants = parts('.stg-giant .g'), specs = parts('.spec');
+  let cur = 0;
+  const show = (i: number, focus = false) => {
+    cur = (i + tabs.length) % tabs.length;
+    tabs.forEach((t, k) => {
+      const on = k === cur;
+      t.classList.toggle('on', on);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
+    slides.forEach((el, k) => el.classList.toggle('on', k === cur));
+    giants.forEach((el, k) => el.classList.toggle('on', k === cur));
+    specs.forEach((el, k) => { el.hidden = k !== cur; });
+    if (focus) tabs[cur].focus();
+  };
+  tabs.forEach((t, k) => {
+    t.addEventListener('click', () => show(k));
+    t.addEventListener('keydown', (e) => {
+      const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (step) { e.preventDefault(); show(cur + step, true); }
+    });
+  });
+  // Link thẳng tới một nhóm: …/#line-3
+  const m = /^#line-(\d+)$/.exec(location.hash);
+  if (m && +m[1] >= 1 && +m[1] <= tabs.length) show(+m[1] - 1);
+  // Tự chuyển: vạch tiến trình dưới tab đang chọn chạy hết thì sang nhóm sau.
+  // Rê chuột / focus vào hero hoặc bấm nút dừng thì vạch dừng lại (WCAG 2.2.2).
+  if (!reduce) {
+    stage.classList.add('auto');
+    stage.addEventListener('animationend', (e) => {
+      if ((e.target as Element).classList.contains('prog')) show(cur + 1);
+    });
+    const toggle = stage.querySelector<HTMLButtonElement>('[data-stage-toggle]');
+    toggle?.addEventListener('click', () => {
+      const paused = stage.classList.toggle('paused');
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.setAttribute('aria-label', (paused ? toggle.dataset.play : toggle.dataset.pause) || '');
+    });
   }
 }
 
@@ -174,6 +191,124 @@ document.querySelectorAll<HTMLElement>('[data-rail]').forEach((rail) => {
   track.addEventListener('scroll', sync, { passive: true });
   sync();
 });
+
+/* ----- Hệ sinh thái giải pháp: tab dọc, rê chuột cũng đổi mảng ----- */
+document.querySelectorAll<HTMLElement>('[data-eco]').forEach((box) => {
+  const tabs = [...box.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  const panes = [...box.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+  let cur = 0;
+  const show = (i: number, focus = false) => {
+    i = (i + tabs.length) % tabs.length;
+    if (i !== cur) {
+      cur = i;
+      tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      panes.forEach((p, k) => { p.hidden = k !== i; });
+    }
+    if (focus) tabs[i].focus();
+  };
+  // Ảnh của các mảng đang ẩn: tải trước khi mục sắp vào màn hình để đổi tab không bị trống.
+  const pre = new IntersectionObserver((en) => {
+    if (!en[0].isIntersecting) return;
+    box.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((im) => { im.loading = 'eager'; });
+    pre.disconnect();
+  }, { rootMargin: '600px 0px' });
+  pre.observe(box);
+  let hoverT = 0;
+  tabs.forEach((t, k) => {
+    t.addEventListener('click', () => show(k));
+    t.addEventListener('mouseenter', () => { clearTimeout(hoverT); hoverT = window.setTimeout(() => show(k), 140); });
+    t.addEventListener('mouseleave', () => clearTimeout(hoverT));
+    t.addEventListener('keydown', (e) => {
+      const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+      if (step) { e.preventDefault(); show(cur + step, true); }
+    });
+  });
+});
+
+/* ----- Robot ló ở mép các mục: trôi nhẹ theo cuộn trang ----- */
+const peeks = [...document.querySelectorAll<HTMLElement>('[data-peek]')];
+if (peeks.length && !reduce) {
+  const visible = new Set<HTMLElement>();
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) visible.add(en.target as HTMLElement); else visible.delete(en.target as HTMLElement);
+  }));
+  peeks.forEach((p) => io.observe(p));
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = innerHeight;
+    visible.forEach((p) => {
+      const r = p.getBoundingClientRect();
+      const k = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
+      p.style.setProperty('--sy', k.toFixed(3));
+    });
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+}
+
+/* ----- Alpha Mini đồng hành ----- */
+const buddy = document.querySelector<HTMLButtonElement>('[data-buddy-bot]');
+if (buddy) {
+  const say = JSON.parse(buddy.dataset.say || '{}') as Record<string, string>;
+  const bubble = buddy.querySelector<HTMLElement>('.buddy-say')!;
+  const poses = [...buddy.querySelectorAll<HTMLImageElement>('img[data-pose]')];
+  let pose = 'walk';
+  let lastTalk = 0;
+  let talkTimer = 0;
+  const setPose = (p: string) => {
+    if (p === pose || !poses.some((im) => im.dataset.pose === p)) return;
+    pose = p;
+    poses.forEach((im) => im.classList.toggle('on', im.dataset.pose === p));
+    // Nói một câu ngắn khi đổi tư thế, không quá dày.
+    const now = Date.now();
+    if (say[p] && now - lastTalk > 3500) {
+      lastTalk = now;
+      bubble.textContent = say[p];
+      buddy.classList.add('talk');
+      clearTimeout(talkTimer);
+      talkTimer = window.setTimeout(() => buddy.classList.remove('talk'), 2600);
+    }
+  };
+  // Chỉ hiện sau khi cuộn qua hero.
+  const onScroll = () => buddy.classList.toggle('show', scrollY > innerHeight * 0.55);
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+  // Mục nào nằm giữa màn hình thì lấy tư thế của mục đó.
+  const zones = document.querySelectorAll<HTMLElement>('[data-buddy]');
+  const zio = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) setPose((en.target as HTMLElement).dataset.buddy || 'walk');
+  }), { rootMargin: '-45% 0px -45% 0px' });
+  zones.forEach((z) => zio.observe(z));
+  buddy.addEventListener('mouseenter', () => {
+    bubble.textContent = say.front || '';
+    buddy.classList.add('talk');
+    clearTimeout(talkTimer);
+  });
+  buddy.addEventListener('mouseleave', () => buddy.classList.remove('talk'));
+  buddy.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+}
+
+/* ----- Hiệu ứng khi rê chuột: đốm sáng trên thẻ, nút hút nhẹ theo con trỏ ----- */
+if (matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('pointermove', (e) => {
+    const card = (e.target as Element).closest<HTMLElement>('.card,.rs,.pcard,.news-card');
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }, { passive: true });
+  if (!reduce) {
+    document.querySelectorAll<HTMLElement>('.btn').forEach((b) => {
+      b.addEventListener('pointermove', (e) => {
+        const r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', `${((e.clientX - r.left) / r.width - 0.5) * 8}px`);
+        b.style.setProperty('--by', `${((e.clientY - r.top) / r.height - 0.5) * 6}px`);
+      });
+      b.addEventListener('pointerleave', () => { b.style.removeProperty('--bx'); b.style.removeProperty('--by'); });
+    });
+  }
+}
 
 /* ----- Lightbox video / ảnh ----- */
 const lb = document.getElementById('lb');

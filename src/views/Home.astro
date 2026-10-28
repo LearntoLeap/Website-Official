@@ -11,6 +11,8 @@ import CtaBand from '../components/CtaBand.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
 import ShortsRail from '../components/ShortsRail.astro';
+import Ecosystem from '../components/Ecosystem.astro';
+import Peek from '../components/Peek.astro';
 import { useT, rich } from '../i18n';
 import { href, withBase, type Lang } from '../i18n/routes';
 import { SITE } from '../data/site';
@@ -20,84 +22,104 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const h = t.home;
-// Toạ độ trong khung 1000×700 của hero (ảnh dàn robot nằm ở x 100–900, y 248–680).
-// p: điểm chỉ vào robot, e: chỗ gấp khúc, t: đầu đường kẻ; side: phía đặt chữ.
-const CALLOUTS = [
-  { p: [455, 330], e: [360, 200], t: [130, 200], side: 'l' },
-  { p: [650, 385], e: [740, 300], t: [985, 300], side: 'r' },
-  { p: [250, 505], e: [190, 420], t: [12, 420], side: 'l' },
-  { p: [735, 520], e: [810, 450], t: [990, 450], side: 'r' },
+// Sân khấu hero: 5 dòng sản phẩm (thứ tự theo i18n home.hero.lines; không ghi tên hãng).
+// Mỗi ảnh: cx = tâm theo chiều ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%),
+// dz = độ trôi khi rê chuột, r = góc xoay. Ảnh đã tách nền nằm ở public/images/robots.
+type Shot = { src: string; cx: number; b: number; h?: number; w?: number; dz?: number; r?: number };
+const STAGE: { thumb: string; shots: Shot[] }[] = [
+  { thumb: 'tienkung', shots: [{ src: 'tienkung', cx: 40, b: -4, h: 106, dz: 10 }] },
+  { thumb: 'yanshee', shots: [
+    { src: 'ukit-se', cx: 70, b: 4, w: 50, dz: 6 },
+    { src: 'yanshee', cx: 34, b: 4, h: 84, dz: 14 },
+  ] },
+  { thumb: 'ugot-up', shots: [
+    { src: 'ukit-transformer', cx: 81, b: 4, h: 56, dz: 6 },
+    { src: 'ugot-dog', cx: 37, b: 4, w: 46, dz: 14 },
+    { src: 'ugot-up', cx: 62, b: 0, w: 22, dz: 20 },
+  ] },
+  { thumb: 'stickem-robot', shots: [
+    { src: 'weeemake-house', cx: 81, b: 6, h: 52, dz: 6 },
+    { src: 'stickem-robot', cx: 35, b: 4, w: 50, dz: 14 },
+    { src: 'weeemake-kit', cx: 61, b: 0, w: 24, dz: 20 },
+  ] },
+  { thumb: 'kt-smarthouse', shots: [
+    { src: 'ebd-stem5', cx: 12, b: 40, w: 16, dz: 4, r: -12 },
+    { src: 'ebd-stem8', cx: 22, b: 43, w: 16, dz: 6, r: -3 },
+    { src: 'kt-wind', cx: 85, b: 6, h: 56, dz: 8 },
+    { src: 'kt-smarthouse', cx: 46, b: 3, w: 54, dz: 14 },
+  ] },
 ];
-// Khung ngắm kiểu HUD quanh đầu – thân robot Walker.
-const HUD = { x1: 425, y1: 238, x2: 540, y2: 395 };
-const k = 22;
-const HUD_CORNERS = [
-  `M${HUD.x1} ${HUD.y1 + k}V${HUD.y1}H${HUD.x1 + k}`,
-  `M${HUD.x2 - k} ${HUD.y1}H${HUD.x2}V${HUD.y1 + k}`,
-  `M${HUD.x2} ${HUD.y2 - k}V${HUD.y2}H${HUD.x2 - k}`,
-  `M${HUD.x1 + k} ${HUD.y2}H${HUD.x1}V${HUD.y2 - k}`,
-];
+const bot = (n: string) => withBase(`/images/robots/${n}.webp`);
+const shotStyle = (s: Shot, i: number) =>
+  [`--cx:${s.cx}%`, `--b:${s.b}%`, s.h ? `--h:${s.h}%` : `--w:${s.w}%`, `--dz:${s.dz ?? 8}`, `--r:${s.r ?? 0}deg`, `--d:${i}`].join(';');
 // 3 bài báo mới nhất (cuối danh sách là mới nhất).
 const latest = press.slice(-3).reverse();
 ---
 <Base lang={lang} page="home" title={t.meta.home.title} description={t.meta.home.description}>
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-glow g1"></div><div class="hero-glow g2"></div>
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
-          <h1 class="reveal d1" set:html={rich(h.hero.title)} />
-          <p class="sub reveal d2">{h.hero.sub}</p>
-          <div class="hero-cta reveal d3">
-            <Btn href={href('solutions', lang)} arrow>{h.hero.cta1}</Btn>
-            <Btn href={href('impact', lang)} variant="glass">{h.hero.cta2}</Btn>
-          </div>
-        </div>
-        <div class="hero-stage reveal d2" aria-hidden="true">
-          <div class="hs-tilt" data-tilt>
-            <div class="hs-floor"></div>
-            <div class="hs-spot"></div>
-            <img class="hs-robots" src={withBase('/images/hero-robots.webp')} alt="" width="1600" height="863" fetchpriority="high" decoding="async" />
-            <svg class="hs-lines" viewBox="0 0 1000 700" fill="none">
-              <g class="hs-hud">
-                {HUD_CORNERS.map((d) => <path d={d} pathLength="1" />)}
-                <rect class="hs-scan" x={HUD.x1 + 4} y={HUD.y1} width={HUD.x2 - HUD.x1 - 8} height="2" />
-              </g>
-              {CALLOUTS.map((c, i) => (
-                <g class="hs-co" style={`--i:${i}`}>
-                  <polyline points={[c.p, c.e, c.t].map((pt) => pt.join(',')).join(' ')} pathLength="1" />
-                  <circle class="ring" cx={c.p[0]} cy={c.p[1]} r="11" />
-                  <circle class="dot" cx={c.p[0]} cy={c.p[1]} r="5" />
-                </g>
-              ))}
-            </svg>
-            <span class="hs-hud-label" style={`left:${HUD.x1 / 10}%;top:${HUD.y1 / 7}%`}>{h.hero.hud}</span>
-            {CALLOUTS.map((c, i) => {
-              const [a, b] = c.side === 'l' ? [c.t[0], c.e[0]] : [c.e[0], c.t[0]];
-              return (
-                <div class:list={['hs-label', c.side]} style={`--i:${i};left:${a / 10}%;width:${(b - a) / 10}%;top:${c.t[1] / 7}%`}>
-                  <b>{h.hero.callouts[i].t}</b><span>{h.hero.callouts[i].d}</span>
-                </div>
-              );
-            })}
-            <div class="hs-log" data-log={JSON.stringify(h.hero.log)}>{h.hero.log.map((l) => <div>&gt; {l}</div>)}</div>
-          </div>
+  <!-- HERO: sân khấu sản phẩm -->
+  <div class="hero stg" data-stage>
+    <div class="stg-giant" aria-hidden="true">
+      {h.hero.lines.map((l, i) => <div class:list={['g', { on: i === 0 }]} data-i={i}><span>{l.giant[0]}</span><span>{l.giant[1]}</span></div>)}
+    </div>
+    <div class="wrap stg-grid">
+      <div class="stg-copy">
+        <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
+        <h1 class="reveal d1" set:html={rich(h.hero.title)} />
+        <p class="sub reveal d2">{h.hero.sub}</p>
+        <div class="hero-cta reveal d3">
+          <Btn href={href('solutions', lang)} arrow>{h.hero.cta1}</Btn>
+          <Btn href={href('impact', lang)} variant="glass">{h.hero.cta2}</Btn>
         </div>
       </div>
+      <div class="stg-stage reveal d2">
+        <div class="stg-view" data-tilt>
+        <div class="stg-floor" aria-hidden="true"></div>
+        <div class="stg-ring" aria-hidden="true"></div>
+        {STAGE.map((st, i) => (
+          <div class:list={['stg-slide', { on: i === 0 }]} id={`stg-${i}`} role="tabpanel" data-i={i} aria-label={h.hero.lines[i].name}>
+            {st.shots.map((sh, j) => (
+              <img src={bot(sh.src)} alt={j === st.shots.length - 1 ? h.hero.lines[i].name : ''} style={shotStyle(sh, j)} decoding="async" fetchpriority={i === 0 ? 'high' : 'low'} />
+            ))}
+          </div>
+        ))}
+        </div>
+        <div class="stg-spec">
+          {h.hero.lines.map((l, i) => (
+            <div class="spec" data-i={i} hidden={i !== 0}>
+              <div class="k">{String(i + 1).padStart(2, '0')} / {String(STAGE.length).padStart(2, '0')} · {l.kind}</div>
+              <div class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+              <h2 class="nm">{l.name}</h2>
+              <p>{l.desc}</p>
+              <ul>{l.tags.map((tg) => <li>{tg}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="wrap stg-bar">
+      <div class="stg-pick" role="tablist" aria-label={h.hero.pickLabel}>
+        {STAGE.map((st, i) => (
+          <button type="button" role="tab" class:list={{ on: i === 0 }} id={`stg-tab-${i}`} aria-controls={`stg-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-pick={i}>
+            <span class="th"><img src={bot(st.thumb)} alt="" loading="lazy" decoding="async" /></span>
+            <span class="tl">{h.hero.lines[i].tab}</span>
+            <i class="prog" aria-hidden="true"></i>
+          </button>
+        ))}
+      </div>
+      <button class="stg-toggle" type="button" data-stage-toggle aria-pressed="false" aria-label={t.common.pauseMotion} data-pause={t.common.pauseMotion} data-play={t.common.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
     </div>
     <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor" aria-hidden="true"><path d="M0 90h1440V40c-220 40-520 50-760 28C420 44 180 20 0 52z"/></svg>
   </div>
 
   <!-- STATS -->
-  <section class="wrap" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
+  <section class="wrap" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
     <LogoStrip label={h.partnersStrip} lang={lang} />
   </section>
 
   <!-- INTRO -->
-  <section class="sp">
+  <section class="sp has-peek" data-buddy="walk">
+    <Peek src="ukit-penguin" class="pk-intro" />
     <div class="wrap split">
       <div class="reveal">
         <span class="eyebrow">{h.intro.eyebrow}</span>
@@ -111,7 +133,8 @@ const latest = press.slice(-3).reverse();
   </section>
 
   <!-- 3 THẾ MẠNH -->
-  <section class="sp bg-soft">
+  <section class="sp bg-soft has-peek" data-buddy="front">
+    <Peek src="ugot-car" class="pk-rs" />
     <div class="wrap">
       <SectionHead eyebrow={h.strengths.eyebrow} title={h.strengths.title} />
       <div class="rs-grid">
@@ -130,8 +153,12 @@ const latest = press.slice(-3).reverse();
     </div>
   </section>
 
+  <!-- HỆ SINH THÁI SẢN PHẨM -->
+  <Ecosystem lang={lang} />
+
   <!-- GIẢI PHÁP -->
-  <section class="sp">
+  <section class="sp has-peek" data-buddy="walk">
+    <Peek src="yanshee-2" class="pk-sol" />
     <div class="wrap">
       <SectionHead eyebrow={h.solPreview.eyebrow} title={h.solPreview.title} lead={h.solPreview.lead} />
       <div class="sol-grid">
@@ -167,7 +194,8 @@ const latest = press.slice(-3).reverse();
   </section>
 
   <!-- GIẢI THƯỞNG -->
-  <section class="sp bg-soft">
+  <section class="sp bg-soft has-peek" data-buddy="jump">
+    <Peek src="ukit-transformer" class="pk-aw" />
     <div class="wrap">
       <SectionHead eyebrow={h.awardsTeaser.eyebrow} title={h.awardsTeaser.title} />
       <div class="g4 grid" style="margin-bottom:46px">

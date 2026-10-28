@@ -8,6 +8,10 @@ const vi = {
   langShort: 'VI',
   locale: 'vi-VN',
   common: {
+    buddy: {
+      label: 'Alpha Mini — lên đầu trang',
+      say: { handsup: 'Xin chào! Mình là Alpha Mini', jump: 'Nhiều robot hay quá!', walk: 'Cùng khám phá nhé', front: 'Bấm mình để lên đầu trang', bow: 'Cảm ơn bạn đã ghé thăm!' },
+    },
     pauseMotion: 'Tạm dừng dải logo',
     playMotion: 'Chạy dải logo',
     srSolutions: 'Chín giải pháp của Learn to Leap',
@@ -111,20 +115,22 @@ const vi = {
   /* ---------- Trang chủ ---------- */
   home: {
     hero: {
-      eyebrow: 'Tư vấn & Giải pháp Giáo dục · STEM — Robotics — AI',
-      title: 'Giáo dục công nghệ đồng hành cùng [[kỷ nguyên vươn mình]] của dân tộc',
-      sub: 'Learn to Leap là đơn vị tư vấn và cung cấp giải pháp toàn diện, phổ cập giáo dục STEM và Trí tuệ nhân tạo (AI).',
+      eyebrow: 'Hệ sinh thái Robotic AI cho giáo dục',
+      title: 'Đưa [[robot AI]] vào từng lớp học Việt Nam',
+      sub: 'Learn to Leap triển khai trọn gói các dòng Robotic AI — thiết bị, chương trình, đào tạo giáo viên và sân chơi quốc tế — cùng nhà trường trên cả nước.',
       cta1: 'Khám phá giải pháp',
       cta2: 'Năng lực & dấu ấn',
-      /** Chú thích quanh dàn robot ở hero (tên + một dòng mô tả). */
-      callouts: [
-        { t: 'Walker · Humanoid AI', d: 'Robot hình người thế hệ mới' },
-        { t: 'Cruzr', d: 'Robot dịch vụ AI tương tác' },
-        { t: 'Yanshee · THPT', d: 'Lập trình Python & AI' },
-        { t: 'UGOT · THCS', d: 'Robot lắp ghép, biến hình' },
+      /** Nhãn của dãy nút chọn dòng sản phẩm ở hero. */
+      pickLabel: 'Chọn dòng sản phẩm',
+      /** 5 dòng sản phẩm trên sân khấu hero, theo thứ tự ưu tiên — chỉ ghi đặc trưng dòng, không ghi tên hãng.
+       *  tab: nhãn nút chọn; giant: 2 dòng chữ lớn phía sau. */
+      lines: [
+        { tab: 'Robot hình người', kind: 'Humanoid · AI hiện thân', name: 'Robot hình người AI', desc: 'Robot hình người cỡ lớn — trình diễn, nghiên cứu và truyền cảm hứng về trí tuệ nhân tạo hiện thân.', tags: ['Humanoid', 'AI hiện thân', 'Trình diễn'], giant: ['HUMANOID', 'AI·ROBOT'] },
+        { tab: 'Robot lập trình', kind: 'Lập trình · Kỹ thuật', name: 'Robot lập trình AI', desc: 'Robot hình người cỡ nhỏ để học lập trình Python & AI, cùng bộ lắp ghép kỹ thuật cơ khí – điện tử.', tags: ['Python', 'Thị giác máy', 'Kỹ thuật'], giant: ['CODE·AI', 'ENGINEER'] },
+        { tab: 'Lắp ghép AI', kind: 'Robotics · Biến hình', name: 'Robot lắp ghép AI', desc: 'Một bộ robot biến hình nhiều dạng — xe, chó robot, cánh tay — lắp ghép sáng tạo, lập trình khối.', tags: ['Biến hình', 'Lập trình khối', 'Thi đấu'], giant: ['MODULAR', 'ROBOTICS'] },
+        { tab: 'STEAM', kind: 'STEAM · Maker', name: 'STEAM & Maker', desc: 'Học liệu lắp ghép và bộ robot – IoT cho các dự án STEAM thực hành, từ ý tưởng đến sản phẩm.', tags: ['Lắp ghép', 'IoT', 'Dự án'], giant: ['STEAM', 'MAKER'] },
+        { tab: 'STEM · IoT', kind: 'STEM Khoa học · IoT', name: 'STEM Khoa học & IoT', desc: 'Học liệu Hoạt động giáo dục STEM, mô hình IoT, nhà thông minh và năng lượng tái tạo.', tags: ['Học liệu', 'Cảm biến', 'Nhà thông minh'], giant: ['STEM', 'IOT·LAB'] },
       ],
-      hud: 'AI VISION · TRACKING',
-      log: ['LTL STEM-AI LAB · ONLINE', 'MODULES: 4 NHÓM · 10 MODULE', 'K12: MẦM NON → THPT', 'STATUS: ACTIVE · MODE: LEARNING'],
     },
     stats: [
       { n: 20, suf: '+', label: 'Tỉnh, thành phố<br>đã triển khai' },
@@ -162,6 +168,21 @@ const vi = {
           desc: 'Khác với đơn vị chỉ giao thiết bị rồi rời đi, Learn to Leap đồng hành trọn vẹn:',
           list: ['Xây dựng chương trình theo cấp học', 'Đội ngũ giảng dạy trực tiếp tại trường', 'Đào tạo giáo viên (TOT)', 'Đồng hành mọi hoạt động thúc đẩy STEM – AI', "Tổ chức sân chơi đến cấp quốc tế (ROBOG, Stick'Em)"], ordered: true,
         },
+      ],
+    },
+    eco: {
+      eyebrow: 'Hệ sinh thái giải pháp',
+      title: 'Một đối tác — [[trọn hệ sinh thái giáo dục công nghệ]]',
+      cta: 'Xem chi tiết giải pháp',
+      listLabel: 'Các mảng giải pháp',
+      /** 6 mảng giải pháp; ảnh minh hoạ đặt trong components/Ecosystem.astro theo cùng thứ tự. */
+      items: [
+        { title: 'Phòng STEM AI Robotics', desc: 'Phòng Lab trang bị robot AI, robot lắp ghép và học liệu lập trình — triển khai và vận hành ngay tại trường.', chips: ['Robot AI', 'Lắp ghép', 'Lập trình'] },
+        { title: 'Phòng học thông minh', desc: 'Màn hình tương tác, thực tế ảo, in 3D và nền tảng học tập số cho mọi môn học.', chips: ['Tương tác', 'Thực tế ảo', 'In 3D'] },
+        { title: 'Trường học thông minh', desc: 'Robot dịch vụ chào đón, hệ thống IoT và giải pháp chuyển đổi số cho toàn trường.', chips: ['Robot dịch vụ', 'IoT', 'Chuyển đổi số'] },
+        { title: 'Ngày hội trải nghiệm', desc: '50+ ngày hội STEM – AI – Robotics, đón tới 1.200+ học sinh mỗi sự kiện.', chips: ['Trạm trải nghiệm', 'Trình diễn robot', 'Workshop'] },
+        { title: 'Cuộc thi Quốc gia & Quốc tế', desc: 'Tổ chức sân chơi và huấn luyện đội tuyển từ cấp trường đến đấu trường quốc tế.', chips: ['Tổ chức', 'Huấn luyện', 'Quốc tế'] },
+        { title: 'Chương trình & đào tạo giáo viên', desc: 'Khung chương trình STEM – AI liên thông các cấp, kèm đào tạo giáo viên vận hành.', chips: ['K12', 'Học liệu', 'Đào tạo'] },
       ],
     },
     solPreview: {

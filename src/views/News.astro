@@ -24,7 +24,7 @@ const vids = [...videos].reverse();
 const empty = !news.length && !vids.length && !shorts.length && !photos.length;
 ---
 <Base lang={lang} page="news" title={t.meta.news.title} description={t.meta.news.description} lightbox>
-  <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} />
+  <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} bots={['cruzr', 'am-walk']} />
 
   <section class="sp">
     <div class="wrap">

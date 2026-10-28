@@ -25,7 +25,7 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(SITE.mapQue
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.mapQuery)}`;
 ---
 <Base lang={lang} page="contact" title={t.meta.contact.title} description={t.meta.contact.description}>
-  <PageHero lang={lang} title={c.hero.title} lead={c.hero.lead} crumb={t.common.nav.contact} />
+  <PageHero lang={lang} title={c.hero.title} lead={c.hero.lead} crumb={t.common.nav.contact} bots={['am-bow']} />
 
   <section class="sp">
     <div class="wrap">

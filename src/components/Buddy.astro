@@ -1,0 +1,16 @@
+---
+// Alpha Mini đồng hành: đứng ở góc màn hình, đổi tư thế theo mục đang xem (thuộc tính data-buddy
+// trên từng mục), nói một câu ngắn khi đổi tư thế; bấm vào để lên đầu trang.
+import { bot } from '../data/site';
+import { useT } from '../i18n';
+import type { Lang } from '../i18n/routes';
+interface Props { lang: Lang }
+const b = useT(Astro.props.lang).common.buddy;
+const POSES = ['walk', 'handsup', 'jump', 'front', 'bow'] as const;
+---
+<button class="buddy" type="button" data-buddy-bot aria-label={b.label} title={b.label} data-say={JSON.stringify(b.say)}>
+  <span class="buddy-say" aria-hidden="true"></span>
+  <span class="buddy-body">
+    {POSES.map((p, i) => <img src={bot(`am-${p}`)} alt="" data-pose={p} class:list={{ on: i === 0 }} loading="lazy" decoding="async" />)}
+  </span>
+</button>

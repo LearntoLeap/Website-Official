@@ -17,7 +17,7 @@ const s = t.solutionsPage;
 const labPhoto = img('lab-photo');
 ---
 <Base lang={lang} page="solutions" title={t.meta.solutions.title} description={t.meta.solutions.description}>
-  <PageHero lang={lang} title={s.hero.title} lead={s.hero.lead} crumb={t.common.nav.solutions}>
+  <PageHero lang={lang} title={s.hero.title} lead={s.hero.lead} crumb={t.common.nav.solutions} bots={['tienkung', 'ugot-up']}>
     <Btn href={href('contact', lang)} variant="glass" arrow>{s.hero.cta}</Btn>
   </PageHero>
 

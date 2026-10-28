@@ -3,12 +3,19 @@ import Icon from './Icon.astro';
 import HexBg from './HexBg.astro';
 import { rich, useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
-interface Props { lang: Lang; title: string; lead?: string; crumb: string }
-const { lang, title, lead, crumb } = Astro.props;
+import { bot } from '../data/site';
+// bots: 1–2 ảnh robot tách nền (tên trong public/images/robots) đứng bên phải; ảnh đầu là robot chính.
+interface Props { lang: Lang; title: string; lead?: string; crumb: string; bots?: string[] }
+const { lang, title, lead, crumb, bots = [] } = Astro.props;
 const t = useT(lang);
 ---
-<div class="phero">
+<div class:list={['phero', { 'has-bots': bots.length > 0 }]} data-buddy="walk">
   <HexBg />
+  {bots.length > 0 && (
+    <div class="ph-bots" aria-hidden="true">
+      {bots.map((b, i) => <img class={`pb-${i}`} src={bot(b)} alt="" decoding="async" />)}
+    </div>
+  )}
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href={href('home', lang)}>{t.common.nav.home}</a><Icon name="chevron" /><span aria-current="page">{crumb}</span>

@@ -1,10 +1,12 @@
 ---
 import { rich } from '../i18n';
+import Peek from './Peek.astro';
 interface Props { eyebrow?: string; title: string; lead?: string }
 const { eyebrow, title, lead } = Astro.props;
 ---
-<section class="sp cta-band">
+<section class="sp cta-band" data-buddy="bow">
   <div class="glow"></div>
+  <Peek src="cruzr" class="pk-cta" />
   <div class="wrap">
     {eyebrow && <span class="eyebrow light center reveal">{eyebrow}</span>}
     <h2 class="reveal d1" set:html={rich(title)} />

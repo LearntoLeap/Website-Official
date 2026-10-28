@@ -6,6 +6,10 @@ const en: Dict = {
   langShort: 'EN',
   locale: 'en-US',
   common: {
+    buddy: {
+      label: 'Alpha Mini — back to top',
+      say: { handsup: 'Hi! I’m Alpha Mini', jump: 'So many cool robots!', walk: 'Let’s explore', front: 'Tap me to go back up', bow: 'Thanks for visiting!' },
+    },
     pauseMotion: 'Pause logo strip',
     playMotion: 'Play logo strip',
     srSolutions: 'Our nine solutions',
@@ -107,19 +111,19 @@ const en: Dict = {
 
   home: {
     hero: {
-      eyebrow: 'Education consulting & solutions · STEM — Robotics — AI',
-      title: 'Technology education for [[Vietnam’s era of rising]]',
-      sub: 'Learn to Leap advises on and delivers end-to-end solutions that bring STEM and Artificial Intelligence (AI) education to every school.',
+      eyebrow: 'A Robotic AI ecosystem for education',
+      title: 'Bringing [[AI robots]] to every classroom in Vietnam',
+      sub: 'Learn to Leap delivers complete Robotic AI programmes — equipment, curriculum, teacher training and international competitions — with schools nationwide.',
       cta1: 'Explore solutions',
       cta2: 'Our impact',
-      callouts: [
-        { t: 'Walker · Humanoid AI', d: 'Next-generation humanoid robot' },
-        { t: 'Cruzr', d: 'Interactive AI service robot' },
-        { t: 'Yanshee · High school', d: 'Python & AI programming' },
-        { t: 'UGOT · Middle school', d: 'Modular, transforming robot' },
+      pickLabel: 'Choose a product line',
+      lines: [
+        { tab: 'Humanoids', kind: 'Humanoid · Embodied AI', name: 'AI humanoid robots', desc: 'Full-size humanoid robots for showcases, research and inspiring students about embodied AI.', tags: ['Humanoid', 'Embodied AI', 'Showcase'], giant: ['HUMANOID', 'AI·ROBOT'] },
+        { tab: 'Coding robots', kind: 'Coding · Engineering', name: 'AI coding robots', desc: 'Small humanoids for learning Python & AI, plus mechanical–electronic engineering kits.', tags: ['Python', 'Computer vision', 'Engineering'], giant: ['CODE·AI', 'ENGINEER'] },
+        { tab: 'Modular AI', kind: 'Robotics · Transforming', name: 'Modular AI robotics', desc: 'One kit, many forms — rover, robot dog, robotic arm — for creative building and block coding.', tags: ['Transforming', 'Block coding', 'Competitions'], giant: ['MODULAR', 'ROBOTICS'] },
+        { tab: 'STEAM', kind: 'STEAM · Maker', name: 'STEAM & Maker', desc: 'Building materials and robotics–IoT kits for hands-on STEAM projects, from idea to product.', tags: ['Building', 'IoT', 'Projects'], giant: ['STEAM', 'MAKER'] },
+        { tab: 'STEM · IoT', kind: 'STEM Science · IoT', name: 'STEM Science & IoT', desc: 'STEM activity learning materials, IoT models, smart homes and renewable energy.', tags: ['Materials', 'Sensors', 'Smart home'], giant: ['STEM', 'IOT·LAB'] },
       ],
-      hud: 'AI VISION · TRACKING',
-      log: ['LTL STEM-AI LAB · ONLINE', 'MODULES: 4 GROUPS · 10 MODULES', 'K12: PRESCHOOL → HIGH SCHOOL', 'STATUS: ACTIVE · MODE: LEARNING'],
     },
     stats: [
       { n: 20, suf: '+', label: 'Provinces & cities<br>served' },
@@ -157,6 +161,20 @@ const en: Dict = {
           desc: 'Unlike providers who hand over equipment and leave, Learn to Leap stays with you all the way:',
           list: ['Curriculum design for each school level', 'Our own teaching staff on site', 'Teacher training (TOT)', 'Support for every STEM – AI initiative', "Competitions up to international level (ROBOG, Stick'Em)"], ordered: true,
         },
+      ],
+    },
+    eco: {
+      eyebrow: 'Solution ecosystem',
+      title: 'One partner — [[a complete tech-education ecosystem]]',
+      cta: 'See solution details',
+      listLabel: 'Solution areas',
+      items: [
+        { title: 'STEM AI Robotics Lab', desc: 'Labs equipped with AI robots, modular robotics and coding materials — deployed and run on campus.', chips: ['AI robots', 'Building', 'Coding'] },
+        { title: 'Smart classroom', desc: 'Interactive displays, virtual reality, 3D printing and digital learning platforms for every subject.', chips: ['Interactive', 'VR', '3D printing'] },
+        { title: 'Smart school', desc: 'Service robots at the gate, IoT systems and digital transformation for the whole school.', chips: ['Service robots', 'IoT', 'Digital'] },
+        { title: 'Experience festivals', desc: '50+ STEM – AI – Robotics festivals, welcoming up to 1,200+ students per event.', chips: ['Hands-on stations', 'Robot shows', 'Workshops'] },
+        { title: 'National & international contests', desc: 'Organising competitions and coaching teams from school level to the international stage.', chips: ['Organising', 'Coaching', 'International'] },
+        { title: 'Curriculum & teacher training', desc: 'An articulated K12 STEM – AI curriculum with training for the teachers who run it.', chips: ['K12', 'Materials', 'Training'] },
       ],
     },
     solPreview: {
