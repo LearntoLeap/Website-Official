@@ -63,7 +63,9 @@ const runCounters = (band: Element) => {
     requestAnimationFrame(tick);
   });
 };
-const reveals = document.querySelectorAll('.reveal');
+// Mỗi mục (trừ hero) hiện dần khi cuộn tới, cùng nhịp với các .reveal bên trong.
+document.querySelectorAll('main section').forEach((el) => el.classList.add('sec-fade'));
+const reveals = document.querySelectorAll('.reveal, .sec-fade');
 if ('IntersectionObserver' in window && !reduce) {
   const io = new IntersectionObserver(
     (entries) => entries.forEach((en) => {
