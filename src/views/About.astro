@@ -22,10 +22,10 @@ const robog = img('robog');
   <section class="sp">
     <div class="wrap split">
       <div class="reveal">
-        <span class="eyebrow">{a.vmEyebrow}</span>
+        <h2 class="eyebrow">{a.vmEyebrow}</h2>
         <div class="vm">
           {a.vm.map((v) => (
-            <div class="vm-card"><div class="ic"><Icon name={v.icon} /></div><h5>{v.title}</h5><p>{v.desc}</p></div>
+            <div class="vm-card"><div class="ic"><Icon name={v.icon} /></div><h3>{v.title}</h3><p>{v.desc}</p></div>
           ))}
         </div>
         <div style="margin-top:36px"><span class="eyebrow">{a.storyEyebrow}</span></div>

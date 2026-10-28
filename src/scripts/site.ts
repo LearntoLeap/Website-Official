@@ -79,6 +79,62 @@ if ('IntersectionObserver' in window && !reduce) {
   reveals.forEach((el) => el.classList.add('in'));
 }
 
+/* ----- Hero: sân khấu robot nghiêng theo chuột + log gõ chữ ----- */
+const tilt = document.querySelector<HTMLElement>('[data-tilt]');
+if (tilt && !reduce && matchMedia('(pointer: fine)').matches) {
+  const hero = tilt.closest<HTMLElement>('.hero') ?? tilt;
+  let raf = 0;
+  hero.addEventListener('pointermove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const r = tilt.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
+      const y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
+      tilt.style.setProperty('--tx', x.toFixed(3));
+      tilt.style.setProperty('--ty', y.toFixed(3));
+    });
+  });
+  hero.addEventListener('pointerleave', () => { tilt.style.setProperty('--tx', '0'); tilt.style.setProperty('--ty', '0'); });
+}
+const log = document.querySelector<HTMLElement>('[data-log]');
+if (log) {
+  const lines: string[] = JSON.parse(log.dataset.log || '[]').map((l: string) => '> ' + l);
+  const cur = document.createElement('span');
+  cur.className = 'cur';
+  if (reduce) {
+    log.lastElementChild?.append(cur);
+  } else {
+    // Bản HTML đã có sẵn đủ chữ (cho máy tắt JS); ở đây xoá đi rồi gõ lại từng dòng.
+    log.replaceChildren();
+    let li = 0;
+    const typeLine = () => {
+      if (li >= lines.length) return;
+      const row = document.createElement('div');
+      const txt = document.createTextNode('');
+      row.append(txt, cur);
+      log.append(row);
+      let ci = 0;
+      const step = () => {
+        txt.data = lines[li].slice(0, ++ci);
+        if (ci < lines[li].length) setTimeout(step, 24);
+        else { li++; setTimeout(typeLine, 380); }
+      };
+      step();
+    };
+    setTimeout(typeLine, 1500);
+  }
+}
+
+/* ----- Nút dừng / chạy dải logo ----- */
+document.querySelectorAll<HTMLButtonElement>('[data-ls-toggle]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const paused = btn.closest('.logo-strip')!.classList.toggle('paused');
+    btn.setAttribute('aria-pressed', String(paused));
+    btn.setAttribute('aria-label', (paused ? btn.dataset.play : btn.dataset.pause) || '');
+  });
+});
+
 /* ----- Video phát ngay trên trang ----- */
 // Video không có ảnh maxres: YouTube trả ảnh xám 120px → đổi sang hqdefault.
 document.querySelectorAll<HTMLImageElement>('img[data-fallback]').forEach((im) => {

@@ -8,6 +8,10 @@ const vi = {
   langShort: 'VI',
   locale: 'vi-VN',
   common: {
+    pauseMotion: 'Tạm dừng dải logo',
+    playMotion: 'Chạy dải logo',
+    srSolutions: 'Chín giải pháp của Learn to Leap',
+    srAudiences: 'Đối tượng hợp tác',
     nav: {
       home: 'Trang chủ',
       about: 'Về chúng tôi',
@@ -112,6 +116,15 @@ const vi = {
       sub: 'Learn to Leap là đơn vị tư vấn và cung cấp giải pháp toàn diện, phổ cập giáo dục STEM và Trí tuệ nhân tạo (AI).',
       cta1: 'Khám phá giải pháp',
       cta2: 'Năng lực & dấu ấn',
+      /** Chú thích quanh dàn robot ở hero (tên + một dòng mô tả). */
+      callouts: [
+        { t: 'Walker · Humanoid AI', d: 'Robot hình người thế hệ mới' },
+        { t: 'Cruzr', d: 'Robot dịch vụ AI tương tác' },
+        { t: 'Yanshee · THPT', d: 'Lập trình Python & AI' },
+        { t: 'UGOT · THCS', d: 'Robot lắp ghép, biến hình' },
+      ],
+      hud: 'AI VISION · TRACKING',
+      log: ['LTL STEM-AI LAB · ONLINE', 'MODULES: 4 NHÓM · 10 MODULE', 'K12: MẦM NON → THPT', 'STATUS: ACTIVE · MODE: LEARNING'],
     },
     stats: [
       { n: 20, suf: '+', label: 'Tỉnh, thành phố<br>đã triển khai' },

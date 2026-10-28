@@ -6,6 +6,10 @@ const en: Dict = {
   langShort: 'EN',
   locale: 'en-US',
   common: {
+    pauseMotion: 'Pause logo strip',
+    playMotion: 'Play logo strip',
+    srSolutions: 'Our nine solutions',
+    srAudiences: 'Who we work with',
     nav: {
       home: 'Home',
       about: 'About us',
@@ -108,6 +112,14 @@ const en: Dict = {
       sub: 'Learn to Leap advises on and delivers end-to-end solutions that bring STEM and Artificial Intelligence (AI) education to every school.',
       cta1: 'Explore solutions',
       cta2: 'Our impact',
+      callouts: [
+        { t: 'Walker · Humanoid AI', d: 'Next-generation humanoid robot' },
+        { t: 'Cruzr', d: 'Interactive AI service robot' },
+        { t: 'Yanshee · High school', d: 'Python & AI programming' },
+        { t: 'UGOT · Middle school', d: 'Modular, transforming robot' },
+      ],
+      hud: 'AI VISION · TRACKING',
+      log: ['LTL STEM-AI LAB · ONLINE', 'MODULES: 4 GROUPS · 10 MODULES', 'K12: PRESCHOOL → HIGH SCHOOL', 'STATUS: ACTIVE · MODE: LEARNING'],
     },
     stats: [
       { n: 20, suf: '+', label: 'Provinces & cities<br>served' },

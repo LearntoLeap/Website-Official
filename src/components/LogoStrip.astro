@@ -1,12 +1,17 @@
 ---
 import { PARTNERS } from '../data/site';
-import { withBase } from '../i18n/routes';
-interface Props { label?: string }
-const { label } = Astro.props;
+import Icon from './Icon.astro';
+import { withBase, type Lang } from '../i18n/routes';
+import { useT } from '../i18n';
+interface Props { label?: string; lang: Lang }
+const { label, lang } = Astro.props;
+const t = useT(lang).common;
 ---
 {PARTNERS.length > 0 && (
   <div class="logo-strip reveal">
     {label && <p class="ls-label">{label}</p>}
+    {/* Dải logo tự chạy nên phải có nút dừng (WCAG 2.2.2) */}
+    <button class="ls-toggle" type="button" data-ls-toggle aria-pressed="false" aria-label={t.pauseMotion} data-pause={t.pauseMotion} data-play={t.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
     <div class="ls-viewport">
       <div class="ls-track">
         <ul class="ls-set">

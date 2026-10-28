@@ -12,15 +12,31 @@ import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
 import ShortsRail from '../components/ShortsRail.astro';
 import { useT, rich } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
-import { SITE, img } from '../data/site';
+import { href, withBase, type Lang } from '../i18n/routes';
+import { SITE } from '../data/site';
 import { press, featuredVideo, shorts } from '../data/media';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const h = t.home;
-const heroPhoto = img('hero');
+// Toạ độ trong khung 1000×700 của hero (ảnh dàn robot nằm ở x 100–900, y 248–680).
+// p: điểm chỉ vào robot, e: chỗ gấp khúc, t: đầu đường kẻ; side: phía đặt chữ.
+const CALLOUTS = [
+  { p: [455, 330], e: [360, 200], t: [130, 200], side: 'l' },
+  { p: [650, 385], e: [740, 300], t: [985, 300], side: 'r' },
+  { p: [250, 505], e: [190, 420], t: [12, 420], side: 'l' },
+  { p: [735, 520], e: [810, 450], t: [990, 450], side: 'r' },
+];
+// Khung ngắm kiểu HUD quanh đầu – thân robot Walker.
+const HUD = { x1: 425, y1: 238, x2: 540, y2: 395 };
+const k = 22;
+const HUD_CORNERS = [
+  `M${HUD.x1} ${HUD.y1 + k}V${HUD.y1}H${HUD.x1 + k}`,
+  `M${HUD.x2 - k} ${HUD.y1}H${HUD.x2}V${HUD.y1 + k}`,
+  `M${HUD.x2} ${HUD.y2 - k}V${HUD.y2}H${HUD.x2 - k}`,
+  `M${HUD.x1 + k} ${HUD.y2}H${HUD.x1}V${HUD.y2 - k}`,
+];
 // 3 bài báo mới nhất (cuối danh sách là mới nhất).
 const latest = press.slice(-3).reverse();
 ---
@@ -39,24 +55,35 @@ const latest = press.slice(-3).reverse();
             <Btn href={href('impact', lang)} variant="glass">{h.hero.cta2}</Btn>
           </div>
         </div>
-        <div class="hero-visual reveal d2" aria-hidden="true">
-          {heroPhoto && <div class="hero-photo" style={`background-image:url('${heroPhoto}')`}></div>}
-          <div class="hv-ring r1 spin"></div><div class="hv-ring r2 spin-r"></div><div class="hv-ring r3 spin"></div>
-          <div class="hv-core">
-            <svg class="hv-hex" viewBox="0 0 200 200" fill="none">
-              <defs><linearGradient id="hg" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse"><stop stop-color="#7c3aed"/><stop offset=".5" stop-color="#df2f86"/><stop offset="1" stop-color="#ff6a7f"/></linearGradient></defs>
-              <path d="M100 10 168 50v100l-68 40-68-40V50z" fill="url(#hg)" opacity=".95"/>
-              <path d="M100 10 168 50v100l-68 40-68-40V50z" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+        <div class="hero-stage reveal d2" aria-hidden="true">
+          <div class="hs-tilt" data-tilt>
+            <div class="hs-floor"></div>
+            <div class="hs-spot"></div>
+            <img class="hs-robots" src={withBase('/images/hero-robots.webp')} alt="" width="1600" height="863" fetchpriority="high" decoding="async" />
+            <svg class="hs-lines" viewBox="0 0 1000 700" fill="none">
+              <g class="hs-hud">
+                {HUD_CORNERS.map((d) => <path d={d} pathLength="1" />)}
+                <rect class="hs-scan" x={HUD.x1 + 4} y={HUD.y1} width={HUD.x2 - HUD.x1 - 8} height="2" />
+              </g>
+              {CALLOUTS.map((c, i) => (
+                <g class="hs-co" style={`--i:${i}`}>
+                  <polyline points={[c.p, c.e, c.t].map((pt) => pt.join(',')).join(' ')} pathLength="1" />
+                  <circle class="ring" cx={c.p[0]} cy={c.p[1]} r="11" />
+                  <circle class="dot" cx={c.p[0]} cy={c.p[1]} r="5" />
+                </g>
+              ))}
             </svg>
-            <svg class="hv-chip" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="18" y="18" width="28" height="28" rx="6"/><rect x="26" y="26" width="12" height="12" rx="2"/>
-              <path d="M24 18v-7M32 18v-7M40 18v-7M24 53v-7M32 53v-7M40 53v-7M18 24h-7M18 32h-7M18 40h-7M53 24h-7M53 32h-7M53 40h-7"/>
-            </svg>
+            <span class="hs-hud-label" style={`left:${HUD.x1 / 10}%;top:${HUD.y1 / 7}%`}>{h.hero.hud}</span>
+            {CALLOUTS.map((c, i) => {
+              const [a, b] = c.side === 'l' ? [c.t[0], c.e[0]] : [c.e[0], c.t[0]];
+              return (
+                <div class:list={['hs-label', c.side]} style={`--i:${i};left:${a / 10}%;width:${(b - a) / 10}%;top:${c.t[1] / 7}%`}>
+                  <b>{h.hero.callouts[i].t}</b><span>{h.hero.callouts[i].d}</span>
+                </div>
+              );
+            })}
+            <div class="hs-log" data-log={JSON.stringify(h.hero.log)}>{h.hero.log.map((l) => <div>&gt; {l}</div>)}</div>
           </div>
-          <div class="hv-node n1 float"><Icon name="robot" /></div>
-          <div class="hv-node n2 float d1"><Icon name="terminal" /></div>
-          <div class="hv-node n3 float d2"><Icon name="globe" /></div>
-          <div class="hv-node n4 float d3"><Icon name="bulb" /></div>
         </div>
       </div>
     </div>
@@ -66,7 +93,7 @@ const latest = press.slice(-3).reverse();
   <!-- STATS -->
   <section class="wrap" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
-    <LogoStrip label={h.partnersStrip} />
+    <LogoStrip label={h.partnersStrip} lang={lang} />
   </section>
 
   <!-- INTRO -->
@@ -133,7 +160,7 @@ const latest = press.slice(-3).reverse();
       <SectionHead title={t.portrait.title} lead={t.portrait.lead} />
       <div class="pgrid">
         {t.portrait.items.map((p, i) => (
-          <div class:list={['pcard reveal', `d${(i % 4) + 1}`]}><div class="ic"><Icon name={p.icon} /></div><h4>{p.title}</h4></div>
+          <div class:list={['pcard reveal', `d${(i % 4) + 1}`]}><div class="ic"><Icon name={p.icon} /></div><h3>{p.title}</h3></div>
         ))}
       </div>
     </div>

@@ -24,6 +24,7 @@ const labPhoto = img('lab-photo');
   <!-- 9 GIẢI PHÁP -->
   <section class="sp">
     <div class="wrap">
+      <h2 class="sr-only">{t.common.srSolutions}</h2>
       <div class="sol-grid">
         {t.solutions.map((x, i) => <SolCard imgKey={x.id} num={x.num} icon={x.icon} title={x.title} desc={x.desc} tag={x.tag} index={i} />)}
       </div>
@@ -42,7 +43,7 @@ const labPhoto = img('lab-photo');
           <div class="lab-chips">{s.lab.chips.map((c) => <span class="chip">{c}</span>)}</div>
           <div class="lab-feats">
             {s.lab.feats.map((f) => (
-              <div class="feat"><div class="ic"><Icon name={f.icon} /></div><div><h5>{f.title}</h5><p>{f.desc}</p></div></div>
+              <div class="feat"><div class="ic"><Icon name={f.icon} /></div><div><h3>{f.title}</h3><p>{f.desc}</p></div></div>
             ))}
           </div>
         </div>

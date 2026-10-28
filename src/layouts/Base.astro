@@ -79,7 +79,7 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
   </script>
   {page === 'home' && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
 </head>
-<body>
+<body class={`page-${page ?? "none"}`}>
   <a class="skip" href="#main">{t.common.skip}</a>
   <Header lang={lang} page={page} />
   <main id="main"><slot /></main>

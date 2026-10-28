@@ -32,11 +32,11 @@ const year = new Date().getFullYear();
         </div>
       </div>
       <div class="ft-col">
-        <h5>{t.footer.solutions}</h5>
+        <h2 class="ft-h">{t.footer.solutions}</h2>
         {t.footer.solLinks.map((l) => <a href={href('solutions', lang)}>{l}</a>)}
       </div>
       <div class="ft-col">
-        <h5>{t.footer.company}</h5>
+        <h2 class="ft-h">{t.footer.company}</h2>
         <a href={href('about', lang)}>{t.common.nav.about}</a>
         <a href={href('impact', lang)}>{t.common.nav.impact}</a>
         <a href={href('partnership', lang)}>{t.common.nav.partnership}</a>
@@ -44,7 +44,7 @@ const year = new Date().getFullYear();
         <a href={href('contact', lang)}>{t.common.nav.contact}</a>
       </div>
       <div class="ft-col">
-        <h5>{t.footer.contact}</h5>
+        <h2 class="ft-h">{t.footer.contact}</h2>
         <p>{lang === 'vi' ? SITE.address : SITE.addressEn}</p>
         <a href={`tel:${SITE.phone}`}>{lang === 'vi' ? SITE.phoneDisplay : `+84 ${SITE.phoneDisplay.slice(1)}`}</a>
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
