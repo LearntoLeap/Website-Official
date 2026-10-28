@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { titleOf, type MediaItem } from '../data/media';
+import type { Lang } from '../i18n/routes';
+interface Props { item: MediaItem; lang: Lang; index: number; fallback: string; readLabel: string }
+const { item, lang, index, fallback, readLabel } = Astro.props;
+const GR = ['linear-gradient(135deg,#7c3aed,#df2f86)', 'linear-gradient(135deg,#451c95,#6429c9)', 'linear-gradient(135deg,#df2f86,#ff6a7f)', 'linear-gradient(135deg,#6429c9,#c026a9)', 'linear-gradient(135deg,#2a1059,#9b2bc0)'];
+const title = titleOf(item, lang);
+const source = item.source || fallback;
+---
+<a class:list={['news-card reveal', `d${(index % 3) + 1}`]} href={item.url} target="_blank" rel="noopener">
+  <div class="nc-thumb" style={item.image ? undefined : `background:${GR[index % GR.length]}`}>
+    {item.image
+      ? <img src={item.image} alt="" loading="lazy" decoding="async" />
+      : <>
+          <svg class="ph-art" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M30 8l20 12v24L30 56 10 44V20z"/><path d="M118 18l20 12v24l-20 12-20-12V30z"/><path d="M172 52l20 12v24l-20 12-20-12V64z"/><path d="M74 62l20 12v24l-20 12-20-12V74z"/></svg>
+          <div class="nc-src"><Icon name="news" stroke={1.6} />{source}</div>
+        </>}
+  </div>
+  <div class="nc-body">
+    <div class="nc-tag"><Icon name="tag" />{source}</div>
+    <h3 lang={title === item.title ? 'vi' : undefined}>{title}</h3>
+    <div class="nc-more">{item.date ? <><Icon name="calendar" />{item.date}</> : <><Icon name="external" />{readLabel}</>}</div>
+  </div>
+</a>

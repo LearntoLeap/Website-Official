@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { SITE } from '../data/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const s = SITE.social;
+const socials = [
+  { url: s.facebook, icon: 'facebook', label: 'Facebook' },
+  { url: s.youtube, icon: 'youtube', label: 'YouTube' },
+  { url: s.tiktok, icon: 'tiktok', label: 'TikTok' },
+  { url: s.linkedin, icon: 'linkedin', label: 'LinkedIn' },
+].filter((x) => x.url);
+const profileHref = SITE.profilePdf || `mailto:${SITE.email}?subject=${encodeURIComponent(t.contact.quick.profileSubject)}`;
+const year = new Date().getFullYear();
+---
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-about">
+        <a class="logo" href={href('home', lang)} aria-label="Learn to Leap">
+          <img class="logo-img logo-img--ft" src="/images/logo-light.png" alt="Learn to Leap" width="242" height="96" loading="lazy" />
+        </a>
+        <p>{t.footer.about}</p>
+        <div class="ft-soc">
+          {socials.map((x) => <a href={x.url} target="_blank" rel="noopener" aria-label={x.label}><Icon name={x.icon} /></a>)}
+          {s.zalo && <a class="txt" href={s.zalo} target="_blank" rel="noopener" aria-label="Zalo">Zalo</a>}
+          <a href={`mailto:${SITE.email}`} aria-label="Email"><Icon name="mail" /></a>
+          <a href={`tel:${SITE.phone}`} aria-label="Hotline"><Icon name="phone" /></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h5>{t.footer.solutions}</h5>
+        {t.footer.solLinks.map((l) => <a href={href('solutions', lang)}>{l}</a>)}
+      </div>
+      <div class="ft-col">
+        <h5>{t.footer.company}</h5>
+        <a href={href('about', lang)}>{t.common.nav.about}</a>
+        <a href={href('impact', lang)}>{t.common.nav.impact}</a>
+        <a href={href('partnership', lang)}>{t.common.nav.partnership}</a>
+        <a href={href('news', lang)}>{t.common.nav.news}</a>
+        <a href={href('contact', lang)}>{t.common.nav.contact}</a>
+      </div>
+      <div class="ft-col">
+        <h5>{t.footer.contact}</h5>
+        <p>{lang === 'vi' ? SITE.address : SITE.addressEn}</p>
+        <a href={`tel:${SITE.phone}`}>{lang === 'vi' ? SITE.phoneDisplay : `+84 ${SITE.phoneDisplay.slice(1)}`}</a>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a href={profileHref}>{t.footer.profile}</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div>© {year} {t.footer.rights} {SITE.taxId}</div>
+      <div class="nq">{t.footer.aligned} <span>NQ 57-NQ/TW</span> · <span>NQ 71-NQ/TW</span> · <span>GDPT 2018</span> · <span>TT 02/2025</span> · <span>QĐ 3439</span></div>
+    </div>
+  </div>
+</footer>

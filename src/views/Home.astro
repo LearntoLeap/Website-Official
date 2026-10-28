@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import HexBg from '../components/HexBg.astro';
+import Btn from '../components/Btn.astro';
+import Stats from '../components/Stats.astro';
+import SectionHead from '../components/SectionHead.astro';
+import SolCard from '../components/SolCard.astro';
+import NewsCard from '../components/NewsCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT, rich } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { SITE, img } from '../data/site';
+import { press } from '../data/media';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const h = t.home;
+const heroPhoto = img('hero');
+// 3 bài báo mới nhất (cuối danh sách là mới nhất).
+const latest = press.slice(-3).reverse();
+---
+<Base lang={lang} page="home" title={t.meta.home.title} description={t.meta.home.description}>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow g1"></div><div class="hero-glow g2"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
+          <h1 class="reveal d1" set:html={rich(h.hero.title)} />
+          <p class="sub reveal d2">{h.hero.sub}</p>
+          <div class="hero-cta reveal d3">
+            <Btn href={href('solutions', lang)} arrow>{h.hero.cta1}</Btn>
+            <Btn href={href('impact', lang)} variant="glass">{h.hero.cta2}</Btn>
+          </div>
+        </div>
+        <div class="hero-visual reveal d2" aria-hidden="true">
+          {heroPhoto && <div class="hero-photo" style={`background-image:url('${heroPhoto}')`}></div>}
+          <div class="hv-ring r1 spin"></div><div class="hv-ring r2 spin-r"></div><div class="hv-ring r3 spin"></div>
+          <div class="hv-core">
+            <svg class="hv-hex" viewBox="0 0 200 200" fill="none">
+              <defs><linearGradient id="hg" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse"><stop stop-color="#7c3aed"/><stop offset=".5" stop-color="#df2f86"/><stop offset="1" stop-color="#ff6a7f"/></linearGradient></defs>
+              <path d="M100 10 168 50v100l-68 40-68-40V50z" fill="url(#hg)" opacity=".95"/>
+              <path d="M100 10 168 50v100l-68 40-68-40V50z" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+            </svg>
+            <svg class="hv-chip" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="18" y="18" width="28" height="28" rx="6"/><rect x="26" y="26" width="12" height="12" rx="2"/>
+              <path d="M24 18v-7M32 18v-7M40 18v-7M24 53v-7M32 53v-7M40 53v-7M18 24h-7M18 32h-7M18 40h-7M53 24h-7M53 32h-7M53 40h-7"/>
+            </svg>
+          </div>
+          <div class="hv-node n1 float"><Icon name="robot" /></div>
+          <div class="hv-node n2 float d1"><Icon name="terminal" /></div>
+          <div class="hv-node n3 float d2"><Icon name="globe" /></div>
+          <div class="hv-node n4 float d3"><Icon name="bulb" /></div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor" aria-hidden="true"><path d="M0 90h1440V40c-220 40-520 50-760 28C420 44 180 20 0 52z"/></svg>
+  </div>
+
+  <!-- STATS -->
+  <section class="wrap" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
+    <Stats lang={lang} items={h.stats} class="stats-home" />
+  </section>
+
+  <!-- INTRO -->
+  <section class="sp">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">{h.intro.eyebrow}</span>
+        <h2 class="intro-title" set:html={rich(h.intro.title)} />
+      </div>
+      <div class="reveal d2 about-body">
+        {h.intro.body.map((p) => <p set:html={p} />)}
+        <Btn href={href('about', lang)} variant="ghost" arrow>{h.intro.cta}</Btn>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 THẾ MẠNH -->
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={h.strengths.eyebrow} title={h.strengths.title} />
+      <div class="rs-grid">
+        {h.strengths.items.map((it, i) => (
+          <div class:list={['rs reveal', `d${i + 1}`]}>
+            <div class="tag">{h.strengths.tagPrefix} {String(i + 1).padStart(2, '0')}</div>
+            <div class="ic"><Icon name={it.icon} /></div>
+            <h3>{it.title}</h3>
+            <p>{it.desc}</p>
+            {it.ordered
+              ? <ol>{it.list.map((li) => <li>{li}</li>)}</ol>
+              : <ul>{it.list.map((li) => <li>{li}</li>)}</ul>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GIẢI PHÁP -->
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={h.solPreview.eyebrow} title={h.solPreview.title} lead={h.solPreview.lead} />
+      <div class="sol-grid">
+        {h.solPreview.items.map((s, i) => <SolCard imgKey={s.img} num={s.num} icon={s.icon} title={s.title} desc={s.desc} index={i} />)}
+      </div>
+      <div class="center" style="margin-top:42px"><Btn href={href('solutions', lang)} arrow>{h.solPreview.cta}</Btn></div>
+    </div>
+  </section>
+
+  <!-- NĂNG LỰC HỌC SINH -->
+  <section class="sp dark">
+    <HexBg tall />
+    <div class="wrap">
+      <SectionHead title={t.portrait.title} lead={t.portrait.lead} />
+      <div class="pgrid">
+        {t.portrait.items.map((p, i) => (
+          <div class:list={['pcard reveal', `d${(i % 4) + 1}`]}><div class="ic"><Icon name={p.icon} /></div><h4>{p.title}</h4></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GIẢI THƯỞNG -->
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={h.awardsTeaser.eyebrow} title={h.awardsTeaser.title} />
+      <div class="g4 grid" style="margin-bottom:46px">
+        {t.awards.map((a, i) => (
+          <div class:list={['card award-card reveal', `d${i + 1}`]}>
+            <div class="medal"><Icon name={a.icon} /></div>
+            <div class="lbl">{a.label}</div>
+            <h3>{a.title}</h3><p>{a.short}</p>
+          </div>
+        ))}
+      </div>
+      <div class="center reveal"><Btn href={href('impact', lang)} variant="ghost" arrow>{h.awardsTeaser.cta}</Btn></div>
+    </div>
+  </section>
+
+  <!-- TIN MỚI -->
+  {latest.length > 0 && (
+    <section class="sp">
+      <div class="wrap">
+        <SectionHead eyebrow={h.latest.eyebrow} title={h.latest.title} />
+        <div class="g3 grid">
+          {latest.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={t.news.sourceFallback} readLabel={t.news.readOriginal} />)}
+        </div>
+        <div class="center" style="margin-top:42px"><Btn href={href('news', lang)} variant="ghost" arrow>{h.latest.cta}</Btn></div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand eyebrow={h.cta.eyebrow} title={h.cta.title} lead={h.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{t.common.ctaPartner}</Btn>
+    <Btn href={`tel:${SITE.phone}`} variant="glass" icon="phone">{t.common.call}: {SITE.phoneDisplay}</Btn>
+  </CtaBand>
+</Base>

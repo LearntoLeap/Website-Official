@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { SITE } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const p = t.partnership;
+const initial = (s: string) => s.trim().charAt(0).toUpperCase();
+---
+<Base lang={lang} page="partnership" title={t.meta.partnership.title} description={t.meta.partnership.description}>
+  <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.partnership} />
+
+  <section class="sp">
+    <div class="wrap">
+      <div class="g3 grid">
+        {p.audiences.map((a, i) => (
+          <div class:list={['aud reveal', `d${i + 1}`]}>
+            <div class="ic"><Icon name={a.icon} /></div>
+            <h3>{a.title}</h3>
+            <div class="who">{a.who}</div>
+            <p>{a.desc}</p>
+            <ul>{a.list.map((li) => <li><Icon name="check" stroke={2.4} /><span set:html={li} /></li>)}</ul>
+            <Btn href={href('contact', lang)} size="sm">{a.cta}</Btn>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={p.process.eyebrow} title={p.process.title} lead={p.process.lead} />
+      <ol class="proc">
+        {p.process.steps.map((s, i) => (
+          <li class:list={['proc-step reveal', `d${i + 1}`]}><div class="num">{i + 1}</div><h4>{s.title}</h4><p>{s.desc}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={p.commitments.eyebrow} title={p.commitments.title} />
+      <div class="g3 grid">
+        {p.commitments.items.map((c, i) => (
+          <div class:list={['com reveal', `d${i + 1}`]}><div class="ic"><Icon name={c.icon} /></div><h3>{c.title}</h3><p>{c.desc}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-2">
+    <div class="wrap">
+      <SectionHead eyebrow={p.partners.eyebrow} title={p.partners.title} lead={p.partners.lead} />
+      {p.partners.groups.map((g, i) => (
+        <div class:list={['part-block reveal', `d${i + 1}`]}>
+          <div class="lbl">{g.label}</div>
+          <div class="part-row">{g.items.map((n) => <span class="plogo"><span class="gi">{initial(n)}</span>{n}</span>)}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={p.policy.eyebrow} title={p.policy.title} lead={p.policy.lead} />
+      <div class="grid g2">
+        {p.policy.items.map((x, i) => (
+          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{x.code}</div><div><h5>{x.title}</h5><p>{x.desc}</p></div></div>
+        ))}
+      </div>
+      <p class="note">{p.policy.note}</p>
+    </div>
+  </section>
+
+  <CtaBand title={p.cta.title} lead={p.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{p.cta.primary}</Btn>
+    <Btn href={`tel:${SITE.phone}`} variant="glass" icon="phone">{t.common.call}: {SITE.phoneDisplay}</Btn>
+  </CtaBand>
+</Base>

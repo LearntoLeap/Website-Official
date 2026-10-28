@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import { img } from '../data/site';
+interface Props { imgKey: string; num: string; icon: string; title: string; desc: string; tag?: string; index: number }
+const { imgKey, num, icon, title, desc, tag, index } = Astro.props;
+const photo = img(imgKey);
+const variant = `v${(index % 3) + 1}`;
+const delay = `d${(index % 3) + 1}`;
+---
+<article class:list={['sol reveal', delay]}>
+  <div class:list={['sol-media', !photo && variant]}>
+    {photo
+      ? <img src={photo} alt={title} loading="lazy" decoding="async" />
+      : <>
+          <svg class="ph-art" viewBox="0 0 200 106" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M30 8l20 12v24L30 56 10 44V20z"/><path d="M118 18l20 12v24l-20 12-20-12V30z"/><path d="M172 52l20 12v24l-20 12-20-12V64z"/><path d="M74 62l20 12v24l-20 12-20-12V74z"/></svg>
+          <Icon name={icon} class="ph-ic" stroke={1.6} />
+        </>}
+  </div>
+  <div class="sol-body">
+    <div class="s-top"><div class="ic-box"><Icon name={icon} /></div><span class="s-num">{num}</span></div>
+    <h3>{title}</h3>
+    <p>{desc}</p>
+    {tag && <span class="s-tag">{tag}</span>}
+  </div>
+</article>

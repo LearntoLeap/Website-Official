@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import NewsCard from '../components/NewsCard.astro';
+import VideoCard from '../components/VideoCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { press, videos, photos, titleOf } from '../data/media';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const n = t.news;
+// Mới nhất lên đầu (trong media.json, mục thêm sau nằm cuối).
+const news = [...press].reverse();
+const top = news.slice(0, 3);
+const rest = news.slice(3);
+const vids = [...videos].reverse();
+const empty = !news.length && !vids.length && !photos.length;
+---
+<Base lang={lang} page="news" title={t.meta.news.title} description={t.meta.news.description} lightbox>
+  <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} />
+
+  <section class="sp">
+    <div class="wrap">
+      {news.length > 0 && (
+        <div class="tl-sec" id="bao-chi">
+          <SectionHead eyebrow={n.press.eyebrow} title={n.press.title} />
+          <div class="g3 grid">
+            {top.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={n.sourceFallback} readLabel={n.readOriginal} />)}
+          </div>
+          {rest.length > 0 && (
+            <>
+              <h3 class="nm-head reveal">{n.press.moreTitle}</h3>
+              <div class="nm-grid">
+                {rest.map((it) => {
+                  const title = titleOf(it, lang);
+                  return (
+                    <a class="nm-item" href={it.url} target="_blank" rel="noopener">
+                      <div class="nm-body">
+                        <span class="nm-tag"><Icon name="tag" />{it.source || n.sourceFallback}</span>
+                        <h3 lang={title === it.title ? 'vi' : undefined}>{title}</h3>
+                      </div>
+                      <span class="nm-arrow"><Icon name="arrow" stroke={2.4} /></span>
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {vids.length > 0 && (
+        <div class="tl-sec" id="video">
+          <SectionHead eyebrow={n.video.eyebrow} title={n.video.title} />
+          <div class="vid-grid featured">
+            {vids.map((it, i) => <VideoCard item={it} lang={lang} index={i} playLabel={n.video.play} />)}
+          </div>
+        </div>
+      )}
+
+      {photos.length > 0 && (
+        <div class="tl-sec" id="hinh-anh">
+          <SectionHead eyebrow={n.photos.eyebrow} title={n.photos.title} />
+          <div class="gal-grid">
+            {photos.map((p) => {
+              const title = titleOf(p, lang);
+              return <button class="gcell" type="button" data-photo={p.image} data-title={title} aria-label={title}><img src={p.image} alt={title} loading="lazy" decoding="async" /></button>;
+            })}
+          </div>
+        </div>
+      )}
+
+      {empty && <p class="tl-state">{n.empty}</p>}
+    </div>
+  </section>
+
+  <CtaBand title={n.cta.title} lead={n.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{n.cta.primary}</Btn>
+  </CtaBand>
+</Base>

@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Stats from '../components/Stats.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { SITE, img } from '../data/site';
+import { photos, titleOf } from '../data/media';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const m = t.impact;
+const profileHref = SITE.profilePdf || href('contact', lang);
+// Thư viện ảnh: ảnh "anh" trong media.json + ảnh dự án đã có.
+const gallery = [
+  ...(img('robog') ? [{ src: img('robog'), title: t.about.photoCaption }] : []),
+  ...(img('sol-huanluyen') ? [{ src: img('sol-huanluyen'), title: t.solutions[6].title }] : []),
+  ...photos.map((p) => ({ src: p.image, title: titleOf(p, lang) })),
+];
+---
+<Base lang={lang} page="impact" title={t.meta.impact.title} description={t.meta.impact.description} lightbox>
+  <PageHero lang={lang} title={m.hero.title} lead={m.hero.lead} crumb={t.common.nav.impact} />
+
+  <section class="sp">
+    <div class="wrap">
+      <div style="margin-bottom:56px"><Stats lang={lang} items={m.stats} /></div>
+      <div class="sec-head reveal" style="margin-bottom:28px">
+        <span class="eyebrow">{m.map.eyebrow}</span>
+        <h2 style="font-size:clamp(24px,3.4vw,36px);margin-top:14px">{m.map.title}</h2>
+      </div>
+      <div class="prov-cloud reveal d1">
+        {m.map.provinces.map((p) => <span class="prov"><span class="d"></span>{p}</span>)}
+        <span class="prov more"><span class="d"></span>{m.map.more}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-2">
+    <div class="wrap">
+      <SectionHead eyebrow={m.projects.eyebrow} title={m.projects.title} />
+      <div class="g3 grid">
+        {m.projects.items.map((p, i) => {
+          const photo = img(p.img);
+          return (
+            <article class:list={['proj reveal', `d${i + 1}`]}>
+              <div class:list={['ph', ['a', 'b', 'c'][i % 3]]}>
+                <span class="flag"><Icon name={p.flagIcon} />{p.flag}</span>
+                {photo
+                  ? <img src={photo} alt={p.title} loading="lazy" decoding="async" />
+                  : <svg class="ph-hex" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M50 8 84 28v44L50 92 16 72V28z"/></svg>}
+              </div>
+              <div class="bd"><h3>{p.title}</h3><p>{p.desc}</p><div class="loc"><Icon name="pin" />{p.loc}</div></div>
+            </article>
+          );
+        })}
+      </div>
+      <p class="lead center reveal" style="margin:34px auto 0;font-size:14.5px">{m.projects.more}</p>
+    </div>
+  </section>
+
+  {gallery.length > 0 && (
+    <section class="sp">
+      <div class="wrap">
+        <SectionHead eyebrow={m.gallery.eyebrow} title={m.gallery.title} />
+        <div class="gal-grid reveal">
+          {gallery.map((g) => (
+            <button class="gcell" type="button" data-photo={g.src} data-title={g.title} aria-label={g.title}>
+              <img src={g.src} alt={g.title} loading="lazy" decoding="async" />
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="sp dark" style="background:linear-gradient(170deg,#150826,#1f0c40)">
+    <div class="wrap">
+      <SectionHead eyebrow={m.awards.eyebrow} title={m.awards.title} light />
+      <div class="aw-grid">
+        {t.awards.map((a, i) => (
+          <div class:list={['aw reveal', `d${i + 1}`]}><div class="ic"><Icon name={a.icon} /></div><div class="yr">{a.label}</div><h4>{a.title}</h4><p>{a.desc}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={m.cta.title} lead={m.cta.lead}>
+    <Btn href={profileHref} arrow>{m.cta.primary}</Btn>
+    <Btn href={href('partnership', lang)} variant="glass">{m.cta.secondary}</Btn>
+  </CtaBand>
+</Base>

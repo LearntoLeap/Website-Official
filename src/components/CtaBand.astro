@@ -1,0 +1,14 @@
+---
+import { rich } from '../i18n';
+interface Props { eyebrow?: string; title: string; lead?: string }
+const { eyebrow, title, lead } = Astro.props;
+---
+<section class="sp cta-band">
+  <div class="glow"></div>
+  <div class="wrap">
+    {eyebrow && <span class="eyebrow light center reveal">{eyebrow}</span>}
+    <h2 class="reveal d1" set:html={rich(title)} />
+    {lead && <p class="lead reveal d2" set:html={lead} />}
+    <div class="row reveal d3"><slot /></div>
+  </div>
+</section>

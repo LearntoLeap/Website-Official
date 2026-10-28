@@ -1,0 +1,15 @@
+---
+import { numFmt } from '../i18n';
+import type { Lang } from '../i18n/routes';
+interface Props { lang: Lang; items: { n: number; suf: string; label: string }[]; class?: string }
+const { lang, items, class: cls } = Astro.props;
+const fmt = (n: number) => n.toLocaleString(numFmt(lang));
+---
+<div class:list={['stats-inner reveal', cls]} data-stats data-locale={numFmt(lang)} style={`--cols:${items.length}`}>
+  {items.map((s) => (
+    <div class="stat">
+      <div class="num" data-n={s.n} data-suf={s.suf}>{fmt(s.n)}{s.suf}</div>
+      <div class="lbl" set:html={s.label} />
+    </div>
+  ))}
+</div>

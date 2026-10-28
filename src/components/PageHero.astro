@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import HexBg from './HexBg.astro';
+import { rich, useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+interface Props { lang: Lang; title: string; lead?: string; crumb: string }
+const { lang, title, lead, crumb } = Astro.props;
+const t = useT(lang);
+---
+<div class="phero">
+  <HexBg />
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href={href('home', lang)}>{t.common.nav.home}</a><Icon name="chevron" /><span aria-current="page">{crumb}</span>
+    </nav>
+    <h1 class="reveal" set:html={rich(title)} />
+    {lead && <p class="reveal d1" set:html={lead} />}
+    {Astro.slots.has('default') && <div class="ph-cta reveal d2"><slot /></div>}
+  </div>
+</div>

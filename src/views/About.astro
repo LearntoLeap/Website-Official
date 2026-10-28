@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT, rich } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { img } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const a = t.about;
+const aboutPhoto = img('about');
+const robog = img('robog');
+---
+<Base lang={lang} page="about" title={t.meta.about.title} description={t.meta.about.description}>
+  <PageHero lang={lang} title={a.hero.title} crumb={t.common.nav.about} />
+
+  <section class="sp">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">{a.vmEyebrow}</span>
+        <div class="vm">
+          {a.vm.map((v) => (
+            <div class="vm-card"><div class="ic"><Icon name={v.icon} /></div><h5>{v.title}</h5><p>{v.desc}</p></div>
+          ))}
+        </div>
+        <div style="margin-top:36px"><span class="eyebrow">{a.storyEyebrow}</span></div>
+        {aboutPhoto && <div class="about-photo" style={`background-image:url('${aboutPhoto}')`} role="img" aria-label="Learn to Leap"></div>}
+        <div class="about-body" style="margin-top:16px">
+          {a.story.map((p) => <p set:html={p} />)}
+        </div>
+      </div>
+      <div class="reveal d2">
+        {robog && (
+          <figure class="fig">
+            <img src={robog} alt={a.photoAlt} width="1200" height="799" loading="lazy" decoding="async" />
+            <figcaption>{a.photoCaption}</figcaption>
+          </figure>
+        )}
+        <blockquote class="quote">
+          <p>{a.quote}</p>
+          <div class="by">— <b>{a.quoteName}</b>, {a.quoteRole}</div>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={a.values.eyebrow} title={a.values.title} />
+      <div class="g4 grid">
+        {a.values.items.map((v, i) => (
+          <div class:list={['card val reveal', `d${i + 1}`]}>
+            <div class="n">{String(i + 1).padStart(2, '0')}</div>
+            <div class="ic-box"><Icon name={v.icon} /></div>
+            <h3>{v.title}</h3><p>{v.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="philo reveal">
+        <span class="eyebrow center">{a.philosophy.eyebrow}</span>
+        <h3 set:html={rich(a.philosophy.title)} />
+        <p class="lead" set:html={a.philosophy.lead} />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={a.cta.title} lead={a.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{a.cta.primary}</Btn>
+    <Btn href={href('solutions', lang)} variant="glass">{a.cta.secondary}</Btn>
+  </CtaBand>
+</Base>

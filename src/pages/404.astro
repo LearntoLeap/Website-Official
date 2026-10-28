@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import HexBg from '../components/HexBg.astro';
+import { useT, rich } from '../i18n';
+import { href } from '../i18n/routes';
+const vi = useT('vi');
+const en = useT('en');
+---
+<Base lang="vi" page={null} title={vi.meta.notFound.title} description={vi.meta.notFound.description}>
+  <div class="phero" style="min-height:72vh;display:grid;align-items:center">
+    <HexBg />
+    <div class="wrap">
+      <span class="eyebrow light">404</span>
+      <h1 style="margin-top:16px" set:html={rich(vi.notFound.title)} />
+      <p>{vi.notFound.lead}</p>
+      <p lang="en" style="font-size:15px;opacity:.8;margin-top:8px">{en.notFound.lead}</p>
+      <div class="ph-cta">
+        <Btn href={href('home', 'vi')} arrow>{vi.notFound.home}</Btn>
+        <Btn href={href('home', 'en')} variant="glass">{en.notFound.home}</Btn>
+      </div>
+    </div>
+  </div>
+</Base>

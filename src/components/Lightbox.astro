@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+interface Props { closeLabel: string }
+const { closeLabel } = Astro.props;
+---
+<div class="lb" id="lb" role="dialog" aria-modal="true" hidden>
+  <div class="lb-inner" id="lbInner"></div>
+  <button class="lb-x" type="button" id="lbX" aria-label={closeLabel}><Icon name="close" /></button>
+</div>

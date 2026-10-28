@@ -1,0 +1,8 @@
+---
+/** Hoạ tiết lục giác mờ làm nền cho các dải tối. */
+interface Props { tall?: boolean }
+const { tall = false } = Astro.props;
+---
+{tall
+  ? <svg class="hex-bg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><g><path d="M40 40l34 20v40L40 160 6 140V60z"/><path d="M180 40l34 20v40l-34 60-34-20V60z"/><path d="M320 120l34 20v40l-34 60-34-20v-80z"/><path d="M520 60l34 20v40l-34 60-34-20V80z"/><path d="M680 120l34 20v40l-34 60-34-20v-80z"/><path d="M120 320l34 20v40l-34 60-34-20v-80z"/><path d="M420 360l34 20v40l-34 60-34-20v-80z"/><path d="M620 320l34 20v40l-34 60-34-20v-80z"/></g></svg>
+  : <svg class="hex-bg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><g><path d="M120 40l34 20v40l-34 60-34-20V60z"/><path d="M520 60l34 20v40l-34 60-34-20V80z"/><path d="M680 120l34 20v40l-34 60-34-20v-80z"/><path d="M420 240l34 20v40l-34 60-34-20v-80z"/></g></svg>}

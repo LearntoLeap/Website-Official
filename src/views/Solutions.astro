@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import SolCard from '../components/SolCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT, rich } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { img } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const s = t.solutionsPage;
+const labPhoto = img('lab-photo');
+---
+<Base lang={lang} page="solutions" title={t.meta.solutions.title} description={t.meta.solutions.description}>
+  <PageHero lang={lang} title={s.hero.title} lead={s.hero.lead} crumb={t.common.nav.solutions}>
+    <Btn href={href('contact', lang)} variant="glass" arrow>{s.hero.cta}</Btn>
+  </PageHero>
+
+  <!-- 9 GIẢI PHÁP -->
+  <section class="sp">
+    <div class="wrap">
+      <div class="sol-grid">
+        {t.solutions.map((x, i) => <SolCard imgKey={x.id} num={x.num} icon={x.icon} title={x.title} desc={x.desc} tag={x.tag} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- PHÒNG STEM – AI LAB -->
+  <section class="sp lab" id="lab">
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="lab-grid">
+        <div class="reveal">
+          <span class="eyebrow">{s.lab.eyebrow}</span>
+          <h2>{s.lab.title}</h2>
+          <p class="lead" set:html={s.lab.lead} />
+          <div class="lab-chips">{s.lab.chips.map((c) => <span class="chip">{c}</span>)}</div>
+          <div class="lab-feats">
+            {s.lab.feats.map((f) => (
+              <div class="feat"><div class="ic"><Icon name={f.icon} /></div><div><h5>{f.title}</h5><p>{f.desc}</p></div></div>
+            ))}
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="op-card">
+            <div class="op-photo">
+              {labPhoto
+                ? <img src={labPhoto} alt={s.lab.photoLabel} loading="lazy" decoding="async" />
+                : <>
+                    <svg class="ph-hex" width="88" height="88" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M50 8 84 28v44L50 92 16 72V28z"/><circle cx="50" cy="50" r="13"/></svg>
+                    <span class="ph-label"><Icon name="camera" />{s.lab.photoLabel}</span>
+                  </>}
+            </div>
+            <h4>{s.lab.opTitle}</h4>
+            <div class="op-stats">
+              {s.lab.opStats.map((o) => <div class="op-stat"><div class="v">{o.v} <span>{o.u}</span></div><div class="k">{o.k}</div></div>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LỘ TRÌNH K12 -->
+  <section class="sp" id="k12">
+    <div class="wrap">
+      <SectionHead eyebrow={s.ladder.eyebrow} title={s.ladder.title} lead={s.ladder.lead} />
+      <div class="prog-grid">
+        {s.ladder.steps.map((st, i) => (
+          <div class:list={['step reveal', `d${i + 1}`]}>
+            <div class="dot"><Icon name={st.icon} stroke={1.8} /></div>
+            <span class="age">{st.age}</span>
+            <h3>{st.title}</h3>
+            <p>{st.desc}</p>
+            <span class="pill">{st.pill}</span>
+          </div>
+        ))}
+      </div>
+      <div class="prog-note reveal"><span>{s.ladder.noteLabel}</span>{s.ladder.notePills.map((p) => <span class="pill">{p}</span>)}</div>
+    </div>
+  </section>
+
+  <!-- INNOVATION HUB -->
+  <section class="sp bg-2" id="innovation-hub">
+    <div class="wrap split mid">
+      <div class="reveal">
+        <span class="eyebrow">{s.ihub.eyebrow}</span>
+        <h2 class="fd" style="font-size:clamp(24px,3.4vw,38px);margin:14px 0" set:html={rich(s.ihub.title)} />
+        <p class="lead">{s.ihub.lead}</p>
+      </div>
+      <div class="reveal d2 grid g2">
+        {s.ihub.cards.map((c) => <div class="card"><div class="ic-box"><Icon name={c.icon} /></div><h3 style="font-size:16px">{c.title}</h3><p>{c.desc}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- SÂN CHƠI -->
+  <section class="sp" id="san-choi">
+    <div class="wrap">
+      <SectionHead eyebrow={s.arena.eyebrow} title={s.arena.title} lead={s.arena.lead} />
+      <div class="g3 grid">
+        {s.arena.cards.map((c, i) => (
+          <div class:list={['card reveal', `d${(i % 3) + 1}`]}><div class="ic-box"><Icon name={c.icon} /></div><h3>{c.title}</h3><p set:html={c.desc} /></div>
+        ))}
+        <div class="card promo reveal d3">
+          <h3>{s.arena.promo.title}</h3>
+          <p>{s.arena.promo.desc}</p>
+          <Btn href={href('contact', lang)} size="sm" arrow>{s.arena.promo.cta}</Btn>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={s.cta.title} lead={s.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{s.cta.primary}</Btn>
+    <Btn href={href('partnership', lang)} variant="glass">{s.cta.secondary}</Btn>
+  </CtaBand>
+</Base>

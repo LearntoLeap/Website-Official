@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { useT, plain } from '../i18n';
+import { ROUTES, LEGACY_HASHES, type Lang, type PageKey } from '../i18n/routes';
+import { SITE } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  page: PageKey | null;
+  title: string;
+  description: string;
+  image?: string;
+  lightbox?: boolean;
+}
+const { lang, page, title, description, image = '/images/og-cover.jpg', lightbox = false } = Astro.props;
+const t = useT(lang);
+const abs = (p: string) => new URL(p, SITE.url).href;
+const canonical = page ? abs(ROUTES[page][lang]) : undefined;
+const alternates = page ? (['vi', 'en'] as Lang[]).map((l) => ({ l, url: abs(ROUTES[page][l]) })) : [];
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  logo: abs('/apple-touch-icon.png'),
+  email: SITE.email,
+  telephone: '+84' + SITE.phone.slice(1),
+  taxID: SITE.taxId,
+  address: { '@type': 'PostalAddress', streetAddress: '241 Xuân Thủy', addressLocality: 'Cầu Giấy, Hà Nội', addressCountry: 'VN' },
+  sameAs: Object.values(SITE.social).filter(Boolean),
+};
+// Link kiểu cũ (#ve-chung-toi…) từ bản WordPress → trang mới tương ứng.
+const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => [h, ROUTES[k].vi]));
+---
+<!doctype html>
+<html lang={lang} data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={plain(description)} />
+  {canonical && <link rel="canonical" href={canonical} />}
+  {alternates.map((a) => <link rel="alternate" hreflang={a.l} href={a.url} />)}
+  {page && <link rel="alternate" hreflang="x-default" href={abs(ROUTES[page].vi)} />}
+  <meta name="theme-color" content="#1b0b38" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Learn to Leap" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={plain(description)} />
+  <meta property="og:image" content={abs(image)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+  {canonical && <meta property="og:url" content={canonical} />}
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <script is:inline define:vars={{ legacy, isHomeVi: page === 'home' && lang === 'vi' }}>
+    var d = document.documentElement, th;
+    d.classList.add('js');
+    try { th = localStorage.getItem('ltl-theme'); } catch (e) {}
+    if (th !== 'light' && th !== 'dark') th = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.dataset.theme = th;
+    if (isHomeVi && location.hash) {
+      var to = legacy[location.hash.slice(1)];
+      if (to && to !== '/') location.replace(to);
+    }
+  </script>
+  {page === 'home' && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
+</head>
+<body>
+  <a class="skip" href="#main">{t.common.skip}</a>
+  <Header lang={lang} page={page} />
+  <main id="main"><slot /></main>
+  <Footer lang={lang} />
+  {lightbox && <Lightbox closeLabel={t.common.close} />}
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</body>
+</html>
