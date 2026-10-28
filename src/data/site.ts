@@ -1,3 +1,5 @@
+import { withBase } from '../i18n/routes';
+
 /**
  * Thông tin chung của công ty và đường dẫn ảnh.
  * Sửa ở đây là toàn bộ website (cả VI lẫn EN) cập nhật theo.
@@ -50,7 +52,7 @@ export const IMAGES: Record<string, string> = {
   'proj-bacninh': '/images/proj-bacninh.webp',
 };
 
-export const img = (key: string) => IMAGES[key] || '';
+export const img = (key: string) => (IMAGES[key] ? withBase(IMAGES[key]) : '');
 
 /**
  * Logo đối tác (dải logo chạy ngang ở trang chủ và trang Hợp tác).

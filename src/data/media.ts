@@ -1,5 +1,5 @@
 import raw from './media.json';
-import type { Lang } from '../i18n/routes';
+import { withBase, type Lang } from '../i18n/routes';
 
 export type MediaType = 'bao' | 'video' | 'anh';
 export interface MediaItem {
@@ -38,4 +38,4 @@ export const videos = allVideos.filter((it) => !isShort(it));
 export const shorts = allVideos.filter(isShort).reverse();
 /** Video phát trên trang chủ: mục có featured, không có thì lấy video mới nhất. */
 export const featuredVideo = videos.find((it) => it.featured) ?? videos[videos.length - 1];
-export const photos = items.filter((it) => it.type === 'anh' && it.image);
+export const photos = items.filter((it) => it.type === 'anh' && it.image).map((it) => ({ ...it, image: withBase(it.image) }));

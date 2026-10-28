@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Lightbox from '../components/Lightbox.astro';
 import { useT, plain } from '../i18n';
-import { ROUTES, LEGACY_HASHES, type Lang, type PageKey } from '../i18n/routes';
+import { ROUTES, LEGACY_HASHES, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { SITE } from '../data/site';
 
 interface Props {
@@ -35,7 +35,7 @@ const orgLd = {
   sameAs: Object.values(SITE.social).filter(Boolean),
 };
 // Link kiểu cũ (#ve-chung-toi…) từ bản WordPress → trang mới tương ứng.
-const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => [h, ROUTES[k].vi]));
+const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => [h, withBase(ROUTES[k].vi)]));
 ---
 <!doctype html>
 <html lang={lang} data-theme="light">
@@ -48,8 +48,8 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
   {alternates.map((a) => <link rel="alternate" hreflang={a.l} href={a.url} />)}
   {page && <link rel="alternate" hreflang="x-default" href={abs(ROUTES[page].vi)} />}
   <meta name="theme-color" content="#1b0b38" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
+  <link rel="apple-touch-icon" sizes="180x180" href={withBase('/apple-touch-icon.png')} />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Learn to Leap" />
@@ -74,7 +74,7 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
     d.dataset.theme = th;
     if (isHomeVi && location.hash) {
       var to = legacy[location.hash.slice(1)];
-      if (to && to !== '/') location.replace(to);
+      if (to && to !== location.pathname) location.replace(to);
     }
   </script>
   {page === 'home' && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}

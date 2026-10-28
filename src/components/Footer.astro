@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { useT } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
+import { href, withBase, type Lang } from '../i18n/routes';
 import { SITE } from '../data/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
     <div class="ft-grid">
       <div class="ft-about">
         <a class="logo" href={href('home', lang)} aria-label="Learn to Leap">
-          <img class="logo-img logo-img--ft" src="/images/logo-light.png" alt="Learn to Leap" width="242" height="96" loading="lazy" />
+          <img class="logo-img logo-img--ft" src={withBase('/images/logo-light.png')} alt="Learn to Leap" width="242" height="96" loading="lazy" />
         </a>
         <p>{t.footer.about}</p>
         <div class="ft-soc">

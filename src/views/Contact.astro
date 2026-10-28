@@ -5,7 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import HexBg from '../components/HexBg.astro';
 import { useT } from '../i18n';
-import type { Lang } from '../i18n/routes';
+import { withBase, type Lang } from '../i18n/routes';
 import { SITE } from '../data/site';
 
 interface Props { lang: Lang }
@@ -18,7 +18,7 @@ const quick = [
   { icon: 'phone', href: `tel:${SITE.phone}`, val: phone, ...c.quick.call },
   ...(SITE.social.zalo ? [{ icon: 'chat', href: SITE.social.zalo, val: SITE.phoneDisplay, ext: true, ...c.quick.zalo }] : []),
   { icon: 'mail', href: mail(c.quick.emailSubject), val: SITE.email, ...c.quick.email },
-  { icon: 'download', href: SITE.profilePdf || mail(c.quick.profileSubject), val: SITE.profilePdf ? 'PDF' : SITE.email, ...c.quick.profile },
+  { icon: 'download', href: SITE.profilePdf ? withBase(SITE.profilePdf) : mail(c.quick.profileSubject), val: SITE.profilePdf ? 'PDF' : SITE.email, ...c.quick.profile },
 ];
 const address = lang === 'vi' ? SITE.address : SITE.addressEn;
 const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(SITE.mapQuery)}&hl=${lang}&z=16&output=embed`;

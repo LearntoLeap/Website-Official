@@ -1,12 +1,12 @@
 ---
 import Icon from './Icon.astro';
 import { useT } from '../i18n';
-import { ROUTES, href, type Lang, type PageKey } from '../i18n/routes';
+import { ROUTES, href, withBase, type Lang, type PageKey } from '../i18n/routes';
 interface Props { lang: Lang; page: PageKey | null }
 const { lang, page } = Astro.props;
 const t = useT(lang);
 const other: Lang = lang === 'vi' ? 'en' : 'vi';
-const switchHref = page ? ROUTES[page][other] : ROUTES.home[other];
+const switchHref = withBase(page ? ROUTES[page][other] : ROUTES.home[other]);
 const main: PageKey[] = ['about', 'solutions', 'impact', 'partnership', 'news'];
 const all: PageKey[] = ['home', ...main, 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
@@ -14,8 +14,8 @@ const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 <header class="site" id="hdr">
   <div class="wrap nav">
     <a class="logo" href={href('home', lang)} aria-label="Learn to Leap">
-      <img class="logo-img logo-img--light" src="/images/logo-light.png" alt="Learn to Leap" width="242" height="96" />
-      <img class="logo-img logo-img--dark" src="/images/logo-dark.png" alt="" width="242" height="96" />
+      <img class="logo-img logo-img--light" src={withBase('/images/logo-light.png')} alt="Learn to Leap" width="242" height="96" />
+      <img class="logo-img logo-img--dark" src={withBase('/images/logo-dark.png')} alt="" width="242" height="96" />
     </a>
     <nav aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
       <ul class="nav-links">

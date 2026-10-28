@@ -7,7 +7,7 @@ import SectionHead from '../components/SectionHead.astro';
 import Stats from '../components/Stats.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
+import { href, withBase, type Lang } from '../i18n/routes';
 import { SITE, img } from '../data/site';
 import { photos, titleOf } from '../data/media';
 
@@ -15,7 +15,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const m = t.impact;
-const profileHref = SITE.profilePdf || href('contact', lang);
+const profileHref = SITE.profilePdf ? withBase(SITE.profilePdf) : href('contact', lang);
 // Thư viện ảnh: ảnh "anh" trong media.json + ảnh dự án đã có.
 const gallery = [
   ...(img('robog') ? [{ src: img('robog'), title: t.about.photoCaption }] : []),

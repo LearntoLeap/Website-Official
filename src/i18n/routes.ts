@@ -25,4 +25,9 @@ export const LEGACY_HASHES: Record<string, PageKey> = {
   'lien-he': 'contact',
 };
 
-export const href = (page: PageKey, lang: Lang) => ROUTES[page][lang];
+/** Thư mục gốc khi site chạy dưới đường dẫn con (vd GitHub Pages: /Website-Official). Bản chính thức là ''. */
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+/** Gắn thư mục gốc vào đường dẫn nội bộ ('/images/a.webp' → '/Website-Official/images/a.webp'). */
+export const withBase = (p: string) => (p.startsWith('/') && !p.startsWith('//') ? BASE + p || '/' : p);
+
+export const href = (page: PageKey, lang: Lang) => withBase(ROUTES[page][lang]);

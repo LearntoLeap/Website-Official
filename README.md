@@ -59,6 +59,10 @@ Chép logo PNG nền trong suốt vào `public/images/partners/`, thêm một d�
 - Ưu tiên ảnh ngang, rộng 1600–2000px, dạng `.jpg` hoặc `.webp`, dưới 400KB.
 - Vị trí nào chưa có ảnh sẽ hiện khung đồ hoạ thay thế, không để trống.
 
+## Bản xem thử trên GitHub Pages
+
+https://learntoleap.github.io/Website-Official/ — đăng từ nhánh `gh-pages` (bản dựng sẵn). Cập nhật: `BASE_PATH=/Website-Official npm run build` rồi đẩy thư mục `dist` lên nhánh `gh-pages`. Bản này chạy dưới đường dẫn con nên đường dẫn nội bộ trong code phải qua `withBase()` / `href()` (`src/i18n/routes.ts`), không viết cứng `/images/...` trong HTML.
+
 ## Triển khai lên Vercel
 
 1. Vercel → **Add New Project** → chọn repo này. Vercel tự nhận Astro (build `npm run build`, thư mục `dist`).
