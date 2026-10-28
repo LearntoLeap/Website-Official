@@ -1,8 +1,0 @@
----
-// Robot "ló" ra ở mép một mục: chỉ để trang trí, trôi nhẹ theo cuộn trang (site.ts) và nhổm lên khi rê chuột.
-// Vị trí / kích thước đặt bằng class riêng (pk-*) trong global.css; mục chứa nó cần position:relative.
-import { bot } from '../data/site';
-interface Props { src: string; class?: string }
-const { src, class: cls } = Astro.props;
----
-<div class:list={['peek', cls]} data-peek aria-hidden="true"><img src={bot(src)} alt="" loading="lazy" decoding="async" /></div>

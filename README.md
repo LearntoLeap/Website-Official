@@ -59,7 +59,7 @@ Chép logo PNG nền trong suốt vào `public/images/partners/`, thêm một d�
 Ảnh đã tách nền nằm ở `public/images/robots/<tên>.webp`, dùng ở:
 - Hero trang chủ (5 dòng sản phẩm): `STAGE` trong `src/views/Home.astro`, chữ ở `home.hero.lines` (không ghi tên hãng).
 - Mục Hệ sinh thái giải pháp: `SHOTS` trong `src/components/Ecosystem.astro`, chữ ở `home.eco`.
-- Robot ở thẻ giải pháp: `SOL_BOTS` trong `src/data/site.ts`; robot ở hero trang con: thuộc tính `bots` của `PageHero`.
+- Robot ở hero trang con: thuộc tính `bots` của `PageHero`; Cruzr ở dải liên hệ cuối trang: `src/components/CtaBand.astro`.
 - Alpha Mini đồng hành: `src/components/Buddy.astro`; tư thế theo mục đặt bằng `data-buddy` trên từng mục.
 
 Link thẳng tới một dòng ở hero: `/#line-3`.

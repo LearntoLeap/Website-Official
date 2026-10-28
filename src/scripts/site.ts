@@ -80,42 +80,58 @@ if ('IntersectionObserver' in window && !reduce) {
 }
 
 /* ----- Hero: sân khấu sản phẩm ----- */
-// Rê chuột: cả hero nhận --tx/--ty (-1…1) để chữ nền, sân khấu và từng ảnh trôi theo độ sâu.
+// Rê chuột: --mx/--my (-1…1) được làm mượt từng khung hình (không dùng transition) nên ảnh trôi êm, không khựng.
 const tilt = document.querySelector<HTMLElement>('[data-tilt]');
 if (tilt && !reduce && matchMedia('(pointer: fine)').matches) {
   const hero = tilt.closest<HTMLElement>('.hero') ?? tilt;
-  let raf = 0;
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  const loop = () => {
+    x += (tx - x) * 0.06;
+    y += (ty - y) * 0.06;
+    hero.style.setProperty('--mx', x.toFixed(4));
+    hero.style.setProperty('--my', y.toFixed(4));
+    raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.001 ? requestAnimationFrame(loop) : 0;
+  };
+  const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
   hero.addEventListener('pointermove', (e) => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      raf = 0;
-      const r = tilt.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
-      const y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
-      hero.style.setProperty('--tx', x.toFixed(3));
-      hero.style.setProperty('--ty', y.toFixed(3));
-    });
+    const r = tilt.getBoundingClientRect();
+    tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
+    ty = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
+    kick();
   });
-  hero.addEventListener('pointerleave', () => { hero.style.setProperty('--tx', '0'); hero.style.setProperty('--ty', '0'); });
+  hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
 }
 const stage = document.querySelector<HTMLElement>('[data-stage]');
 if (stage) {
   const tabs = [...stage.querySelectorAll<HTMLButtonElement>('[data-pick]')];
   const parts = (sel: string) => [...stage.querySelectorAll<HTMLElement>(sel)];
   const slides = parts('.stg-slide'), giants = parts('.stg-giant .g'), specs = parts('.spec');
+  const sweep = stage.querySelector<HTMLElement>('.stg-sweep');
   let cur = 0;
+  const outTimers: number[] = [];
   const show = (i: number, focus = false) => {
-    cur = (i + tabs.length) % tabs.length;
+    i = (i + tabs.length) % tabs.length;
+    if (i === cur) { if (focus) tabs[i].focus(); return; }
+    const prev = cur;
+    cur = i;
     tabs.forEach((t, k) => {
-      const on = k === cur;
+      const on = k === i;
       t.classList.toggle('on', on);
       t.setAttribute('aria-selected', String(on));
       t.tabIndex = on ? 0 : -1;
     });
-    slides.forEach((el, k) => el.classList.toggle('on', k === cur));
-    giants.forEach((el, k) => el.classList.toggle('on', k === cur));
-    specs.forEach((el, k) => { el.hidden = k !== cur; });
-    if (focus) tabs[cur].focus();
+    // Cảnh cũ lướt ra (.out) trong lúc cảnh mới hiện vào (.on).
+    [slides, giants].forEach((list) => {
+      list.forEach((el, k) => el.classList.toggle('on', k === i));
+      const old = list[prev];
+      old.classList.add('out');
+      clearTimeout(outTimers[prev]);
+      outTimers[prev] = window.setTimeout(() => old.classList.remove('out'), 900);
+      list[i].classList.remove('out');
+    });
+    specs.forEach((el, k) => { el.hidden = k !== i; });
+    if (sweep) { sweep.classList.remove('go'); void sweep.offsetWidth; sweep.classList.add('go'); }
+    if (focus) tabs[i].focus();
   };
   tabs.forEach((t, k) => {
     t.addEventListener('click', () => show(k));
@@ -124,11 +140,11 @@ if (stage) {
       if (step) { e.preventDefault(); show(cur + step, true); }
     });
   });
-  // Link thẳng tới một nhóm: …/#line-3
+  // Link thẳng tới một dòng: …/#line-3
   const m = /^#line-(\d+)$/.exec(location.hash);
   if (m && +m[1] >= 1 && +m[1] <= tabs.length) show(+m[1] - 1);
-  // Tự chuyển: vạch tiến trình dưới tab đang chọn chạy hết thì sang nhóm sau.
-  // Rê chuột / focus vào hero hoặc bấm nút dừng thì vạch dừng lại (WCAG 2.2.2).
+  // Luôn tự chuyển: vạch tiến trình dưới tab đang chọn chạy hết thì sang dòng sau.
+  // Có nút dừng / chạy (WCAG 2.2.2); máy bật giảm chuyển động thì không tự chuyển.
   if (!reduce) {
     stage.classList.add('auto');
     stage.addEventListener('animationend', (e) => {
@@ -224,28 +240,6 @@ document.querySelectorAll<HTMLElement>('[data-eco]').forEach((box) => {
     });
   });
 });
-
-/* ----- Robot ló ở mép các mục: trôi nhẹ theo cuộn trang ----- */
-const peeks = [...document.querySelectorAll<HTMLElement>('[data-peek]')];
-if (peeks.length && !reduce) {
-  const visible = new Set<HTMLElement>();
-  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
-    if (en.isIntersecting) visible.add(en.target as HTMLElement); else visible.delete(en.target as HTMLElement);
-  }));
-  peeks.forEach((p) => io.observe(p));
-  let ticking = false;
-  const update = () => {
-    ticking = false;
-    const vh = innerHeight;
-    visible.forEach((p) => {
-      const r = p.getBoundingClientRect();
-      const k = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / vh));
-      p.style.setProperty('--sy', k.toFixed(3));
-    });
-  };
-  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  update();
-}
 
 /* ----- Alpha Mini đồng hành ----- */
 const buddy = document.querySelector<HTMLButtonElement>('[data-buddy-bot]');

@@ -1,12 +1,12 @@
 ---
 import { rich } from '../i18n';
-import Peek from './Peek.astro';
+import { bot } from '../data/site';
 interface Props { eyebrow?: string; title: string; lead?: string }
 const { eyebrow, title, lead } = Astro.props;
 ---
 <section class="sp cta-band" data-buddy="bow">
   <div class="glow"></div>
-  <Peek src="cruzr" class="pk-cta" />
+  <div class="cta-bot reveal d2" aria-hidden="true"><span class="pod"></span><img src={bot('cruzr')} alt="" loading="lazy" decoding="async" /></div>
   <div class="wrap">
     {eyebrow && <span class="eyebrow light center reveal">{eyebrow}</span>}
     <h2 class="reveal d1" set:html={rich(title)} />

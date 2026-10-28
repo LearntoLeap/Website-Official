@@ -12,7 +12,6 @@ import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
 import ShortsRail from '../components/ShortsRail.astro';
 import Ecosystem from '../components/Ecosystem.astro';
-import Peek from '../components/Peek.astro';
 import { useT, rich } from '../i18n';
 import { href, withBase, type Lang } from '../i18n/routes';
 import { SITE } from '../data/site';
@@ -23,35 +22,36 @@ const { lang } = Astro.props;
 const t = useT(lang);
 const h = t.home;
 // Sân khấu hero: 5 dòng sản phẩm (thứ tự theo i18n home.hero.lines; không ghi tên hãng).
-// Mỗi ảnh: cx = tâm theo chiều ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%),
-// dz = độ trôi khi rê chuột, r = góc xoay. Ảnh đã tách nền nằm ở public/images/robots.
+// Toạ độ tính trong hộp robot (.stg-bots: 66% bên trái khung trên desktop, cả khung trên mobile) để
+// không chạm thẻ thông số. cx = tâm ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%),
+// dz = độ trôi theo chuột (px), r = góc xoay. Ảnh đã tách nền nằm ở public/images/robots.
 type Shot = { src: string; cx: number; b: number; h?: number; w?: number; dz?: number; r?: number };
 const STAGE: { thumb: string; shots: Shot[] }[] = [
-  { thumb: 'tienkung', shots: [{ src: 'tienkung', cx: 40, b: -4, h: 106, dz: 10 }] },
+  { thumb: 'tienkung', shots: [{ src: 'tienkung', cx: 50, b: 1, h: 98, dz: 10 }] },
   { thumb: 'yanshee', shots: [
-    { src: 'ukit-se', cx: 70, b: 4, w: 50, dz: 6 },
-    { src: 'yanshee', cx: 34, b: 4, h: 84, dz: 14 },
+    { src: 'ukit-se', cx: 74, b: 3, w: 50, dz: 6 },
+    { src: 'yanshee', cx: 36, b: 4, h: 80, dz: 14 },
   ] },
   { thumb: 'ugot-up', shots: [
-    { src: 'ukit-transformer', cx: 81, b: 4, h: 56, dz: 6 },
-    { src: 'ugot-dog', cx: 37, b: 4, w: 46, dz: 14 },
-    { src: 'ugot-up', cx: 62, b: 0, w: 22, dz: 20 },
+    { src: 'ukit-transformer', cx: 80, b: 6, h: 60, dz: 6 },
+    { src: 'ugot-dog', cx: 38, b: 4, w: 60, dz: 14 },
+    { src: 'ugot-up', cx: 62, b: 0, w: 28, dz: 20 },
   ] },
   { thumb: 'stickem-robot', shots: [
-    { src: 'weeemake-house', cx: 81, b: 6, h: 52, dz: 6 },
-    { src: 'stickem-robot', cx: 35, b: 4, w: 50, dz: 14 },
-    { src: 'weeemake-kit', cx: 61, b: 0, w: 24, dz: 20 },
+    { src: 'weeemake-house', cx: 81, b: 8, h: 42, dz: 6 },
+    { src: 'stickem-robot', cx: 40, b: 4, w: 64, dz: 14 },
+    { src: 'weeemake-kit', cx: 66, b: 0, w: 30, dz: 20 },
   ] },
   { thumb: 'kt-smarthouse', shots: [
-    { src: 'ebd-stem5', cx: 12, b: 40, w: 16, dz: 4, r: -12 },
-    { src: 'ebd-stem8', cx: 22, b: 43, w: 16, dz: 6, r: -3 },
-    { src: 'kt-wind', cx: 85, b: 6, h: 56, dz: 8 },
-    { src: 'kt-smarthouse', cx: 46, b: 3, w: 54, dz: 14 },
+    { src: 'ebd-stem5', cx: 12, b: 42, w: 19, dz: 4, r: -12 },
+    { src: 'ebd-stem8', cx: 26, b: 45, w: 19, dz: 6, r: -3 },
+    { src: 'kt-wind', cx: 87, b: 6, h: 52, dz: 8 },
+    { src: 'kt-smarthouse', cx: 48, b: 3, w: 68, dz: 14 },
   ] },
 ];
 const bot = (n: string) => withBase(`/images/robots/${n}.webp`);
 const shotStyle = (s: Shot, i: number) =>
-  [`--cx:${s.cx}%`, `--b:${s.b}%`, s.h ? `--h:${s.h}%` : `--w:${s.w}%`, `--dz:${s.dz ?? 8}`, `--r:${s.r ?? 0}deg`, `--d:${i}`].join(';');
+  [`--cx:${s.cx}%`, `--b:${s.b}%`, s.h ? `height:${s.h}%` : `width:${s.w}%`, `--dz:${s.dz ?? 8}px`, `--r:${s.r ?? 0}deg`, `--d:${i}`].join(';');
 // 3 bài báo mới nhất (cuối danh sách là mới nhất).
 const latest = press.slice(-3).reverse();
 ---
@@ -73,15 +73,20 @@ const latest = press.slice(-3).reverse();
       </div>
       <div class="stg-stage reveal d2">
         <div class="stg-view" data-tilt>
-        <div class="stg-floor" aria-hidden="true"></div>
-        <div class="stg-ring" aria-hidden="true"></div>
-        {STAGE.map((st, i) => (
-          <div class:list={['stg-slide', { on: i === 0 }]} id={`stg-${i}`} role="tabpanel" data-i={i} aria-label={h.hero.lines[i].name}>
-            {st.shots.map((sh, j) => (
-              <img src={bot(sh.src)} alt={j === st.shots.length - 1 ? h.hero.lines[i].name : ''} style={shotStyle(sh, j)} decoding="async" fetchpriority={i === 0 ? 'high' : 'low'} />
+          <div class="stg-floor" aria-hidden="true"></div>
+          <div class="stg-bots">
+            <div class="stg-ring" aria-hidden="true"></div>
+            {STAGE.map((st, i) => (
+              <div class:list={['stg-slide', { on: i === 0 }]} id={`stg-${i}`} role="tabpanel" data-i={i} aria-label={h.hero.lines[i].name}>
+                {st.shots.map((sh, j) => (
+                  <span class:list={['shot', sh.h ? 'by-h' : 'by-w']} style={shotStyle(sh, j)}>
+                    <img src={bot(sh.src)} alt={j === st.shots.length - 1 ? h.hero.lines[i].name : ''} decoding="async" fetchpriority={i === 0 ? 'high' : 'low'} />
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
-        ))}
+          <div class="stg-sweep" aria-hidden="true"></div>
         </div>
         <div class="stg-spec">
           {h.hero.lines.map((l, i) => (
@@ -118,8 +123,7 @@ const latest = press.slice(-3).reverse();
   </section>
 
   <!-- INTRO -->
-  <section class="sp has-peek" data-buddy="walk">
-    <Peek src="ukit-penguin" class="pk-intro" />
+  <section class="sp" data-buddy="walk">
     <div class="wrap split">
       <div class="reveal">
         <span class="eyebrow">{h.intro.eyebrow}</span>
@@ -133,8 +137,7 @@ const latest = press.slice(-3).reverse();
   </section>
 
   <!-- 3 THẾ MẠNH -->
-  <section class="sp bg-soft has-peek" data-buddy="front">
-    <Peek src="ugot-car" class="pk-rs" />
+  <section class="sp bg-soft" data-buddy="front">
     <div class="wrap">
       <SectionHead eyebrow={h.strengths.eyebrow} title={h.strengths.title} />
       <div class="rs-grid">
@@ -157,8 +160,7 @@ const latest = press.slice(-3).reverse();
   <Ecosystem lang={lang} />
 
   <!-- GIẢI PHÁP -->
-  <section class="sp has-peek" data-buddy="walk">
-    <Peek src="yanshee-2" class="pk-sol" />
+  <section class="sp" data-buddy="walk">
     <div class="wrap">
       <SectionHead eyebrow={h.solPreview.eyebrow} title={h.solPreview.title} lead={h.solPreview.lead} />
       <div class="sol-grid">
@@ -194,8 +196,7 @@ const latest = press.slice(-3).reverse();
   </section>
 
   <!-- GIẢI THƯỞNG -->
-  <section class="sp bg-soft has-peek" data-buddy="jump">
-    <Peek src="ukit-transformer" class="pk-aw" />
+  <section class="sp bg-soft" data-buddy="jump">
     <div class="wrap">
       <SectionHead eyebrow={h.awardsTeaser.eyebrow} title={h.awardsTeaser.title} />
       <div class="g4 grid" style="margin-bottom:46px">
