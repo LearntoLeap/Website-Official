@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import { titleOf, ytId, type MediaItem } from '../data/media';
+import type { Lang } from '../i18n/routes';
+interface Props { item: MediaItem; lang: Lang; playLabel: string; short?: boolean; class?: string }
+const { item, lang, playLabel, short = false, class: cls } = Astro.props;
+const id = ytId(item.url);
+const title = titleOf(item, lang);
+// Video ngang: ảnh maxres nét hơn; Shorts chỉ chắc chắn có hqdefault.
+const thumb = `https://i.ytimg.com/vi/${id}/${short ? 'hqdefault' : 'maxresdefault'}.jpg`;
+---
+<figure class:list={['iv', { short }, cls]}>
+  <div class="iv-media">
+    <button class="iv-poster" type="button" data-inline-yt={id} data-title={title} aria-label={`${playLabel}: ${title}`}>
+      <img src={thumb} alt="" loading="lazy" decoding="async" data-fallback={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} />
+      <span class="iv-play"><Icon name="play" /></span>
+    </button>
+  </div>
+  <figcaption>{title}</figcaption>
+</figure>

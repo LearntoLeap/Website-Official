@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import InlineVideo from './InlineVideo.astro';
+import type { MediaItem } from '../data/media';
+import type { Lang } from '../i18n/routes';
+interface Props { items: MediaItem[]; lang: Lang; playLabel: string; title?: string }
+const { items, lang, playLabel, title } = Astro.props;
+const prev = lang === 'vi' ? 'Video trước' : 'Previous';
+const next = lang === 'vi' ? 'Video sau' : 'Next';
+---
+{items.length > 0 && (
+  <div class="shorts reveal" data-rail>
+    {title && <h3 class="shorts-title">{title}</h3>}
+    <div class="sh-track" data-rail-track>
+      {items.map((it) => <InlineVideo item={it} lang={lang} playLabel={playLabel} short />)}
+    </div>
+    <button class="sh-nav prev" type="button" data-rail-prev aria-label={prev}><Icon name="chevron" /></button>
+    <button class="sh-nav next" type="button" data-rail-next aria-label={next}><Icon name="chevron" /></button>
+  </div>
+)}

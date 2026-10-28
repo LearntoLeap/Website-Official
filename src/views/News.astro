@@ -6,10 +6,11 @@ import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import NewsCard from '../components/NewsCard.astro';
 import VideoCard from '../components/VideoCard.astro';
+import ShortsRail from '../components/ShortsRail.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
-import { press, videos, photos, titleOf } from '../data/media';
+import { press, videos, shorts, photos, titleOf } from '../data/media';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -20,7 +21,7 @@ const news = [...press].reverse();
 const top = news.slice(0, 3);
 const rest = news.slice(3);
 const vids = [...videos].reverse();
-const empty = !news.length && !vids.length && !photos.length;
+const empty = !news.length && !vids.length && !shorts.length && !photos.length;
 ---
 <Base lang={lang} page="news" title={t.meta.news.title} description={t.meta.news.description} lightbox>
   <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} />
@@ -52,6 +53,13 @@ const empty = !news.length && !vids.length && !photos.length;
               </div>
             </>
           )}
+        </div>
+      )}
+
+      {shorts.length > 0 && (
+        <div class="tl-sec" id="video-ngan">
+          <SectionHead eyebrow={n.shorts.eyebrow} title={n.shorts.title} />
+          <ShortsRail items={shorts} lang={lang} playLabel={n.video.play} />
         </div>
       )}
 

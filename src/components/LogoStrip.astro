@@ -1,0 +1,21 @@
+---
+import { PARTNERS } from '../data/site';
+interface Props { label?: string }
+const { label } = Astro.props;
+---
+{PARTNERS.length > 0 && (
+  <div class="logo-strip reveal">
+    {label && <p class="ls-label">{label}</p>}
+    <div class="ls-viewport">
+      <div class="ls-track">
+        <ul class="ls-set">
+          {PARTNERS.map((p) => <li title={p.name}><img src={p.logo} alt={p.name} loading="lazy" decoding="async" /></li>)}
+        </ul>
+        {/* Bản sao để dải logo chạy vòng liên tục */}
+        <ul class="ls-set" aria-hidden="true">
+          {PARTNERS.map((p) => <li><img src={p.logo} alt="" loading="lazy" decoding="async" /></li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+)}

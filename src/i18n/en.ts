@@ -161,6 +161,8 @@ const en: Dict = {
         { img: 'sol-huanluyen', num: '07 – 08', icon: 'terminal', title: 'Team coaching & Summer camps', desc: 'Coaching teams for VEX, WRO, FLL… and national technology summer camps.' },
       ],
     },
+    partnersStrip: 'Working alongside leading partners in Vietnam and abroad',
+    videos: { eyebrow: 'Video', title: 'See Learn to Leap [[in action]]', lead: 'Click to watch right here — no need to leave the site.', shortsTitle: 'Shorts', cta: 'See all videos' },
     awardsTeaser: { eyebrow: 'Recognition', title: 'Trusted and [[recognised]]', cta: 'See our impact' },
     latest: { eyebrow: 'In the press', title: 'Latest [[news]]', cta: 'See all news' },
     cta: {
@@ -401,6 +403,7 @@ const en: Dict = {
       lead: 'Our latest activities and events, and Learn to Leap in the press and on TV.',
     },
     press: { eyebrow: 'News & press', title: 'Featured [[news]]', moreTitle: 'More articles' },
+    shorts: { eyebrow: 'Shorts', title: '[[60-second]] moments' },
     video: { eyebrow: 'Video', title: 'Featured [[videos]]', play: 'Play video' },
     photos: { eyebrow: 'Photos', title: 'Event [[moments]]' },
     empty: 'This section is being updated.',

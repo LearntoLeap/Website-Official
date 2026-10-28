@@ -79,6 +79,46 @@ if ('IntersectionObserver' in window && !reduce) {
   reveals.forEach((el) => el.classList.add('in'));
 }
 
+/* ----- Video phát ngay trên trang ----- */
+// Video không có ảnh maxres: YouTube trả ảnh xám 120px → đổi sang hqdefault.
+document.querySelectorAll<HTMLImageElement>('img[data-fallback]').forEach((im) => {
+  const swap = () => { if (im.naturalWidth <= 120 && im.src !== im.dataset.fallback) im.src = im.dataset.fallback!; };
+  if (im.complete && im.naturalWidth) swap(); else im.addEventListener('load', swap, { once: true });
+  im.addEventListener('error', () => { if (im.src !== im.dataset.fallback) im.src = im.dataset.fallback!; }, { once: true });
+});
+let playing: { box: HTMLElement; html: string } | null = null;
+document.addEventListener('click', (e) => {
+  const btn = (e.target as Element).closest<HTMLElement>('[data-inline-yt]');
+  if (!btn) return;
+  const box = btn.parentElement!;
+  // Chỉ phát một video một lúc: video đang phát trở lại ảnh bìa.
+  if (playing && playing.box !== box) playing.box.innerHTML = playing.html;
+  playing = { box, html: box.innerHTML };
+  const id = encodeURIComponent(btn.dataset.inlineYt!);
+  const ifr = document.createElement('iframe');
+  ifr.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+  ifr.title = btn.dataset.title || 'Video';
+  ifr.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+  ifr.allowFullscreen = true;
+  // YouTube cần biết trang nhúng (Referer), thiếu sẽ báo lỗi 153.
+  ifr.referrerPolicy = 'strict-origin-when-cross-origin';
+  box.replaceChildren(ifr);
+});
+
+/* ----- Dải video ngắn: nút trước / sau ----- */
+document.querySelectorAll<HTMLElement>('[data-rail]').forEach((rail) => {
+  const track = rail.querySelector<HTMLElement>('[data-rail-track]')!;
+  const step = () => (track.firstElementChild as HTMLElement | null)?.offsetWidth ?? 240;
+  const sync = () => {
+    rail.classList.toggle('at-start', track.scrollLeft < 8);
+    rail.classList.toggle('at-end', track.scrollLeft + track.clientWidth > track.scrollWidth - 8);
+  };
+  rail.querySelector('[data-rail-prev]')?.addEventListener('click', () => track.scrollBy({ left: -step() * 2, behavior: 'smooth' }));
+  rail.querySelector('[data-rail-next]')?.addEventListener('click', () => track.scrollBy({ left: step() * 2, behavior: 'smooth' }));
+  track.addEventListener('scroll', sync, { passive: true });
+  sync();
+});
+
 /* ----- Lightbox video / ảnh ----- */
 const lb = document.getElementById('lb');
 const lbInner = document.getElementById('lbInner');

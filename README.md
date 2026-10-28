@@ -47,6 +47,12 @@ Thêm vào **cuối** mảng `items` (mục ở cuối được coi là mới nh
 - `type`: `bao` (bài báo), `video` (link YouTube) hoặc `anh` (ảnh sự kiện, ghi link ảnh vào `image`).
 - `visible: false` để ẩn tạm một mục mà không cần xoá.
 - Video: `url` là link YouTube; ảnh xem trước lấy tự động từ YouTube.
+- Video ngắn dọc (YouTube Shorts): dán link dạng `https://youtube.com/shorts/…` là tự vào dải "Video ngắn" (hoặc thêm `"format": "short"`). Dải này chỉ hiện khi có ít nhất một video ngắn.
+- `"featured": true`: video phát ngay trên trang chủ (chỉ đặt cho một video).
+
+### Logo đối tác
+
+Chép logo PNG nền trong suốt vào `public/images/partners/`, thêm một dòng vào `PARTNERS` trong `src/data/site.ts`.
 
 ### Ảnh
 

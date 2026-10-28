@@ -165,6 +165,8 @@ const vi = {
         { img: 'sol-huanluyen', num: '07 – 08', icon: 'terminal', title: 'Huấn luyện đội tuyển & Trại hè', desc: 'Đào tạo đội tuyển dự VEX, WRO, FLL… và trại hè công nghệ toàn quốc.' },
       ],
     },
+    partnersStrip: 'Đồng hành cùng các đối tác hàng đầu trong và ngoài nước',
+    videos: { eyebrow: 'Video', title: 'Xem Learn to Leap [[qua từng thước phim]]', lead: 'Bấm để xem ngay trên trang — không cần rời khỏi website.', shortsTitle: 'Video ngắn', cta: 'Xem tất cả video' },
     awardsTeaser: { eyebrow: 'Năng lực & dấu ấn', title: 'Được tin tưởng, được [[vinh danh]]', cta: 'Xem năng lực & dấu ấn' },
     latest: { eyebrow: 'Báo chí nói về chúng tôi', title: 'Tin tức [[mới nhất]]', cta: 'Xem tất cả tin tức' },
     cta: {
@@ -410,6 +412,7 @@ const vi = {
       lead: 'Cập nhật hoạt động, sự kiện và những lần Learn to Leap xuất hiện trên báo chí, truyền hình.',
     },
     press: { eyebrow: 'Tin tức & Báo chí', title: 'Tin tức [[nổi bật]]', moreTitle: 'Các bài viết khác' },
+    shorts: { eyebrow: 'Video ngắn', title: 'Khoảnh khắc [[60 giây]]' },
     video: { eyebrow: 'Video', title: 'Video [[nổi bật]]', play: 'Xem video' },
     photos: { eyebrow: 'Hình ảnh', title: 'Khoảnh khắc [[sự kiện]]' },
     empty: 'Khu vực tư liệu đang được cập nhật.',

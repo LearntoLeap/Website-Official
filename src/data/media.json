@@ -9,7 +9,8 @@
       "source": "",
       "image": "",
       "date": "",
-      "visible": true
+      "visible": true,
+      "featured": true
     },
     {
       "type": "bao",
@@ -338,6 +339,166 @@
       "url": "https://www.youtube.com/watch?v=HEDfY0Iebvw",
       "source": "Learn to Leap",
       "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Đội vô địch Sân chơi STEM · AI · Robotics Thái Nguyên 2026",
+      "title_en": "Champions of the Thai Nguyen STEM · AI · Robotics Challenge 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-01.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Vòng chung kết Sân chơi STEM · AI · Robotics Thái Nguyên 2026",
+      "title_en": "Final round of the Thai Nguyen STEM · AI · Robotics Challenge 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-02.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Chung kết ROBOG Miền Bắc 2026",
+      "title_en": "ROBOG Northern Vietnam Finals 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-03.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "49 đội thi, hơn 240 học sinh tại ROBOG Miền Bắc 2026",
+      "title_en": "49 teams and 240+ students at ROBOG Northern Vietnam 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-04.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Thí sinh thi đấu tại ROBOG Miền Bắc 2026",
+      "title_en": "Students competing at ROBOG Northern Vietnam 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-05.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Giải Vàng Stick'Em Global Robotics Games 2025",
+      "title_en": "Gold Award at the Stick'Em Global Robotics Games 2025",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-06.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Hội thảo “Đổi mới sáng tạo cùng STEM · AI · Robotics” cùng Sở GD&ĐT Thái Nguyên",
+      "title_en": "“Innovating with STEM · AI · Robotics” conference with the Thai Nguyen Department of Education",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-07.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Đại biểu trải nghiệm robot AI tại hội thảo Thái Nguyên",
+      "title_en": "Delegates trying an AI robot at the Thai Nguyen conference",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-08.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Trải nghiệm thực tế ảo (VR) tại hội thảo Thái Nguyên",
+      "title_en": "Hands-on VR experience at the Thai Nguyen conference",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-09.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Ngày hội trải nghiệm STEM – AI – Robotics",
+      "title_en": "STEM – AI – Robotics experience day",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-10.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Học sinh lắp ráp và lập trình robot tại ngày hội",
+      "title_en": "Students building and coding robots at an experience day",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-11.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Cuộc thi STEM – AI – Robotics cấp trường",
+      "title_en": "School-level STEM – AI – Robotics competition",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-12.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Learn to Leap tại Sàn giao dịch Khoa học và Công nghệ TP. Hà Nội",
+      "title_en": "Learn to Leap at the Hanoi Science & Technology Exchange",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-13.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Ký kết hợp tác “Nhà nước – Nhà trường – Doanh nghiệp” tại Nghệ An",
+      "title_en": "Signing the State – University – Business partnership in Nghe An",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-14.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Chứng nhận và cúp SEI Awards",
+      "title_en": "SEI Awards certificate and trophy",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-15.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Dự án STEM Innovation 57",
+      "title_en": "The STEM Innovation 57 project",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-16.webp",
       "date": "",
       "visible": true
     }

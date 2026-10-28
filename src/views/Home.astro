@@ -8,10 +8,13 @@ import SectionHead from '../components/SectionHead.astro';
 import SolCard from '../components/SolCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import CtaBand from '../components/CtaBand.astro';
+import LogoStrip from '../components/LogoStrip.astro';
+import InlineVideo from '../components/InlineVideo.astro';
+import ShortsRail from '../components/ShortsRail.astro';
 import { useT, rich } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
 import { SITE, img } from '../data/site';
-import { press } from '../data/media';
+import { press, featuredVideo, shorts } from '../data/media';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -63,6 +66,7 @@ const latest = press.slice(-3).reverse();
   <!-- STATS -->
   <section class="wrap" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
+    <LogoStrip label={h.partnersStrip} />
   </section>
 
   <!-- INTRO -->
@@ -109,6 +113,18 @@ const latest = press.slice(-3).reverse();
       <div class="center" style="margin-top:42px"><Btn href={href('solutions', lang)} arrow>{h.solPreview.cta}</Btn></div>
     </div>
   </section>
+
+  <!-- VIDEO -->
+  {featuredVideo && (
+    <section class="sp bg-soft">
+      <div class="wrap">
+        <SectionHead eyebrow={h.videos.eyebrow} title={h.videos.title} lead={h.videos.lead} />
+        <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>
+        <ShortsRail items={shorts} lang={lang} playLabel={t.news.video.play} title={h.videos.shortsTitle} />
+        <div class="center vid-more reveal"><Btn href={`${href('news', lang)}#video`} variant="ghost" arrow>{h.videos.cta}</Btn></div>
+      </div>
+    </section>
+  )}
 
   <!-- NĂNG LỰC HỌC SINH -->
   <section class="sp dark">
