@@ -109,12 +109,17 @@ if (tvc) {
     film.currentTime = 0;
     film.play().catch(() => {});
   });
-  tvc.querySelector('[data-tvc-close]')?.addEventListener('click', () => tvc.close());
-  tvc.addEventListener('click', (e) => { if (e.target === tvc) tvc.close(); });
-  tvc.addEventListener('close', () => {
+  // Dừng phim ngay trong hàm đóng — không trông vào sự kiện 'close' (có trình duyệt không phát).
+  const shut = () => {
     film.pause();
+    if (tvc.open) tvc.close();
     if (resumeHero) heroVideo?.play().catch(() => {});
-  });
+    resumeHero = false;
+  };
+  tvc.querySelector('[data-tvc-close]')?.addEventListener('click', shut);
+  tvc.addEventListener('click', (e) => { if (e.target === tvc) shut(); });
+  tvc.addEventListener('cancel', (e) => { e.preventDefault(); shut(); });
+  tvc.addEventListener('close', shut);
 }
 
 /* ----- Hệ sinh thái Robotic AI: sân khấu 5 dòng thiết bị ----- */
@@ -335,3 +340,112 @@ if (lb && lbInner) {
   document.getElementById('lbX')?.addEventListener('click', close);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
 }
+
+/* ----- Hiệu ứng tự chạy ----- */
+// Chỉ chạy khi mục đang trong khung nhìn, tab đang mở và máy không bật giảm chuyển động.
+const whenVisible = (el: Element, cb: (on: boolean) => void) => {
+  if (!('IntersectionObserver' in window)) return cb(true);
+  new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.25 }).observe(el);
+};
+
+// Hero: cụm chữ gradient đổi luân phiên; giữ chiều cao của cụm dài nhất để tiêu đề không nhảy.
+const rot = document.querySelector<HTMLElement>('[data-rotate]');
+if (rot && !reduce) {
+  const words: string[] = JSON.parse(rot.dataset.rotate || '[]');
+  const gt = rot.querySelector<HTMLElement>('.gt')!;
+  const fit = () => {
+    const keep = gt.textContent;
+    rot.style.minHeight = '';
+    rot.style.minHeight = Math.max(...words.map((w) => { gt.textContent = w; return rot.offsetHeight; })) + 'px';
+    gt.textContent = keep;
+  };
+  fit();
+  addEventListener('resize', fit);
+  document.fonts?.ready.then(fit);
+  let i = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    rot.classList.add('out');
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      gt.textContent = words[i];
+      rot.classList.remove('out');
+      rot.classList.add('in');
+      void rot.offsetWidth;
+      rot.classList.remove('in');
+    }, 450);
+  }, 2800);
+}
+
+// Thẻ tự chuyển điểm sáng: rê chuột / focus vào khối thì dừng và sáng đúng thẻ đang trỏ.
+document.querySelectorAll<HTMLElement>('[data-cycle]').forEach((box) => {
+  const items = [...box.querySelectorAll<HTMLElement>('[data-cycle-item]')];
+  if (reduce || items.length < 2) return;
+  const ms = parseInt(box.dataset.cycle || '3600', 10);
+  box.style.setProperty('--cyc', ms + 'ms');
+  let i = -1, timer = 0, seen = false, hold = false;
+  const show = (n: number) => {
+    items.forEach((it, k) => it.classList.toggle('on', k === n));
+    i = n;
+  };
+  const stop = () => { clearInterval(timer); timer = 0; };
+  const start = () => {
+    stop();
+    if (!seen || hold) return;
+    show((i + 1) % items.length);
+    timer = window.setInterval(() => { if (!document.hidden) show((i + 1) % items.length); }, ms);
+  };
+  whenVisible(box, (on) => { seen = on; if (on) start(); else { stop(); show(-1); } });
+  box.addEventListener('pointerenter', () => { hold = true; stop(); box.classList.add('hold'); show(-1); });
+  box.addEventListener('pointerleave', () => { hold = false; box.classList.remove('hold'); start(); });
+  box.addEventListener('focusin', () => { hold = true; stop(); show(-1); });
+  box.addEventListener('focusout', () => { hold = false; start(); });
+});
+
+// Dải ảnh tự trượt từng ảnh; hết dải thì quay về đầu. Người xem tự vuốt / rê chuột thì tạm dừng.
+document.querySelectorAll<HTMLElement>('[data-autorail]').forEach((rail) => {
+  const track = rail.querySelector<HTMLElement>('[data-autorail-track]');
+  if (!track || reduce) return;
+  const ms = parseInt(rail.dataset.autorail || '3200', 10);
+  let seen = false, hold = false;
+  const step = () => {
+    if (!seen || hold || document.hidden) return;
+    const card = track.firstElementChild as HTMLElement | null;
+    if (!card) return;
+    const w = card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
+    const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    track.scrollTo({ left: end ? 0 : track.scrollLeft + w });
+  };
+  whenVisible(rail, (on) => { seen = on; });
+  setInterval(step, ms);
+  rail.addEventListener('pointerenter', () => { hold = true; });
+  rail.addEventListener('pointerleave', () => { hold = false; });
+  track.addEventListener('touchstart', () => { hold = true; }, { passive: true });
+  track.addEventListener('touchend', () => { setTimeout(() => { hold = false; }, ms * 2); }, { passive: true });
+});
+
+/* ----- Blog: lọc theo chủ đề, sao chép liên kết ----- */
+const filter = document.querySelector<HTMLElement>('[data-blog-filter]');
+if (filter) {
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-blog-grid] [data-cat]')];
+  const empty = document.querySelector<HTMLElement>('[data-blog-empty]');
+  filter.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest<HTMLButtonElement>('button[data-cat]');
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+    filter.querySelectorAll('button').forEach((b) => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
+    let shown = 0;
+    cards.forEach((c) => { const on = !cat || c.dataset.cat === cat; c.hidden = !on; if (on) { shown++; c.classList.add('in'); } });
+    if (empty) empty.hidden = shown > 0;
+  });
+}
+document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.copyLink!);
+      const label = btn.textContent;
+      btn.textContent = btn.dataset.done || label;
+      setTimeout(() => { btn.textContent = label; }, 1800);
+    } catch { /* trình duyệt chặn clipboard: bỏ qua */ }
+  });
+});

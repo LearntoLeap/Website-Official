@@ -1,0 +1,10 @@
+---
+/** Nền chuyển động nhẹ cho các dải tối: lưới mảnh trôi chậm, hai quầng sáng lượn, vài hạt sáng bay lên. Chỉ trang trí. */
+const dots = [8, 19, 31, 44, 57, 66, 78, 90];
+---
+<div class="fx-bg" aria-hidden="true">
+  <span class="fx-grid"></span>
+  <span class="fx-orb o1"></span>
+  <span class="fx-orb o2"></span>
+  {dots.map((x, i) => <span class="fx-dot" style={`--x:${x}%;--d:${(i * 1.7) % 9}s;--t:${11 + (i % 4) * 3}s`}></span>)}
+</div>

@@ -29,7 +29,6 @@ export const ytThumb = (u: string) => {
 };
 export const titleOf = (it: MediaItem, lang: Lang) => (lang === 'en' && it.title_en ? it.title_en : it.title);
 
-export const press = items.filter((it) => it.type === 'bao');
 const allVideos = items.filter((it) => it.type === 'video' && ytId(it.url));
 const isShort = (it: MediaItem) => it.format === 'short' || /\/shorts\//.test(it.url);
 /** Video ngang (16:9). */

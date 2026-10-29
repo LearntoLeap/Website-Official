@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { useT } from '../i18n';
+import { withBase, type Lang } from '../i18n/routes';
+import { postHref, readMinutes, fmtDate, type Post } from '../data/blog';
+interface Props { post: Post; lang: Lang; index?: number }
+const { post, lang, index = 0 } = Astro.props;
+const b = useT(lang).news.blog;
+const d = post.data;
+---
+<a class:list={['news-card bc reveal', `d${(index % 3) + 1}`]} href={postHref(post)} data-cat={d.category}>
+  <div class="nc-thumb">
+    <img src={withBase(d.cover)} alt="" loading="lazy" decoding="async" />
+    {d.sample && <span class="bc-sample">{b.sample}</span>}
+  </div>
+  <div class="nc-body">
+    <div class="nc-tag"><Icon name="tag" />{b.cats[d.category]}</div>
+    <h3>{d.title}</h3>
+    <p class="bc-ex">{d.excerpt}</p>
+    <div class="nc-more"><Icon name="calendar" />{fmtDate(d.date, lang)}<span aria-hidden="true">·</span>{readMinutes(post)} {b.minutes}</div>
+  </div>
+</a>

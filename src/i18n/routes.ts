@@ -10,7 +10,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   solutions:   { vi: '/giai-phap',   en: '/en/solutions' },
   impact:      { vi: '/nang-luc',    en: '/en/impact' },
   partnership: { vi: '/hop-tac',     en: '/en/partnership' },
-  news:        { vi: '/tin-tuc',     en: '/en/news' },
+  news:        { vi: '/blog',        en: '/en/blog' },
   contact:     { vi: '/lien-he',     en: '/en/contact' },
 };
 

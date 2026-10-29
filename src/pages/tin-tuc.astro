@@ -1,4 +1,8 @@
 ---
-import View from '../views/News.astro';
+// Trang Tin tức cũ đã thành Blog: giữ đường dẫn cũ để link đã chia sẻ vẫn chạy.
+import { withBase } from '../i18n/routes';
+const to = withBase('/blog');
 ---
-<View lang="vi" />
+<!doctype html>
+<html><head><meta charset="utf-8" /><meta name="robots" content="noindex" /><link rel="canonical" href={to} /><meta http-equiv="refresh" content={`0; url=${to}`} /><title>Blog — Learn to Leap</title></head>
+<body><a href={to}>Blog — Learn to Leap</a></body></html>

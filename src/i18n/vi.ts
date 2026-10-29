@@ -22,7 +22,7 @@ const vi = {
       solutions: 'Giải pháp',
       impact: 'Năng lực & Dấu ấn',
       partnership: 'Hợp tác',
-      news: 'Tin tức',
+      news: 'Blog',
       contact: 'Liên hệ',
     },
     ctaPartner: 'Hợp tác cùng LtL',
@@ -69,8 +69,8 @@ const vi = {
       description: 'Phương án hợp tác linh hoạt cho Sở/Phòng GD&ĐT, nhà trường và doanh nghiệp. Quy trình 5 bước, mạng lưới 50+ đối tác, bám sát NQ 57, NQ 71 và khung của Bộ GD&ĐT.',
     },
     news: {
-      title: 'Tin tức & Truyền thông — Learn to Leap',
-      description: 'Hoạt động, sự kiện và những lần Learn to Leap xuất hiện trên báo chí, truyền hình.',
+      title: 'Blog — Learn to Leap',
+      description: 'Câu chuyện từ lớp học, ngày hội, cuộc thi và góc nhìn chuyên môn về giáo dục STEM – AI – Robotics do đội ngũ Learn to Leap viết.',
     },
     contact: {
       title: 'Liên hệ — Learn to Leap',
@@ -120,6 +120,8 @@ const vi = {
       title: 'Đưa [[STEM – AI – Robotics]] đến từng trường học Việt Nam',
       sub: 'Tư vấn – chuyển giao – vận hành trọn gói: phòng học, chương trình, giáo viên và sân chơi quốc tế.',
       cta1: 'Đặt lịch tư vấn',
+      /** Cụm chữ gradient trong tiêu đề đổi luân phiên (cụm đầu = cụm trong tiêu đề). */
+      rotate: ['STEM – AI – Robotics', 'Robot AI', 'Lập trình & AI', 'Phòng Lab AI', 'Sân chơi quốc tế'],
       cta2: 'Xem phim',
       pauseVideo: 'Tạm dừng phim nền',
       playVideo: 'Phát phim nền',
@@ -134,7 +136,6 @@ const vi = {
       { n: 1200, suf: '+', label: 'Học sinh tham gia<br>mỗi ngày hội' },
     ],
     partnersStrip: 'Đồng hành cùng các đối tác hàng đầu trong và ngoài nước',
-    pressLabel: 'Báo chí đưa tin',
     /** Mục 3 — Lối vào theo người xem. page: khoá trang trong i18n/routes; hash: neo trong trang đó. */
     doors: {
       eyebrow: 'Giải pháp cho từng đối tác',
@@ -202,9 +203,13 @@ const vi = {
         { src: '/images/sol-k12.webp', alt: 'Tiết học STEM – AI với máy tính bảng' },
         { src: '/images/gallery/su-kien-08.webp', alt: 'Giáo viên trải nghiệm robot dịch vụ tại hội thảo' },
         { src: '/images/sol-ngayhoi.webp', alt: 'Học sinh tại ngày hội STEM – AI – Robotics' },
+        { src: '/images/gallery/su-kien-11.webp', alt: 'Học sinh lập trình robot trên sa bàn cùng giáo viên' },
+        { src: '/images/gallery/su-kien-10.webp', alt: 'Học sinh reo hò cổ vũ tại ngày hội' },
+        { src: '/images/gallery/su-kien-12.webp', alt: 'Học sinh lắp ráp xe robot' },
+        { src: '/images/gallery/su-kien-09.webp', alt: 'Thầy cô trải nghiệm kính thực tế ảo' },
       ],
-      pressTitle: 'Báo chí nói về chúng tôi',
-      cta: 'Xem tất cả tin tức & video',
+      blogTitle: 'Bài mới trên Blog',
+      cta: 'Xem Blog & video',
     },
     /** Mục 9 — Hành động. */
     cta: {
@@ -444,23 +449,39 @@ const vi = {
     },
   },
 
-  /* ---------- Tin tức ---------- */
+  /* ---------- Blog ---------- */
   news: {
     hero: {
-      title: 'Tin tức & [[Truyền thông]]',
-      lead: 'Cập nhật hoạt động, sự kiện và những lần Learn to Leap xuất hiện trên báo chí, truyền hình.',
+      title: 'Blog [[Learn to Leap]]',
+      lead: 'Câu chuyện từ lớp học, ngày hội, cuộc thi và góc nhìn chuyên môn về giáo dục STEM – AI – Robotics — do chính đội ngũ Learn to Leap viết.',
     },
-    press: { eyebrow: 'Tin tức & Báo chí', title: 'Tin tức [[nổi bật]]', moreTitle: 'Các bài viết khác' },
+    blog: {
+      eyebrow: 'Bài viết',
+      title: 'Mới nhất [[từ Learn to Leap]]',
+      featured: 'Bài nổi bật',
+      all: 'Tất cả',
+      filterLabel: 'Lọc theo chủ đề',
+      read: 'Đọc bài',
+      minutes: 'phút đọc',
+      sample: 'Bài mẫu',
+      sampleNote: 'Các bài đang hiển thị là bài mẫu (lorem ipsum) để duyệt bố cục — bài thật sẽ do đội ngũ Learn to Leap cập nhật.',
+      empty: 'Chưa có bài viết nào trong chủ đề này.',
+      cats: { 'su-kien': 'Sự kiện', 'cuoc-thi': 'Cuộc thi', 'giai-phap': 'Giải pháp', 'chia-se': 'Chia sẻ chuyên môn' },
+    },
+    post: {
+      back: 'Về Blog',
+      related: 'Đọc [[tiếp]]',
+      share: 'Chia sẻ',
+      copy: 'Sao chép liên kết',
+      copied: 'Đã sao chép',
+    },
     shorts: { eyebrow: 'Video ngắn', title: 'Khoảnh khắc [[60 giây]]' },
     video: { eyebrow: 'Video', title: 'Video [[nổi bật]]', play: 'Xem video' },
     photos: { eyebrow: 'Hình ảnh', title: 'Khoảnh khắc [[sự kiện]]' },
-    empty: 'Khu vực tư liệu đang được cập nhật.',
-    sourceFallback: 'Tin tức',
-    readOriginal: 'Đọc bài gốc',
     cta: {
-      title: 'Hợp tác truyền thông cùng Learn to Leap',
-      lead: 'Liên hệ để nhận thông cáo báo chí, bộ nhận diện và thông tin sự kiện sắp tới.',
-      primary: 'Liên hệ báo chí',
+      title: 'Có câu chuyện muốn kể [[cùng Learn to Leap]]?',
+      lead: 'Nhà trường, thầy cô và đối tác có thể gửi bài, ảnh hoạt động hoặc đề xuất chủ đề — chúng tôi sẽ biên tập và đăng lên Blog.',
+      primary: 'Liên hệ đội ngũ',
     },
   },
 

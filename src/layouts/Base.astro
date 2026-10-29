@@ -15,12 +15,15 @@ interface Props {
   description: string;
   image?: string;
   lightbox?: boolean;
+  /** Đường dẫn riêng theo ngôn ngữ (bài blog) — thay cho ROUTES[page] ở canonical, hreflang, nút đổi ngôn ngữ. */
+  paths?: Record<Lang, string>;
 }
-const { lang, page, title, description, image = '/images/og-cover.jpg', lightbox = false } = Astro.props;
+const { lang, page, title, description, image = '/images/og-cover.jpg', lightbox = false, paths } = Astro.props;
 const t = useT(lang);
 const abs = (p: string) => new URL(p, SITE.url).href;
-const canonical = page ? abs(ROUTES[page][lang]) : undefined;
-const alternates = page ? (['vi', 'en'] as Lang[]).map((l) => ({ l, url: abs(ROUTES[page][l]) })) : [];
+const own = paths ?? (page ? ROUTES[page] : undefined);
+const canonical = own ? abs(own[lang]) : undefined;
+const alternates = own ? (['vi', 'en'] as Lang[]).map((l) => ({ l, url: abs(own[l]) })) : [];
 
 const orgLd = {
   '@context': 'https://schema.org',
@@ -47,7 +50,7 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
   <meta name="description" content={plain(description)} />
   {canonical && <link rel="canonical" href={canonical} />}
   {alternates.map((a) => <link rel="alternate" hreflang={a.l} href={a.url} />)}
-  {page && <link rel="alternate" hreflang="x-default" href={abs(ROUTES[page].vi)} />}
+  {own && <link rel="alternate" hreflang="x-default" href={abs(own.vi)} />}
   <meta name="theme-color" content="#1b0b38" />
   <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
   <link rel="apple-touch-icon" sizes="180x180" href={withBase('/apple-touch-icon.png')} />
@@ -82,7 +85,7 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
 </head>
 <body class={`page-${page ?? "none"}`}>
   <a class="skip" href="#main">{t.common.skip}</a>
-  <Header lang={lang} page={page} />
+  <Header lang={lang} page={page} paths={paths} />
   <main id="main"><slot /></main>
   <Footer lang={lang} />
   <Buddy lang={lang} />

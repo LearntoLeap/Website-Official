@@ -1,0 +1,10 @@
+---
+import View from '../../views/BlogPost.astro';
+import { getPosts, slugOf, type Post } from '../../data/blog';
+
+export async function getStaticPaths() {
+  return (await getPosts('vi')).map((post) => ({ params: { slug: slugOf(post) }, props: { post } }));
+}
+const { post } = Astro.props as { post: Post };
+---
+<View post={post} lang="vi" />

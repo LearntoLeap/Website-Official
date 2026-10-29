@@ -4,57 +4,70 @@ import Icon from '../components/Icon.astro';
 import Btn from '../components/Btn.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
-import NewsCard from '../components/NewsCard.astro';
+import BlogCard from '../components/BlogCard.astro';
 import VideoCard from '../components/VideoCard.astro';
 import ShortsRail from '../components/ShortsRail.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
-import { press, videos, shorts, photos, titleOf } from '../data/media';
+import { href, withBase, type Lang } from '../i18n/routes';
+import { videos, shorts, photos, titleOf } from '../data/media';
+import { getPosts, postHref, readMinutes, fmtDate, type Category } from '../data/blog';
 
+// Trang Blog (khoá trang 'news'): bài tự viết của Learn to Leap + video, ảnh hoạt động.
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const n = t.news;
-// Mới nhất lên đầu (trong media.json, mục thêm sau nằm cuối).
-const news = [...press].reverse();
-const top = news.slice(0, 3);
-const rest = news.slice(3);
+const b = n.blog;
+const posts = await getPosts(lang);
+const [feat, ...rest] = posts;
+const cats = Object.keys(b.cats) as Category[];
+const usedCats = cats.filter((c) => posts.some((p) => p.data.category === c));
+const hasSample = posts.some((p) => p.data.sample);
 const vids = [...videos].reverse();
-const empty = !news.length && !vids.length && !shorts.length && !photos.length;
 ---
 <Base lang={lang} page="news" title={t.meta.news.title} description={t.meta.news.description} lightbox>
   <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} bots={['cruzr', 'am-walk']} />
 
   <section class="sp">
     <div class="wrap">
-      {news.length > 0 && (
-        <div class="tl-sec" id="bao-chi">
-          <SectionHead eyebrow={n.press.eyebrow} title={n.press.title} />
-          <div class="g3 grid">
-            {top.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={n.sourceFallback} readLabel={n.readOriginal} />)}
+      {hasSample && <p class="blog-note reveal"><Icon name="idea" />{b.sampleNote}</p>}
+
+      {feat && (
+        <a class="blog-feat reveal" href={postHref(feat)}>
+          <div class="bf-media">
+            <img src={withBase(feat.data.cover)} alt="" decoding="async" />
+            {feat.data.sample && <span class="bc-sample">{b.sample}</span>}
           </div>
-          {rest.length > 0 && (
-            <>
-              <h3 class="nm-head reveal">{n.press.moreTitle}</h3>
-              <div class="nm-grid">
-                {rest.map((it) => {
-                  const title = titleOf(it, lang);
-                  return (
-                    <a class="nm-item" href={it.url} target="_blank" rel="noopener">
-                      <div class="nm-body">
-                        <span class="nm-tag"><Icon name="tag" />{it.source || n.sourceFallback}</span>
-                        <h3 lang={title === it.title ? 'vi' : undefined}>{title}</h3>
-                      </div>
-                      <span class="nm-arrow"><Icon name="arrow" stroke={2.4} /></span>
-                    </a>
-                  );
-                })}
+          <div class="bf-body">
+            <span class="bf-lbl">{b.featured} · {b.cats[feat.data.category]}</span>
+            <h2>{feat.data.title}</h2>
+            <p>{feat.data.excerpt}</p>
+            <span class="bf-meta"><Icon name="calendar" />{fmtDate(feat.data.date, lang)}<span aria-hidden="true">·</span>{readMinutes(feat)} {b.minutes}</span>
+            <span class="bf-go">{b.read}<Icon name="arrow" stroke={2.4} /></span>
+          </div>
+        </a>
+      )}
+
+      {rest.length > 0 && (
+        <div class="tl-sec" id="bai-viet">
+          <div class="blog-top">
+            <SectionHead eyebrow={b.eyebrow} title={b.title} />
+            {usedCats.length > 1 && (
+              <div class="blog-filter reveal" role="group" aria-label={b.filterLabel} data-blog-filter>
+                <button type="button" class="on" data-cat="" aria-pressed="true">{b.all}</button>
+                {usedCats.map((c) => <button type="button" data-cat={c} aria-pressed="false">{b.cats[c]}</button>)}
               </div>
-            </>
-          )}
+            )}
+          </div>
+          <div class="g3 grid blog-grid" data-blog-grid>
+            {rest.map((p, i) => <BlogCard post={p} lang={lang} index={i} />)}
+          </div>
+          <p class="tl-state" data-blog-empty hidden>{b.empty}</p>
         </div>
       )}
+
+      {!posts.length && <p class="tl-state">{b.empty}</p>}
 
       {shorts.length > 0 && (
         <div class="tl-sec" id="video-ngan">
@@ -83,8 +96,6 @@ const empty = !news.length && !vids.length && !shorts.length && !photos.length;
           </div>
         </div>
       )}
-
-      {empty && <p class="tl-state">{n.empty}</p>}
     </div>
   </section>
 

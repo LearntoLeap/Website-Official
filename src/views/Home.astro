@@ -6,15 +6,17 @@ import Icon from '../components/Icon.astro';
 import Btn from '../components/Btn.astro';
 import Stats from '../components/Stats.astro';
 import SectionHead from '../components/SectionHead.astro';
-import NewsCard from '../components/NewsCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import FxBg from '../components/FxBg.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
 import ShortsRail from '../components/ShortsRail.astro';
-import { useT, rich } from '../i18n';
+import { useT } from '../i18n';
 import { href, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { SITE, img, bot } from '../data/site';
-import { press, featuredVideo, shorts } from '../data/media';
+import { featuredVideo, shorts } from '../data/media';
+import { getPosts } from '../data/blog';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -32,8 +34,8 @@ const hasHeroVideo = fs.existsSync(path.join(process.cwd(), 'public', HERO_VIDEO
 const TVC_VIDEO = '/video/tvc-30s.mp4';
 const hasTvc = fs.existsSync(path.join(process.cwd(), 'public', TVC_VIDEO));
 
-// Mục 2 — tên các báo, tạp chí, đài đã đưa tin (bỏ trùng, tối đa 8).
-const pressNames = [...new Set(press.map((p) => p.source).filter((s) => s && /^(Báo|Tạp chí|Đài)/.test(s)))].slice(0, 8);
+// Mục 1 — cụm chữ gradient trong tiêu đề đổi luân phiên: tách tiêu đề quanh [[…]].
+const [titlePre, titleRot, titlePost] = h.hero.title.split(/\[\[|\]\]/);
 
 // Mục 5 — sân khấu 5 dòng thiết bị (thứ tự theo i18n home.robotic.lines; không ghi tên hãng).
 // Toạ độ tính trong hộp robot: cx = tâm ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%), r = góc xoay.
@@ -77,8 +79,8 @@ const steps = t.partnership.process.steps;
 const feature = t.awards[1];
 const others = t.awards.filter((_, i) => i !== 1);
 
-// Mục 8 — 3 bài báo mới nhất (cuối danh sách là mới nhất).
-const latest = press.slice(-3).reverse();
+// Mục 8 — 3 bài Blog mới nhất.
+const latest = (await getPosts(lang)).slice(0, 3);
 const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash;
 ---
 <Base lang={lang} page="home" title={t.meta.home.title} description={t.meta.home.description}>
@@ -92,7 +94,9 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
     <div class="hv-shade" aria-hidden="true"></div>
     <div class="wrap hv-copy">
       <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
-      <h1 class="reveal d1" set:html={rich(h.hero.title)} />
+      <h1 class="reveal d1">
+        {titlePre}<span class="sr-only">{titleRot}</span><span class="hv-rot" aria-hidden="true" data-rotate={JSON.stringify(h.hero.rotate)}><span class="gt">{titleRot}</span></span>{titlePost}
+      </h1>
       <p class="sub reveal d2">{h.hero.sub}</p>
       <div class="hero-cta reveal d3">
         <Btn href={href('contact', lang)} arrow>{h.hero.cta1}</Btn>
@@ -116,18 +120,15 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   <section class="wrap proof" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
     <LogoStrip label={h.partnersStrip} lang={lang} />
-    {pressNames.length > 0 && (
-      <p class="press-line reveal"><span>{h.pressLabel}</span>{pressNames.map((n) => <b>{n}</b>)}</p>
-    )}
   </section>
 
   <!-- 3 · LỐI VÀO THEO NGƯỜI XEM -->
   <section class="sp doors-sec" data-buddy="walk">
     <div class="wrap">
       <SectionHead eyebrow={h.doors.eyebrow} title={h.doors.title} />
-      <div class="doors">
+      <div class="doors" data-cycle="3600">
         {h.doors.items.map((d, i) => (
-          <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)}>
+          <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)} data-cycle-item>
             <img src={img(d.img)} alt="" loading="lazy" decoding="async" />
             <span class="door-body">
               <span class="who">{d.who}</span>
@@ -160,6 +161,7 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
 
   <!-- 5 · HỆ SINH THÁI ROBOTIC AI (dải tối) -->
   <section class="sp rob stg" data-stage data-buddy="jump" aria-labelledby="rob-title">
+    <FxBg />
     <div class="wrap rob-grid">
       <div class="rob-copy">
         <SectionHead eyebrow={r.eyebrow} title={r.title} lead={r.lead} center={false} light id="rob-title" />
@@ -243,9 +245,9 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
             <span class="dsc">{feature.desc}</span>
           </span>
         </a>
-        <div class="hf-awards">
+        <div class="hf-awards" data-cycle="3200">
           {others.map((a, i) => (
-            <div class:list={['hf-aw reveal', `d${i + 1}`]}>
+            <div class:list={['hf-aw reveal', `d${i + 1}`]} data-cycle-item>
               <span class="ic"><Icon name={a.icon} /></span>
               <span class="lbl">{a.label}</span>
               <h3>{a.title}</h3>
@@ -258,20 +260,22 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
     </div>
   </section>
 
-  <!-- 8 · KHOẢNH KHẮC & BÁO CHÍ -->
+  <!-- 8 · KHOẢNH KHẮC & BLOG -->
   <section class="sp" id="phim">
     <div class="wrap">
       <SectionHead eyebrow={h.moments.eyebrow} title={h.moments.title} lead={h.moments.lead} />
       {featuredVideo && <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>}
       {shorts.length > 0 && <ShortsRail items={shorts} lang={lang} playLabel={t.news.video.play} title={h.moments.shortsTitle} />}
-      <div class="mo-photos">
-        {h.moments.photos.map((p, i) => <figure class:list={['reveal', `d${i + 1}`]}><img src={withBase(p.src)} alt={p.alt} loading="lazy" decoding="async" /></figure>)}
+      <div class="mo-photos reveal" data-autorail="3200">
+        <div class="mo-track" data-autorail-track>
+          {h.moments.photos.map((p) => <figure><img src={withBase(p.src)} alt={p.alt} loading="lazy" decoding="async" /></figure>)}
+        </div>
       </div>
       {latest.length > 0 && (
         <>
-          <h3 class="mo-sub reveal">{h.moments.pressTitle}</h3>
+          <h3 class="mo-sub reveal">{h.moments.blogTitle}</h3>
           <div class="g3 grid">
-            {latest.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={t.news.sourceFallback} readLabel={t.news.readOriginal} />)}
+            {latest.map((p, i) => <BlogCard post={p} lang={lang} index={i} />)}
           </div>
         </>
       )}

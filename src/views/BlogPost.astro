@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import HexBg from '../components/HexBg.astro';
+import SectionHead from '../components/SectionHead.astro';
+import BlogCard from '../components/BlogCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { render } from 'astro:content';
+import { useT } from '../i18n';
+import { href, withBase, type Lang } from '../i18n/routes';
+import { getPosts, slugOf, postPath, readMinutes, fmtDate, type Post } from '../data/blog';
+import { SITE } from '../data/site';
+
+interface Props { post: Post; lang: Lang }
+const { post, lang } = Astro.props;
+const t = useT(lang);
+const n = t.news;
+const d = post.data;
+const slug = slugOf(post);
+const { Content } = await render(post);
+
+// Bài cùng slug ở ngôn ngữ kia (nếu có) để nút đổi ngôn ngữ trỏ đúng bài; chưa dịch thì về trang Blog.
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+const hasOther = (await getPosts(other)).some((p) => slugOf(p) === slug);
+const paths = { [lang]: postPath(lang, slug), [other]: hasOther ? postPath(other, slug) : (other === 'vi' ? '/blog' : '/en/blog') } as Record<Lang, string>;
+
+// Đọc tiếp: ưu tiên bài cùng chủ đề, rồi bài mới nhất.
+const all = (await getPosts(lang)).filter((p) => p.id !== post.id);
+const related = [...all.filter((p) => p.data.category === d.category), ...all.filter((p) => p.data.category !== d.category)].slice(0, 3);
+const url = new URL(postPath(lang, slug), SITE.url).href;
+---
+<Base lang={lang} page={null} paths={paths} title={`${d.title} — Learn to Leap`} description={d.excerpt} image={d.cover}>
+  <article>
+    <header class="phero post-hero" data-buddy="walk">
+      <HexBg />
+      <div class="wrap post-wrap">
+        <nav class="crumb" aria-label="Breadcrumb">
+          <a href={href('home', lang)}>{t.common.nav.home}</a><Icon name="chevron" /><a href={href('news', lang)}>{t.common.nav.news}</a><Icon name="chevron" /><span aria-current="page">{n.blog.cats[d.category]}</span>
+        </nav>
+        {d.sample && <span class="bc-sample static">{n.blog.sample}</span>}
+        <h1 class="reveal">{d.title}</h1>
+        <p class="post-meta reveal d1">
+          <span>{d.author}</span><span aria-hidden="true">·</span>
+          <span><Icon name="calendar" />{fmtDate(d.date, lang)}</span><span aria-hidden="true">·</span>
+          <span>{readMinutes(post)} {n.blog.minutes}</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap post-cover reveal"><img src={withBase(d.cover)} alt="" decoding="async" fetchpriority="high" /></div>
+
+    <div class="wrap post-body">
+      <div class="prose"><Content /></div>
+      <aside class="post-share" aria-label={n.post.share}>
+        <span>{n.post.share}</span>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+        <button type="button" data-copy-link={url} data-done={n.post.copied}>{n.post.copy}</button>
+      </aside>
+      <a class="post-back" href={href('news', lang)}><Icon name="chevron" />{n.post.back}</a>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="sp bg-soft">
+      <div class="wrap">
+        <SectionHead title={n.post.related} />
+        <div class="g3 grid">{related.map((p, i) => <BlogCard post={p} lang={lang} index={i} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand title={n.cta.title} lead={n.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{n.cta.primary}</Btn>
+  </CtaBand>
+</Base>

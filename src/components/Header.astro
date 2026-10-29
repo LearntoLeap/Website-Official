@@ -2,11 +2,11 @@
 import Icon from './Icon.astro';
 import { useT } from '../i18n';
 import { ROUTES, href, withBase, type Lang, type PageKey } from '../i18n/routes';
-interface Props { lang: Lang; page: PageKey | null }
-const { lang, page } = Astro.props;
+interface Props { lang: Lang; page: PageKey | null; paths?: Record<Lang, string> }
+const { lang, page, paths } = Astro.props;
 const t = useT(lang);
 const other: Lang = lang === 'vi' ? 'en' : 'vi';
-const switchHref = withBase(page ? ROUTES[page][other] : ROUTES.home[other]);
+const switchHref = withBase(paths ? paths[other] : page ? ROUTES[page][other] : ROUTES.home[other]);
 const main: PageKey[] = ['about', 'solutions', 'impact', 'partnership', 'news'];
 const all: PageKey[] = ['home', ...main, 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
