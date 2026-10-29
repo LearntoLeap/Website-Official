@@ -114,7 +114,7 @@ const en: Dict = {
   home: {
     hero: {
       eyebrow: 'A STEM – AI – Robotics education ecosystem',
-      title: 'Bringing [[STEM – AI – Robotics]] to every school in Vietnam',
+      title: '[[STEM – AI – Robotics]] for every school',
       sub: 'Consulting, transfer and full-service operation: learning spaces, curriculum, teachers and international competitions.',
       cta1: 'Book a consultation',
       rotate: ['STEM – AI – Robotics', 'AI robotics', 'Coding & AI', 'Smart classrooms', 'Global competitions'],
@@ -211,7 +211,7 @@ const en: Dict = {
       eyebrow: 'Partner with Learn to Leap',
       title: 'Let’s bring [[STEM – AI]] to your school',
       lead: 'Book a meeting and the Learn to Leap team will survey, advise and send you our full capability profile.',
-      book: 'Book a meeting',
+      book: 'Book a consultation',
     },
   },
 

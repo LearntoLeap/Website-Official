@@ -119,7 +119,7 @@ const vi = {
     /** Mục 1 — Hero: phim nền (public/video/hero-loop.mp4 nếu có, chưa có thì ảnh tĩnh). */
     hero: {
       eyebrow: 'Hệ sinh thái giáo dục STEM – AI – Robotics',
-      title: 'Đưa [[STEM – AI – Robotics]] đến từng trường học Việt Nam',
+      title: '[[STEM – AI – Robotics]] cho mọi trường học',
       sub: 'Tư vấn – chuyển giao – vận hành trọn gói: phòng học, chương trình, giáo viên và sân chơi quốc tế.',
       cta1: 'Đặt lịch tư vấn',
       /** Cụm chữ gradient trong tiêu đề đổi luân phiên (cụm đầu = cụm trong tiêu đề). */
@@ -227,7 +227,7 @@ const vi = {
       eyebrow: 'Đồng hành cùng Learn to Leap',
       title: 'Cùng đưa [[STEM – AI]] đến trường của bạn',
       lead: 'Đặt lịch làm việc để đội ngũ Learn to Leap khảo sát, tư vấn và gửi Hồ sơ năng lực đầy đủ.',
-      book: 'Đặt lịch làm việc',
+      book: 'Đặt lịch tư vấn',
     },
   },
 

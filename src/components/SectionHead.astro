@@ -1,11 +1,11 @@
 ---
 import { rich } from '../i18n';
+// eyebrow: giữ trong Props cho tương thích nội dung cũ nhưng không hiển thị (tinh gọn 29/10).
 interface Props { eyebrow?: string; title: string; lead?: string; center?: boolean; light?: boolean; level?: 'h1' | 'h2'; id?: string }
-const { eyebrow, title, lead, center = true, light = false, level = 'h2', id } = Astro.props;
+const { title, lead, center = true, level = 'h2', id } = Astro.props;
 const H = level;
 ---
 <div class:list={['sec-head reveal', { center }]}>
-  {eyebrow && <span class:list={['eyebrow', { center, light }]}>{eyebrow}</span>}
   <H id={id} set:html={rich(title)} />
   {lead && <p class="lead" set:html={lead} />}
 </div>

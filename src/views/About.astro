@@ -55,7 +55,6 @@ const robog = img('robog');
       <div class="g4 grid">
         {a.values.items.map((v, i) => (
           <div class:list={['card val reveal', `d${i + 1}`]}>
-            <div class="n">{String(i + 1).padStart(2, '0')}</div>
             <div class="ic-box"><Icon name={v.icon} /></div>
             <h3>{v.title}</h3><p>{v.desc}</p>
           </div>

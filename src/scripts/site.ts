@@ -88,6 +88,7 @@ if (heroVideo) {
   const btn = document.querySelector<HTMLButtonElement>('[data-hero-toggle]');
   const setPaused = (paused: boolean) => {
     if (paused) heroVideo.pause(); else heroVideo.play().catch(() => {});
+    document.documentElement.classList.toggle('hero-paused', paused);
     btn?.classList.toggle('paused', paused);
     btn?.setAttribute('aria-pressed', String(paused));
     btn?.setAttribute('aria-label', (paused ? btn.dataset.play : btn.dataset.pause) || '');
@@ -329,14 +330,21 @@ if (buddy) {
   let pose = 'walk';
   let lastTalk = 0;
   let talkTimer = 0;
+  // Mỗi câu chỉ tự nói một lần trong phiên; màn hình nhỏ thì không tự nói (bong bóng che chữ).
+  const small = matchMedia('(max-width:640px)');
+  let saved = '';
+  try { saved = sessionStorage.getItem('buddy-said') || ''; } catch {}
+  const said = new Set(saved.split(',').filter(Boolean));
   const setPose = (p: string) => {
     if (p === pose || !poses.some((im) => im.dataset.pose === p)) return;
     pose = p;
     poses.forEach((im) => im.classList.toggle('on', im.dataset.pose === p));
     // Nói một câu ngắn khi đổi tư thế, không quá dày.
     const now = Date.now();
-    if (say[p] && now - lastTalk > 3500) {
+    if (say[p] && !said.has(p) && !small.matches && now - lastTalk > 3500) {
       lastTalk = now;
+      said.add(p);
+      try { sessionStorage.setItem('buddy-said', [...said].join(',')); } catch {}
       bubble.textContent = say[p];
       buddy.classList.add('talk');
       clearTimeout(talkTimer);
@@ -444,7 +452,7 @@ if (rot) {
   document.fonts?.ready.then(fit);
   let i = 0;
   if (!reduce) setInterval(() => {
-    if (document.hidden) return;
+    if (document.hidden || document.documentElement.classList.contains('hero-paused')) return;
     rot.classList.add('out');
     setTimeout(() => {
       i = (i + 1) % words.length;
@@ -487,9 +495,15 @@ document.querySelectorAll<HTMLElement>('[data-autorail]').forEach((rail) => {
   const track = rail.querySelector<HTMLElement>('[data-autorail-track]');
   if (!track || reduce) return;
   const ms = parseInt(rail.dataset.autorail || '3200', 10);
-  let seen = false, hold = false;
+  let seen = false, hold = false, paused = false;
+  const toggle = rail.querySelector<HTMLButtonElement>('[data-autorail-toggle]');
+  toggle?.addEventListener('click', () => {
+    paused = rail.classList.toggle('paused');
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.setAttribute('aria-label', (paused ? toggle.dataset.play : toggle.dataset.pause) || '');
+  });
   const step = () => {
-    if (!seen || hold || document.hidden) return;
+    if (!seen || hold || paused || document.hidden) return;
     const card = track.firstElementChild as HTMLElement | null;
     if (!card) return;
     const w = card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
@@ -531,25 +545,9 @@ document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) =
 });
 
 /* ----- Robot ló ở mép các mục ----- */
-// Trôi nhẹ theo cuộn trang (chỉ robot đang trong khung nhìn); bấm vào thì nhảy lên và nói câu của mình.
+// Rê chuột thì nghiêng và nói (CSS); bấm vào thì nhảy lên và nói câu của mình.
 const peeks = [...document.querySelectorAll<HTMLElement>('[data-peek]')];
 if (peeks.length) {
-  if (!reduce) {
-    const vis = new Set<HTMLElement>();
-    const io = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? vis.add(e.target as HTMLElement) : vis.delete(e.target as HTMLElement))));
-    peeks.forEach((p) => io.observe(p));
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      vis.forEach((p) => {
-        const r = p.getBoundingClientRect();
-        const k = ((r.top + r.height / 2) / innerHeight - 0.5) * 2; // -1 (trên) … 1 (dưới)
-        p.style.setProperty('--sy', Math.max(-1, Math.min(1, k)).toFixed(3));
-      });
-    };
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-    update();
-  }
   peeks.forEach((p) => {
     let t = 0;
     p.querySelector('img')?.addEventListener('click', () => {

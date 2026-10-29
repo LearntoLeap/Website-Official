@@ -89,12 +89,11 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   <div class="hero hv">
     <div class="hv-media" aria-hidden="true">
       {hasHeroVideo
-        ? <video data-hero-video autoplay muted loop playsinline preload="metadata" poster={img('hero-poster')}><source src={withBase(HERO_VIDEO)} type="video/mp4" /></video>
+        ? <video data-hero-video autoplay muted loop playsinline preload="metadata" poster={img('hero-poster')}><source src={withBase(HERO_VIDEO)} type="video/mp4" media="(min-width: 761px)" /></video>
         : <img src={img('hero-poster')} alt="" fetchpriority="high" decoding="async" />}
     </div>
     <div class="hv-shade" aria-hidden="true"></div>
     <div class="wrap hv-copy">
-      <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
       <h1 class="reveal d1">
         {titlePre}<span class="sr-only">{titleRot}</span><span class="hv-rot" aria-hidden="true" data-rotate={JSON.stringify(h.hero.rotate)}><span class="gt">{titleRot}</span></span>{titlePost}
       </h1>
@@ -129,9 +128,9 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
     <Peek src="yanshee-2" say={h.peeks.doors} class="pk-doors" />
     <div class="wrap">
       <SectionHead eyebrow={h.doors.eyebrow} title={h.doors.title} />
-      <div class="doors" data-cycle="3600">
+      <div class="doors">
         {h.doors.items.map((d, i) => (
-          <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)} data-cycle-item>
+          <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)}>
             <img src={img(d.img)} alt="" loading="lazy" decoding="async" />
             <span class="door-body">
               <span class="who">{d.who}</span>
@@ -153,7 +152,6 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
         {h.pillars.items.map((p, i) => (
           <a class:list={['pillar reveal', `d${i + 1}`]} href={pageHref('solutions', p.hash)}>
             <span class="ph"><img src={img(p.img)} alt="" loading="lazy" decoding="async" /></span>
-            <span class="pn">{String(i + 1).padStart(2, '0')}</span>
             <h3>{p.title}</h3>
             <ul>{p.list.map((li) => <li>{li}</li>)}</ul>
           </a>
@@ -172,7 +170,7 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
         <div class="stg-spec reveal d2">
           {r.lines.map((l, i) => (
             <div class="spec" data-i={i} hidden={i !== 0}>
-              <div class="k">{String(i + 1).padStart(2, '0')} / {String(STAGE.length).padStart(2, '0')} · {l.kind}</div>
+              <div class="k">{l.kind}</div>
               <h3 class="nm">{l.name}</h3>
               <p>{l.desc}</p>
               <ul>{l.tags.map((tg) => <li>{tg}</li>)}</ul>
@@ -223,7 +221,7 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
       <SectionHead eyebrow={h.process.eyebrow} title={h.process.title} lead={h.process.lead} />
       <ol class="steps5">
         {steps.map((s, i) => (
-          <li class:list={['reveal', `d${i + 1}`]}><span class="sn">{String(i + 1).padStart(2, '0')}</span><h3>{s.title}</h3><p>{s.desc}</p></li>
+          <li class:list={['reveal', `d${i + 1}`]}><span class="sn">{i + 1}</span><h3>{s.title}</h3><p>{s.desc}</p></li>
         ))}
       </ol>
       <div class="basis reveal">
@@ -274,6 +272,7 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
       {featuredVideo && <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>}
       {shorts.length > 0 && <ShortsRail items={shorts} lang={lang} playLabel={t.news.video.play} title={h.moments.shortsTitle} />}
       <div class="mo-photos reveal" data-autorail="3200">
+        <button class="ls-toggle" type="button" data-autorail-toggle aria-pressed="false" aria-label={t.common.pauseMotion} data-pause={t.common.pauseMotion} data-play={t.common.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
         <div class="mo-track" data-autorail-track>
           {h.moments.photos.map((p) => <figure><img src={withBase(p.src)} alt={p.alt} loading="lazy" decoding="async" /></figure>)}
         </div>
