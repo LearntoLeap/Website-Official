@@ -64,18 +64,33 @@ export const bot = (name: string) => withBase(`/images/robots/${name}.webp`);
  * Logo đối tác (dải logo chạy ngang ở trang chủ và trang Hợp tác).
  * Đặt file PNG nền trong suốt vào public/images/partners/ rồi thêm một dòng vào đây.
  */
-export const PARTNERS: { name: string; logo: string }[] = [
-  { name: 'Viện Nghiên cứu Thiết kế Trường học – Bộ GD&ĐT', logo: '/images/partners/vien-nctk.png' },
-  { name: 'IPPTech – UBTECH', logo: '/images/partners/ipptech.png' },
-  { name: "Stick 'Em (Singapore)", logo: '/images/partners/stickem.png' },
-  { name: 'World Energy Council Vietnam', logo: '/images/partners/wec.png' },
-  { name: 'Trường Đại học Sư phạm Hà Nội', logo: '/images/partners/hnue.png' },
-  { name: 'Trường Đại học Vinh', logo: '/images/partners/dh-vinh.png' },
-  { name: 'VEX Robotics', logo: '/images/partners/vex.png' },
-  { name: 'OhStem', logo: '/images/partners/ohstem.png' },
-  { name: 'Bách Khoa Aptech', logo: '/images/partners/aptech.png' },
-  { name: 'Nexta', logo: '/images/partners/nexta.png' },
-  { name: 'Phúc Nam Thành', logo: '/images/partners/pnt.png' },
-  { name: 'VDSmart', logo: '/images/partners/vdsmart.png' },
-  { name: 'Steam Park', logo: '/images/partners/steampark.png' },
+/** Đối tác trên dải logo. group: 'biz' = doanh nghiệp, công nghệ, tổ chức; 'public' = viện, trường đại học, cao đẳng, phổ thông. */
+export type PartnerGroup = 'biz' | 'public';
+export const PARTNERS: { name: string; logo: string; group: PartnerGroup }[] = [
+  { name: 'IPPTech – UBTECH', logo: '/images/partners/ipptech.png', group: 'biz' },
+  { name: 'UBTECH Robotics', logo: '/images/partners/ubtech.png', group: 'biz' },
+  { name: "Stick 'Em (Singapore)", logo: '/images/partners/stickem.png', group: 'biz' },
+  { name: 'World Energy Council Vietnam', logo: '/images/partners/wec.png', group: 'biz' },
+  { name: 'VEX Robotics', logo: '/images/partners/vex.png', group: 'biz' },
+  { name: 'Weeemake', logo: '/images/partners/weeemake.png', group: 'biz' },
+  { name: 'MAXHUB', logo: '/images/partners/maxhub.png', group: 'biz' },
+  { name: 'EBD – NXB Giáo dục Việt Nam', logo: '/images/partners/ebd.png', group: 'biz' },
+  { name: 'OhStem', logo: '/images/partners/ohstem.png', group: 'biz' },
+  { name: 'Edulive', logo: '/images/partners/edulive.png', group: 'biz' },
+  { name: '3D Thinking', logo: '/images/partners/3dthinking.png', group: 'biz' },
+  { name: 'ETEK – Total Automation Solutions', logo: '/images/partners/etek.png', group: 'biz' },
+  { name: 'Hanoi High Tech (HHT)', logo: '/images/partners/hht.png', group: 'biz' },
+  { name: 'IED Hà Phương', logo: '/images/partners/ied-haphuong.png', group: 'biz' },
+  { name: 'ADC', logo: '/images/partners/adc.png', group: 'biz' },
+  { name: 'Đối tác giáo dục', logo: '/images/partners/doi-tac-mu.png', group: 'biz' },
+  { name: 'Bách Khoa Aptech', logo: '/images/partners/aptech.png', group: 'biz' },
+  { name: 'Nexta', logo: '/images/partners/nexta.png', group: 'biz' },
+  { name: 'Phúc Nam Thành', logo: '/images/partners/pnt.png', group: 'biz' },
+  { name: 'VDSmart', logo: '/images/partners/vdsmart.png', group: 'biz' },
+  { name: 'Steam Park', logo: '/images/partners/steampark.png', group: 'biz' },
+  { name: 'Viện Nghiên cứu Thiết kế Trường học – Bộ GD&ĐT', logo: '/images/partners/vien-nctk.png', group: 'public' },
+  { name: 'Trường Đại học Sư phạm Hà Nội', logo: '/images/partners/hnue.png', group: 'public' },
+  { name: 'Trường Đại học Vinh', logo: '/images/partners/dh-vinh.png', group: 'public' },
+  { name: 'Trường Cao đẳng Việt Nam – Hàn Quốc Hà Nội', logo: '/images/partners/cd-viet-han.png', group: 'public' },
+  { name: 'Trường THCS Chu Văn An – Long Biên', logo: '/images/partners/thcs-chu-van-an.png', group: 'public' },
 ];

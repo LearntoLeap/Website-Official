@@ -1,0 +1,14 @@
+---
+// Robot "ló" ra ở mép một mục: trôi nhẹ theo cuộn trang, rê chuột thì nghiêng người và nói một câu,
+// bấm vào thì nhảy lên (site.ts). Chỉ trang trí nên ẩn với trình đọc màn hình; ẩn trên điện thoại.
+// Vị trí / kích thước đặt bằng class riêng (pk-*) trong global.css; mục chứa nó có class has-peek.
+import { bot } from '../data/site';
+interface Props { src: string; say: string; class?: string; side?: 'l' | 'r' }
+const { src, say, class: cls, side = 'r' } = Astro.props;
+---
+<div class:list={['peek', `pk-${side}`, cls]} data-peek aria-hidden="true">
+  <div class="pk-in">
+    <span class="pk-say">{say}</span>
+    <img src={bot(src)} alt="" loading="lazy" decoding="async" draggable="false" />
+  </div>
+</div>

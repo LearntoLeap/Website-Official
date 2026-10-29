@@ -12,6 +12,8 @@ const en: Dict = {
     },
     pauseMotion: 'Pause logo strip',
     playMotion: 'Play logo strip',
+    prevLogo: 'Previous logo',
+    nextLogo: 'Next logo',
     srSolutions: 'Our nine solutions',
     srAudiences: 'Who we work with',
     nav: {
@@ -129,6 +131,14 @@ const en: Dict = {
       { n: 1200, suf: '+', label: 'Students at<br>each festival' },
     ],
     partnersStrip: 'Working with leading partners in Vietnam and abroad',
+    publicStrip: 'With institutes, universities, colleges and schools',
+    peeks: {
+      doors: 'Who are you? Pick your card — I’ll show you the way!',
+      pillars: 'Vroom! Spaces, curriculum and competitions — all covered.',
+      process: 'Just 5 steps — clear from survey to operation!',
+      impact: 'Transform… into awards!',
+      moments: 'Woof! Play the videos right here on the page.',
+    },
     doors: {
       eyebrow: 'Solutions for every partner',
       title: 'Who are you [[looking for solutions for?]]',

@@ -8,6 +8,7 @@ import Stats from '../components/Stats.astro';
 import SectionHead from '../components/SectionHead.astro';
 import BlogCard from '../components/BlogCard.astro';
 import FxBg from '../components/FxBg.astro';
+import Peek from '../components/Peek.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
@@ -119,11 +120,13 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   <!-- 2 · BẰNG CHỨNG NHANH -->
   <section class="wrap proof" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
-    <LogoStrip label={h.partnersStrip} lang={lang} />
+    <LogoStrip label={h.partnersStrip} lang={lang} group="biz" />
+    <LogoStrip label={h.publicStrip} lang={lang} group="public" reverse />
   </section>
 
   <!-- 3 · LỐI VÀO THEO NGƯỜI XEM -->
-  <section class="sp doors-sec" data-buddy="walk">
+  <section class="sp doors-sec has-peek" data-buddy="walk">
+    <Peek src="yanshee-2" say={h.peeks.doors} class="pk-doors" />
     <div class="wrap">
       <SectionHead eyebrow={h.doors.eyebrow} title={h.doors.title} />
       <div class="doors" data-cycle="3600">
@@ -142,7 +145,8 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   </section>
 
   <!-- 4 · BA TRỤ GIẢI PHÁP -->
-  <section class="sp bg-soft" data-buddy="front">
+  <section class="sp bg-soft has-peek" data-buddy="front">
+    <Peek src="ugot-car" say={h.peeks.pillars} class="pk-pillars" side="l" />
     <div class="wrap">
       <SectionHead eyebrow={h.pillars.eyebrow} title={h.pillars.title} lead={h.pillars.lead} />
       <div class="pillars">
@@ -213,7 +217,8 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   </section>
 
   <!-- 6 · QUY TRÌNH 5 BƯỚC -->
-  <section class="sp" data-buddy="walk">
+  <section class="sp has-peek" data-buddy="walk">
+    <Peek src="ukit-penguin" say={h.peeks.process} class="pk-process" />
     <div class="wrap">
       <SectionHead eyebrow={h.process.eyebrow} title={h.process.title} lead={h.process.lead} />
       <ol class="steps5">
@@ -233,7 +238,8 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   </section>
 
   <!-- 7 · DẤU ẤN -->
-  <section class="sp bg-soft" data-buddy="front">
+  <section class="sp bg-soft has-peek" data-buddy="front">
+    <Peek src="ukit-transformer" say={h.peeks.impact} class="pk-impact" side="l" />
     <div class="wrap">
       <SectionHead eyebrow={h.impact.eyebrow} title={h.impact.title} />
       <div class="hf-impact">
@@ -261,7 +267,8 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   </section>
 
   <!-- 8 · KHOẢNH KHẮC & BLOG -->
-  <section class="sp" id="phim">
+  <section class="sp has-peek" id="phim">
+    <Peek src="ugot-dog" say={h.peeks.moments} class="pk-moments" />
     <div class="wrap">
       <SectionHead eyebrow={h.moments.eyebrow} title={h.moments.title} lead={h.moments.lead} />
       {featuredVideo && <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>}

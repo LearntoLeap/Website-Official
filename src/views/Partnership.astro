@@ -62,7 +62,8 @@ const initial = (s: string) => s.trim().charAt(0).toUpperCase();
   <section class="sp bg-2">
     <div class="wrap">
       <SectionHead eyebrow={p.partners.eyebrow} title={p.partners.title} lead={p.partners.lead} />
-      <LogoStrip lang={lang} />
+      <LogoStrip label={t.home.partnersStrip} lang={lang} group="biz" />
+      <LogoStrip label={t.home.publicStrip} lang={lang} group="public" reverse />
       <div style="height:46px"></div>
       {p.partners.groups.map((g, i) => (
         <div class:list={['part-block reveal', `d${i + 1}`]}>

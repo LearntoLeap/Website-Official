@@ -189,12 +189,94 @@ if (stage) {
   }
 }
 
-/* ----- Nút dừng / chạy dải logo ----- */
-document.querySelectorAll<HTMLButtonElement>('[data-ls-toggle]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const paused = btn.closest('.logo-strip')!.classList.toggle('paused');
-    btn.setAttribute('aria-pressed', String(paused));
-    btn.setAttribute('aria-label', (paused ? btn.dataset.play : btn.dataset.pause) || '');
+/* Gọi cb(true/false) khi phần tử vào / ra khung nhìn. */
+const whenVisible = (el: Element, cb: (on: boolean) => void) => {
+  if (!('IntersectionObserver' in window)) return cb(true);
+  new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.25 }).observe(el);
+};
+
+/* ----- Dải logo đối tác: tự trôi + lướt tay ----- */
+// Khung cuộn ngang thật (vuốt, cuộn ngang, kéo chuột, mũi tên); JS đẩy scrollLeft từng khung hình để trôi.
+// Hai bộ logo giống nhau nối đuôi: cuộn quá bộ đầu thì lùi đúng một bộ nên vòng không có điểm nối.
+document.querySelectorAll<HTMLElement>('[data-ls]').forEach((strip) => {
+  const view = strip.querySelector<HTMLElement>('[data-ls-view]')!;
+  const set = view.querySelector<HTMLElement>('.ls-set')!;
+  const toggle = strip.querySelector<HTMLButtonElement>('[data-ls-toggle]');
+  const dir = Number(strip.dataset.dir || 1);
+  const SPEED = 38; // px mỗi giây
+  let pos = 0, last = 0, hover = false, seen = false, paused = false, resumeAt = 0;
+  const loop = () => set.offsetWidth;
+  const wrap = () => { const w = loop(); if (w) { if (pos >= w) pos -= w; else if (pos < 0) pos += w; } };
+  const put = () => { view.scrollLeft = pos; };
+  const hold = (ms = 2600) => { resumeAt = performance.now() + ms; };
+  if (dir < 0) requestAnimationFrame(() => { pos = loop() - 1; put(); });
+
+  view.addEventListener('scroll', () => {
+    if (Math.abs(view.scrollLeft - pos) <= 1.5) return; // do chính vòng trôi đặt
+    pos = view.scrollLeft; // người xem tự cuộn
+    const w = loop();
+    if (w && (pos >= w || pos <= 0)) { wrap(); put(); }
+    hold();
+  }, { passive: true });
+
+  const tick = (now: number) => {
+    const dt = last ? Math.min(now - last, 64) : 0;
+    last = now;
+    if (!reduce && seen && !paused && !hover && !document.hidden && now > resumeAt && !view.classList.contains('drag')) {
+      pos += (dir * SPEED * dt) / 1000;
+      wrap();
+      put();
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  whenVisible(strip, (on) => { seen = on; });
+
+  strip.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+  strip.addEventListener('pointerleave', () => { hover = false; });
+  view.addEventListener('touchstart', () => hold(60000), { passive: true });
+  view.addEventListener('touchend', () => hold(), { passive: true });
+  strip.addEventListener('focusin', () => { hover = true; });
+  strip.addEventListener('focusout', () => { hover = false; });
+
+  // Kéo bằng chuột (cảm ứng đã có vuốt sẵn của trình duyệt)
+  let sx = 0, sp = 0;
+  view.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    sx = e.clientX; sp = pos;
+    view.classList.add('drag');
+    view.setPointerCapture(e.pointerId);
+  });
+  view.addEventListener('pointermove', (e) => {
+    if (!view.classList.contains('drag')) return;
+    pos = sp - (e.clientX - sx);
+    wrap();
+    put();
+  });
+  const endDrag = () => { if (view.classList.contains('drag')) { view.classList.remove('drag'); hold(); } };
+  view.addEventListener('pointerup', endDrag);
+  view.addEventListener('pointercancel', endDrag);
+
+  // Mũi tên: lướt đúng một logo
+  const step = (k: number) => {
+    const li = set.querySelector('li');
+    const gap = parseFloat(getComputedStyle(set).columnGap || '0') || 18;
+    const d = (li ? li.offsetWidth + gap : 190) * k;
+    if (k < 0 && pos + d < 0) { pos += loop(); put(); }
+    view.scrollBy({ left: d, behavior: reduce ? 'auto' : 'smooth' });
+    hold(4000);
+  };
+  strip.querySelector('[data-ls-prev]')?.addEventListener('click', () => step(-1));
+  strip.querySelector('[data-ls-next]')?.addEventListener('click', () => step(1));
+  view.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
+
+  toggle?.addEventListener('click', () => {
+    paused = strip.classList.toggle('paused');
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.setAttribute('aria-label', (paused ? toggle.dataset.play : toggle.dataset.pause) || '');
   });
 });
 
@@ -342,28 +424,26 @@ if (lb && lbInner) {
 }
 
 /* ----- Hiệu ứng tự chạy ----- */
-// Chỉ chạy khi mục đang trong khung nhìn, tab đang mở và máy không bật giảm chuyển động.
-const whenVisible = (el: Element, cb: (on: boolean) => void) => {
-  if (!('IntersectionObserver' in window)) return cb(true);
-  new IntersectionObserver(([e]) => cb(e.isIntersecting), { threshold: 0.25 }).observe(el);
-};
 
-// Hero: cụm chữ gradient đổi luân phiên; giữ chiều cao của cụm dài nhất để tiêu đề không nhảy.
+// Hero: cụm chữ gradient đổi luân phiên. Cụm luôn nằm trên một dòng; cụm dài nhất không vừa khung thì
+// thu cỡ chữ của cả cụm cho vừa — mọi cụm cùng một dòng nên tiêu đề cân, không nhảy.
 const rot = document.querySelector<HTMLElement>('[data-rotate]');
-if (rot && !reduce) {
+if (rot) {
   const words: string[] = JSON.parse(rot.dataset.rotate || '[]');
   const gt = rot.querySelector<HTMLElement>('.gt')!;
   const fit = () => {
     const keep = gt.textContent;
-    rot.style.minHeight = '';
-    rot.style.minHeight = Math.max(...words.map((w) => { gt.textContent = w; return rot.offsetHeight; })) + 'px';
+    rot.style.fontSize = '';
+    const widest = Math.max(...words.map((w) => { gt.textContent = w; return gt.offsetWidth; }));
     gt.textContent = keep;
+    const room = rot.clientWidth;
+    if (widest > room) rot.style.fontSize = `${(parseFloat(getComputedStyle(rot).fontSize) * room) / widest}px`;
   };
   fit();
   addEventListener('resize', fit);
   document.fonts?.ready.then(fit);
   let i = 0;
-  setInterval(() => {
+  if (!reduce) setInterval(() => {
     if (document.hidden) return;
     rot.classList.add('out');
     setTimeout(() => {
@@ -449,3 +529,36 @@ document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) =
     } catch { /* trình duyệt chặn clipboard: bỏ qua */ }
   });
 });
+
+/* ----- Robot ló ở mép các mục ----- */
+// Trôi nhẹ theo cuộn trang (chỉ robot đang trong khung nhìn); bấm vào thì nhảy lên và nói câu của mình.
+const peeks = [...document.querySelectorAll<HTMLElement>('[data-peek]')];
+if (peeks.length) {
+  if (!reduce) {
+    const vis = new Set<HTMLElement>();
+    const io = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? vis.add(e.target as HTMLElement) : vis.delete(e.target as HTMLElement))));
+    peeks.forEach((p) => io.observe(p));
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      vis.forEach((p) => {
+        const r = p.getBoundingClientRect();
+        const k = ((r.top + r.height / 2) / innerHeight - 0.5) * 2; // -1 (trên) … 1 (dưới)
+        p.style.setProperty('--sy', Math.max(-1, Math.min(1, k)).toFixed(3));
+      });
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+  peeks.forEach((p) => {
+    let t = 0;
+    p.querySelector('img')?.addEventListener('click', () => {
+      p.classList.remove('hop');
+      void p.offsetWidth;
+      if (!reduce) p.classList.add('hop');
+      p.classList.add('talk');
+      clearTimeout(t);
+      t = window.setTimeout(() => p.classList.remove('talk', 'hop'), 2600);
+    });
+  });
+}

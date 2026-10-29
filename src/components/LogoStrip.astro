@@ -1,27 +1,36 @@
 ---
-import { PARTNERS } from '../data/site';
+import { PARTNERS, type PartnerGroup } from '../data/site';
 import Icon from './Icon.astro';
 import { withBase, type Lang } from '../i18n/routes';
 import { useT } from '../i18n';
-interface Props { label?: string; lang: Lang }
-const { label, lang } = Astro.props;
+// Dải logo tự trôi (site.ts) và lướt tay được: vuốt, kéo chuột, cuộn ngang hoặc bấm mũi tên.
+// group: chỉ hiện một nhóm đối tác; reverse: trôi ngược chiều (khi đặt hai dải liền nhau).
+interface Props { label?: string; lang: Lang; group?: PartnerGroup; reverse?: boolean }
+const { label, lang, group, reverse = false } = Astro.props;
 const t = useT(lang).common;
+const items = PARTNERS.filter((p) => !group || p.group === group);
+// Đủ số bản sao để luôn cuộn được hết một bộ trên màn hình rộng (mỗi logo ~190px).
+const copies = Math.max(2, Math.ceil(2600 / (items.length * 190)) + 1);
 ---
-{PARTNERS.length > 0 && (
-  <div class="logo-strip reveal">
+{items.length > 0 && (
+  <div class="logo-strip reveal" data-ls data-dir={reverse ? '-1' : '1'}>
     {label && <p class="ls-label">{label}</p>}
     {/* Dải logo tự chạy nên phải có nút dừng (WCAG 2.2.2) */}
     <button class="ls-toggle" type="button" data-ls-toggle aria-pressed="false" aria-label={t.pauseMotion} data-pause={t.pauseMotion} data-play={t.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
-    <div class="ls-viewport">
-      <div class="ls-track">
+    <div class="ls-body">
+      <button class="ls-nav prev" type="button" data-ls-prev aria-label={t.prevLogo}><Icon name="chevron" /></button>
+      <div class="ls-viewport" data-ls-view tabindex="0" role="region" aria-label={label || (lang === 'vi' ? 'Logo đối tác' : 'Partner logos')}>
         <ul class="ls-set">
-          {PARTNERS.map((p) => <li title={p.name}><img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" /></li>)}
+          {items.map((p) => <li title={p.name}><img src={withBase(p.logo)} alt={p.name} loading="lazy" decoding="async" draggable="false" /></li>)}
         </ul>
         {/* Bản sao để dải logo chạy vòng liên tục */}
-        <ul class="ls-set" aria-hidden="true">
-          {PARTNERS.map((p) => <li><img src={withBase(p.logo)} alt="" loading="lazy" decoding="async" /></li>)}
-        </ul>
+        {Array.from({ length: copies - 1 }, () => (
+          <ul class="ls-set" aria-hidden="true">
+            {items.map((p) => <li><img src={withBase(p.logo)} alt="" loading="lazy" decoding="async" draggable="false" /></li>)}
+          </ul>
+        ))}
       </div>
+      <button class="ls-nav next" type="button" data-ls-next aria-label={t.nextLogo}><Icon name="chevron" /></button>
     </div>
   </div>
 )}

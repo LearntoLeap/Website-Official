@@ -14,6 +14,8 @@ const vi = {
     },
     pauseMotion: 'Tạm dừng dải logo',
     playMotion: 'Chạy dải logo',
+    prevLogo: 'Logo trước',
+    nextLogo: 'Logo sau',
     srSolutions: 'Chín giải pháp của Learn to Leap',
     srAudiences: 'Đối tượng hợp tác',
     nav: {
@@ -136,6 +138,15 @@ const vi = {
       { n: 1200, suf: '+', label: 'Học sinh tham gia<br>mỗi ngày hội' },
     ],
     partnersStrip: 'Đồng hành cùng các đối tác hàng đầu trong và ngoài nước',
+    publicStrip: 'Cùng các viện, trường đại học, cao đẳng và phổ thông',
+    /** Câu robot ló ở mép các mục nói khi rê chuột / bấm vào. */
+    peeks: {
+      doors: 'Bạn là ai? Chọn đúng ô, mình dẫn đường nhé!',
+      pillars: 'Brừm! Đủ cả phòng học, chương trình và sân chơi.',
+      process: '5 bước thôi — rõ ràng từ khảo sát tới vận hành!',
+      impact: 'Biến hình… thành giải thưởng!',
+      moments: 'Gâu! Bấm xem video ngay trên trang nhé.',
+    },
     /** Mục 3 — Lối vào theo người xem. page: khoá trang trong i18n/routes; hash: neo trong trang đó. */
     doors: {
       eyebrow: 'Giải pháp cho từng đối tác',
