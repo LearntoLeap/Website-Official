@@ -1,235 +1,288 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import HexBg from '../components/HexBg.astro';
 import Btn from '../components/Btn.astro';
 import Stats from '../components/Stats.astro';
 import SectionHead from '../components/SectionHead.astro';
-import SolCard from '../components/SolCard.astro';
 import NewsCard from '../components/NewsCard.astro';
 import CtaBand from '../components/CtaBand.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import InlineVideo from '../components/InlineVideo.astro';
 import ShortsRail from '../components/ShortsRail.astro';
-import Ecosystem from '../components/Ecosystem.astro';
 import { useT, rich } from '../i18n';
-import { href, withBase, type Lang } from '../i18n/routes';
-import { SITE } from '../data/site';
+import { href, withBase, type Lang, type PageKey } from '../i18n/routes';
+import { SITE, img, bot } from '../data/site';
 import { press, featuredVideo, shorts } from '../data/media';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const h = t.home;
-// Sân khấu hero: 5 dòng sản phẩm (thứ tự theo i18n home.hero.lines; không ghi tên hãng).
-// Toạ độ tính trong hộp robot (.stg-bots: 66% bên trái khung trên desktop, cả khung trên mobile) để
-// không chạm thẻ thông số. cx = tâm ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%),
-// dz = độ trôi theo chuột (px), r = góc xoay. Ảnh đã tách nền nằm ở public/images/robots.
-type Shot = { src: string; cx: number; b: number; h?: number; w?: number; dz?: number; r?: number };
+
+// Trang chủ theo storyboard 9 mục (bản đề xuất 28/10/2026):
+// 1 Hero phim → 2 Bằng chứng → 3 Lối vào theo người xem → 4 Ba trụ giải pháp → 5 Hệ sinh thái Robotic AI (dải tối)
+// → 6 Quy trình → 7 Dấu ấn → 8 Khoảnh khắc → 9 Đặt lịch làm việc.
+
+// Mục 1 — phim nền: đặt file vào public/video/hero-loop.mp4 thì tự phát; chưa có thì dùng ảnh tĩnh.
+const HERO_VIDEO = '/video/hero-loop.mp4';
+const hasHeroVideo = fs.existsSync(path.join(process.cwd(), 'public', HERO_VIDEO));
+// Nút "Xem phim": có public/video/tvc-30s.mp4 thì mở hộp phát TVC ngay trên trang; chưa có thì cuộn tới mục Khoảnh khắc.
+const TVC_VIDEO = '/video/tvc-30s.mp4';
+const hasTvc = fs.existsSync(path.join(process.cwd(), 'public', TVC_VIDEO));
+
+// Mục 2 — tên các báo, tạp chí, đài đã đưa tin (bỏ trùng, tối đa 8).
+const pressNames = [...new Set(press.map((p) => p.source).filter((s) => s && /^(Báo|Tạp chí|Đài)/.test(s)))].slice(0, 8);
+
+// Mục 5 — sân khấu 5 dòng thiết bị (thứ tự theo i18n home.robotic.lines; không ghi tên hãng).
+// Toạ độ tính trong hộp robot: cx = tâm ngang (%), b = cách đáy (%), h hoặc w = cao/rộng (%), r = góc xoay.
+// Ảnh đã tách nền ở public/images/robots.
+type Shot = { src: string; cx: number; b: number; h?: number; w?: number; r?: number };
 const STAGE: { thumb: string; shots: Shot[] }[] = [
-  { thumb: 'tienkung', shots: [{ src: 'tienkung', cx: 50, b: 1, h: 98, dz: 10 }] },
+  { thumb: 'tienkung', shots: [{ src: 'tienkung', cx: 50, b: 1, h: 98 }] },
   { thumb: 'yanshee', shots: [
-    { src: 'ukit-se', cx: 74, b: 3, w: 50, dz: 6 },
-    { src: 'yanshee', cx: 36, b: 4, h: 80, dz: 14 },
+    { src: 'ukit-se', cx: 74, b: 3, w: 50 },
+    { src: 'yanshee', cx: 36, b: 4, h: 80 },
   ] },
   { thumb: 'ugot-up', shots: [
-    { src: 'ukit-transformer', cx: 80, b: 6, h: 60, dz: 6 },
-    { src: 'ugot-dog', cx: 38, b: 4, w: 60, dz: 14 },
-    { src: 'ugot-up', cx: 62, b: 0, w: 28, dz: 20 },
+    { src: 'ukit-transformer', cx: 80, b: 6, h: 60 },
+    { src: 'ugot-dog', cx: 38, b: 4, w: 60 },
+    { src: 'ugot-up', cx: 62, b: 0, w: 28 },
   ] },
   { thumb: 'stickem-robot', shots: [
-    { src: 'weeemake-house', cx: 81, b: 8, h: 42, dz: 6 },
-    { src: 'stickem-robot', cx: 40, b: 4, w: 64, dz: 14 },
-    { src: 'weeemake-kit', cx: 66, b: 0, w: 30, dz: 20 },
+    { src: 'weeemake-house', cx: 81, b: 8, h: 42 },
+    { src: 'stickem-robot', cx: 40, b: 4, w: 64 },
+    { src: 'weeemake-kit', cx: 66, b: 0, w: 30 },
   ] },
   { thumb: 'kt-smarthouse', shots: [
-    { src: 'ebd-stem5', cx: 13, b: 17, w: 20, dz: 4, r: -7 },
-    { src: 'ebd-stem8', cx: 27, b: 15, w: 20, dz: 5, r: 3 },
-    { src: 'kt-wind', cx: 89, b: 14, h: 44, dz: 6 },
-    { src: 'kt-smarthouse', cx: 54, b: 8, w: 64, dz: 12 },
-    { src: 'kt-datalogger', cx: 22, b: 0, w: 32, dz: 18 },
-    { src: 'kt-ph', cx: 72, b: -2, w: 30, dz: 20 },
-    { src: 'kt-wifi', cx: 93, b: 0, w: 17, dz: 22 },
+    { src: 'ebd-stem5', cx: 13, b: 17, w: 20, r: -7 },
+    { src: 'ebd-stem8', cx: 27, b: 15, w: 20, r: 3 },
+    { src: 'kt-wind', cx: 89, b: 14, h: 44 },
+    { src: 'kt-smarthouse', cx: 54, b: 8, w: 64 },
+    { src: 'kt-datalogger', cx: 22, b: 0, w: 32 },
+    { src: 'kt-ph', cx: 72, b: -2, w: 30 },
+    { src: 'kt-wifi', cx: 93, b: 0, w: 17 },
   ] },
 ];
-const bot = (n: string) => withBase(`/images/robots/${n}.webp`);
 const shotStyle = (s: Shot, i: number) =>
-  [`--cx:${s.cx}%`, `--b:${s.b}%`, s.h ? `height:${s.h}%` : `width:${s.w}%`, `--dz:${s.dz ?? 8}px`, `--r:${s.r ?? 0}deg`, `--d:${i}`].join(';');
-// 3 bài báo mới nhất (cuối danh sách là mới nhất).
+  [`--cx:${s.cx}%`, `--b:${s.b}%`, s.h ? `height:${s.h}%` : `width:${s.w}%`, `--r:${s.r ?? 0}deg`, `--d:${i}`].join(';');
+const r = h.robotic;
+
+// Mục 6 — Hồ sơ năng lực: file PDF nếu có, chưa có thì mở email yêu cầu.
+const profileHref = SITE.profilePdf ? withBase(SITE.profilePdf) : `mailto:${SITE.email}?subject=${encodeURIComponent(t.contact.quick.profileSubject)}`;
+const steps = t.partnership.process.steps;
+
+// Mục 7 — awards[1] (STEM Innovation 57) là dự án nổi bật, 3 thẻ còn lại xếp bên cạnh.
+const feature = t.awards[1];
+const others = t.awards.filter((_, i) => i !== 1);
+
+// Mục 8 — 3 bài báo mới nhất (cuối danh sách là mới nhất).
 const latest = press.slice(-3).reverse();
+const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash;
 ---
 <Base lang={lang} page="home" title={t.meta.home.title} description={t.meta.home.description}>
-  <!-- HERO: sân khấu sản phẩm -->
-  <div class="hero stg" data-stage>
-    <div class="stg-giant" aria-hidden="true">
-      {h.hero.lines.map((l, i) => <div class:list={['g', { on: i === 0 }]} data-i={i}><span>{l.giant[0]}</span><span>{l.giant[1]}</span></div>)}
+  <!-- 1 · HERO: phim nền -->
+  <div class="hero hv">
+    <div class="hv-media" aria-hidden="true">
+      {hasHeroVideo
+        ? <video data-hero-video autoplay muted loop playsinline preload="metadata" poster={img('hero-poster')}><source src={withBase(HERO_VIDEO)} type="video/mp4" /></video>
+        : <img src={img('hero-poster')} alt="" fetchpriority="high" decoding="async" />}
     </div>
-    <div class="wrap stg-grid">
-      <div class="stg-copy">
-        <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
-        <h1 class="reveal d1" set:html={rich(h.hero.title)} />
-        <p class="sub reveal d2">{h.hero.sub}</p>
-        <div class="hero-cta reveal d3">
-          <Btn href={href('solutions', lang)} arrow>{h.hero.cta1}</Btn>
-          <Btn href={href('impact', lang)} variant="glass">{h.hero.cta2}</Btn>
-        </div>
+    <div class="hv-shade" aria-hidden="true"></div>
+    <div class="wrap hv-copy">
+      <span class="eyebrow light reveal">{h.hero.eyebrow}</span>
+      <h1 class="reveal d1" set:html={rich(h.hero.title)} />
+      <p class="sub reveal d2">{h.hero.sub}</p>
+      <div class="hero-cta reveal d3">
+        <Btn href={href('contact', lang)} arrow>{h.hero.cta1}</Btn>
+        {hasTvc
+          ? <button class="btn glass" type="button" data-tvc-open aria-haspopup="dialog"><Icon name="play" stroke={2.2} />{h.hero.cta2}</button>
+          : <Btn href="#phim" variant="glass" icon="play">{h.hero.cta2}</Btn>}
       </div>
-      <div class="stg-stage reveal d2">
-        <div class="stg-view" data-tilt>
-          <div class="stg-floor" aria-hidden="true"></div>
-          <div class="stg-bots">
-            <div class="stg-ring" aria-hidden="true"></div>
-            {STAGE.map((st, i) => (
-              <div class:list={['stg-slide', { on: i === 0 }]} id={`stg-${i}`} role="tabpanel" data-i={i} aria-label={h.hero.lines[i].name}>
-                {st.shots.map((sh, j) => (
-                  <span class:list={['shot', sh.h ? 'by-h' : 'by-w']} style={shotStyle(sh, j)}>
-                    <img src={bot(sh.src)} alt={j === st.shots.length - 1 ? h.hero.lines[i].name : ''} decoding="async" fetchpriority={i === 0 ? 'high' : 'low'} />
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div class="stg-sweep" aria-hidden="true"></div>
-        </div>
-        <div class="stg-spec">
-          {h.hero.lines.map((l, i) => (
+    </div>
+    {hasHeroVideo && (
+      <button class="hv-toggle" type="button" data-hero-toggle aria-pressed="false" aria-label={h.hero.pauseVideo} data-pause={h.hero.pauseVideo} data-play={h.hero.playVideo}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
+    )}
+    {hasTvc && (
+      <dialog class="tvc-modal" data-tvc aria-label={h.hero.cta2}>
+        <button class="tvc-close" type="button" data-tvc-close aria-label={h.hero.closeFilm}><Icon name="close" stroke={2.4} /></button>
+        <video controls playsinline preload="none" poster={img('hero-poster')}><source src={withBase(TVC_VIDEO)} type="video/mp4" /></video>
+      </dialog>
+    )}
+  </div>
+
+  <!-- 2 · BẰNG CHỨNG NHANH -->
+  <section class="wrap proof" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
+    <Stats lang={lang} items={h.stats} class="stats-home" />
+    <LogoStrip label={h.partnersStrip} lang={lang} />
+    {pressNames.length > 0 && (
+      <p class="press-line reveal"><span>{h.pressLabel}</span>{pressNames.map((n) => <b>{n}</b>)}</p>
+    )}
+  </section>
+
+  <!-- 3 · LỐI VÀO THEO NGƯỜI XEM -->
+  <section class="sp doors-sec" data-buddy="walk">
+    <div class="wrap">
+      <SectionHead eyebrow={h.doors.eyebrow} title={h.doors.title} />
+      <div class="doors">
+        {h.doors.items.map((d, i) => (
+          <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)}>
+            <img src={img(d.img)} alt="" loading="lazy" decoding="async" />
+            <span class="door-body">
+              <span class="who">{d.who}</span>
+              <span class="ttl">{d.title}</span>
+              <span class="go" aria-hidden="true"><Icon name="arrow" stroke={2.4} /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · BA TRỤ GIẢI PHÁP -->
+  <section class="sp bg-soft" data-buddy="front">
+    <div class="wrap">
+      <SectionHead eyebrow={h.pillars.eyebrow} title={h.pillars.title} lead={h.pillars.lead} />
+      <div class="pillars">
+        {h.pillars.items.map((p, i) => (
+          <a class:list={['pillar reveal', `d${i + 1}`]} href={pageHref('solutions', p.hash)}>
+            <span class="ph"><img src={img(p.img)} alt="" loading="lazy" decoding="async" /></span>
+            <span class="pn">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.title}</h3>
+            <ul>{p.list.map((li) => <li>{li}</li>)}</ul>
+          </a>
+        ))}
+      </div>
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('solutions', lang)} arrow>{h.pillars.cta}</Btn></div>
+    </div>
+  </section>
+
+  <!-- 5 · HỆ SINH THÁI ROBOTIC AI (dải tối) -->
+  <section class="sp rob stg" data-stage data-buddy="jump" aria-labelledby="rob-title">
+    <div class="wrap rob-grid">
+      <div class="rob-copy">
+        <SectionHead eyebrow={r.eyebrow} title={r.title} lead={r.lead} center={false} light id="rob-title" />
+        <div class="stg-spec reveal d2">
+          {r.lines.map((l, i) => (
             <div class="spec" data-i={i} hidden={i !== 0}>
               <div class="k">{String(i + 1).padStart(2, '0')} / {String(STAGE.length).padStart(2, '0')} · {l.kind}</div>
-              <div class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
-              <h2 class="nm">{l.name}</h2>
+              <h3 class="nm">{l.name}</h3>
               <p>{l.desc}</p>
               <ul>{l.tags.map((tg) => <li>{tg}</li>)}</ul>
             </div>
           ))}
         </div>
+        <div class="reveal d3"><Btn href={pageHref('solutions', '#lab')} variant="glass" arrow>{r.cta}</Btn></div>
+      </div>
+      <div class="rob-stage reveal d2">
+        <div class="stg-giant" aria-hidden="true">
+          {r.lines.map((l, i) => <div class:list={['g', { on: i === 0 }]} data-i={i}><span>{l.giant[0]}</span><span>{l.giant[1]}</span></div>)}
+        </div>
+        <div class="stg-view">
+          <div class="stg-floor" aria-hidden="true"></div>
+          <div class="stg-bots">
+            <div class="stg-ring" aria-hidden="true"></div>
+            {STAGE.map((st, i) => (
+              <div class:list={['stg-slide', { on: i === 0 }]} id={`stg-${i}`} role="tabpanel" data-i={i} aria-label={r.lines[i].name}>
+                {st.shots.map((sh, j) => (
+                  <span class:list={['shot', sh.h ? 'by-h' : 'by-w']} style={shotStyle(sh, j)}>
+                    <img src={bot(sh.src)} alt={j === st.shots.length - 1 ? r.lines[i].name : ''} loading="lazy" decoding="async" />
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
     <div class="wrap stg-bar">
-      <div class="stg-pick" role="tablist" aria-label={h.hero.pickLabel}>
+      <div class="stg-pick" role="tablist" aria-label={r.pickLabel}>
         {STAGE.map((st, i) => (
           <button type="button" role="tab" class:list={{ on: i === 0 }} id={`stg-tab-${i}`} aria-controls={`stg-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-pick={i}>
             <span class="th"><img src={bot(st.thumb)} alt="" loading="lazy" decoding="async" /></span>
-            <span class="tl">{h.hero.lines[i].tab}</span>
+            <span class="tl">{r.lines[i].tab}</span>
             <i class="prog" aria-hidden="true"></i>
           </button>
         ))}
       </div>
       <button class="stg-toggle" type="button" data-stage-toggle aria-pressed="false" aria-label={t.common.pauseMotion} data-pause={t.common.pauseMotion} data-play={t.common.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
     </div>
-    <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor" aria-hidden="true"><path d="M0 90h1440V40c-220 40-520 50-760 28C420 44 180 20 0 52z"/></svg>
-  </div>
-
-  <!-- STATS -->
-  <section class="wrap" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
-    <Stats lang={lang} items={h.stats} class="stats-home" />
-    <LogoStrip label={h.partnersStrip} lang={lang} />
   </section>
 
-  <!-- INTRO -->
+  <!-- 6 · QUY TRÌNH 5 BƯỚC -->
   <section class="sp" data-buddy="walk">
-    <div class="wrap split">
-      <div class="reveal">
-        <span class="eyebrow">{h.intro.eyebrow}</span>
-        <h2 class="intro-title" set:html={rich(h.intro.title)} />
+    <div class="wrap">
+      <SectionHead eyebrow={h.process.eyebrow} title={h.process.title} lead={h.process.lead} />
+      <ol class="steps5">
+        {steps.map((s, i) => (
+          <li class:list={['reveal', `d${i + 1}`]}><span class="sn">{String(i + 1).padStart(2, '0')}</span><h3>{s.title}</h3><p>{s.desc}</p></li>
+        ))}
+      </ol>
+      <div class="basis reveal">
+        <span class="bl">{h.process.basisLabel}</span>
+        <ul>{h.process.basis.map((b) => <li>{b}</li>)}</ul>
       </div>
-      <div class="reveal d2 about-body">
-        {h.intro.body.map((p) => <p set:html={p} />)}
-        <Btn href={href('about', lang)} variant="ghost" arrow>{h.intro.cta}</Btn>
+      <div class="center row-btns reveal">
+        <Btn href={profileHref} arrow>{h.process.cta}</Btn>
+        <Btn href={href('partnership', lang)} variant="ghost">{h.process.cta2}</Btn>
       </div>
     </div>
   </section>
 
-  <!-- 3 THẾ MẠNH -->
+  <!-- 7 · DẤU ẤN -->
   <section class="sp bg-soft" data-buddy="front">
     <div class="wrap">
-      <SectionHead eyebrow={h.strengths.eyebrow} title={h.strengths.title} />
-      <div class="rs-grid">
-        {h.strengths.items.map((it, i) => (
-          <div class:list={['rs reveal', `d${i + 1}`]}>
-            <div class="tag">{h.strengths.tagPrefix} {String(i + 1).padStart(2, '0')}</div>
-            <div class="ic"><Icon name={it.icon} /></div>
-            <h3>{it.title}</h3>
-            <p>{it.desc}</p>
-            {it.ordered
-              ? <ol>{it.list.map((li) => <li>{li}</li>)}</ol>
-              : <ul>{it.list.map((li) => <li>{li}</li>)}</ul>}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- HỆ SINH THÁI SẢN PHẨM -->
-  <Ecosystem lang={lang} />
-
-  <!-- GIẢI PHÁP -->
-  <section class="sp" data-buddy="walk">
-    <div class="wrap">
-      <SectionHead eyebrow={h.solPreview.eyebrow} title={h.solPreview.title} lead={h.solPreview.lead} />
-      <div class="sol-grid">
-        {h.solPreview.items.map((s, i) => <SolCard imgKey={s.img} num={s.num} icon={s.icon} title={s.title} desc={s.desc} index={i} />)}
-      </div>
-      <div class="center" style="margin-top:42px"><Btn href={href('solutions', lang)} arrow>{h.solPreview.cta}</Btn></div>
-    </div>
-  </section>
-
-  <!-- VIDEO -->
-  {featuredVideo && (
-    <section class="sp bg-soft">
-      <div class="wrap">
-        <SectionHead eyebrow={h.videos.eyebrow} title={h.videos.title} lead={h.videos.lead} />
-        <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>
-        <ShortsRail items={shorts} lang={lang} playLabel={t.news.video.play} title={h.videos.shortsTitle} />
-        <div class="center vid-more reveal"><Btn href={`${href('news', lang)}#video`} variant="ghost" arrow>{h.videos.cta}</Btn></div>
-      </div>
-    </section>
-  )}
-
-  <!-- NĂNG LỰC HỌC SINH -->
-  <section class="sp dark">
-    <HexBg tall />
-    <div class="wrap">
-      <SectionHead title={t.portrait.title} lead={t.portrait.lead} />
-      <div class="pgrid">
-        {t.portrait.items.map((p, i) => (
-          <div class:list={['pcard reveal', `d${(i % 4) + 1}`]}><div class="ic"><Icon name={p.icon} /></div><h3>{p.title}</h3></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- GIẢI THƯỞNG -->
-  <section class="sp bg-soft" data-buddy="jump">
-    <div class="wrap">
-      <SectionHead eyebrow={h.awardsTeaser.eyebrow} title={h.awardsTeaser.title} />
-      <div class="g4 grid" style="margin-bottom:46px">
-        {t.awards.map((a, i) => (
-          <div class:list={['card award-card reveal', `d${i + 1}`]}>
-            <div class="medal"><Icon name={a.icon} /></div>
-            <div class="lbl">{a.label}</div>
-            <h3>{a.title}</h3><p>{a.short}</p>
-          </div>
-        ))}
-      </div>
-      <div class="center reveal"><Btn href={href('impact', lang)} variant="ghost" arrow>{h.awardsTeaser.cta}</Btn></div>
-    </div>
-  </section>
-
-  <!-- TIN MỚI -->
-  {latest.length > 0 && (
-    <section class="sp">
-      <div class="wrap">
-        <SectionHead eyebrow={h.latest.eyebrow} title={h.latest.title} />
-        <div class="g3 grid">
-          {latest.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={t.news.sourceFallback} readLabel={t.news.readOriginal} />)}
+      <SectionHead eyebrow={h.impact.eyebrow} title={h.impact.title} />
+      <div class="hf-impact">
+        <a class="hf-feat reveal" href={href('impact', lang)}>
+          <img src={img('proj-stem57')} alt="" loading="lazy" decoding="async" />
+          <span class="cap">
+            <span class="lbl">{h.impact.featureLabel} · {feature.label}</span>
+            <span class="ttl">{feature.title}</span>
+            <span class="dsc">{feature.desc}</span>
+          </span>
+        </a>
+        <div class="hf-awards">
+          {others.map((a, i) => (
+            <div class:list={['hf-aw reveal', `d${i + 1}`]}>
+              <span class="ic"><Icon name={a.icon} /></span>
+              <span class="lbl">{a.label}</span>
+              <h3>{a.title}</h3>
+              <p>{a.short}</p>
+            </div>
+          ))}
         </div>
-        <div class="center" style="margin-top:42px"><Btn href={href('news', lang)} variant="ghost" arrow>{h.latest.cta}</Btn></div>
       </div>
-    </section>
-  )}
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('impact', lang)} variant="ghost" arrow>{h.impact.cta}</Btn></div>
+    </div>
+  </section>
 
-  <CtaBand eyebrow={h.cta.eyebrow} title={h.cta.title} lead={h.cta.lead}>
-    <Btn href={href('contact', lang)} arrow>{t.common.ctaPartner}</Btn>
+  <!-- 8 · KHOẢNH KHẮC & BÁO CHÍ -->
+  <section class="sp" id="phim">
+    <div class="wrap">
+      <SectionHead eyebrow={h.moments.eyebrow} title={h.moments.title} lead={h.moments.lead} />
+      {featuredVideo && <div class="reveal"><InlineVideo item={featuredVideo} lang={lang} playLabel={t.news.video.play} class="iv-feature" /></div>}
+      {shorts.length > 0 && <ShortsRail items={shorts} lang={lang} playLabel={t.news.video.play} title={h.moments.shortsTitle} />}
+      <div class="mo-photos">
+        {h.moments.photos.map((p, i) => <figure class:list={['reveal', `d${i + 1}`]}><img src={withBase(p.src)} alt={p.alt} loading="lazy" decoding="async" /></figure>)}
+      </div>
+      {latest.length > 0 && (
+        <>
+          <h3 class="mo-sub reveal">{h.moments.pressTitle}</h3>
+          <div class="g3 grid">
+            {latest.map((it, i) => <NewsCard item={it} lang={lang} index={i} fallback={t.news.sourceFallback} readLabel={t.news.readOriginal} />)}
+          </div>
+        </>
+      )}
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('news', lang)} variant="ghost" arrow>{h.moments.cta}</Btn></div>
+    </div>
+  </section>
+
+  <!-- 9 · ĐẶT LỊCH LÀM VIỆC -->
+  <CtaBand eyebrow={h.cta.eyebrow} title={h.cta.title} lead={h.cta.lead} bot="am-handsup">
+    <Btn href={href('contact', lang)} arrow>{h.cta.book}</Btn>
     <Btn href={`tel:${SITE.phone}`} variant="glass" icon="phone">{t.common.call}: {SITE.phoneDisplay}</Btn>
+    {SITE.social.zalo && <Btn href={SITE.social.zalo} variant="glass" external>Zalo</Btn>}
   </CtaBand>
 </Base>

@@ -114,16 +114,58 @@ const vi = {
 
   /* ---------- Trang chủ ---------- */
   home: {
+    /** Mục 1 — Hero: phim nền (public/video/hero-loop.mp4 nếu có, chưa có thì ảnh tĩnh). */
     hero: {
-      eyebrow: 'Hệ sinh thái Robotic AI cho giáo dục',
-      title: 'Đưa [[robot AI]] vào từng lớp học Việt Nam',
-      sub: 'Learn to Leap triển khai trọn gói các dòng Robotic AI — thiết bị, chương trình, đào tạo giáo viên và sân chơi quốc tế — cùng nhà trường trên cả nước.',
-      cta1: 'Khám phá giải pháp',
-      cta2: 'Năng lực & dấu ấn',
-      /** Nhãn của dãy nút chọn dòng sản phẩm ở hero. */
+      eyebrow: 'Hệ sinh thái giáo dục STEM – AI – Robotics',
+      title: 'Đưa [[STEM – AI – Robotics]] đến từng trường học Việt Nam',
+      sub: 'Tư vấn – chuyển giao – vận hành trọn gói: phòng học, chương trình, giáo viên và sân chơi quốc tế.',
+      cta1: 'Đặt lịch tư vấn',
+      cta2: 'Xem phim',
+      pauseVideo: 'Tạm dừng phim nền',
+      playVideo: 'Phát phim nền',
+      closeFilm: 'Đóng phim',
+    },
+    /** Mục 2 — Bằng chứng nhanh. */
+    stats: [
+      { n: 20, suf: '+', label: 'Tỉnh, thành phố<br>đã triển khai' },
+      { n: 50, suf: '+', label: 'Đối tác<br>chiến lược' },
+      { n: 200, suf: '+', label: 'Chủ đề & mô hình<br>trải nghiệm' },
+      { n: 50, suf: '+', label: 'Ngày hội STEM –<br>AI – Robotics' },
+      { n: 1200, suf: '+', label: 'Học sinh tham gia<br>mỗi ngày hội' },
+    ],
+    partnersStrip: 'Đồng hành cùng các đối tác hàng đầu trong và ngoài nước',
+    pressLabel: 'Báo chí đưa tin',
+    /** Mục 3 — Lối vào theo người xem. page: khoá trang trong i18n/routes; hash: neo trong trang đó. */
+    doors: {
+      eyebrow: 'Giải pháp cho từng đối tác',
+      title: 'Bạn đang tìm giải pháp [[cho ai?]]',
+      items: [
+        { who: 'Sở / Phòng GD&ĐT', title: 'Đề án STEM – AI toàn tỉnh, bám sát Nghị quyết 57', img: 'proj-bacninh', page: 'partnership', hash: '' },
+        { who: 'Nhà trường', title: 'Phòng Lab, chương trình và giáo viên — trọn gói', img: 'sol-lab', page: 'solutions', hash: '#lab' },
+        { who: 'Đối tác & Doanh nghiệp', title: 'Cùng phát triển, chuyển giao và tổ chức sân chơi', img: 'hoi-thao', page: 'partnership', hash: '' },
+        { who: 'Phụ huynh & Học sinh', title: 'Ngày hội, cuộc thi và trại hè công nghệ', img: 'sol-ngayhoi', page: 'solutions', hash: '#san-choi' },
+      ],
+    },
+    /** Mục 4 — Ba trụ giải pháp. */
+    pillars: {
+      eyebrow: 'Giải pháp',
+      title: 'Một đối tác — [[trọn hành trình]]',
+      lead: 'Từ không gian học tập, chương trình và con người đến sân chơi — Learn to Leap đồng hành cùng nhà trường ở mọi chặng.',
+      cta: 'Xem chi tiết giải pháp',
+      items: [
+        { title: 'Không gian học tập', img: 'sol-lab', hash: '#lab', list: ['Phòng STEM AI Robotics', 'Phòng học thông minh', 'Trường học thông minh'] },
+        { title: 'Chương trình & con người', img: 'lab-photo', hash: '#k12', list: ['Chương trình STEM – AI K12 liên thông', 'Giáo viên Learn to Leap đứng lớp tại trường', 'Đào tạo giáo viên (TOT)'] },
+        { title: 'Sân chơi & trải nghiệm', img: 'sol-cuocthi', hash: '#san-choi', list: ['Ngày hội trải nghiệm STEM – AI', 'Cuộc thi quốc gia & quốc tế', 'Huấn luyện đội tuyển · Trại hè · Tour hướng nghiệp'] },
+      ],
+    },
+    /** Mục 5 — Dải tối: 5 dòng thiết bị Robotic AI, chỉ ghi đặc trưng dòng, không ghi tên hãng.
+     *  tab: nhãn nút chọn; giant: 2 dòng chữ lớn phía sau. */
+    robotic: {
+      eyebrow: 'Hệ sinh thái Robotic AI',
+      title: 'Thiết bị chuẩn quốc tế, [[từ robot hình người đến IoT]]',
+      lead: 'Đối tác chính thức của các hãng robot giáo dục hàng đầu — Learn to Leap đưa 5 dòng thiết bị về tận lớp học, kèm chương trình và giáo viên.',
+      cta: 'Xem phòng STEM AI Robotics',
       pickLabel: 'Chọn dòng sản phẩm',
-      /** 5 dòng sản phẩm trên sân khấu hero, theo thứ tự ưu tiên — chỉ ghi đặc trưng dòng, không ghi tên hãng.
-       *  tab: nhãn nút chọn; giant: 2 dòng chữ lớn phía sau. */
       lines: [
         { tab: 'Robot hình người', kind: 'Humanoid · AI hiện thân', name: 'Robot hình người AI', desc: 'Robot hình người cỡ lớn — trình diễn, nghiên cứu và truyền cảm hứng về trí tuệ nhân tạo hiện thân.', tags: ['Humanoid', 'AI hiện thân', 'Trình diễn'], giant: ['HUMANOID', 'AI·ROBOT'] },
         { tab: 'Robot lập trình', kind: 'Lập trình · Kỹ thuật', name: 'Robot lập trình AI', desc: 'Robot hình người cỡ nhỏ để học lập trình Python & AI, cùng bộ lắp ghép kỹ thuật cơ khí – điện tử.', tags: ['Python', 'Thị giác máy', 'Kỹ thuật'], giant: ['CODE·AI', 'ENGINEER'] },
@@ -132,81 +174,44 @@ const vi = {
         { tab: 'STEM · IoT', kind: 'STEM Khoa học · IoT', name: 'STEM Khoa học & IoT', desc: 'Học liệu Hoạt động giáo dục STEM, mô hình IoT, nhà thông minh và năng lượng tái tạo.', tags: ['Học liệu', 'Cảm biến', 'Nhà thông minh'], giant: ['STEM', 'IOT·LAB'] },
       ],
     },
-    stats: [
-      { n: 20, suf: '+', label: 'Tỉnh, thành phố<br>đã triển khai' },
-      { n: 50, suf: '+', label: 'Đối tác<br>chiến lược' },
-      { n: 200, suf: '+', label: 'Chủ đề & mô hình<br>trải nghiệm' },
-      { n: 50, suf: '+', label: 'Ngày hội STEM –<br>AI – Robotics' },
-      { n: 1200, suf: '+', label: 'Học sinh tham gia<br>mỗi ngày hội' },
-    ],
-    intro: {
-      eyebrow: 'Về Learn to Leap',
-      title: 'Mang sứ mệnh [[phổ cập giáo dục STEM và Trí tuệ nhân tạo (AI)]]',
-      body: [
-        'Learn to Leap (LtL) đồng hành cùng nhà trường và địa phương trên cả hành trình: <strong>tư vấn</strong> lựa chọn mô hình, <strong>chuyển giao</strong> chương trình chuẩn quốc tế đã bản địa hoá, và trực tiếp <strong>vận hành</strong> đến tận từng lớp học, từng học sinh.',
-        'Chúng tôi tin rằng giáo dục công nghệ không nên là đặc quyền của số ít — mỗi học sinh Việt Nam đều xứng đáng được chạm tay vào công nghệ và rèn luyện năng lực của công dân toàn cầu.',
-      ],
-      cta: 'Tìm hiểu về chúng tôi',
+    /** Mục 6 — Quy trình (các bước lấy từ partnership.process.steps). */
+    process: {
+      eyebrow: 'Quy trình triển khai',
+      title: 'Năm bước, [[một hành trình khép kín]]',
+      lead: 'Minh bạch từ ngày khảo sát đến khi vận hành ổn định — bám sát chủ trương và khung chuẩn của Bộ GD&ĐT.',
+      basisLabel: 'Căn cứ & khung chuẩn',
+      basis: ['Chương trình GDPT 2018', 'Khung năng lực số — TT 02/2025', 'Khung năng lực AI — QĐ 3439', 'Nghị quyết 57-NQ/TW', 'Nghị quyết 71-NQ/TW'],
+      cta: 'Nhận Hồ sơ năng lực',
+      cta2: 'Phương án hợp tác',
     },
-    strengths: {
-      eyebrow: 'Vì sao chọn Learn to Leap',
-      title: 'Ba thế mạnh nền tảng làm nên [[sự khác biệt]]',
-      tagPrefix: 'Năng lực cốt lõi',
-      items: [
-        {
-          icon: 'network', title: 'Mạng lưới đối tác hàng đầu',
-          desc: 'Đối tác chính thức của nhiều đơn vị lớn trong và ngoài nước — đưa chương trình, thiết bị và đấu trường chuẩn quốc tế về tận trường học Việt Nam.',
-          list: ['UBTECH (qua IPPG / IPP Tech)', "Stick'Em · Global Robotics Game (Singapore)", 'ROBOGRAM (Hàn Quốc), VEX Robotics, OhStem…'], ordered: false,
-        },
-        {
-          icon: 'bookCheck', title: 'Chuyển giao & bản địa hoá theo chuẩn Bộ GD&ĐT',
-          desc: 'Không bê nguyên chương trình nước ngoài, mà bản địa hoá để khớp hệ thống khung của Bộ — với cố vấn từ các đại học lớn và Viện NCTK Trường học:',
-          list: ['Chương trình GDPT 2018 (TT 32/2018)', 'Khung Năng lực số — TT 02/2025 (6 miền, 26 năng lực)', 'Khung Năng lực AI cho HS phổ thông — QĐ 3439 (thí điểm)'], ordered: false,
-        },
-        {
-          icon: 'pulse', title: 'Vận hành end-to-end, đến tận từng học sinh',
-          desc: 'Khác với đơn vị chỉ giao thiết bị rồi rời đi, Learn to Leap đồng hành trọn vẹn:',
-          list: ['Xây dựng chương trình theo cấp học', 'Đội ngũ giảng dạy trực tiếp tại trường', 'Đào tạo giáo viên (TOT)', 'Đồng hành mọi hoạt động thúc đẩy STEM – AI', "Tổ chức sân chơi đến cấp quốc tế (ROBOG, Stick'Em)"], ordered: true,
-        },
-      ],
+    /** Mục 7 — Dấu ấn (thẻ lấy từ awards; awards[1] là dự án nổi bật). */
+    impact: {
+      eyebrow: 'Năng lực & dấu ấn',
+      title: 'Được tin tưởng, được [[vinh danh]]',
+      featureLabel: 'Dự án tiêu biểu',
+      cta: 'Xem năng lực & dấu ấn',
     },
-    eco: {
-      eyebrow: 'Hệ sinh thái giải pháp',
-      title: 'Một đối tác — [[trọn hệ sinh thái giáo dục công nghệ]]',
-      cta: 'Xem chi tiết giải pháp',
-      listLabel: 'Các mảng giải pháp',
-      /** 6 mảng giải pháp; ảnh minh hoạ đặt trong components/Ecosystem.astro theo cùng thứ tự. */
-      items: [
-        { title: 'Phòng STEM AI Robotics', desc: 'Phòng Lab trang bị robot AI, robot lắp ghép và học liệu lập trình — triển khai và vận hành ngay tại trường.', chips: ['Robot AI', 'Lắp ghép', 'Lập trình'] },
-        { title: 'Phòng học thông minh', desc: 'Màn hình tương tác, thực tế ảo, in 3D và nền tảng học tập số cho mọi môn học.', chips: ['Tương tác', 'Thực tế ảo', 'In 3D'] },
-        { title: 'Trường học thông minh', desc: 'Robot dịch vụ chào đón, hệ thống IoT và giải pháp chuyển đổi số cho toàn trường.', chips: ['Robot dịch vụ', 'IoT', 'Chuyển đổi số'] },
-        { title: 'Ngày hội trải nghiệm', desc: '50+ ngày hội STEM – AI – Robotics, đón tới 1.200+ học sinh mỗi sự kiện.', chips: ['Trạm trải nghiệm', 'Trình diễn robot', 'Workshop'] },
-        { title: 'Cuộc thi Quốc gia & Quốc tế', desc: 'Tổ chức sân chơi và huấn luyện đội tuyển từ cấp trường đến đấu trường quốc tế.', chips: ['Tổ chức', 'Huấn luyện', 'Quốc tế'] },
-        { title: 'Chương trình & đào tạo giáo viên', desc: 'Khung chương trình STEM – AI liên thông các cấp, kèm đào tạo giáo viên vận hành.', chips: ['K12', 'Học liệu', 'Đào tạo'] },
+    /** Mục 8 — Khoảnh khắc: video, ảnh, báo chí. */
+    moments: {
+      eyebrow: 'Khoảnh khắc Learn to Leap',
+      title: 'Không khí thật [[từ những lớp học]]',
+      lead: 'Bấm để xem ngay trên trang — không cần rời khỏi website.',
+      shortsTitle: 'Video ngắn',
+      photos: [
+        { src: '/images/gallery/su-kien-05.webp', alt: 'Học sinh điều khiển robot thi đấu trên sa bàn' },
+        { src: '/images/sol-k12.webp', alt: 'Tiết học STEM – AI với máy tính bảng' },
+        { src: '/images/gallery/su-kien-08.webp', alt: 'Giáo viên trải nghiệm robot dịch vụ tại hội thảo' },
+        { src: '/images/sol-ngayhoi.webp', alt: 'Học sinh tại ngày hội STEM – AI – Robotics' },
       ],
+      pressTitle: 'Báo chí nói về chúng tôi',
+      cta: 'Xem tất cả tin tức & video',
     },
-    solPreview: {
-      eyebrow: 'Giải pháp toàn diện',
-      title: 'Một hệ sinh thái — [[chín giải pháp đồng bộ]]',
-      lead: 'Từ phòng học thông minh, chương trình liên thông đến sân chơi quốc tế — giải pháp trọn gói, linh hoạt theo từng nhà trường, từng địa phương.',
-      cta: 'Xem tất cả giải pháp',
-      items: [
-        { img: 'sol-ihub', num: '01', icon: 'hub', title: 'Innovation Hub', desc: 'Chuỗi trung tâm học tập tương lai, kết hợp trực tuyến và trải nghiệm.' },
-        { img: 'sol-lab', num: '02', icon: 'lab', title: 'Phòng STEM – AI Lab', desc: 'Phòng học hiện đại "chạm tay vào công nghệ", chuẩn quốc tế, triển khai ngay tại trường.' },
-        { img: 'sol-k12', num: '03', icon: 'book', title: 'Chương trình STEM – AI K12', desc: 'Lộ trình liên thông Mầm non → THPT, bám sát Khung năng lực số.' },
-        { img: 'sol-ngayhoi', num: '04 – 05', icon: 'trophy', title: 'Ngày hội & Cuộc thi', desc: '50+ ngày hội và cuộc thi từ cấp trường đến quốc tế, đón tới 1.200+ học sinh mỗi sự kiện.' },
-        { img: 'sol-tour', num: '06', icon: 'pin', title: 'Tour trải nghiệm hướng nghiệp', desc: 'Kết nối học sinh với doanh nghiệp và thị trường lao động đa ngành.' },
-        { img: 'sol-huanluyen', num: '07 – 08', icon: 'terminal', title: 'Huấn luyện đội tuyển & Trại hè', desc: 'Đào tạo đội tuyển dự VEX, WRO, FLL… và trại hè công nghệ toàn quốc.' },
-      ],
-    },
-    partnersStrip: 'Đồng hành cùng các đối tác hàng đầu trong và ngoài nước',
-    videos: { eyebrow: 'Video', title: 'Xem Learn to Leap [[qua từng thước phim]]', lead: 'Bấm để xem ngay trên trang — không cần rời khỏi website.', shortsTitle: 'Video ngắn', cta: 'Xem tất cả video' },
-    awardsTeaser: { eyebrow: 'Năng lực & dấu ấn', title: 'Được tin tưởng, được [[vinh danh]]', cta: 'Xem năng lực & dấu ấn' },
-    latest: { eyebrow: 'Báo chí nói về chúng tôi', title: 'Tin tức [[mới nhất]]', cta: 'Xem tất cả tin tức' },
+    /** Mục 9 — Hành động. */
     cta: {
       eyebrow: 'Đồng hành cùng Learn to Leap',
-      title: 'Sẵn sàng đưa STEM – AI đến với mọi miền tổ quốc',
-      lead: 'Đặt lịch làm việc cùng đội ngũ Learn to Leap để nhận tư vấn và Hồ sơ năng lực đầy đủ.',
+      title: 'Cùng đưa [[STEM – AI]] đến trường của bạn',
+      lead: 'Đặt lịch làm việc để đội ngũ Learn to Leap khảo sát, tư vấn và gửi Hồ sơ năng lực đầy đủ.',
+      book: 'Đặt lịch làm việc',
     },
   },
 

@@ -81,34 +81,48 @@ if ('IntersectionObserver' in window && !reduce) {
   reveals.forEach((el) => el.classList.add('in'));
 }
 
-/* ----- Hero: sân khấu sản phẩm ----- */
-// Rê chuột: --mx/--my (-1…1) được làm mượt từng khung hình (không dùng transition) nên ảnh trôi êm, không khựng.
-const tilt = document.querySelector<HTMLElement>('[data-tilt]');
-if (tilt && !reduce && matchMedia('(pointer: fine)').matches) {
-  const hero = tilt.closest<HTMLElement>('.hero') ?? tilt;
-  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
-  const loop = () => {
-    x += (tx - x) * 0.06;
-    y += (ty - y) * 0.06;
-    hero.style.setProperty('--mx', x.toFixed(4));
-    hero.style.setProperty('--my', y.toFixed(4));
-    raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.001 ? requestAnimationFrame(loop) : 0;
+/* ----- Hero trang chủ: phim nền ----- */
+// Phim nền lặp, không tiếng; có nút dừng / phát (WCAG 2.2.2). Máy bật giảm chuyển động thì dừng ở khung đầu.
+const heroVideo = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+if (heroVideo) {
+  const btn = document.querySelector<HTMLButtonElement>('[data-hero-toggle]');
+  const setPaused = (paused: boolean) => {
+    if (paused) heroVideo.pause(); else heroVideo.play().catch(() => {});
+    btn?.classList.toggle('paused', paused);
+    btn?.setAttribute('aria-pressed', String(paused));
+    btn?.setAttribute('aria-label', (paused ? btn.dataset.play : btn.dataset.pause) || '');
   };
-  const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
-  hero.addEventListener('pointermove', (e) => {
-    const r = tilt.getBoundingClientRect();
-    tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
-    ty = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
-    kick();
-  });
-  hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
+  if (reduce) setPaused(true);
+  btn?.addEventListener('click', () => setPaused(!heroVideo.paused));
 }
+
+/* ----- Hero trang chủ: hộp phát TVC (nút "Xem phim") ----- */
+// Mở thì dừng phim nền và phát TVC có tiếng; đóng (nút ×, Esc, bấm ra ngoài) thì dừng TVC, phát lại phim nền.
+const tvc = document.querySelector<HTMLDialogElement>('[data-tvc]');
+if (tvc) {
+  const film = tvc.querySelector('video')!;
+  let resumeHero = false;
+  document.querySelector('[data-tvc-open]')?.addEventListener('click', () => {
+    resumeHero = !!heroVideo && !heroVideo.paused;
+    heroVideo?.pause();
+    tvc.showModal();
+    film.currentTime = 0;
+    film.play().catch(() => {});
+  });
+  tvc.querySelector('[data-tvc-close]')?.addEventListener('click', () => tvc.close());
+  tvc.addEventListener('click', (e) => { if (e.target === tvc) tvc.close(); });
+  tvc.addEventListener('close', () => {
+    film.pause();
+    if (resumeHero) heroVideo?.play().catch(() => {});
+  });
+}
+
+/* ----- Hệ sinh thái Robotic AI: sân khấu 5 dòng thiết bị ----- */
 const stage = document.querySelector<HTMLElement>('[data-stage]');
 if (stage) {
   const tabs = [...stage.querySelectorAll<HTMLButtonElement>('[data-pick]')];
   const parts = (sel: string) => [...stage.querySelectorAll<HTMLElement>(sel)];
   const slides = parts('.stg-slide'), giants = parts('.stg-giant .g'), specs = parts('.spec');
-  const sweep = stage.querySelector<HTMLElement>('.stg-sweep');
   let cur = 0;
   const outTimers: number[] = [];
   const show = (i: number, focus = false) => {
@@ -132,7 +146,6 @@ if (stage) {
       list[i].classList.remove('out');
     });
     specs.forEach((el, k) => { el.hidden = k !== i; });
-    if (sweep) { sweep.classList.remove('go'); void sweep.offsetWidth; sweep.classList.add('go'); }
     if (focus) tabs[i].focus();
   };
   tabs.forEach((t, k) => {
@@ -145,8 +158,18 @@ if (stage) {
   // Link thẳng tới một dòng: …/#line-3
   const m = /^#line-(\d+)$/.exec(location.hash);
   if (m && +m[1] >= 1 && +m[1] <= tabs.length) show(+m[1] - 1);
-  // Luôn tự chuyển: vạch tiến trình dưới tab đang chọn chạy hết thì sang dòng sau.
+  // Tự chuyển: vạch tiến trình dưới tab đang chọn chạy hết thì sang dòng sau; chỉ chạy khi mục đang trong màn hình.
   // Có nút dừng / chạy (WCAG 2.2.2); máy bật giảm chuyển động thì không tự chuyển.
+  // Ảnh các dòng đang ẩn được tải trước khi mục sắp vào màn hình để đổi dòng không bị trống.
+  if ('IntersectionObserver' in window) {
+    const pre = new IntersectionObserver((en) => {
+      if (!en[0].isIntersecting) return;
+      stage.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((im) => { im.loading = 'eager'; });
+      pre.disconnect();
+    }, { rootMargin: '600px 0px' });
+    pre.observe(stage);
+    new IntersectionObserver((en) => stage.classList.toggle('off', !en[0].isIntersecting)).observe(stage);
+  }
   if (!reduce) {
     stage.classList.add('auto');
     stage.addEventListener('animationend', (e) => {
@@ -208,39 +231,6 @@ document.querySelectorAll<HTMLElement>('[data-rail]').forEach((rail) => {
   rail.querySelector('[data-rail-next]')?.addEventListener('click', () => track.scrollBy({ left: step() * 2, behavior: 'smooth' }));
   track.addEventListener('scroll', sync, { passive: true });
   sync();
-});
-
-/* ----- Hệ sinh thái giải pháp: tab dọc, rê chuột cũng đổi mảng ----- */
-document.querySelectorAll<HTMLElement>('[data-eco]').forEach((box) => {
-  const tabs = [...box.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
-  const panes = [...box.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
-  let cur = 0;
-  const show = (i: number, focus = false) => {
-    i = (i + tabs.length) % tabs.length;
-    if (i !== cur) {
-      cur = i;
-      tabs.forEach((t, k) => { t.classList.toggle('on', k === i); t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
-      panes.forEach((p, k) => { p.hidden = k !== i; });
-    }
-    if (focus) tabs[i].focus();
-  };
-  // Ảnh của các mảng đang ẩn: tải trước khi mục sắp vào màn hình để đổi tab không bị trống.
-  const pre = new IntersectionObserver((en) => {
-    if (!en[0].isIntersecting) return;
-    box.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((im) => { im.loading = 'eager'; });
-    pre.disconnect();
-  }, { rootMargin: '600px 0px' });
-  pre.observe(box);
-  let hoverT = 0;
-  tabs.forEach((t, k) => {
-    t.addEventListener('click', () => show(k));
-    t.addEventListener('mouseenter', () => { clearTimeout(hoverT); hoverT = window.setTimeout(() => show(k), 140); });
-    t.addEventListener('mouseleave', () => clearTimeout(hoverT));
-    t.addEventListener('keydown', (e) => {
-      const step = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
-      if (step) { e.preventDefault(); show(cur + step, true); }
-    });
-  });
 });
 
 /* ----- Alpha Mini đồng hành ----- */

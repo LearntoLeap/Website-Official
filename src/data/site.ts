@@ -50,6 +50,9 @@ export const IMAGES: Record<string, string> = {
   'proj-stem57': '/images/proj-stem57.webp',
   'proj-intl': '',
   'proj-bacninh': '/images/proj-bacninh.webp',
+  'hoi-thao': '/images/gallery/su-kien-07.webp',
+  /** Ảnh tĩnh của hero trang chủ (khung hình từ TVC LtL 2026), dùng khi chưa có / không phát phim nền. */
+  'hero-poster': '/images/hero-poster.webp',
 };
 
 export const img = (key: string) => (IMAGES[key] ? withBase(IMAGES[key]) : '');

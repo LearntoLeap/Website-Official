@@ -1,12 +1,13 @@
 ---
 import { rich } from '../i18n';
 import { bot } from '../data/site';
-interface Props { eyebrow?: string; title: string; lead?: string }
-const { eyebrow, title, lead } = Astro.props;
+/** bot: tên ảnh robot đã tách nền đứng cạnh dải (public/images/robots). */
+interface Props { eyebrow?: string; title: string; lead?: string; bot?: string }
+const { eyebrow, title, lead, bot: botName = 'cruzr' } = Astro.props;
 ---
 <section class="sp cta-band" data-buddy="bow">
   <div class="glow"></div>
-  <div class="cta-bot reveal d2" aria-hidden="true"><span class="pod"></span><img src={bot('cruzr')} alt="" loading="lazy" decoding="async" /></div>
+  <div class="cta-bot reveal d2" aria-hidden="true"><span class="pod"></span><img src={bot(botName)} alt="" loading="lazy" decoding="async" /></div>
   <div class="wrap">
     {eyebrow && <span class="eyebrow light center reveal">{eyebrow}</span>}
     <h2 class="reveal d1" set:html={rich(title)} />
