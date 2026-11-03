@@ -1,0 +1,30 @@
+name: Nhật ký thay đổi
+
+# Mỗi thay đổi phải kèm file nhật ký mới trong nhat-ky/ (xem nhat-ky/README.md).
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, release]
+
+permissions:
+  contents: read
+
+jobs:
+  nhat-ky:
+    name: Kiểm tra nhật ký
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Kiểm tra file nhật ký
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          # Với Pull Request: tài khoản ghi trong nhật ký phải là người tạo yêu cầu.
+          ACTOR: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login || '' }}
+        run: node tools/nhat-ky.mjs kiem-tra --base "$BASE" --head "$HEAD_SHA" --actor "$ACTOR"
