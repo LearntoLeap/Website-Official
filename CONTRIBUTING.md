@@ -28,3 +28,4 @@ Website chính thức của Learn to Leap có nhiều đơn vị cùng sửa. Đ
 - Nhật ký đã ghi **không được sửa hay xoá**. Cần đính chính thì thêm file nhật ký mới.
 - Không đưa thông số sản phẩm chưa xác minh, ảnh có watermark hay logo chưa được phép sử dụng.
 - Sửa chữ thì sửa cả bản Tiếng Việt (`src/i18n/vi.ts`) và English (`src/i18n/en.ts`).
+
