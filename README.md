@@ -6,6 +6,10 @@ Website song ngữ (Tiếng Việt / English), có giao diện sáng – tối, 
 - English nằm dưới `/en`: `/en`, `/en/about`, `/en/solutions`, `/en/impact`, `/en/partnership`, `/en/news`, `/en/contact`
 - Link kiểu cũ (`learntoleap.edu.vn/#ve-chung-toi`…) tự chuyển sang trang mới.
 
+## Ai sửa, sửa gì: nhật ký thay đổi
+
+Nhiều đơn vị cùng sửa website. Mọi thay đổi đi qua Pull Request, được Learn to Leap duyệt, và kèm một file nhật ký mới trong [`nhat-ky/`](nhat-ky/README.md) ghi người sửa và chi tiết thay đổi. Quy trình cho nhà phân phối: [CONTRIBUTING.md](CONTRIBUTING.md). Bảng tổng hợp: `npm run nhat-ky`.
+
 ## Chạy thử trên máy
 
 ```bash
