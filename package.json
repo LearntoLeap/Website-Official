@@ -7,9 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
-    "nhat-ky": "node tools/nhat-ky.mjs tong-hop",
-    "nhat-ky:kiem-tra": "node tools/nhat-ky.mjs kiem-tra"
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.2",

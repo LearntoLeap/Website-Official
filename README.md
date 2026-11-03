@@ -8,7 +8,7 @@ Website song ngữ (Tiếng Việt / English), có giao diện sáng – tối, 
 
 ## Ai sửa, sửa gì: nhật ký thay đổi
 
-Nhiều đơn vị cùng sửa website. Mọi thay đổi đi qua Pull Request, được Learn to Leap duyệt, và kèm một file nhật ký mới trong [`nhat-ky/`](nhat-ky/README.md) ghi người sửa và chi tiết thay đổi. Quy trình cho nhà phân phối: [CONTRIBUTING.md](CONTRIBUTING.md). Bảng tổng hợp: `npm run nhat-ky`.
+Nhiều đơn vị cùng sửa website. Sau mỗi lần đẩy lên GitHub, GitHub Actions (`.github/workflows/nhat-ky.yml`) tự ghi người đẩy, thời gian, từng commit kèm mô tả và từng file thay đổi vào nhánh [`nhat-ky`](https://github.com/LearntoLeap/Website-Official/tree/nhat-ky), mỗi tháng một file. Chỉ ghi lại, không duyệt hay chặn. Quy tắc cho nhà phân phối: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Chạy thử trên máy
 

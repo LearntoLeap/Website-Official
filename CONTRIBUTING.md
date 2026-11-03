@@ -1,30 +1,15 @@
 # Hướng dẫn sửa website cho nhà phân phối
 
-Website chính thức của Learn to Leap có nhiều đơn vị cùng sửa. Để biết **ai đã sửa gì**, mọi thay đổi đều đi qua quy trình dưới đây.
+Website chính thức của Learn to Leap có nhiều đơn vị cùng sửa. GitHub **tự ghi nhật ký** mọi lần đẩy thay đổi: ai đẩy, lúc nào, từng commit kèm mô tả và từng file thay đổi. Không có bước duyệt; nhật ký chỉ để tra cứu.
 
-## 1. Chuẩn bị
-
-- Mỗi người dùng **tài khoản GitHub riêng**, không dùng chung. Gửi tên tài khoản cho Learn to Leap để được mời vào repo.
-- Đọc phần "Cập nhật nội dung" trong [README.md](README.md) để biết sửa ở file nào.
-
-## 2. Sửa và gửi yêu cầu
-
-1. Tạo nhánh mới từ `main` (không sửa thẳng trên `main`; GitHub sẽ chặn).
-2. Sửa nội dung.
-3. Thêm **một file nhật ký mới**: chép [`nhat-ky/_mau.md`](nhat-ky/_mau.md) thành `nhat-ky/YYYY-MM-DD-ten-ngan.md` và điền đủ:
-   - họ tên, đơn vị, tài khoản GitHub của bạn;
-   - loại thay đổi và các trang bị ảnh hưởng;
-   - **Thay đổi**: ghi cụ thể từng chỗ (chữ cũ → chữ mới, ảnh nào, mục nào);
-   - **Lý do**.
-4. Tạo Pull Request vào `main` và điền mẫu có sẵn.
-
-## 3. Kiểm tra và duyệt
-
-- GitHub tự kiểm tra file nhật ký (mục **Nhật ký thay đổi**). Báo lỗi thì đọc phần "Cần sửa" trong kết quả kiểm tra, sửa rồi đẩy lại.
-- Learn to Leap xem và duyệt. Chỉ khi được duyệt, thay đổi mới được gộp vào `main` để lên website.
+Xem nhật ký: nhánh [`nhat-ky`](https://github.com/LearntoLeap/Website-Official/tree/nhat-ky) (mỗi tháng một file).
 
 ## Quy tắc
 
-- Nhật ký đã ghi **không được sửa hay xoá**. Cần đính chính thì thêm file nhật ký mới.
-- Không đưa thông số sản phẩm chưa xác minh, ảnh có watermark hay logo chưa được phép sử dụng.
-- Sửa chữ thì sửa cả bản Tiếng Việt (`src/i18n/vi.ts`) và English (`src/i18n/en.ts`).
+1. **Mỗi người một tài khoản GitHub riêng**, không dùng chung. Nhật ký ghi theo tài khoản đã đăng nhập khi đẩy. Gửi tên tài khoản cho Learn to Leap để được mời vào repo.
+2. **Viết mô tả commit rõ ràng**, vì nhật ký chép nguyên văn:
+   - dòng đầu: sửa gì (vd: `Cập nhật ảnh và mô tả robot UGOT ở trang Giải pháp`);
+   - các dòng sau (nếu cần): chi tiết từng chỗ và lý do, ghi kèm tên đơn vị.
+3. Sửa chữ thì sửa cả bản Tiếng Việt (`src/i18n/vi.ts`) và English (`src/i18n/en.ts`). Bảng "sửa ở file nào" nằm trong [README.md](README.md).
+4. Không đưa thông số sản phẩm chưa xác minh, ảnh có watermark hay logo chưa được phép sử dụng.
+5. Không đẩy đè lịch sử (`git push --force`) và không xoá nhánh `main`, `release`; GitHub chặn hai việc này để nhật ký không bị mất.
