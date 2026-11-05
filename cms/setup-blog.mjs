@@ -2,6 +2,7 @@
 // Chạy một lần trên VPS (xem cms/README.md). Chạy lại không tạo trùng; khóa website chỉ in ra ở lần tạo đầu.
 // Cần biến môi trường DIRECTUS_TOKEN là token của tài khoản quản trị.
 import { randomBytes } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 const BASE = process.env.DIRECTUS_URL || 'http://127.0.0.1:8055';
 const TOKEN = process.env.DIRECTUS_TOKEN;
@@ -28,6 +29,11 @@ const divider = (name, title) => ({
   field: name, type: 'alias',
   meta: { interface: 'presentation-divider', special: ['alias', 'no-data'], options: { title }, width: 'full' },
 });
+// Trình soạn thảo trực quan (WYSIWYG): căn lề, ảnh có chú thích và mô tả alt, bảng, video. Không có H1 vì tiêu đề bài đã là H1.
+const EDITOR = {
+  interface: 'input-rich-text-html',
+  options: { toolbar: ['h2', 'h3', 'bold', 'italic', 'underline', 'alignleft', 'aligncenter', 'alignright', 'alignjustify', 'bullist', 'numlist', 'blockquote', 'customLink', 'customImage', 'customMedia', 'table', 'hr', 'removeformat', 'code', 'fullscreen'] },
+};
 const choices = (items) => ({ choices: items.map(([value, text]) => ({ value, text })) });
 
 const POST_FIELDS = [
@@ -59,11 +65,11 @@ const POST_FIELDS = [
   divider('div_vi', 'Tiếng Việt'),
   field('title_vi', 'string', { interface: 'input', width: 'full', required: true, options: { trim: true } }, { is_nullable: false }),
   field('excerpt_vi', 'text', { interface: 'input-multiline', width: 'full', required: true, note: 'Tóm tắt 1–2 câu, hiện trên thẻ bài viết' }),
-  field('body_vi', 'text', { interface: 'input-rich-text-md', width: 'full', required: true }),
+  field('body_vi', 'text', { ...EDITOR, width: 'full', required: true }),
   divider('div_en', 'English (không bắt buộc: để trống tiêu đề thì bài chỉ có bản tiếng Việt)'),
   field('title_en', 'string', { interface: 'input', width: 'full', options: { trim: true } }),
   field('excerpt_en', 'text', { interface: 'input-multiline', width: 'full' }),
-  field('body_en', 'text', { interface: 'input-rich-text-md', width: 'full' }),
+  field('body_en', 'text', { ...EDITOR, width: 'full' }),
 ];
 
 const ensureCollection = async () => {
@@ -148,6 +154,33 @@ const ensureWebsiteUser = async (role) => {
   console.log(`+ Đã tạo tài khoản website. KHÓA CHỈ-ĐỌC (chỉ hiện một lần, dán vào Vercel):\n\n${token}\n`);
 };
 
+// Bảng tạo trước khi có trình soạn thảo trực quan: đổi ô nội dung và chuyển bài Markdown sang HTML,
+// nếu không trình soạn thảo sẽ hiện nguyên ký hiệu Markdown. Directus lưu bản cũ trong lịch sử sửa của từng bài.
+const ensureEditor = async () => {
+  for (const name of ['body_vi', 'body_en']) {
+    const f = await api('GET', `/fields/blog_posts/${name}`);
+    if (f.meta?.interface === EDITOR.interface) continue;
+    await api('PATCH', `/fields/blog_posts/${name}`, { meta: EDITOR });
+    console.log(`+ Đã đổi ${name} sang trình soạn thảo trực quan`);
+  }
+  const posts = await api('GET', '/items/blog_posts?limit=-1&fields=id,body_vi,body_en');
+  const isMd = (v) => v && !v.trimStart().startsWith('<');
+  const todo = posts.filter((p) => isMd(p.body_vi) || isMd(p.body_en));
+  if (!todo.length) return;
+  // marked đi kèm Directus; tìm qua gói directus → @directus/api để chạy được cả cài kiểu npm lẫn pnpm.
+  const { createRequire } = await import('node:module');
+  let req = createRequire(process.cwd() + '/');
+  for (const pkg of ['directus', '@directus/api']) req = createRequire(req.resolve(`${pkg}/package.json`));
+  const { marked } = await import(pathToFileURL(req.resolve('marked')).href);
+  for (const p of todo) {
+    const patch = {};
+    for (const k of ['body_vi', 'body_en']) if (isMd(p[k])) patch[k] = marked.parse(p[k]);
+    await api('PATCH', `/items/blog_posts/${p.id}`, patch);
+  }
+  console.log(`+ Đã chuyển ${todo.length} bài từ Markdown sang HTML`);
+};
+
 await ensureCollection();
+await ensureEditor();
 await ensureWebsiteUser(await ensureRoles());
 console.log('Xong.');

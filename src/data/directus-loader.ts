@@ -60,7 +60,9 @@ export const directusLoader = (url: string, token: string): Loader => ({
           id,
           data: { title, excerpt: post[`excerpt_${lang}`] ?? '', date: post.date, cover, category: post.category, author: post.author || undefined },
         });
-        store.set({ id, data, body, rendered: await renderMarkdown(body), digest: generateDigest({ data, body }) });
+        // Trình soạn thảo trực quan lưu HTML; bài cũ soạn bằng Markdown vẫn hiển thị được.
+        const rendered = body.trimStart().startsWith('<') ? { html: body } : await renderMarkdown(body);
+        store.set({ id, data, body, rendered, digest: generateDigest({ data, body }) });
       }
     }
     logger.info(`Đã đọc ${store.keys().length} bài từ Directus`);

@@ -8,7 +8,7 @@ Directus chạy trên VPS tại `/www/directus`, tên miền `cms.learntoleap.ed
 cd /www/directus && read -s -p "Token: " T; echo; docker compose exec -T -e DIRECTUS_TOKEN="$T" directus node --input-type=module < setup-blog.mjs; unset T
 ```
 
-Chạy lại không tạo trùng. Directus 12 không có license thì bỏ qua vai trò Tác giả (giới hạn theo trường cần license); có license thì chạy lại để tạo.
+Chạy lại không tạo trùng. Script cũng đổi ô nội dung sang trình soạn thảo trực quan (căn lề, ảnh có chú thích, bảng, video) và chuyển bài viết bằng Markdown sang HTML. Chạy sau khi website đã có bản đọc được HTML. Mỗi bài được chuyển sẽ kích hoạt dựng lại website một lần. Directus 12 không có license thì bỏ qua vai trò Tác giả (giới hạn theo trường cần license); có license thì chạy lại để tạo.
 
 `setup-duyet-bai.mjs` tách quyền đăng và duyệt: tạo vai trò QTV duyệt bài, bỏ quyền xóa bài của Biên tập, thêm hai Flow chặn Biên tập tự xuất bản hoặc sửa bài đã lên web. Chạy sau `setup-blog.mjs`, cùng cách trên (thay tên file). Chạy lại sẽ làm mới Flow.
 
