@@ -16,7 +16,7 @@ Mã đo nằm ở `ANALYTICS` trong `src/data/site.ts`; để trống là không
 
 | Công cụ | Lấy mã ở đâu | Ghi vào |
 |---|---|---|
-| Google Analytics 4 | analytics.google.com → Tạo tài khoản → Tạo thuộc tính → Luồng dữ liệu **Web** với `https://www.learntoleap.edu.vn` → mã **Measurement ID** dạng `G-XXXXXXXXXX` | `ANALYTICS.ga4` |
+| Google Analytics 4 | analytics.google.com → Tạo tài khoản → Tạo thuộc tính → Luồng dữ liệu **Web** với `https://www.learntoleap.edu.vn` → mã trong **Hướng dẫn cài đặt → Cài đặt thủ công** (dòng `gtag('config', 'G-…')`; có thể khác Mã đo lường) | `ANALYTICS.ga4` |
 | Microsoft Clarity | clarity.microsoft.com → New project → mã ở Settings → Overview, **Project ID** (khoảng 10 ký tự) | `ANALYTICS.clarity` |
 | Google Search Console | search.google.com/search-console → thuộc tính **Miền** `learntoleap.edu.vn` → thêm bản ghi TXT ở nơi quản lý tên miền → gửi sitemap `https://www.learntoleap.edu.vn/sitemap-index.xml` | Không cần sửa code |
 

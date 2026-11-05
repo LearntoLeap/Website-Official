@@ -34,7 +34,7 @@ export const SITE = {
  * Để trống thì không đo và không hiện banner cookie. Chỉ chạy trên tên miền của SITE.url, sau khi khách bấm Đồng ý.
  */
 export const ANALYTICS = {
-  ga4: 'G-G15N4HZM4P',
+  ga4: 'G-KB7K3CSDS8', // mã thẻ Google (gtag.js), gửi về luồng đo lường G-G15N4HZM4P
   clarity: 'z8t4mpvi0b',
 };
 
