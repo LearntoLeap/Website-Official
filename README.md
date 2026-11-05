@@ -10,6 +10,20 @@ Website song ngữ (Tiếng Việt / English), có giao diện sáng – tối, 
 
 Nhiều đơn vị cùng sửa website. Sau mỗi lần đẩy lên GitHub, GitHub Actions (`.github/workflows/nhat-ky.yml`) tự ghi người đẩy, thời gian, từng commit kèm mô tả và từng file thay đổi vào nhánh [`nhat-ky`](https://github.com/LearntoLeap/Website-Official/tree/nhat-ky), mỗi tháng một file. Chỉ ghi lại, không duyệt hay chặn. Quy tắc cho nhà phân phối: [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Đo lường (lượt truy cập, hành trình, SEO)
+
+Mã đo nằm ở `ANALYTICS` trong `src/data/site.ts`; để trống là không đo. Có mã thì website hiện banner xin đồng ý cookie (Nghị định 13/2023), và **chỉ khi khách bấm Đồng ý** mới tải Google Analytics 4 và Microsoft Clarity. Bản xem thử (github.io, localhost, Vercel preview) vẫn hiện banner nhưng không gửi số liệu. Khách đổi ý bằng nút "Cài đặt cookie" ở chân trang.
+
+| Công cụ | Lấy mã ở đâu | Ghi vào |
+|---|---|---|
+| Google Analytics 4 | analytics.google.com → Tạo tài khoản → Tạo thuộc tính → Luồng dữ liệu **Web** với `https://www.learntoleap.edu.vn` → mã **Measurement ID** dạng `G-XXXXXXXXXX` | `ANALYTICS.ga4` |
+| Microsoft Clarity | clarity.microsoft.com → New project → mã ở Settings → Overview, **Project ID** (khoảng 10 ký tự) | `ANALYTICS.clarity` |
+| Google Search Console | search.google.com/search-console → thuộc tính **Miền** `learntoleap.edu.vn` → thêm bản ghi TXT ở nơi quản lý tên miền → gửi sitemap `https://www.learntoleap.edu.vn/sitemap-index.xml` | Không cần sửa code |
+
+Website tự gửi sự kiện `contact_click` khi khách bấm Hotline, email hoặc Zalo (tham số `method`: phone / email / zalo; `placement`: header / footer / page). Trong GA4, vào Quản trị → Sự kiện, bật **Đánh dấu là sự kiện chính** cho `contact_click` để tính là chuyển đổi. Lượt tải file, bấm link ra ngoài, cuộn trang, xem video YouTube: bật "Đo lường nâng cao" của luồng dữ liệu là GA4 tự đếm.
+
+Link đăng Facebook, Zalo, email nên gắn mã UTM, ví dụ `https://www.learntoleap.edu.vn/giai-phap?utm_source=facebook&utm_medium=social&utm_campaign=stem-day-2026`, để GA4 biết bài nào kéo khách về.
+
 ## Chạy thử trên máy
 
 ```bash

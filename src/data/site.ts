@@ -30,6 +30,15 @@ export const SITE = {
 };
 
 /**
+ * Đo lường: mã Google Analytics 4 (dạng 'G-XXXXXXXXXX') và mã dự án Microsoft Clarity.
+ * Để trống thì không đo và không hiện banner cookie. Chỉ chạy trên tên miền của SITE.url, sau khi khách bấm Đồng ý.
+ */
+export const ANALYTICS = {
+  ga4: 'G-G15N4HZM4P',
+  clarity: 'z8t4mpvi0b',
+};
+
+/**
  * Ảnh giao diện. Đặt file vào public/images/ rồi ghi đường dẫn vào đây.
  * Vị trí nào chưa có ảnh sẽ hiện khung đồ hoạ thay thế.
  */

@@ -1,0 +1,24 @@
+---
+// Banner xin đồng ý cookie đo lường (Nghị định 13/2023). Chỉ khi khách bấm Đồng ý mới tải GA4 / Clarity.
+import { useT } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { SITE, ANALYTICS } from '../data/site';
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang).common.consent;
+const on = Boolean(ANALYTICS.ga4 || ANALYTICS.clarity);
+---
+{on && (
+  <div class="consent" role="region" aria-label={t.label} data-consent data-ga4={ANALYTICS.ga4} data-clarity={ANALYTICS.clarity} data-host={new URL(SITE.url).hostname.replace(/^www\./, '')} hidden>
+    <p>{t.text}</p>
+    <div class="acts">
+      <button type="button" class="btn sm" data-consent-choice="yes">{t.accept}</button>
+      <button type="button" class="btn ghost sm" data-consent-choice="no">{t.decline}</button>
+    </div>
+  </div>
+)}
+
+<script>
+  import { initAnalytics } from '../scripts/analytics';
+  initAnalytics();
+</script>

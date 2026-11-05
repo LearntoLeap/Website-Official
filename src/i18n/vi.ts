@@ -32,6 +32,13 @@ const vi = {
     menuOpen: 'Mở menu',
     menuClose: 'Đóng menu',
     skip: 'Bỏ qua, tới nội dung chính',
+    consent: {
+      label: 'Cookie đo lường',
+      text: 'Learn to Leap dùng cookie của Google Analytics và Microsoft Clarity để đếm lượt truy cập và cải thiện website. Không dùng cho quảng cáo.',
+      accept: 'Đồng ý',
+      decline: 'Từ chối',
+      settings: 'Cài đặt cookie',
+    },
     switchLang: 'English',
     switchLangLabel: 'Switch to English',
     themeToLight: 'Chuyển sang giao diện sáng',

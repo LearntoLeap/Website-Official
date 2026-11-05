@@ -30,6 +30,13 @@ const en: Dict = {
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
     skip: 'Skip to main content',
+    consent: {
+      label: 'Analytics cookies',
+      text: 'Learn to Leap uses Google Analytics and Microsoft Clarity cookies to count visits and improve this website. They are not used for advertising.',
+      accept: 'Accept',
+      decline: 'Decline',
+      settings: 'Cookie settings',
+    },
     switchLang: 'Tiếng Việt',
     switchLangLabel: 'Chuyển sang tiếng Việt',
     themeToLight: 'Switch to light theme',

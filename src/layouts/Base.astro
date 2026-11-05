@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Buddy from '../components/Buddy.astro';
 import Lightbox from '../components/Lightbox.astro';
+import Consent from '../components/Consent.astro';
 import { useT, plain } from '../i18n';
 import { ROUTES, LEGACY_HASHES, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { SITE } from '../data/site';
@@ -89,6 +90,7 @@ const legacy = Object.fromEntries(Object.entries(LEGACY_HASHES).map(([h, k]) => 
   <main id="main"><slot /></main>
   <Footer lang={lang} />
   <Buddy lang={lang} />
+  <Consent lang={lang} />
   {lightbox && <Lightbox closeLabel={t.common.close} />}
   <script>
     import '../scripts/site.ts';

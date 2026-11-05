@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import { useT } from '../i18n';
 import { href, withBase, type Lang } from '../i18n/routes';
-import { SITE } from '../data/site';
+import { SITE, ANALYTICS } from '../data/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
@@ -52,7 +52,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="ft-bottom">
-      <div>© {year} {t.footer.rights} {SITE.taxId}</div>
+      <div>© {year} {t.footer.rights} {SITE.taxId}{(ANALYTICS.ga4 || ANALYTICS.clarity) && <> · <button type="button" class="ft-consent" data-consent-open>{t.common.consent.settings}</button></>}</div>
       <div class="nq">{t.footer.aligned} <span>NQ 57-NQ/TW</span> · <span>NQ 71-NQ/TW</span> · <span>GDPT 2018</span> · <span>TT 02/2025</span> · <span>QĐ 3439</span></div>
     </div>
   </div>
