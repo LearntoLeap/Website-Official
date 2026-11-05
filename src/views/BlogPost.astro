@@ -30,7 +30,7 @@ const all = (await getPosts(lang)).filter((p) => p.id !== post.id);
 const related = [...all.filter((p) => p.data.category === d.category), ...all.filter((p) => p.data.category !== d.category)].slice(0, 3);
 const url = new URL(postPath(lang, slug), SITE.url).href;
 ---
-<Base lang={lang} page={null} paths={paths} title={`${d.title} — Learn to Leap`} description={d.excerpt} image={d.cover}>
+<Base lang={lang} page={null} paths={paths} title={d.seoTitle ?? `${d.title} — Learn to Leap`} description={d.seoDescription ?? d.excerpt} image={d.ogImage ?? d.cover} robots={d.robots}>
   <article>
     <header class="phero post-hero" data-buddy="walk">
       <HexBg />

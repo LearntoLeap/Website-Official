@@ -19,6 +19,12 @@ const blog = defineCollection({
     /** true = bài mẫu để duyệt bố cục (chữ lorem ipsum), hiện nhãn "Bài mẫu". */
     sample: z.boolean().default(false),
     draft: z.boolean().default(false),
+    /** Ô SEO trong CMS (bỏ trống thì dùng title / excerpt / cover). */
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    ogImage: z.string().optional(),
+    /** vd "noindex, nofollow" */
+    robots: z.string().optional(),
   }),
 });
 

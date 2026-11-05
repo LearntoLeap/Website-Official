@@ -9,7 +9,10 @@ const OUT_DIR = path.join(process.cwd(), 'public', 'cms');
 const COVER = 'width=1600&quality=80&format=webp';
 const INLINE = 'width=1400&quality=80&format=webp';
 
-const FIELDS = ['slug', 'date', 'category', 'author', 'cover', 'title_vi', 'excerpt_vi', 'body_vi', 'title_en', 'excerpt_en', 'body_en'];
+const FIELDS = ['slug', 'date', 'category', 'author', 'cover', 'title_vi', 'excerpt_vi', 'body_vi', 'seo_vi', 'title_en', 'excerpt_en', 'body_en', 'seo_en'];
+
+/** Ô SEO của plugin @directus-labs/seo-plugin (lưu JSON). og_image là "<uuid>.<đuôi>". */
+type Seo = { title?: string; meta_description?: string; og_image?: string; no_index?: boolean; no_follow?: boolean } | null;
 
 export const directusLoader = (url: string, token: string): Loader => ({
   name: 'directus',
@@ -44,7 +47,7 @@ export const directusLoader = (url: string, token: string): Loader => ({
 
     await mkdir(OUT_DIR, { recursive: true });
     const res = await get(`/items/blog_posts?limit=-1&filter[status][_eq]=published&fields=${FIELDS.join(',')}`);
-    const { data: posts } = (await res.json()) as { data: Record<string, string | null>[] };
+    const { data: posts } = (await res.json()) as { data: Record<string, any>[] };
 
     store.clear();
     for (const post of posts) {
@@ -56,9 +59,17 @@ export const directusLoader = (url: string, token: string): Loader => ({
         if (!title || !raw) continue;
         const id = `${lang}/${post.slug}`;
         const body = await localize(raw);
+        const seo: Seo = post[`seo_${lang}`];
+        const robots = [seo?.no_index && 'noindex', seo?.no_follow && 'nofollow'].filter(Boolean).join(', ');
         const data = await parseData({
           id,
-          data: { title, excerpt: post[`excerpt_${lang}`] ?? '', date: post.date, cover, category: post.category, author: post.author || undefined },
+          data: {
+            title, excerpt: post[`excerpt_${lang}`] ?? '', date: post.date, cover, category: post.category, author: post.author || undefined,
+            seoTitle: seo?.title?.trim() || undefined,
+            seoDescription: seo?.meta_description?.trim() || undefined,
+            ogImage: seo?.og_image ? await saveImage(seo.og_image.slice(0, 36), COVER) : undefined,
+            robots: robots || undefined,
+          },
         });
         // Trình soạn thảo trực quan lưu HTML; bài cũ soạn bằng Markdown vẫn hiển thị được.
         const rendered = body.trimStart().startsWith('<') ? { html: body } : await renderMarkdown(body);
