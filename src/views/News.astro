@@ -9,9 +9,9 @@ import VideoCard from '../components/VideoCard.astro';
 import ShortsRail from '../components/ShortsRail.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
-import { href, withBase, type Lang } from '../i18n/routes';
+import { href, type Lang } from '../i18n/routes';
 import { videos, shorts, photos, titleOf } from '../data/media';
-import { getPosts, postHref, readMinutes, fmtDate, type Category } from '../data/blog';
+import { getPosts, type Category } from '../data/blog';
 
 // Trang Blog (khoá trang 'news'): bài tự viết của Learn to Leap + video, ảnh hoạt động.
 interface Props { lang: Lang }
@@ -20,7 +20,6 @@ const t = useT(lang);
 const n = t.news;
 const b = n.blog;
 const posts = await getPosts(lang);
-const [feat, ...rest] = posts;
 const cats = Object.keys(b.cats) as Category[];
 const usedCats = cats.filter((c) => posts.some((p) => p.data.category === c));
 const hasSample = posts.some((p) => p.data.sample);
@@ -33,23 +32,7 @@ const vids = [...videos].reverse();
     <div class="wrap">
       {hasSample && <p class="blog-note reveal"><Icon name="idea" />{b.sampleNote}</p>}
 
-      {feat && (
-        <a class="blog-feat reveal" href={postHref(feat)}>
-          <div class="bf-media">
-            <img src={withBase(feat.data.cover)} alt="" decoding="async" />
-            {feat.data.sample && <span class="bc-sample">{b.sample}</span>}
-          </div>
-          <div class="bf-body">
-            <span class="bf-lbl">{b.featured} · {b.cats[feat.data.category]}</span>
-            <h2>{feat.data.title}</h2>
-            <p>{feat.data.excerpt}</p>
-            <span class="bf-meta"><Icon name="calendar" />{fmtDate(feat.data.date, lang)}<span aria-hidden="true">·</span>{readMinutes(feat)} {b.minutes}</span>
-            <span class="bf-go">{b.read}<Icon name="arrow" stroke={2.4} /></span>
-          </div>
-        </a>
-      )}
-
-      {rest.length > 0 && (
+      {posts.length > 0 && (
         <div class="tl-sec" id="bai-viet">
           <div class="blog-top">
             <SectionHead eyebrow={b.eyebrow} title={b.title} />
@@ -61,7 +44,7 @@ const vids = [...videos].reverse();
             )}
           </div>
           <div class="g3 grid blog-grid" data-blog-grid>
-            {rest.map((p, i) => <BlogCard post={p} lang={lang} index={i} />)}
+            {posts.map((p, i) => <BlogCard post={p} lang={lang} index={i} featured={i === 0} />)}
           </div>
           <p class="tl-state" data-blog-empty hidden>{b.empty}</p>
         </div>
