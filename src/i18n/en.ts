@@ -31,8 +31,8 @@ const en: Dict = {
     menuClose: 'Close menu',
     skip: 'Skip to main content',
     consent: {
-      label: 'Analytics cookies',
-      text: 'Learn to Leap uses Google Analytics and Microsoft Clarity cookies to count visits and improve this website. They are not used for advertising.',
+      label: 'Cookies',
+      text: 'We use cookies to improve your experience on our website.',
       accept: 'Accept',
       decline: 'Decline',
       settings: 'Cookie settings',

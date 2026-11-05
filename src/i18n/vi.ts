@@ -33,9 +33,9 @@ const vi = {
     menuClose: 'Đóng menu',
     skip: 'Bỏ qua, tới nội dung chính',
     consent: {
-      label: 'Cookie đo lường',
-      text: 'Learn to Leap dùng cookie của Google Analytics và Microsoft Clarity để đếm lượt truy cập và cải thiện website. Không dùng cho quảng cáo.',
-      accept: 'Đồng ý',
+      label: 'Cookie',
+      text: 'Chúng tôi sử dụng cookie để cải thiện trải nghiệm của bạn trên website.',
+      accept: 'Chấp nhận',
       decline: 'Từ chối',
       settings: 'Cài đặt cookie',
     },
