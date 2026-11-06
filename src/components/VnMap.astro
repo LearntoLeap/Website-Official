@@ -1,0 +1,71 @@
+---
+import VN from '../data/vn-map.json';
+import type { Lang } from '../i18n/routes';
+
+interface Props { lang: Lang; eyebrow: string; title: string; provinces: string[]; more: string }
+const { lang, eyebrow, title, provinces, more } = Astro.props;
+
+/** Kinh độ, vĩ độ của từng tỉnh — CÙNG THỨ TỰ với impact.map.provinces trong vi.ts / en.ts. Thêm tỉnh thì thêm toạ độ ở đây. */
+const COORDS: [number, number][] = [
+  [105.85, 21.03], // Hà Nội (trụ sở)
+  [106.70, 10.78], // TP. Hồ Chí Minh
+  [106.08, 21.19], // Bắc Ninh
+  [105.69, 18.67], // Nghệ An
+  [105.85, 21.59], // Thái Nguyên
+  [106.68, 20.86], // Hải Phòng
+  [105.78, 19.81], // Thanh Hóa
+  [105.91, 18.34], // Hà Tĩnh
+  [106.89, 11.54], // Bình Phước
+];
+// Cùng phép chiếu với file tạo src/data/vn-map.json (Natural Earth 10m, góc nhìn Việt Nam).
+const K = Math.cos((16 * Math.PI) / 180);
+const proj = ([lon, lat]: [number, number]) => [(lon - 102) * K * 60, (23.6 - lat) * 60];
+const pins = provinces.map((name, i) => ({ name, xy: COORDS[i] ? proj(COORDS[i]) : null })).filter((p) => p.xy) as { name: string; xy: number[] }[];
+const [hx, hy] = pins[0].xy;
+const arc = ([x, y]: number[]) => {
+  const dx = x - hx, dy = y - hy, mx = (hx + x) / 2 + dy * 0.28, my = (hy + y) / 2 - dx * 0.28;
+  return `M${hx.toFixed(1)},${hy.toFixed(1)}Q${mx.toFixed(1)},${my.toFixed(1)} ${x.toFixed(1)},${y.toFixed(1)}`;
+};
+const isl = lang === 'vi' ? ['QĐ. Hoàng Sa', 'QĐ. Trường Sa'] : ['Hoang Sa Archipelago', 'Truong Sa Archipelago'];
+---
+<div class="vnm reveal">
+  <div class="vnm-txt">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{title}</h2>
+    <ul class="prov-cloud">
+      {provinces.map((p, i) => <li class="prov" data-i={i}><span class="d"></span>{p}</li>)}
+      <li class="prov more"><span class="d"></span>{more}</li>
+    </ul>
+  </div>
+  <svg class="vnm-svg" viewBox="0 0 830 940" role="img" aria-label={`${title}: ${provinces.join(', ')}. ${isl.join(', ')}.`}>
+    <defs>
+      <linearGradient id="vnm-land" x1="0" y1="0" x2="0.6" y2="1">
+        <stop offset="0" stop-color="#7c3aed" stop-opacity=".55" /><stop offset="1" stop-color="#df2f86" stop-opacity=".4" />
+      </linearGradient>
+    </defs>
+    <path class="land" d={VN.d} />
+    <g class="isl">{VN.islands.map(([x, y]) => <circle cx={x} cy={y} r="2.6" />)}</g>
+    <text class="isl-t" x="575" y="372" text-anchor="middle">{isl[0]}</text>
+    <text class="isl-t" x="745" y="884" text-anchor="middle">{isl[1]}</text>
+    <g class="arcs">{pins.slice(1).map((p) => <path d={arc(p.xy)} />)}</g>
+    {pins.map((p, i) => (
+      <g class:list={['pin', { hq: i === 0, lbl: i < 2 }]} data-i={i} style={`--i:${i}`}>
+        <circle class="ring" cx={p.xy[0]} cy={p.xy[1]} r="10" />
+        <circle class="core" cx={p.xy[0]} cy={p.xy[1]} r={i === 0 ? 11 : 8} />
+        <text x={p.xy[0] - 20} y={p.xy[1] + 8} text-anchor="end">{p.name}</text>
+      </g>
+    ))}
+  </svg>
+</div>
+
+<script>
+  // Rê chuột vào tên tỉnh thì ghim tương ứng sáng lên.
+  document.querySelectorAll<HTMLElement>('.vnm').forEach((m) => {
+    const pins = m.querySelectorAll('.pin');
+    m.querySelectorAll<HTMLElement>('.prov[data-i]').forEach((p) => {
+      const on = (v: boolean) => pins[+p.dataset.i!]?.classList.toggle('on', v);
+      p.addEventListener('pointerenter', () => on(true));
+      p.addEventListener('pointerleave', () => on(false));
+    });
+  });
+</script>

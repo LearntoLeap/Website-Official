@@ -520,6 +520,30 @@ body.menu-open header.site .tool{color:#fff;border-color:rgba(255,255,255,.22);b
 .prov .d{width:7px;height:7px;border-radius:50%;background:var(--grad)}
 .prov.more{background:var(--grad);color:#fff;border-color:transparent}
 .prov.more .d{background:#fff}
+/* Bản đồ triển khai (trang Năng lực) — nền tối, ghim phát sáng, đường nối nét đứt từ Hà Nội */
+.vnm{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(28px,5vw,64px);border-radius:var(--r-lg);color:#fff;background:radial-gradient(70% 60% at 65% 40%,rgba(124,58,237,.38),transparent 70%),radial-gradient(50% 40% at 90% 95%,rgba(223,47,134,.22),transparent 70%),linear-gradient(160deg,var(--pp-900),var(--pp-950));overflow:hidden}
+.vnm-txt h2{font-size:clamp(28px,4vw,44px);margin:14px 0 28px;color:#fff}
+.vnm-txt .eyebrow{color:var(--pp-300)}
+.vnm .prov-cloud{list-style:none;margin:0;padding:0}
+.vnm .prov{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#efe9ff;cursor:default}
+@media (hover:hover) and (pointer:fine){.vnm .prov:hover{background:rgba(255,255,255,.14);border-color:var(--pp-300);color:#fff}}
+.vnm .prov.more{background:var(--grad);border-color:transparent}
+.vnm-svg{width:100%;height:auto;max-height:640px;overflow:visible}
+.vnm .land{fill:url(#vnm-land);stroke:#c4a8ff;stroke-width:1.4;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(168,132,245,.55))}
+.vnm .isl circle{fill:#c4a8ff;r:3.6}
+.vnm .isl-t{fill:#cdb6ff;font:600 21px var(--f-ui);letter-spacing:.06em;text-transform:uppercase}
+.vnm .arcs path{fill:none;stroke:rgba(255,255,255,.55);stroke-width:2.4;stroke-dasharray:7 8;animation:vnm-flow 1.6s linear infinite}
+.vnm .pin .core{fill:#fff;stroke:#ff6a7f;stroke-width:4;transition:r .2s var(--ease-out)}
+.vnm .pin.hq .core{fill:#ff6a7f;stroke:#fff}
+.vnm .pin .ring{fill:none;stroke:#ff6a7f;stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.vnm.in .pin .ring{animation:vnm-ping 2.8s var(--ease-out) infinite;animation-delay:calc(var(--i) * .3s)}
+.vnm .pin text{fill:#fff;font:700 25px var(--f-ui);paint-order:stroke;stroke:var(--pp-950);stroke-width:7px;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.vnm .pin.lbl text,.vnm .pin.on text{opacity:1}
+.vnm .pin.on .core{r:13}
+@keyframes vnm-flow{to{stroke-dashoffset:-30}}
+@keyframes vnm-ping{0%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(3.4)}}
+@media (max-width:860px){.vnm{grid-template-columns:1fr}.vnm-svg{max-height:520px}}
+@media (prefers-reduced-motion:reduce){.vnm .arcs path,.vnm.in .pin .ring{animation:none}}
 .proj{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:var(--tr-ui);display:flex;flex-direction:column;color:inherit}
 @media (hover:hover) and (pointer:fine){.proj:hover{transform:translateY(-5px);box-shadow:var(--sh)}}
 .proj .ph{aspect-ratio:16/9;position:relative;display:grid;place-items:center;overflow:hidden}
