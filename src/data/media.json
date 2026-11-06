@@ -2,6 +2,166 @@
   "updated": "2026-07-07T16:16:15.387Z",
   "items": [
     {
+      "type": "anh",
+      "title": "Robot trình diễn cùng học sinh tại Ngày hội Khoa học và Công nghệ phường Vĩnh Hưng",
+      "title_en": "A robot performs with students at the Vinh Hung Ward Science & Technology Festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-17.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Lễ khởi động Phòng thí nghiệm Khoa học ứng dụng AI tại phường Vĩnh Hưng",
+      "title_en": "Launch of the AI Applied Science Lab in Vinh Hung Ward",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-18.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Đại biểu thăm Phòng thí nghiệm AI tại phường Vĩnh Hưng",
+      "title_en": "Guests visit the new AI lab in Vinh Hung Ward",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-19.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Trao giải Sân chơi Robotics AI phường Vĩnh Hưng",
+      "title_en": "Awards at the Vinh Hung Ward Robotics AI Challenge",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-20.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Khai mạc Ngày hội Chuyển đổi số phường Đống Đa năm 2026",
+      "title_en": "Opening of the Dong Da Ward Digital Transformation Festival 2026",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-21.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Chia sẻ về trường học thông minh STEM & AI tại Ngày hội Chuyển đổi số Đống Đa",
+      "title_en": "A talk on smart STEM & AI schools at the Dong Da Digital Transformation Festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-22.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Gian trưng bày của Learn to Leap tại Ngày hội Chuyển đổi số Đống Đa",
+      "title_en": "The Learn to Leap booth at the Dong Da Digital Transformation Festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-23.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Giới thiệu robot và thiết bị AI tại gian Learn to Leap",
+      "title_en": "Robots and AI devices on show at the Learn to Leap booth",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-24.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Lãnh đạo địa phương trải nghiệm kính thực tế ảo tại Ngày hội xã Lâm Thao",
+      "title_en": "Local leaders try VR headsets at the Lam Thao Commune festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-25.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Học sinh trải nghiệm thực tế ảo tại Ngày hội Khoa học công nghệ và AI xã Lâm Thao",
+      "title_en": "Students try virtual reality at the Lam Thao Science, Technology & AI Festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-26.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Học sinh tìm hiểu robot hình người tại Ngày hội xã Lâm Thao",
+      "title_en": "Students meet a humanoid robot at the Lam Thao festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-27.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Học sinh thi đấu robot trên sa bàn tại Ngày hội xã Lâm Thao",
+      "title_en": "Students compete with robots on the game field in Lam Thao",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-28.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Trao giải Nhất cuộc thi Robotics tại Ngày hội xã Lâm Thao",
+      "title_en": "First prize at the Lam Thao robotics competition",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-29.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Ảnh lưu niệm Ngày hội Trải nghiệm Khoa học công nghệ và AI xã Lâm Thao",
+      "title_en": "Group photo at the Lam Thao Science, Technology & AI Festival",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-30.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Tập huấn giáo viên tại phòng STEM Trường Tiểu học Bắc Hồng",
+      "title_en": "Teacher training in the STEM room at Bac Hong Primary School",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-31.webp",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "anh",
+      "title": "Giáo viên Trường Tiểu học Bắc Hồng thực hành bộ kit Stick 'Em",
+      "title_en": "Bac Hong Primary School teachers build with Stick 'Em kits",
+      "url": "",
+      "source": "Learn to Leap",
+      "image": "/images/gallery/su-kien-32.webp",
+      "date": "",
+      "visible": true
+    },
+    {
       "type": "video",
       "title": "Learn to Leap | Kiến tạo năng lực công dân số cho tương lai Việt Nam",
       "title_en": "Learn to Leap | Building digital citizenship for Vietnam's future",

@@ -52,7 +52,7 @@ export const IMAGES: Record<string, string> = {
   'sol-ngayhoi': '/images/sol-ngayhoi.webp',
   'sol-cuocthi': '/images/sol-cuocthi.webp',
   'sol-tour': '/images/sol-tour.webp',
-  'sol-huanluyen': '/images/sol-huanluyen.jpg',
+  'sol-huanluyen': '/images/sol-huanluyen.webp',
   'sol-traihe': '/images/sol-traihe.webp',
   'sol-doitac': '/images/sol-doitac.webp',
   'lab-photo': '/images/lab-photo.webp',

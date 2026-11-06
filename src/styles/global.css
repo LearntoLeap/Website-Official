@@ -1021,3 +1021,30 @@ body.menu-open .buddy,body:has(.lb.open) .buddy{display:none}
 @media (min-width:561px) and (max-width:1080px){
   .blog-grid:not(:has(> .news-card[hidden])):has(> .news-card:last-child:nth-child(odd)) .bc-feat{grid-column:span 2}
 }
+
+/* Stick 'Em (trang Giải pháp) — bộ kit tách nền + nhân vật sticky + ảnh thực tế */
+.se-sec{background:radial-gradient(60% 60% at 85% 30%,rgba(255,106,127,.10),transparent 70%),var(--paper)}
+.se-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.se-logo{width:92px;height:auto;margin-bottom:14px}
+.se-grid h2{font-size:clamp(26px,3.6vw,40px);margin:12px 0 14px}
+.se-feats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.se-feat{display:flex;gap:12px;align-items:flex-start}
+.se-feat .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--grad);color:#fff}
+.se-feat .ic svg{width:20px;height:20px}
+.se-feat h3{font-size:15.5px;margin-bottom:4px}
+.se-feat p{font-size:14px;color:var(--ink-2)}
+.se-art{position:relative;aspect-ratio:5/4;border-radius:var(--r-lg);background:radial-gradient(65% 60% at 50% 55%,rgba(168,132,245,.32),transparent 72%)}
+.se-art img{position:absolute;height:auto}
+.se-art .kit{width:74%;left:13%;top:22%;filter:drop-shadow(0 24px 28px rgba(40,10,80,.28))}
+.se-art .board{width:30%;left:2%;top:2%;transform:rotate(-9deg);filter:drop-shadow(0 12px 16px rgba(40,10,80,.22))}
+.se-art .st{filter:drop-shadow(0 10px 12px rgba(40,10,80,.2));animation:se-bob 4.5s ease-in-out infinite}
+.se-art .st1{width:15%;right:4%;bottom:6%}
+.se-art .st2{width:27%;left:-2%;bottom:0;animation-delay:-1.5s}
+.se-art .st3{width:13%;right:12%;top:0;animation-delay:-3s}
+@keyframes se-bob{50%{translate:0 -8px}}
+.se-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(32px,5vw,56px)}
+.se-photos figure{margin:0}
+.se-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-sm);display:block;background:#111}
+.se-photos figcaption{font-size:13px;color:var(--ink-2);margin-top:8px}
+@media (max-width:860px){.se-grid{grid-template-columns:1fr}.se-photos{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.se-feats{grid-template-columns:1fr}}
