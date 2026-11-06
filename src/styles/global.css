@@ -531,6 +531,7 @@ body.menu-open header.site .tool{color:#fff;border-color:rgba(255,255,255,.22);b
 .vnm .depth{transform:translate(0,10px);filter:drop-shadow(0 18px 22px rgba(10,3,30,.55))}
 .vnm .land{fill:#fff;stroke:#d6cbee;stroke-width:1;stroke-linejoin:round}
 .vnm .coast circle{fill:#fff}
+.vnm .arch{opacity:.72}
 .vnm .arch circle{fill:#fff}
 .vnm .arch text{fill:#fff;font:600 22px var(--f-ui);letter-spacing:.01em}
 .vnm .leads path{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.4}
