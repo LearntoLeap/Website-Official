@@ -12,21 +12,29 @@ const { lang, eyebrow, title, provinces, more } = Astro.props;
  */
 const COORDS: [number, number, 'b' | 't' | 'n', 'l' | 'r', number][] = [
   [105.85, 21.03, 'b', 'l', 150], // Hà Nội (trụ sở)
-  [106.70, 10.78, 'n', 'r', 830], // TP. Hồ Chí Minh
+  [106.70, 10.78, 'n', 'l', 715], // TP. Hồ Chí Minh
   [106.08, 21.19, 'b', 'r', 95], // Bắc Ninh
-  [105.69, 18.67, 't', 'l', 330], // Nghệ An
-  [105.85, 21.59, 'b', 'l', 60], // Thái Nguyên
-  [106.68, 20.86, 'b', 'r', 185], // Hải Phòng
-  [105.78, 19.81, 't', 'l', 240], // Thanh Hóa
-  [105.91, 18.34, 't', 'r', 295], // Hà Tĩnh
-  [106.89, 11.54, 'n', 'l', 690], // Bình Phước
+  [105.69, 18.67, 't', 'l', 345], // Nghệ An
+  [105.85, 21.59, 'b', 'l', 20], // Thái Nguyên
+  [106.68, 20.86, 'b', 'r', 225], // Hải Phòng
+  [105.78, 19.81, 't', 'l', 280], // Thanh Hóa
+  [105.91, 18.34, 't', 'r', 330], // Hà Tĩnh
+  [106.89, 11.54, 'n', 'l', 640], // Đồng Nai (Đồng Xoài, Bình Phước cũ)
+  [105.78, 10.03, 'n', 'l', 865], // Cần Thơ
+  [105.63, 10.46, 'n', 'l', 790], // Đồng Tháp
+  [107.08, 20.95, 'b', 'r', 160], // Quảng Ninh
+  [103.91, 21.33, 'b', 'l', 85], // Sơn La
+  [106.76, 21.85, 'b', 'r', 30], // Lạng Sơn
+  [105.97, 20.25, 'b', 'l', 215], // Ninh Bình
 ];
 const REGION = lang === 'vi' ? { b: 'Miền Bắc', t: 'Miền Trung', n: 'Miền Nam', hq: 'Trụ sở chính' } : { b: 'North', t: 'Central', n: 'South', hq: 'Headquarters' };
 const isl = lang === 'vi' ? ['QĐ. Hoàng Sa', 'QĐ. Trường Sa'] : ['Hoang Sa Archipelago', 'Truong Sa Archipelago'];
+const islOf = lang === 'vi' ? ['TP. Đà Nẵng', 'Tỉnh Khánh Hòa'] : ['Da Nang City', 'Khanh Hoa Province'];
+const [hs, ts] = [VN.arch.hs, VN.arch.ts];
 
 // Cùng phép chiếu với file tạo src/data/vn-map.json.
 const K = Math.cos((16 * Math.PI) / 180);
-const VB = [-330, -10, 1180, 950];
+const VB = [-330, -10, 1280, 1010];
 const LX = { l: -40, r: 380 };
 const pct = (x: number, y: number) => `left:${(((x - VB[0]) / VB[2]) * 100).toFixed(2)}%;top:${(((y - VB[1]) / VB[3]) * 100).toFixed(2)}%`;
 const pins = provinces.flatMap((name, i) => {
@@ -43,13 +51,22 @@ const PIN = 'M0,0C-3,-9 -13,-15 -13,-25A13,13 0 1 1 13,-25C13,-15 3,-9 0,0Z';
     <h2>{title}</h2>
   </div>
   <div class="vnm-stage">
-    <svg class="vnm-svg" viewBox={VB.join(' ')} role="img" aria-label={`${title}: ${provinces.join(', ')}. ${isl.join(', ')}.`}>
+    <svg class="vnm-svg" viewBox={VB.join(' ')} role="img" aria-label={`${title}: ${provinces.join(', ')}. ${isl.map((x, k) => `${x} (${islOf[k]})`).join(', ')}.`}>
       <defs><g id="vnm-p">{VN.provinces.map((d) => <path d={d} />)}</g></defs>
       <use href="#vnm-p" class="depth" />
       <use href="#vnm-p" class="land" />
-      <g class="isl">{VN.islands.map(([x, y]) => <circle cx={x} cy={y} r="3.6" />)}</g>
-      <text class="isl-t" x="575" y="372" text-anchor="middle">{isl[0]}</text>
-      <text class="isl-t" x="745" y="884" text-anchor="middle">{isl[1]}</text>
+      <g class="coast">{VN.coast.map(([x, y]) => <circle cx={x} cy={y} r="1.6" />)}</g>
+      {[hs, ts].map((g, k) => {
+        const [x1, y1, x2, y2] = g.box;
+        return (
+          <g class="arch">
+            <rect x={x1 - 22} y={y1 - 22} width={x2 - x1 + 44} height={y2 - y1 + 44} rx="28" />
+            {g.dots.map(([x, y, r]) => <circle cx={x} cy={y} r={r} />)}
+            <text x={k ? x2 + 22 : (x1 + x2) / 2} y={k ? y1 - 52 : y2 + 56} text-anchor={k ? 'end' : 'middle'}>{isl[k]}</text>
+            <text class="of" x={k ? x2 + 22 : (x1 + x2) / 2} y={k ? y1 - 32 : y2 + 76} text-anchor={k ? 'end' : 'middle'}>{islOf[k]}</text>
+          </g>
+        );
+      })}
       <g class="leads">
         {pins.map((p) => <><path d={`M${p.x.toFixed(0)},${p.y.toFixed(0)}L${p.side === 'l' ? p.lx + 14 : p.lx - 14},${p.ly}`} /><circle cx={p.side === 'l' ? p.lx + 14 : p.lx - 14} cy={p.ly} r="3.5" /></>)}
       </g>

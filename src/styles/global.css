@@ -525,13 +525,16 @@ body.menu-open header.site .tool{color:#fff;border-color:rgba(255,255,255,.22);b
 .vnm-head{text-align:center}
 .vnm-head .eyebrow{color:var(--pp-300)}
 .vnm-head h2{font-size:clamp(30px,4.6vw,52px);margin:12px 0 8px;color:#fff}
-.vnm-stage{position:relative;max-width:940px;margin:0 auto}
+.vnm-stage{position:relative;max-width:1040px;margin:0 auto}
 .vnm-svg{display:block;width:100%;height:auto}
 .vnm .depth{fill:#5b3aa8;stroke:#5b3aa8;stroke-width:2}
 .vnm .depth{transform:translate(0,10px);filter:drop-shadow(0 18px 22px rgba(10,3,30,.55))}
 .vnm .land{fill:#fff;stroke:#d6cbee;stroke-width:1;stroke-linejoin:round}
-.vnm .isl circle{fill:#fff}
-.vnm .isl-t{fill:#e3d6ff;font:600 17px var(--f-ui);letter-spacing:.08em;text-transform:uppercase}
+.vnm .coast circle{fill:#fff}
+.vnm .arch rect{fill:rgba(255,255,255,.05);stroke:rgba(205,182,255,.55);stroke-width:1.5;stroke-dasharray:6 6}
+.vnm .arch circle{fill:#fff;filter:drop-shadow(0 0 3px rgba(255,255,255,.7))}
+.vnm .arch text{fill:#fff;font:700 21px var(--f-ui);letter-spacing:.06em;text-transform:uppercase}
+.vnm .arch text.of{fill:#cdb6ff;font:600 15px var(--f-ui);letter-spacing:.02em;text-transform:none}
 .vnm .leads path{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.4}
 .vnm .leads circle{fill:#fff}
 .vnm .pin path{fill:#e8327f;stroke:#fff;stroke-width:2}
@@ -550,7 +553,7 @@ body.menu-open header.site .tool{color:#fff;border-color:rgba(255,255,255,.22);b
 .vnm .prov{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#efe9ff}
 .vnm .prov:not(.more){display:none}
 .vnm .prov.more{background:var(--grad);border-color:transparent}
-@media (max-width:760px){.vnm-lb,.vnm .leads{display:none}.vnm-stage{overflow:hidden}.vnm-svg{width:138.8%;margin-left:-38.8%}.vnm .prov:not(.more){display:inline-flex}}
+@media (max-width:760px){.vnm-lb,.vnm .leads{display:none}.vnm-stage{overflow:hidden}.vnm-svg{width:134.7%;margin-left:-34.7%}.vnm .prov:not(.more){display:inline-flex}}
 .proj{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:var(--tr-ui);display:flex;flex-direction:column;color:inherit}
 @media (hover:hover) and (pointer:fine){.proj:hover{transform:translateY(-5px);box-shadow:var(--sh)}}
 .proj .ph{aspect-ratio:16/9;position:relative;display:grid;place-items:center;overflow:hidden}

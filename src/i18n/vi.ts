@@ -367,7 +367,7 @@ const vi = {
     map: {
       eyebrow: 'Bản đồ triển khai',
       title: 'Từ Bắc vào Nam',
-      provinces: ['Hà Nội', 'TP. Hồ Chí Minh', 'Bắc Ninh', 'Nghệ An', 'Thái Nguyên', 'Hải Phòng', 'Thanh Hóa', 'Hà Tĩnh', 'Bình Phước'],
+      provinces: ['Hà Nội', 'TP. Hồ Chí Minh', 'Bắc Ninh', 'Nghệ An', 'Thái Nguyên', 'Hải Phòng', 'Thanh Hóa', 'Hà Tĩnh', 'Đồng Nai', 'Cần Thơ', 'Đồng Tháp', 'Quảng Ninh', 'Sơn La', 'Lạng Sơn', 'Ninh Bình'],
       more: '& nhiều địa phương khác',
     },
     projects: {

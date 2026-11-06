@@ -348,7 +348,7 @@ const en: Dict = {
     map: {
       eyebrow: 'Where we work',
       title: 'From North to South',
-      provinces: ['Hanoi', 'Ho Chi Minh City', 'Bac Ninh', 'Nghe An', 'Thai Nguyen', 'Hai Phong', 'Thanh Hoa', 'Ha Tinh', 'Binh Phuoc'],
+      provinces: ['Hanoi', 'Ho Chi Minh City', 'Bac Ninh', 'Nghe An', 'Thai Nguyen', 'Hai Phong', 'Thanh Hoa', 'Ha Tinh', 'Dong Nai', 'Can Tho', 'Dong Thap', 'Quang Ninh', 'Son La', 'Lang Son', 'Ninh Binh'],
       more: '& many more',
     },
     projects: {
