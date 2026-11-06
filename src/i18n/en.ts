@@ -98,10 +98,10 @@ const en: Dict = {
     { id: 'sol-doitac', num: '09', icon: 'users', title: 'Strategic partner network', desc: 'An ecosystem of 50+ academic and technology partners in Vietnam and abroad who co-develop, transfer and sponsor our programmes.', tag: '50+ partners' },
   ],
   awards: [
-    { icon: 'star', label: '2023 Award', title: 'SEI Awards 2023', short: '"Educational Impact of the Year" — chosen from 200+ projects.', desc: '"Educational Impact of the Year" — a smart education initiative selected from more than 200 projects.' },
-    { icon: 'shieldCheck', label: 'National project', title: 'STEM Innovation 57', short: 'Labs presented by the General Secretary of the Party.', desc: 'Labs presented at Cau Giay Secondary School and Kim Lien High School by the General Secretary of the Communist Party of Vietnam.' },
-    { icon: 'trend', label: 'Bac Ninh Province', title: 'Top 12 projects in Bac Ninh', short: 'Selected by the province for development support.', desc: 'One of 12 outstanding projects selected by Bac Ninh Province for development support.' },
-    { icon: 'globe', label: 'Hanoi · International', title: 'Top 20 Hanoi innovative startups', short: 'Viet Startup Interchange in Shenzhen.', desc: 'Represented Hanoi at Viet Startup Interchange Season 3 in Shenzhen, China.' },
+    { img: 'aw-sei', icon: 'star', label: '2023 Award', title: 'SEI Awards 2023', short: '"Educational Impact of the Year" — chosen from 200+ projects.', desc: '"Educational Impact of the Year" — a smart education initiative selected from more than 200 projects.' },
+    { img: 'proj-stem57', icon: 'shieldCheck', label: 'National project', title: 'STEM Innovation 57', short: 'Labs presented by the General Secretary of the Party.', desc: 'Labs presented at Cau Giay Secondary School and Kim Lien High School by the General Secretary of the Communist Party of Vietnam.' },
+    { img: 'proj-bacninh', icon: 'trend', label: 'Bac Ninh Province', title: 'Top 12 projects in Bac Ninh', short: 'Selected by the province for development support.', desc: 'One of 12 outstanding projects selected by Bac Ninh Province for development support.' },
+    { img: 'aw-top20', icon: 'globe', label: 'Hanoi · International', title: 'Top 20 Hanoi innovative startups', short: 'Viet Startup Interchange in Shenzhen.', desc: 'Represented Hanoi at Viet Startup Interchange Season 3 in Shenzhen, China.' },
   ],
   portrait: {
     title: 'Core competencies that shape [[global citizens]]',
@@ -122,7 +122,7 @@ const en: Dict = {
     hero: {
       eyebrow: 'A STEM – AI – Robotics education ecosystem',
       title: '[[STEM – AI – Robotics]] for every school',
-      sub: 'Consulting, transfer and full-service operation: learning spaces, curriculum, teachers and international competitions.',
+      sub: 'Learn to Leap works with education authorities, schools and partners to design, deliver and run complete STEM – AI – Robotics education models: from learning spaces, curriculum and teacher development to hands-on experiences and national and international competitions.',
       cta1: 'Book a consultation',
       rotate: ['STEM – AI – Robotics', 'AI robotics', 'Coding & AI', 'Smart classrooms', 'Global competitions'],
       cta2: 'Watch the film',
@@ -148,7 +148,7 @@ const en: Dict = {
     },
     doors: {
       eyebrow: 'Solutions for every partner',
-      title: 'Who are you [[looking for solutions for?]]',
+      title: '[[International-standard]] solutions, designed in line with Ministry of Education priorities',
       items: [
         { who: 'Education departments', title: 'Province-wide STEM – AI programmes aligned with Resolution 57', img: 'proj-bacninh', page: 'partnership', hash: '' },
         { who: 'Schools', title: 'Labs, curriculum and teachers — all in one', img: 'sol-lab', page: 'solutions', hash: '#lab' },
@@ -158,19 +158,19 @@ const en: Dict = {
     },
     pillars: {
       eyebrow: 'Solutions',
-      title: 'One partner — [[the whole journey]]',
-      lead: 'From learning spaces, curriculum and people to competitions — Learn to Leap supports schools at every stage.',
+      title: 'A [[complete]] education ecosystem',
+      lead: 'Learn to Leap delivers integrated solutions: from creating learning spaces and standardising curriculum to running hands-on events and competitions in Vietnam and abroad.',
       cta: 'Explore our solutions',
       items: [
         { title: 'Learning spaces', img: 'sol-lab', hash: '#lab', list: ['STEM AI Robotics labs', 'Smart classrooms', 'Smart schools'] },
-        { title: 'Curriculum & people', img: 'lab-photo', hash: '#k12', list: ['Connected K-12 STEM – AI curriculum', 'Learn to Leap teachers in your school', 'Teacher training (TOT)'] },
+        { title: 'Curriculum & people', img: 'sol-k12', hash: '#k12', list: ['Connected K-12 STEM – AI curriculum', 'Learn to Leap teachers in your school', 'Teacher training (TOT)'] },
         { title: 'Competitions & experiences', img: 'sol-cuocthi', hash: '#san-choi', list: ['STEM – AI experience festivals', 'National & international competitions', 'Team coaching · Summer camps · Career tours'] },
       ],
     },
     robotic: {
       eyebrow: 'Robotic AI ecosystem',
-      title: 'International-standard equipment, [[from humanoids to IoT]]',
-      lead: 'As an official partner of leading educational robotics makers, Learn to Leap brings five equipment lines to the classroom — with curriculum and teachers.',
+      title: 'Modern technology, [[right in the classroom]]',
+      lead: 'As an official partner of leading educational robotics makers, Learn to Leap brings the best of world technology into the classroom with five state-of-the-art equipment lines – from AI humanoid robots to IoT systems.',
       cta: 'See STEM AI Robotics labs',
       pickLabel: 'Choose a product line',
       lines: [
@@ -183,8 +183,8 @@ const en: Dict = {
     },
     process: {
       eyebrow: 'How we deliver',
-      title: 'Five steps, [[one complete journey]]',
-      lead: 'Transparent from the first site survey to stable operation — aligned with national policy and Ministry of Education frameworks.',
+      title: 'A complete, [[lean and effective]] roll-out',
+      lead: 'A transparent, coordinated 5-step process that strictly follows the Ministry of Education and Training’s standard frameworks.',
       basisLabel: 'Policy & frameworks',
       basis: ['2018 General Education Curriculum', 'Digital Competency Framework — Circular 02/2025', 'AI Competency Framework — Decision 3439', 'Resolution 57-NQ/TW', 'Resolution 71-NQ/TW'],
       cta: 'Get our capability profile',
@@ -198,12 +198,12 @@ const en: Dict = {
     },
     moments: {
       eyebrow: 'Learn to Leap moments',
-      title: 'Real energy [[from real classrooms]]',
-      lead: 'Play right here on the page — no need to leave the website.',
+      title: 'Real experiences [[from the classrooms of the future]]',
+      lead: 'Watch now to see how Learn to Leap creates lively learning spaces and sparks students’ passion for technology.',
       shortsTitle: 'Shorts',
       photos: [
         { src: '/images/gallery/su-kien-05.webp', alt: 'Students driving competition robots on a game mat' },
-        { src: '/images/sol-k12.webp', alt: 'A STEM – AI lesson with tablets' },
+        { src: '/images/gallery/su-kien-13.webp', alt: 'Learn to Leap at the Hanoi Science & Technology Exchange' },
         { src: '/images/gallery/su-kien-08.webp', alt: 'Teachers meeting a service robot at a workshop' },
         { src: '/images/sol-ngayhoi.webp', alt: 'Students at a STEM – AI – Robotics festival' },
         { src: '/images/gallery/su-kien-11.webp', alt: 'Students programming robots on a game mat with their teacher' },
@@ -216,7 +216,7 @@ const en: Dict = {
     },
     cta: {
       eyebrow: 'Partner with Learn to Leap',
-      title: 'Let’s bring [[STEM – AI]] to your school',
+      title: 'Let’s bring [[STEM – Robotics – AI]] to every corner of Vietnam',
       lead: 'Book a meeting and the Learn to Leap team will survey, advise and send you our full capability profile.',
       book: 'Book a consultation',
     },
@@ -256,7 +256,7 @@ const en: Dict = {
       lead: 'Learn to Leap’s philosophy is <em>learning by doing, and making real things</em>. Every programme targets concrete outcomes — logical thinking, problem-solving, collaboration and confidence with technology.',
     },
     cta: {
-      title: 'Let’s write the next chapter of STEM – AI in your community',
+      title: 'Let’s write the next chapter of bringing STEM – Robotics – AI to every corner of Vietnam',
       lead: 'Get our full company profile and discuss a partnership model that fits your organisation.',
       primary: 'Talk to us',
       secondary: 'View solutions',
@@ -334,7 +334,7 @@ const en: Dict = {
 
   impact: {
     hero: {
-      title: 'STEM – AI capabilities delivered in [[20+ provinces and cities]]',
+      title: 'Bringing [[STEM – Robotics – AI]] to every corner of Vietnam',
       lead: 'Learn to Leap doesn’t just design solutions — we deliver them, with a complete ecosystem spanning teacher training, events and smart Labs.',
     },
     stats: [
@@ -353,13 +353,12 @@ const en: Dict = {
     },
     projects: {
       eyebrow: 'Flagship projects',
-      title: 'Milestones we are [[proud of]]',
+      title: 'Milestones [[we are proud of]]',
       items: [
         { img: 'proj-stem57', flagIcon: 'shield', flag: 'National project', title: 'STEM Innovation 57', desc: 'Labs presented at Cau Giay Secondary School (Hanoi) and Kim Lien High School (Nghe An) by the General Secretary of the Communist Party of Vietnam — pioneering technology in teaching and practical digital skills.', loc: 'Hanoi · Nghe An' },
         { img: 'proj-intl', flagIcon: 'globe', flag: 'International schools', title: 'Hanoi international school network', desc: 'Robotics clubs, technology summer camps, team coaching & city-level STEM festivals at BVIS Hanoi, Tay Ha Noi, Victory Experimental and Hoang Long Tokyo schools.', loc: 'Hanoi · 15+ campuses' },
         { img: 'proj-bacninh', flagIcon: 'trend', flag: 'Innovation', title: 'Our work in Bac Ninh', desc: 'STEM – AI experiences, a provincial innovation festival and coaching for a prize-winning creativity team — one of 12 projects selected by the province for development support.', loc: 'Bac Ninh Province' },
       ],
-      more: 'And many more programmes: TECHTITANS Club – Vinhomes Smart City · "The Road to Net Zero" – Nguyen Du Primary School · WHSer STEAM Club.',
     },
     gallery: { eyebrow: 'Moments', title: 'Moments that shape [[global citizens]]' },
     awards: { eyebrow: 'Awards & recognition', title: 'Trusted and [[recognised]]' },
@@ -373,7 +372,7 @@ const en: Dict = {
 
   partnership: {
     hero: {
-      title: 'Partner with Learn to Leap for [[a tailor-made solution]]',
+      title: 'Strategic partnership – [[flexible solutions]]',
       lead: 'We design flexible partnership models for each type of partner — education authorities, schools, companies and organisations — with delivery models that fit local conditions.',
     },
     audiences: [
@@ -398,8 +397,8 @@ const en: Dict = {
     ],
     process: {
       eyebrow: 'How we deliver',
-      title: 'Five steps, [[one complete journey]]',
-      lead: 'A transparent process that gives schools and localities peace of mind from the first survey to stable operation.',
+      title: 'A complete, [[lean and effective]] roll-out',
+      lead: 'A transparent, coordinated 5-step process that strictly follows the Ministry of Education and Training’s standard frameworks.',
       steps: [
         { title: 'Survey', desc: 'Assess current conditions, needs & facilities.' },
         { title: 'Advise & design', desc: 'Propose the right solution, curriculum & funding model.' },
@@ -410,7 +409,7 @@ const en: Dict = {
     },
     commitments: {
       eyebrow: 'Our commitments',
-      title: 'Three promises to [[every partner]]',
+      title: 'Core values [[in every partnership]]',
       items: [
         { icon: 'shieldCheck', title: 'Quality', desc: 'International-standard programmes & equipment, localised to Ministry frameworks and measured by what students can actually do.' },
         { icon: 'support', title: 'Long-term support', desc: 'We stay after launch: updated learning materials, regular teacher development & ongoing technical support.' },
@@ -419,12 +418,8 @@ const en: Dict = {
     },
     partners: {
       eyebrow: 'Partner network',
-      title: 'Standing on [[the shoulders of giants]]',
-      lead: 'More than 50 academic, technology and institutional partners in Vietnam and abroad build this education ecosystem with Learn to Leap.',
-      groups: [
-        { label: 'Technology & learning-material transfer', items: ['UBTECH', 'IPPG', 'VEX Robotics', 'OhStem', 'Yansee · UGOT', 'Aptech Bach Khoa', 'ROBOGRAM (Korea)', 'Nexta', "Stick 'Em (Singapore)"] },
-        { label: 'Academia, government & organisations', items: ['Institute of School Design Research – MOET', 'Provincial Departments of Education', 'WEC Vietnam', 'Ho Chi Minh Communist Youth Union'] },
-      ],
+      title: 'The strength of [[a global partner network]]',
+      lead: 'Together with more than 50 respected academic, technology and institutional partners in Vietnam and abroad, Learn to Leap keeps building a complete education ecosystem.',
     },
     policy: {
       eyebrow: 'Policy alignment',
@@ -449,8 +444,8 @@ const en: Dict = {
 
   news: {
     hero: {
-      title: 'Learn to Leap [[Blog]]',
-      lead: 'Stories from classrooms, festivals and competitions, plus expert insight on STEM – AI – Robotics education — written by the Learn to Leap team.',
+      title: 'Bringing [[STEM – Robotics – AI]] to every corner of Vietnam',
+      lead: 'Follow Learn to Leap on the road to making education technology accessible to all. Hear real stories from classrooms, the buzz of competitions and in-depth expert perspectives, written by our own team.',
     },
     blog: {
       eyebrow: 'Articles',

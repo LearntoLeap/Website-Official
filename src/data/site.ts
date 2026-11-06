@@ -57,8 +57,11 @@ export const IMAGES: Record<string, string> = {
   'sol-doitac': '/images/sol-doitac.webp',
   'lab-photo': '/images/lab-photo.webp',
   'proj-stem57': '/images/proj-stem57.webp',
-  'proj-intl': '',
+  'proj-intl': '/images/sol-traihe.webp',
   'proj-bacninh': '/images/proj-bacninh.webp',
+  /** Ảnh thẻ giải thưởng trang Năng lực (chưa có ảnh thì hiện icon). */
+  'aw-sei': '/images/gallery/su-kien-15.webp',
+  'aw-top20': '',
   'hoi-thao': '/images/gallery/su-kien-07.webp',
   /** Ảnh tĩnh của hero trang chủ (khung hình từ TVC LtL 2026), dùng khi chưa có / không phát phim nền. */
   'hero-poster': '/images/hero-poster.webp',

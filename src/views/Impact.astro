@@ -59,7 +59,23 @@ const gallery = [
           );
         })}
       </div>
-      <p class="lead center reveal" style="margin:34px auto 0;font-size:14.5px">{m.projects.more}</p>
+    </div>
+  </section>
+
+  <section class="sp dark" style="background:linear-gradient(170deg,#150826,#1f0c40)">
+    <div class="wrap">
+      <SectionHead eyebrow={m.awards.eyebrow} title={m.awards.title} light />
+      <div class="aw-grid">
+        {t.awards.map((a, i) => {
+          const photo = img(a.img);
+          return (
+            <div class:list={['aw reveal', `d${i + 1}`]}>
+              <div class="aw-ph">{photo ? <img src={photo} alt={a.title} loading="lazy" decoding="async" /> : <Icon name={a.icon} />}</div>
+              <div class="yr">{a.label}</div><h3>{a.title}</h3><p>{a.desc}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   </section>
 
@@ -77,17 +93,6 @@ const gallery = [
       </div>
     </section>
   )}
-
-  <section class="sp dark" style="background:linear-gradient(170deg,#150826,#1f0c40)">
-    <div class="wrap">
-      <SectionHead eyebrow={m.awards.eyebrow} title={m.awards.title} light />
-      <div class="aw-grid">
-        {t.awards.map((a, i) => (
-          <div class:list={['aw reveal', `d${i + 1}`]}><div class="ic"><Icon name={a.icon} /></div><div class="yr">{a.label}</div><h3>{a.title}</h3><p>{a.desc}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <CtaBand title={m.cta.title} lead={m.cta.lead}>
     <Btn href={profileHref} arrow>{m.cta.primary}</Btn>
