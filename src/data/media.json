@@ -163,6 +163,66 @@
     },
     {
       "type": "video",
+      "title": "Ngày Hội Trải Nghiệm Công Nghệ STEM - AI - Robotics tại THCS Vĩnh Hưng",
+      "title_en": "STEM – AI – Robotics Technology Experience Day at Vinh Hung Secondary School",
+      "url": "https://www.youtube.com/watch?v=-kIn-IgfLCM&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q&index=3",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Ngày hội trải nghiệm công nghệ STEM - AI - Robotics tại Trường THCS Thanh Trì",
+      "title_en": "STEM – AI – Robotics Technology Experience Day at Thanh Tri Secondary School",
+      "url": "https://www.youtube.com/watch?v=g8VOLiwarqQ&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q&index=2",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Học sinh Vĩnh Hưng (Hà Nội) làm chủ tương lai với Ngày hội STEM - AI - Robotics",
+      "title_en": "Vinh Hung (Hanoi) students take charge of the future at the STEM – AI – Robotics Festival",
+      "url": "https://www.youtube.com/watch?v=s4BEXEKoTjg&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Chương trình trải nghiệm \"Tổ quốc trong tim\" cho học sinh Vinschool",
+      "title_en": "\"Homeland in Our Hearts\" experience programme for Vinschool students",
+      "url": "https://www.youtube.com/watch?v=1p6UrP1w_wE",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Chương trình trải nghiệm tại Trường Phổ thông Liên cấp Hermann Gmeiner",
+      "title_en": "Experience programme at Hermann Gmeiner School",
+      "url": "https://www.youtube.com/watch?v=pP3PlB0bv2M",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Truyền hình Thái Nguyên đưa tin về Sân chơi STEM – AI – Robotics 2026",
+      "title_en": "Thai Nguyen TV reports on the 2026 STEM – AI – Robotics Challenge",
+      "url": "https://www.youtube.com/watch?v=4cnMue6Bp_Q",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
       "title": "Learn to Leap | Kiến tạo năng lực công dân số cho tương lai Việt Nam",
       "title_en": "Learn to Leap | Building digital citizenship for Vietnam's future",
       "url": "https://www.youtube.com/watch?v=FfcxoEC62kY",
@@ -171,6 +231,96 @@
       "date": "",
       "visible": true,
       "featured": true
+    },
+    {
+      "type": "video",
+      "title": "Ngày hội STEM – AI: Khơi dậy đam mê công nghệ cho học sinh",
+      "title_en": "STEM – AI Festival: igniting students' passion for technology",
+      "url": "https://www.youtube.com/watch?v=Hw6g8QUeFLU",
+      "source": "Đài Phát thanh Truyền hình Thái Nguyên",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Toàn cảnh sự kiện tại Trường THCS Xuân Đỉnh - Những khoảnh khắc ấn tượng nhất",
+      "title_en": "Event highlights at Xuan Dinh Secondary School – the most memorable moments",
+      "url": "https://www.youtube.com/watch?v=HEDfY0Iebvw",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Báo Pháp Luật: ROBOG Miền Bắc 2026 – bước đệm đưa học sinh phổ thông vươn tầm công nghệ toàn cầu",
+      "title_en": "Phap Luat newspaper: ROBOG Northern Vietnam 2026, a springboard for students to reach global technology",
+      "url": "https://www.youtube.com/watch?v=Z5bIa9BPPP0",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Kênh Hà Nội 1 đưa tin chung kết ROBOG Miền Bắc 2026 do Learn to Leap tổ chức",
+      "title_en": "Hanoi 1 TV covers the ROBOG Northern Vietnam 2026 final organised by Learn to Leap",
+      "url": "https://www.youtube.com/watch?v=Gs06Q-QPAHA",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Learn to Leap cùng hệ sinh thái giáo dục STEM – AI – Robotics lên sóng VTV2",
+      "title_en": "Learn to Leap and its STEM – AI – Robotics ecosystem on VTV2",
+      "url": "https://www.youtube.com/watch?v=v8c0yVzqfAU",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Hành trình từ lớp học Robotics AI đến vươn tầm thế giới",
+      "title_en": "From the Robotics AI classroom to the world stage",
+      "url": "https://www.youtube.com/watch?v=K-I45iXh0Lw",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Recap ROBOG Miền Bắc 2026",
+      "title_en": "ROBOG Northern Vietnam 2026 recap",
+      "url": "https://www.youtube.com/watch?v=rb1NtuOOBcY",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "VTV2: Learn to Leap đưa giáo dục STEM – Robotics – AI vào trường học",
+      "title_en": "VTV2: Learn to Leap brings STEM – Robotics – AI education into schools",
+      "url": "https://www.youtube.com/watch?v=CKqH3LwqaZI",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
+    },
+    {
+      "type": "video",
+      "title": "Learn to Leap trên sóng VTV1 – Câu chuyện đằng sau hành trình khởi nghiệp",
+      "title_en": "Learn to Leap on VTV1 – The story behind the startup journey",
+      "url": "https://www.youtube.com/watch?v=i4piSjKXEVA",
+      "source": "Learn to Leap",
+      "image": "",
+      "date": "",
+      "visible": true
     },
     {
       "type": "bao",
@@ -278,16 +428,6 @@
       "title_en": "STEM – AI – Robotics Festival",
       "url": "https://baothainguyen.vn/giao-duc/202509/ngay-hoi-stem-ai-robotics-f6b76c7/",
       "source": "Báo Thái Nguyên",
-      "image": "",
-      "date": "",
-      "visible": true
-    },
-    {
-      "type": "video",
-      "title": "Ngày hội STEM – AI: Khơi dậy đam mê công nghệ cho học sinh",
-      "title_en": "STEM – AI Festival: igniting students' passion for technology",
-      "url": "https://www.youtube.com/watch?v=Hw6g8QUeFLU",
-      "source": "Đài Phát thanh Truyền hình Thái Nguyên",
       "image": "",
       "date": "",
       "visible": true
@@ -458,46 +598,6 @@
       "title_en": "Vietnamese student delegation shines at ROBOG Asia Cup 2026",
       "url": "https://hanoimoi.vn/doan-hoc-sinh-viet-nam-toa-sang-tai-robog-asia-cup-2026-1209907.html",
       "source": "Hà Nội mới",
-      "image": "",
-      "date": "",
-      "visible": true
-    },
-    {
-      "type": "video",
-      "title": "Học sinh Vĩnh Hưng (Hà Nội) làm chủ tương lai với Ngày hội STEM - AI - Robotics",
-      "title_en": "Vinh Hung (Hanoi) students take charge of the future at the STEM – AI – Robotics Festival",
-      "url": "https://www.youtube.com/watch?v=s4BEXEKoTjg&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q",
-      "source": "Learn to Leap",
-      "image": "",
-      "date": "",
-      "visible": true
-    },
-    {
-      "type": "video",
-      "title": "Ngày hội trải nghiệm công nghệ STEM - AI - Robotics tại Trường THCS Thanh Trì",
-      "title_en": "STEM – AI – Robotics Technology Experience Day at Thanh Tri Secondary School",
-      "url": "https://www.youtube.com/watch?v=g8VOLiwarqQ&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q&index=2",
-      "source": "Learn to Leap",
-      "image": "",
-      "date": "",
-      "visible": true
-    },
-    {
-      "type": "video",
-      "title": "Ngày Hội Trải Nghiệm Công Nghệ STEM - AI - Robotics tại THCS Vĩnh Hưng",
-      "title_en": "STEM – AI – Robotics Technology Experience Day at Vinh Hung Secondary School",
-      "url": "https://www.youtube.com/watch?v=-kIn-IgfLCM&list=PLDDV3BdaNM1iJXaTGAVvSsqkvfeaH2Y5Q&index=3",
-      "source": "Learn to Leap",
-      "image": "",
-      "date": "",
-      "visible": true
-    },
-    {
-      "type": "video",
-      "title": "Toàn cảnh sự kiện tại Trường THCS Xuân Đỉnh - Những khoảnh khắc ấn tượng nhất",
-      "title_en": "Event highlights at Xuan Dinh Secondary School – the most memorable moments",
-      "url": "https://www.youtube.com/watch?v=HEDfY0Iebvw",
-      "source": "Learn to Leap",
       "image": "",
       "date": "",
       "visible": true
