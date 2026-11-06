@@ -531,10 +531,8 @@ body.menu-open header.site .tool{color:#fff;border-color:rgba(255,255,255,.22);b
 .vnm .depth{transform:translate(0,10px);filter:drop-shadow(0 18px 22px rgba(10,3,30,.55))}
 .vnm .land{fill:#fff;stroke:#d6cbee;stroke-width:1;stroke-linejoin:round}
 .vnm .coast circle{fill:#fff}
-.vnm .arch rect{fill:rgba(255,255,255,.05);stroke:rgba(205,182,255,.55);stroke-width:1.5;stroke-dasharray:6 6}
-.vnm .arch circle{fill:#fff;filter:drop-shadow(0 0 3px rgba(255,255,255,.7))}
-.vnm .arch text{fill:#fff;font:700 21px var(--f-ui);letter-spacing:.06em;text-transform:uppercase}
-.vnm .arch text.of{fill:#cdb6ff;font:600 15px var(--f-ui);letter-spacing:.02em;text-transform:none}
+.vnm .arch circle{fill:#fff}
+.vnm .arch text{fill:#fff;font:600 22px var(--f-ui);letter-spacing:.01em}
 .vnm .leads path{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.4}
 .vnm .leads circle{fill:#fff}
 .vnm .pin path{fill:#e8327f;stroke:#fff;stroke-width:2}
