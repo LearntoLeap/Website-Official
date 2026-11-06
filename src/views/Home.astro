@@ -31,9 +31,8 @@ const h = t.home;
 // Mục 1 — phim nền: đặt file vào public/video/hero-loop.mp4 thì tự phát; chưa có thì dùng ảnh tĩnh.
 const HERO_VIDEO = '/video/hero-loop.mp4';
 const hasHeroVideo = fs.existsSync(path.join(process.cwd(), 'public', HERO_VIDEO));
-// Nút "Xem phim": có public/video/tvc-30s.mp4 thì mở hộp phát TVC ngay trên trang; chưa có thì cuộn tới mục Khoảnh khắc.
-const TVC_VIDEO = '/video/tvc-30s.mp4';
-const hasTvc = fs.existsSync(path.join(process.cwd(), 'public', TVC_VIDEO));
+// Nút thứ hai ở hero: mở hộp phát phóng sự VTV1 "Khởi nghiệp trẻ" về Learn to Leap (YouTube) ngay trên trang.
+const FILM_YT = 'i4piSjKXEVA';
 
 // Mục 1 — cụm chữ gradient trong tiêu đề đổi luân phiên: tách tiêu đề quanh [[…]].
 const [titlePre, titleRot, titlePost] = h.hero.title.split(/\[\[|\]\]/);
@@ -100,20 +99,17 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
       <p class="sub reveal d2">{h.hero.sub}</p>
       <div class="hero-cta reveal d3">
         <Btn href={href('contact', lang)} arrow>{h.hero.cta1}</Btn>
-        {hasTvc
-          ? <button class="btn glass" type="button" data-tvc-open aria-haspopup="dialog"><Icon name="play" stroke={2.2} />{h.hero.cta2}</button>
-          : <Btn href="#phim" variant="glass" icon="play">{h.hero.cta2}</Btn>}
+        <button class="btn glass" type="button" data-tvc-open aria-haspopup="dialog"><Icon name="play" stroke={2.2} />{h.hero.cta2}</button>
       </div>
     </div>
     {hasHeroVideo && (
       <button class="hv-toggle" type="button" data-hero-toggle aria-pressed="false" aria-label={h.hero.pauseVideo} data-pause={h.hero.pauseVideo} data-play={h.hero.playVideo}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
     )}
-    {hasTvc && (
-      <dialog class="tvc-modal" data-tvc aria-label={h.hero.cta2}>
-        <button class="tvc-close" type="button" data-tvc-close aria-label={h.hero.closeFilm}><Icon name="close" stroke={2.4} /></button>
-        <video controls playsinline preload="none" poster={img('hero-poster')}><source src={withBase(TVC_VIDEO)} type="video/mp4" /></video>
-      </dialog>
-    )}
+    <dialog class="tvc-modal" data-tvc aria-label={h.hero.cta2}>
+      <button class="tvc-close" type="button" data-tvc-close aria-label={h.hero.closeFilm}><Icon name="close" stroke={2.4} /></button>
+      {/* src gắn khi mở hộp: không tải YouTube cho tới khi khách bấm xem */}
+      <iframe data-src={`https://www.youtube-nocookie.com/embed/${FILM_YT}?autoplay=1&rel=0&playsinline=1`} title={h.hero.cta2} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </dialog>
   </div>
 
   <!-- 2 · BẰNG CHỨNG NHANH -->

@@ -125,7 +125,7 @@ const en: Dict = {
       sub: 'Learn to Leap works with education authorities, schools and partners to design, deliver and run complete STEM – AI – Robotics education models: from learning spaces, curriculum and teacher development to hands-on experiences and national and international competitions.',
       cta1: 'Book a consultation',
       rotate: ['STEM – AI – Robotics', 'AI robotics', 'Coding & AI', 'Smart classrooms', 'Global competitions'],
-      cta2: 'Watch the film',
+      cta2: 'What VTV1 says about LtL',
       pauseVideo: 'Pause background film',
       playVideo: 'Play background film',
       closeFilm: 'Close film',

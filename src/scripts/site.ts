@@ -97,22 +97,21 @@ if (heroVideo) {
   btn?.addEventListener('click', () => setPaused(!heroVideo.paused));
 }
 
-/* ----- Hero trang chủ: hộp phát TVC (nút "Xem phim") ----- */
-// Mở thì dừng phim nền và phát TVC có tiếng; đóng (nút ×, Esc, bấm ra ngoài) thì dừng TVC, phát lại phim nền.
+/* ----- Hero trang chủ: hộp phát phóng sự VTV1 (YouTube) ----- */
+// Mở thì dừng phim nền và nạp clip; đóng (nút ×, Esc, bấm ra ngoài) thì gỡ clip cho tắt tiếng, phát lại phim nền.
 const tvc = document.querySelector<HTMLDialogElement>('[data-tvc]');
 if (tvc) {
-  const film = tvc.querySelector('video')!;
+  const film = tvc.querySelector('iframe')!;
   let resumeHero = false;
   document.querySelector('[data-tvc-open]')?.addEventListener('click', () => {
     resumeHero = !!heroVideo && !heroVideo.paused;
     heroVideo?.pause();
     tvc.showModal();
-    film.currentTime = 0;
-    film.play().catch(() => {});
+    film.src = film.dataset.src!;
   });
   // Dừng phim ngay trong hàm đóng — không trông vào sự kiện 'close' (có trình duyệt không phát).
   const shut = () => {
-    film.pause();
+    film.removeAttribute('src');
     if (tvc.open) tvc.close();
     if (resumeHero) heroVideo?.play().catch(() => {});
     resumeHero = false;

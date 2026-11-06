@@ -131,7 +131,7 @@ const vi = {
       cta1: 'Đặt lịch tư vấn',
       /** Cụm chữ gradient trong tiêu đề đổi luân phiên (cụm đầu = cụm trong tiêu đề). */
       rotate: ['STEM – AI – Robotics', 'Robot AI', 'Lập trình & AI', 'Phòng Lab AI', 'Sân chơi quốc tế'],
-      cta2: 'Xem phim',
+      cta2: 'VTV1 nói gì về LtL?',
       pauseVideo: 'Tạm dừng phim nền',
       playVideo: 'Phát phim nền',
       closeFilm: 'Đóng phim',
