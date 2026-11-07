@@ -475,6 +475,7 @@ const en: Dict = {
       sample: 'Sample',
       sampleNote: 'The articles shown are samples (lorem ipsum) for layout review — real articles will be published by the Learn to Leap team.',
       empty: 'No articles in this topic yet.',
+      more: 'Load more articles',
       cats: { 'su-kien': 'Events', 'cuoc-thi': 'Competitions', 'giai-phap': 'Solutions', 'chia-se': 'Insights' },
     },
     post: {

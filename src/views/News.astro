@@ -24,6 +24,8 @@ const cats = Object.keys(b.cats) as Category[];
 const usedCats = cats.filter((c) => posts.some((p) => p.data.category === c));
 const hasSample = posts.some((p) => p.data.sample);
 const vids = [...videos].reverse();
+// Bài nổi bật (2×2) + 8 thẻ = 3 hàng đủ trên lưới 4 cột; "Xem thêm" mở tiếp 8 bài (2 hàng).
+const BLOG_PAGE = 9;
 ---
 <Base lang={lang} page="news" title={t.meta.news.title} description={t.meta.news.description} lightbox>
   <PageHero lang={lang} title={n.hero.title} lead={n.hero.lead} crumb={t.common.nav.news} bots={['cruzr', 'am-walk']} />
@@ -43,10 +45,13 @@ const vids = [...videos].reverse();
               </div>
             )}
           </div>
-          <div class="g3 grid blog-grid" data-blog-grid>
-            {posts.map((p, i) => <BlogCard post={p} lang={lang} index={i} featured={i === 0} />)}
+          <div class="g3 grid blog-grid" data-blog-grid data-page={BLOG_PAGE}>
+            {posts.map((p, i) => <BlogCard post={p} lang={lang} index={i} featured={i === 0} hidden={i >= BLOG_PAGE} />)}
           </div>
           <p class="tl-state" data-blog-empty hidden>{b.empty}</p>
+          {posts.length > BLOG_PAGE && (
+            <div class="blog-more"><button type="button" class="btn ghost" data-blog-more>{b.more}</button></div>
+          )}
         </div>
       )}
 

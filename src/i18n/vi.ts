@@ -496,6 +496,7 @@ const vi = {
       sample: 'Bài mẫu',
       sampleNote: 'Các bài đang hiển thị là bài mẫu (lorem ipsum) để duyệt bố cục — bài thật sẽ do đội ngũ Learn to Leap cập nhật.',
       empty: 'Chưa có bài viết nào trong chủ đề này.',
+      more: 'Xem thêm bài viết',
       cats: { 'su-kien': 'Sự kiện', 'cuoc-thi': 'Cuộc thi', 'giai-phap': 'Giải pháp', 'chia-se': 'Chia sẻ chuyên môn' },
     },
     post: {

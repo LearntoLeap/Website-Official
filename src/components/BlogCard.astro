@@ -4,12 +4,12 @@ import { useT } from '../i18n';
 import { withBase, type Lang } from '../i18n/routes';
 import { postHref, readMinutes, fmtDate, type Post } from '../data/blog';
 // featured: thẻ đầu lưới Blog, chiếm 2 cột × 2 hàng như video nổi bật.
-interface Props { post: Post; lang: Lang; index?: number; featured?: boolean }
-const { post, lang, index = 0, featured = false } = Astro.props;
+interface Props { post: Post; lang: Lang; index?: number; featured?: boolean; hidden?: boolean }
+const { post, lang, index = 0, featured = false, hidden = false } = Astro.props;
 const b = useT(lang).news.blog;
 const d = post.data;
 ---
-<a class:list={['news-card bc reveal', `d${(index % 3) + 1}`, { 'bc-feat': featured }]} href={postHref(post)} data-cat={d.category}>
+<a class:list={['news-card bc reveal', `d${(index % 3) + 1}`, { 'bc-feat': featured }]} href={postHref(post)} data-cat={d.category} hidden={hidden}>
   <div class="nc-thumb">
     <img src={withBase(d.cover)} alt="" loading="lazy" decoding="async" />
     {d.sample && <span class="bc-sample">{b.sample}</span>}

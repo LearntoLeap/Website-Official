@@ -517,20 +517,41 @@ document.querySelectorAll<HTMLElement>('[data-autorail]').forEach((rail) => {
   track.addEventListener('touchend', () => { setTimeout(() => { hold = false; }, ms * 2); }, { passive: true });
 });
 
-/* ----- Blog: lọc theo chủ đề, sao chép liên kết ----- */
-const filter = document.querySelector<HTMLElement>('[data-blog-filter]');
-if (filter) {
-  const cards = [...document.querySelectorAll<HTMLElement>('[data-blog-grid] [data-cat]')];
+/* ----- Blog: lọc theo chủ đề, "Xem thêm", sao chép liên kết ----- */
+const blogGrid = document.querySelector<HTMLElement>('[data-blog-grid]');
+if (blogGrid) {
+  const cards = [...blogGrid.querySelectorAll<HTMLElement>('[data-cat]')];
+  const filter = document.querySelector<HTMLElement>('[data-blog-filter]');
   const empty = document.querySelector<HTMLElement>('[data-blog-empty]');
-  filter.addEventListener('click', (e) => {
+  const more = document.querySelector<HTMLButtonElement>('[data-blog-more]');
+  const page = Number(blogGrid.dataset.page) || 9;
+  let cat = '';
+  let limit = page;
+  const render = () => {
+    const match = cards.filter((c) => !cat || c.dataset.cat === cat);
+    const shown = new Set(match.slice(0, limit));
+    // Thẻ vừa hiện thì bật luôn hiệu ứng xuất hiện (không chờ cuộn tới).
+    cards.forEach((c) => { const on = shown.has(c); if (on && c.hidden) c.classList.add('in'); c.hidden = !on; });
+    blogGrid.classList.toggle('is-filtered', !!cat);
+    blogGrid.classList.toggle('odd', shown.size % 2 === 1);
+    if (empty) empty.hidden = shown.size > 0;
+    if (more) more.parentElement!.hidden = match.length <= limit;
+    return match;
+  };
+  filter?.addEventListener('click', (e) => {
     const btn = (e.target as Element).closest<HTMLButtonElement>('button[data-cat]');
     if (!btn) return;
-    const cat = btn.dataset.cat;
+    cat = btn.dataset.cat || '';
+    limit = cat ? page - 1 : page; // đang lọc không có thẻ nổi bật: 8 thẻ = 2 hàng đủ
     filter.querySelectorAll('button').forEach((b) => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
-    let shown = 0;
-    cards.forEach((c) => { const on = !cat || c.dataset.cat === cat; c.hidden = !on; if (on) { shown++; c.classList.add('in'); } });
-    if (empty) empty.hidden = shown > 0;
+    render();
   });
+  more?.addEventListener('click', () => {
+    const from = limit;
+    limit += page - 1;
+    render()[from]?.focus({ preventScroll: true }); // bàn phím/đọc màn hình đi tiếp từ bài mới đầu tiên
+  });
+  render();
 }
 document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) => {
   btn.addEventListener('click', async () => {

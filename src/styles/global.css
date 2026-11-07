@@ -1014,12 +1014,25 @@ body.menu-open .buddy,body:has(.lb.open) .buddy{display:none}
 .bc-feat h3{font-size:clamp(20px,2vw,26px);line-height:1.28}
 .bc-feat .bc-ex{font-size:15.5px;-webkit-line-clamp:3}
 @media (min-width:1081px){.bc-feat .nc-thumb{aspect-ratio:auto;flex:1;min-height:320px}.bc-feat .nc-body{flex:none}}
-.blog-grid:has(> .news-card[hidden]) .bc-feat{grid-column:auto;grid-row:auto}
-.blog-grid:has(> .news-card[hidden]) .bc-feat .nc-thumb{aspect-ratio:16/10;flex:none;min-height:0}
+.blog-grid.is-filtered .bc-feat{grid-column:auto;grid-row:auto}
+.blog-grid.is-filtered .bc-feat .nc-thumb{aspect-ratio:16/10;flex:none;min-height:0}
 @media (max-width:1080px){.blog-grid .bc-feat{grid-column:auto;grid-row:auto}}
 @media (min-width:561px) and (max-width:1080px){
-  .blog-grid:not(:has(> .news-card[hidden])):has(> .news-card:last-child:nth-child(odd)) .bc-feat{grid-column:span 2}
+  .blog-grid.odd:not(.is-filtered) .bc-feat{grid-column:span 2}
 }
+/* Máy tính: 4 cột, thẻ thường gọn lại (bài nổi bật vẫn 2×2) */
+@media (min-width:1081px){
+  .blog-grid{grid-template-columns:repeat(4,1fr);gap:22px}
+  .blog-grid .bc:not(.bc-feat) .nc-body{padding:15px 17px 17px}
+  .blog-grid .bc:not(.bc-feat) h3{font-size:15.5px;margin-top:9px}
+  .blog-grid .bc:not(.bc-feat) .bc-ex{font-size:13.5px;margin-top:8px}
+  .blog-grid .bc:not(.bc-feat) .nc-more{font-size:13px}
+  .blog-grid.is-filtered .bc-feat .nc-body{padding:15px 17px 17px}
+  .blog-grid.is-filtered .bc-feat h3{font-size:15.5px}
+  .blog-grid.is-filtered .bc-feat .bc-ex{font-size:13.5px;-webkit-line-clamp:2}
+}
+.blog-more{display:flex;justify-content:center;margin-top:36px}
+.blog-more[hidden]{display:none}
 
 /* Stick 'Em (trang Giải pháp) — bộ kit tách nền + nhân vật sticky + ảnh thực tế */
 .se-sec{background:radial-gradient(60% 60% at 85% 30%,rgba(255,106,127,.10),transparent 70%),var(--paper)}
