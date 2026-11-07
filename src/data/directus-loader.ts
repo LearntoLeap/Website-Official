@@ -50,32 +50,45 @@ export const directusLoader = (url: string, token: string): Loader => ({
     const { data: posts } = (await res.json()) as { data: Record<string, any>[] };
 
     store.clear();
+    let failed = 0;
     for (const post of posts) {
       if (!post.cover) { logger.warn(`Bỏ qua bài "${post.slug}": chưa có ảnh bìa`); continue; }
-      const cover = await saveImage(post.cover, COVER);
-      for (const lang of ['vi', 'en'] as const) {
-        const title = post[`title_${lang}`];
-        const raw = post[`body_${lang}`];
-        if (!title || !raw) continue;
-        const id = `${lang}/${post.slug}`;
-        const body = await localize(raw);
-        const seo: Seo = post[`seo_${lang}`];
-        const robots = [seo?.no_index && 'noindex', seo?.no_follow && 'nofollow'].filter(Boolean).join(', ');
-        const data = await parseData({
-          id,
-          data: {
-            title, excerpt: post[`excerpt_${lang}`] ?? '', date: post.date, cover, category: post.category, author: post.author || undefined,
-            seoTitle: seo?.title?.trim() || undefined,
-            seoDescription: seo?.meta_description?.trim() || undefined,
-            ogImage: seo?.og_image ? await saveImage(seo.og_image.slice(0, 36), COVER) : undefined,
-            robots: robots || undefined,
-          },
-        });
-        // Trình soạn thảo trực quan lưu HTML; bài cũ soạn bằng Markdown vẫn hiển thị được.
-        const rendered = body.trimStart().startsWith('<') ? { html: body } : await renderMarkdown(body);
-        store.set({ id, data, body, rendered, digest: generateDigest({ data, body }) });
+      // Một bài lỗi (thường do ảnh Directus không thu nhỏ được: HEIC, >6000px, không phải ảnh) chỉ bỏ bài đó,
+      // không làm hỏng cả lần dựng web. Gom mục của bài rồi mới ghi, để không ghi dở một ngôn ngữ.
+      const entries: Parameters<typeof store.set>[0][] = [];
+      try {
+        const cover = await saveImage(post.cover, COVER);
+        for (const lang of ['vi', 'en'] as const) {
+          const title = post[`title_${lang}`];
+          const raw = post[`body_${lang}`];
+          if (!title || !raw) continue;
+          const id = `${lang}/${post.slug}`;
+          const body = await localize(raw);
+          const seo: Seo = post[`seo_${lang}`];
+          const robots = [seo?.no_index && 'noindex', seo?.no_follow && 'nofollow'].filter(Boolean).join(', ');
+          const data = await parseData({
+            id,
+            data: {
+              title, excerpt: post[`excerpt_${lang}`] ?? '', date: post.date, cover, category: post.category, author: post.author || undefined,
+              seoTitle: seo?.title?.trim() || undefined,
+              seoDescription: seo?.meta_description?.trim() || undefined,
+              ogImage: seo?.og_image ? await saveImage(seo.og_image.slice(0, 36), COVER) : undefined,
+              robots: robots || undefined,
+            },
+          });
+          // Trình soạn thảo trực quan lưu HTML; bài cũ soạn bằng Markdown vẫn hiển thị được.
+          const rendered = body.trimStart().startsWith('<') ? { html: body } : await renderMarkdown(body);
+          entries.push({ id, data, body, rendered, digest: generateDigest({ data, body }) });
+        }
+      } catch (e) {
+        failed++;
+        logger.warn(`Bỏ qua bài "${post.slug}": ${(e as Error).message}`);
+        continue;
       }
+      for (const entry of entries) store.set(entry);
     }
-    logger.info(`Đã đọc ${store.keys().length} bài từ Directus`);
+    // Bài nào cũng lỗi thì nhiều khả năng CMS đang trục trặc: dừng dựng để Vercel giữ bản đang chạy.
+    if (failed && !store.keys().length) throw new Error(`Directus: cả ${failed} bài đều lỗi, dừng dựng web`);
+    logger.info(`Đã đọc ${store.keys().length} bài từ Directus${failed ? `, bỏ qua ${failed} bài lỗi` : ''}`);
   },
 });
