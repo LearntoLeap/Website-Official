@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { Loader } from 'astro/loaders';
+import sharp from 'sharp';
 
 // Đọc bài "Đã xuất bản" từ Directus lúc dựng web. Mỗi bài tạo một mục vi/<slug> và, nếu có tiêu đề + nội dung
 // tiếng Anh, một mục en/<slug>. Ảnh được tải về public/cms để web không phụ thuộc VPS khi đang chạy.
@@ -28,8 +29,17 @@ export const directusLoader = (url: string, token: string): Loader => ({
     const saveImage = async (id: string, query: string) => {
       const cached = saved.get(id);
       if (cached) return cached;
-      const res = await get(`/assets/${id}?${query}`);
-      await writeFile(path.join(OUT_DIR, `${id}.webp`), Buffer.from(await res.arrayBuffer()));
+      let img: Buffer;
+      try {
+        img = Buffer.from(await (await get(`/assets/${id}?${query}`)).arrayBuffer());
+      } catch (e) {
+        // Directus không thu nhỏ ảnh quá 6000px → tải bản gốc, tự thu nhỏ bằng sharp. HEIC iPhone thì sharp cũng không đọc được.
+        const orig = Buffer.from(await (await get(`/assets/${id}`)).arrayBuffer());
+        const width = Number(new URLSearchParams(query).get('width'));
+        img = await sharp(orig, { limitInputPixels: false }).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: 80 }).toBuffer();
+        logger.warn(`Ảnh ${id}: ${(e as Error).message} → đã tự thu nhỏ từ bản gốc`);
+      }
+      await writeFile(path.join(OUT_DIR, `${id}.webp`), img);
       const web = `/cms/${id}.webp`;
       saved.set(id, web);
       return web;
