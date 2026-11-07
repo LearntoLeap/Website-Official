@@ -19,7 +19,8 @@ export const directusLoader = (url: string, token: string): Loader => ({
   name: 'directus',
   load: async ({ store, parseData, generateDigest, renderMarkdown, logger }) => {
     const get = async (p: string) => {
-      const res = await fetch(url + p, { headers: { Authorization: `Bearer ${token}` } });
+      // Giới hạn 60 giây: VPS treo một lượt tải thì báo lỗi (bỏ bài đó), không treo cả lần dựng web.
+      const res = await fetch(url + p, { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(60_000) });
       if (!res.ok) throw new Error(`Directus ${p}: ${res.status} ${res.statusText}`);
       return res;
     };
