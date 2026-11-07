@@ -81,6 +81,8 @@ const others = t.awards.filter((_, i) => i !== 1);
 
 // Mục 8 — 3 bài Blog mới nhất.
 const latest = (await getPosts(lang)).slice(0, 3);
+// Mục 7b — 3 dự án sau STEM Innovation 57 (đã là thẻ nổi bật ở mục 7).
+const projects = t.projectsPage.items.slice(1, 4);
 const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash;
 ---
 <Base lang={lang} page="home" title={t.meta.home.title} description={t.meta.home.description}>
@@ -115,8 +117,6 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
   <!-- 2 · BẰNG CHỨNG NHANH -->
   <section class="wrap proof" data-buddy="handsup" aria-label={lang === 'vi' ? 'Số liệu nổi bật' : 'Key figures'}>
     <Stats lang={lang} items={h.stats} class="stats-home" />
-    <LogoStrip label={h.partnersStrip} lang={lang} group="biz" />
-    <LogoStrip label={h.publicStrip} lang={lang} group="public" reverse />
   </section>
 
   <!-- 3 · LỐI VÀO THEO NGƯỜI XEM -->
@@ -222,7 +222,7 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
       </ol>
       <div class="basis reveal">
         <span class="bl">{h.process.basisLabel}</span>
-        <ul>{h.process.basis.map((b) => <li>{b}</li>)}</ul>
+        <ul>{h.process.basis.map((b, i) => <>{i > 0 && <li class="arr" aria-hidden="true">→</li>}<li>{b}</li></>)}</ul>
       </div>
       <div class="center row-btns reveal">
         <Btn href={profileHref} arrow>{h.process.cta}</Btn>
@@ -260,6 +260,25 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
     </div>
   </section>
 
+  <!-- 7b · DỰ ÁN TIÊU BIỂU -->
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={h.projects.eyebrow} title={h.projects.title} />
+      <div class="g3 grid">
+        {projects.map((p, i) => (
+          <a class:list={['proj reveal', `d${i + 1}`]} href={href('projects', lang)}>
+            <div class:list={['ph', ['a', 'b', 'c'][i % 3]]}>
+              <span class="flag"><Icon name={p.flagIcon} />{p.flag}</span>
+              {img(p.img) && <img src={img(p.img)} alt={p.title} loading="lazy" decoding="async" />}
+            </div>
+            <div class="bd"><h3>{p.title}</h3><p>{p.desc}</p><div class="loc"><Icon name="pin" />{p.loc}</div></div>
+          </a>
+        ))}
+      </div>
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('projects', lang)} variant="ghost" arrow>{h.projects.cta}</Btn></div>
+    </div>
+  </section>
+
   <!-- 8 · KHOẢNH KHẮC & BLOG -->
   <section class="sp has-peek" id="phim">
     <Peek src="ugot-dog" say={h.peeks.moments} class="pk-moments" />
@@ -282,6 +301,15 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
         </>
       )}
       <div class="center reveal" style="margin-top:40px"><Btn href={href('news', lang)} variant="ghost" arrow>{h.moments.cta}</Btn></div>
+    </div>
+  </section>
+
+  <!-- 8b · MẠNG LƯỚI ĐỐI TÁC (chuyển xuống từ mục 2) -->
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={h.partnersHead.eyebrow} title={h.partnersHead.title} />
+      <LogoStrip label={h.partnersStrip} lang={lang} group="biz" />
+      <LogoStrip label={h.publicStrip} lang={lang} group="public" reverse />
     </div>
   </section>
 

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const x = t.xhh;
+// Số liệu vận hành dùng chung với phòng STEM – AI Lab (trang Giải pháp).
+const opStats = t.solutionsPage.lab.opStats;
+---
+<Base lang={lang} page="xhh" title={t.meta.xhh.title} description={t.meta.xhh.description}>
+  <PageHero lang={lang} title={x.hero.title} lead={x.hero.lead} crumb={t.common.nav.xhh} bots={['am-handsup', 'yanshee-2']}>
+    <Btn href={href('contact', lang)} variant="glass" arrow>{x.hero.cta}</Btn>
+  </PageHero>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={x.roles.eyebrow} title={x.roles.title} />
+      <div class="g3 grid">
+        {x.roles.items.map((r, i) => (
+          <div class:list={['com reveal', `d${i + 1}`]}><div class="ic"><Icon name={r.icon} /></div><h3>{r.title}</h3><p>{r.desc}</p></div>
+        ))}
+      </div>
+      <div class="op-card xhh-op reveal">
+        <h4>{x.opTitle}</h4>
+        <div class="op-stats">
+          {opStats.map((o) => <div class="op-stat"><div class="v">{o.v} <span>{o.u}</span></div><div class="k">{o.k}</div></div>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={x.benefits.eyebrow} title={x.benefits.title} />
+      <div class="g3 grid">
+        {x.benefits.items.map((b, i) => (
+          <div class:list={['aud reveal', `d${i + 1}`]}>
+            <h3>{b.who}</h3>
+            <ul>{b.list.map((li) => <li><Icon name="check" stroke={2.4} /><span>{li}</span></li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={x.steps.eyebrow} title={x.steps.title} />
+      <ol class="proc">
+        {x.steps.items.map((s, i) => (
+          <li class:list={['proc-step reveal', `d${i + 1}`]}><div class="num">{i + 1}</div><h3>{s.title}</h3><p>{s.desc}</p></li>
+        ))}
+      </ol>
+      <p class="note">{x.note}</p>
+    </div>
+  </section>
+
+  <CtaBand title={x.cta.title} lead={x.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{x.cta.primary}</Btn>
+    <Btn href={href('scheme', lang)} variant="glass">{x.cta.secondary}</Btn>
+  </CtaBand>
+</Base>

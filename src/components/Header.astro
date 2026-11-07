@@ -7,8 +7,8 @@ const { lang, page, paths } = Astro.props;
 const t = useT(lang);
 const other: Lang = lang === 'vi' ? 'en' : 'vi';
 const switchHref = withBase(paths ? paths[other] : page ? ROUTES[page][other] : ROUTES.home[other]);
-const main: PageKey[] = ['about', 'solutions', 'impact', 'partnership', 'news'];
-const all: PageKey[] = ['home', ...main, 'contact'];
+const main: PageKey[] = ['about', 'solutions', 'products', 'scheme', 'xhh', 'projects', 'store', 'news'];
+const all: PageKey[] = ['home', ...main, 'impact', 'partnership', 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 ---
 <header class="site" id="hdr">

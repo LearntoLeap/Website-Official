@@ -33,11 +33,15 @@ const year = new Date().getFullYear();
       </div>
       <div class="ft-col">
         <h2 class="ft-h">{t.footer.solutions}</h2>
-        {t.footer.solLinks.map((l) => <a href={href('solutions', lang)}>{l}</a>)}
+        {t.footer.solLinks.map((l) => <a href={href('solutions', lang) + l.hash}>{l.label}</a>)}
       </div>
       <div class="ft-col">
         <h2 class="ft-h">{t.footer.company}</h2>
         <a href={href('about', lang)}>{t.common.nav.about}</a>
+        <a href={href('scheme', lang)}>{t.common.nav.scheme}</a>
+        <a href={href('xhh', lang)}>{t.common.nav.xhh}</a>
+        <a href={href('projects', lang)}>{t.common.nav.projects}</a>
+        <a href={href('store', lang)}>{t.common.nav.store}</a>
         <a href={href('impact', lang)}>{t.common.nav.impact}</a>
         <a href={href('partnership', lang)}>{t.common.nav.partnership}</a>
         <a href={href('news', lang)}>{t.common.nav.news}</a>
@@ -53,7 +57,7 @@ const year = new Date().getFullYear();
     </div>
     <div class="ft-bottom">
       <div>© {year} {t.footer.rights} {SITE.taxId}{(ANALYTICS.ga4 || ANALYTICS.clarity) && <> · <button type="button" class="ft-consent" data-consent-open>{t.common.consent.settings}</button></>}</div>
-      <div class="nq">{t.footer.aligned} <span>NQ 57-NQ/TW</span> · <span>NQ 71-NQ/TW</span> · <span>GDPT 2018</span> · <span>TT 02/2025</span> · <span>QĐ 3439</span></div>
+      <div class="nq">{t.footer.aligned} <span>NQ 57-NQ/TW</span> · <span>NQ 71-NQ/TW</span> · <span>GDPT 2018</span> · <span>TT 86/2026</span> · <span>QĐ 2422</span> · <span>TT 02/2025</span></div>
     </div>
   </div>
 </footer>

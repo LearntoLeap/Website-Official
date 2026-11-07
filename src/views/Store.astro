@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { SITE, bot } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const st = t.store;
+// shortcut: chưa có giỏ hàng/giá — nút "Nhận báo giá" mở email; thay bằng form/giỏ khi Store chạy thật.
+const quoteHref = (name: string) => `mailto:${SITE.email}?subject=${encodeURIComponent(`${st.quoteSubject}: ${name}`)}`;
+---
+<Base lang={lang} page="store" title={t.meta.store.title} description={t.meta.store.description}>
+  <PageHero lang={lang} title={st.hero.title} lead={st.hero.lead} crumb={t.common.nav.store} bots={['ukit-se', 'kt-3dprinter']} />
+
+  <section class="sp st-sec">
+    <div class="wrap">
+      <p class="st-demo"><Icon name="tag" />{st.demo}</p>
+      <nav class="st-nav" aria-label={st.navLabel}>
+        {st.groups.map((g) => <a href={`#${g.id}`}><b>{g.code}</b>{g.title}</a>)}
+      </nav>
+
+      {st.groups.map((g) => (
+        <div class="st-group" id={g.id}>
+          <div class="st-head reveal">
+            <span class="st-code">{g.code}</span>
+            <div><h2>{g.title}</h2><p>{g.desc}</p></div>
+          </div>
+          <div class="st-grid">
+            {g.items.map((it, i) => (
+              <article class:list={['st-item reveal', `d${(i % 4) + 1}`]}>
+                <div class="st-ph">{it.img ? <img src={bot(it.img)} alt={it.name} loading="lazy" decoding="async" /> : <Icon name={it.icon} />}</div>
+                <h3>{it.name}</h3>
+                <p>{it.desc}</p>
+                <ul class="st-lv">{it.lv.map((l) => <li>{l}</li>)}</ul>
+                <a class="st-quote" href={quoteHref(it.name)}>{st.quote}<Icon name="arrow" stroke={2.4} /></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand title={st.cta.title} lead={st.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{st.cta.primary}</Btn>
+    <Btn href={href('scheme', lang)} variant="glass">{t.common.nav.scheme}</Btn>
+  </CtaBand>
+</Base>

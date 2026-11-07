@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
 import { img } from '../data/site';
-interface Props { imgKey: string; num?: string; icon: string; title: string; desc: string; tag?: string; index: number }
-const { imgKey, icon, title, desc, tag, index } = Astro.props;
+interface Props { imgKey: string; num?: string; icon: string; title: string; desc: string; tag?: string; index: number; href?: string }
+const { imgKey, icon, title, desc, tag, index, href } = Astro.props;
+const Tag = href ? 'a' : 'article';
 const photo = img(imgKey);
 const variant = `v${(index % 3) + 1}`;
 const delay = `d${(index % 3) + 1}`;
 ---
-<article class:list={['sol reveal', delay]}>
+<Tag class:list={['sol reveal', delay]} href={href}>
   <div class:list={['sol-media', !photo && variant]}>
     {photo
       ? <img src={photo} alt={title} loading="lazy" decoding="async" />
@@ -22,4 +23,4 @@ const delay = `d${(index % 3) + 1}`;
     <p>{desc}</p>
     {tag && <span class="s-tag">{tag}</span>}
   </div>
-</article>
+</Tag>

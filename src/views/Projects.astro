@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+import { img } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const p = t.projectsPage;
+---
+<Base lang={lang} page="projects" title={t.meta.projects.title} description={t.meta.projects.description}>
+  <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.projects} bots={['ugot-dog', 'ukit-penguin']} />
+
+  <section class="sp">
+    <div class="wrap">
+      <div class="g3 grid">
+        {p.items.map((x, i) => (
+          <article class:list={['proj reveal', `d${(i % 3) + 1}`]}>
+            <div class:list={['ph', ['a', 'b', 'c'][i % 3]]}>
+              <span class="flag"><Icon name={x.flagIcon} />{x.flag}</span>
+              {img(x.img) && <img src={img(x.img)} alt={x.title} loading="lazy" decoding="async" />}
+            </div>
+            <div class="bd"><h3>{x.title}</h3><p>{x.desc}</p><div class="loc"><Icon name="pin" />{x.loc}</div></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={p.cta.title} lead={p.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{p.cta.primary}</Btn>
+    <Btn href={href('impact', lang)} variant="glass">{t.common.nav.impact}</Btn>
+  </CtaBand>
+</Base>

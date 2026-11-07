@@ -22,12 +22,12 @@ const se = s.stickem;
     <Btn href={href('contact', lang)} variant="glass" arrow>{s.hero.cta}</Btn>
   </PageHero>
 
-  <!-- 9 GIẢI PHÁP -->
+  <!-- 8 GIẢI PHÁP (thứ tự CEO chốt 07/11/2026; mỗi thẻ dẫn tới section của nó) -->
   <section class="sp">
     <div class="wrap">
       <h2 class="sr-only">{t.common.srSolutions}</h2>
-      <div class="sol-grid">
-        {t.solutions.map((x, i) => <SolCard imgKey={x.id} num={x.num} icon={x.icon} title={x.title} desc={x.desc} tag={x.tag} index={i} />)}
+      <div class="sol-grid g4">
+        {t.solutions.map((x, i) => <SolCard imgKey={x.id} num={x.num} icon={x.icon} title={x.title} desc={x.desc} tag={x.tag} index={i} href={x.hash} />)}
       </div>
     </div>
   </section>
@@ -67,6 +67,24 @@ const se = s.stickem;
       </div>
     </div>
   </section>
+
+  {/* Section dạng chung: ảnh một bên, thẻ một bên, đổi bên xen kẽ. */}
+  {[s.blocks.phtm, s.blocks.ailab].map((b, i) => (
+    <section class:list={['sp blk', { 'bg-soft': i % 2 === 0 }]} id={b.id}>
+      <div class:list={['wrap split mid', { rev: i % 2 === 1 }]}>
+        <div class="blk-ph reveal">{img(b.img) && <img src={img(b.img)} alt="" loading="lazy" decoding="async" />}</div>
+        <div class="reveal d2">
+          <span class="eyebrow">{b.eyebrow}</span>
+          <h2 class="fd blk-t" set:html={rich(b.title)} />
+          <p class="lead">{b.lead}</p>
+          <div class="grid g2 blk-cards">
+            {b.cards.map((c) => <div class="card"><div class="ic-box"><Icon name={c.icon} /></div><h3>{c.title}</h3><p>{c.desc}</p></div>)}
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  ))}
 
   <!-- LỘ TRÌNH K12 -->
   <section class="sp" id="k12">
@@ -114,36 +132,23 @@ const se = s.stickem;
     </div>
   </section>
 
-  <!-- INNOVATION HUB -->
-  <section class="sp bg-2" id="innovation-hub">
-    <div class="wrap split mid">
-      <div class="reveal">
-        <span class="eyebrow">{s.ihub.eyebrow}</span>
-        <h2 class="fd" style="font-size:clamp(24px,3.4vw,38px);margin:14px 0" set:html={rich(s.ihub.title)} />
-        <p class="lead">{s.ihub.lead}</p>
-      </div>
-      <div class="reveal d2 grid g2">
-        {s.ihub.cards.map((c) => <div class="card"><div class="ic-box"><Icon name={c.icon} /></div><h3 style="font-size:16px">{c.title}</h3><p>{c.desc}</p></div>)}
-      </div>
-    </div>
-  </section>
-
-  <!-- SÂN CHƠI -->
-  <section class="sp" id="san-choi">
-    <div class="wrap">
-      <SectionHead eyebrow={s.arena.eyebrow} title={s.arena.title} lead={s.arena.lead} />
-      <div class="g3 grid">
-        {s.arena.cards.map((c, i) => (
-          <div class:list={['card reveal', `d${(i % 3) + 1}`]}><div class="ic-box"><Icon name={c.icon} /></div><h3>{c.title}</h3><p set:html={c.desc} /></div>
-        ))}
-        <div class="card promo reveal d3">
-          <h3>{s.arena.promo.title}</h3>
-          <p>{s.arena.promo.desc}</p>
-          <Btn href={href('contact', lang)} size="sm" arrow>{s.arena.promo.cta}</Btn>
+  {/* Section dạng chung: ảnh một bên, thẻ một bên, đổi bên xen kẽ. */}
+  {[s.blocks.sanChoi, s.blocks.tourHe, s.blocks.huanLuyen, s.blocks.ihub].map((b, i) => (
+    <section class:list={['sp blk', { 'bg-soft': i % 2 === 1 }]} id={b.id}>
+      <div class:list={['wrap split mid', { rev: i % 2 === 1 }]}>
+        <div class="blk-ph reveal">{img(b.img) && <img src={img(b.img)} alt="" loading="lazy" decoding="async" />}</div>
+        <div class="reveal d2">
+          <span class="eyebrow">{b.eyebrow}</span>
+          <h2 class="fd blk-t" set:html={rich(b.title)} />
+          <p class="lead">{b.lead}</p>
+          <div class="grid g2 blk-cards">
+            {b.cards.map((c) => <div class="card"><div class="ic-box"><Icon name={c.icon} /></div><h3>{c.title}</h3><p>{c.desc}</p></div>)}
+          </div>
+          {b.id === 'san-choi' && <div class="blk-promo"><p><b>{s.promo.title}</b> {s.promo.desc}</p><Btn href={href('contact', lang)} size="sm" arrow>{s.promo.cta}</Btn></div>}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <CtaBand title={s.cta.title} lead={s.cta.lead}>
     <Btn href={href('contact', lang)} arrow>{s.cta.primary}</Btn>

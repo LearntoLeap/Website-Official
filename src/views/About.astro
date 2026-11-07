@@ -6,7 +6,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT, rich } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
+import { href, withBase, type Lang } from '../i18n/routes';
 import { img } from '../data/site';
 
 interface Props { lang: Lang }
@@ -15,6 +15,9 @@ const t = useT(lang);
 const a = t.about;
 const aboutPhoto = img('about');
 const robog = img('robog');
+const f = a.founder;
+// Chữ viết tắt từ họ tên khi chưa có ảnh (Lê Văn Trí → LT).
+const initials = (n: string) => { const w = n.trim().split(/\s+/); return (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase(); };
 ---
 <Base lang={lang} page="about" title={t.meta.about.title} description={t.meta.about.description}>
   <PageHero lang={lang} title={a.hero.title} crumb={t.common.nav.about} bots={['am-handsup', 'ukit-penguin']} />
@@ -41,10 +44,43 @@ const robog = img('robog');
             <figcaption>{a.photoCaption}</figcaption>
           </figure>
         )}
+      </div>
+    </div>
+  </section>
+
+  <!-- NHÀ SÁNG LẬP -->
+  <section class="sp bg-soft" id="founder">
+    <div class="wrap fd-grid">
+      <div class="fd-ph reveal">
+        {f.photo ? <img src={withBase(f.photo)} alt={f.name} loading="lazy" decoding="async" /> : <span class="fd-ini" aria-hidden="true">{initials(f.name)}</span>}
+      </div>
+      <div class="reveal d2">
+        <span class="eyebrow">{f.eyebrow}</span>
+        <h2 class="fd blk-t" set:html={rich(f.title)} />
+        <div class="fd-name">{f.name}</div>
+        <div class="fd-role">{f.role}</div>
+        <ul class="fd-bio">{f.bio.map((b) => <li>{b}</li>)}</ul>
         <blockquote class="quote">
           <p>{a.quote}</p>
           <div class="by">— <b>{a.quoteName}</b>, {a.quoteRole}</div>
         </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- NHÂN VẬT & CỐ VẤN CHIẾN LƯỢC -->
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={a.advisors.eyebrow} title={a.advisors.title} lead={a.advisors.lead} />
+      <div class="g4 grid">
+        {a.advisors.items.map((p, i) => (
+          <div class:list={['card adv reveal', `d${i + 1}`]}>
+            <span class="adv-ph" aria-hidden="true"><Icon name="user" /></span>
+            <h3>{p.name || a.advisors.pending}</h3>
+            <div class="adv-role">{p.role}</div>
+            <p>{p.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>

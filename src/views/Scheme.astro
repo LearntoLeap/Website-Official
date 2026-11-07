@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { useT } from '../i18n';
+import { href, type Lang } from '../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const d = t.scheme;
+// Căn cứ dùng chung với trang Hợp tác.
+const policy = t.partnership.policy;
+---
+<Base lang={lang} page="scheme" title={t.meta.scheme.title} description={t.meta.scheme.description}>
+  <PageHero lang={lang} title={d.hero.title} lead={d.hero.lead} crumb={t.common.nav.scheme} bots={['am-front', 'kt-smarthouse']}>
+    <Btn href={href('contact', lang)} variant="glass" arrow>{d.hero.cta}</Btn>
+  </PageHero>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={d.types.eyebrow} title={d.types.title} />
+      <div class="g4 grid">
+        {d.types.items.map((x, i) => (
+          <div class:list={['card val reveal', `d${i + 1}`]}><div class="ic-box"><Icon name={x.icon} /></div><h3>{x.title}</h3><p>{x.desc}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={d.deliver.eyebrow} title={d.deliver.title} />
+      <ul class="chk-list reveal">
+        {d.deliver.items.map((x) => <li><Icon name="check" stroke={2.4} /><span>{x}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={d.steps.eyebrow} title={d.steps.title} />
+      <ol class="proc">
+        {d.steps.items.map((s, i) => (
+          <li class:list={['proc-step reveal', `d${i + 1}`]}><div class="num">{i + 1}</div><h3>{s.title}</h3><p>{s.desc}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={d.basis.eyebrow} title={d.basis.title} lead={policy.lead} />
+      <div class="grid g2">
+        {policy.items.map((x, i) => (
+          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{x.code}</div><div><h3>{x.title}</h3><p>{x.desc}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={d.cta.title} lead={d.cta.lead}>
+    <Btn href={href('contact', lang)} arrow>{d.cta.primary}</Btn>
+    <Btn href={href('xhh', lang)} variant="glass">{d.cta.secondary}</Btn>
+  </CtaBand>
+</Base>

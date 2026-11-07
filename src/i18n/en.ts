@@ -14,12 +14,17 @@ const en: Dict = {
     playMotion: 'Play logo strip',
     prevLogo: 'Previous logo',
     nextLogo: 'Next logo',
-    srSolutions: 'Our nine solutions',
+    srSolutions: 'Our eight solutions',
     srAudiences: 'Who we work with',
     nav: {
       home: 'Home',
       about: 'About us',
       solutions: 'Solutions',
+      products: 'Products',
+      scheme: 'Public Programs',
+      xhh: 'Private Investment',
+      projects: 'Projects',
+      store: 'Store',
       impact: 'Impact',
       partnership: 'Partner with us',
       news: 'Blog',
@@ -49,7 +54,14 @@ const en: Dict = {
     solutions: 'Solutions',
     company: 'Company',
     contact: 'Contact',
-    solLinks: ['STEM – AI Lab', 'K12 Curriculum', 'Festivals & Competitions', 'Team Coaching', 'Innovation Hub'],
+    solLinks: [
+      { label: 'STEM – AI Lab', hash: '#lab' },
+      { label: 'Smart Classroom', hash: '#phtm' },
+      { label: 'AI Lab · AI Center', hash: '#ai-lab' },
+      { label: 'STEM Curriculum', hash: '#k12' },
+      { label: 'Festivals & Competitions', hash: '#san-choi' },
+      { label: 'Innovation Hub', hash: '#innovation-hub' },
+    ],
     profile: 'Request our company profile',
     rights: 'Learn to Leap Education Technology JSC · Tax ID',
     aligned: 'Aligned with:',
@@ -65,11 +77,11 @@ const en: Dict = {
     },
     solutions: {
       title: 'STEM – AI Solutions — Learn to Leap',
-      description: 'Nine integrated solutions: STEM – AI Labs, a K-12 curriculum pathway, Innovation Hubs, festivals, competitions, team coaching, summer camps and career discovery tours.',
+      description: 'Eight integrated solutions: STEM – AI Labs, Smart Classrooms, AI Labs, a K-12 STEM curriculum, festivals & competitions, summer tours, team coaching and Innovation Hubs.',
     },
     impact: {
       title: 'Impact — Learn to Leap',
-      description: '20+ provinces and cities, 50+ partners, 50+ STEM – AI – Robotics festivals. Flagship projects and awards from Learn to Leap.',
+      description: '20+ provinces and cities, 50+ partners, 100+ STEM – AI – Robotics festivals with 30,000+ students taking part. Flagship projects and awards from Learn to Leap.',
     },
     partnership: {
       title: 'Partner with us — Learn to Leap',
@@ -83,19 +95,38 @@ const en: Dict = {
       title: 'Contact — Learn to Leap',
       description: 'Contact Learn to Leap: hotline +84 777 308 883, email contact@learntoleap.vn, 241 Xuan Thuy, Cau Giay, Hanoi.',
     },
+    products: {
+      title: 'Products — Learn to Leap',
+      description: 'Learn to Leap’s STEM – AI – Robotics product groups: humanoid robots, coding robots, modular AI robots, STEAM kits and STEM – IoT for K-12 schools.',
+    },
+    scheme: {
+      title: 'Digital Transformation & STEM – AI Programmes — Learn to Leap',
+      description: 'Learn to Leap advises on province-wide digital transformation, smart education and STEM – AI programmes, and state-funded school STEM programmes, aligned with Resolutions 57, 71 and Circular 86/2026.',
+    },
+    xhh: {
+      title: 'Private-investment STEM – AI programmes — Learn to Leap',
+      description: 'A private-investment model: a company funds the STEM – AI lab, Learn to Leap transfers and runs the programme together with the school.',
+    },
+    projects: {
+      title: 'Featured projects — Learn to Leap',
+      description: 'Featured Learn to Leap projects: STEM Innovation 57, ROBOG Northern Vietnam 2026, partnerships in Nghe An, Thai Nguyen, Bac Ninh, Hanoi and more.',
+    },
+    store: {
+      title: 'Store — Solutions catalogue under Circular 86 — Learn to Leap',
+      description: 'Learn to Leap’s catalogue of STEM education solutions and equipment, organised by the groups of Circular 86/2026/TT-BGDĐT.',
+    },
     notFound: { title: 'Page not found — Learn to Leap', description: 'The page you are looking for does not exist.' },
   },
 
   solutions: [
-    { id: 'sol-ihub', num: '01', icon: 'hub', title: 'Innovation Hub', desc: 'A nationwide network of future-ready learning centres: blended learning, online courses, active learning, workshops and weekend maker studios.', tag: 'ILH ecosystem' },
-    { id: 'sol-lab', num: '02', icon: 'lab', title: 'STEM – AI Lab', desc: 'A modern classroom model with AI robotics equipment, flexible space and an LMS platform — international standard, installed right at your school.', tag: 'Flagship solution' },
-    { id: 'sol-k12', num: '03', icon: 'book', title: 'STEM – AI K12 Curriculum', desc: 'A continuous pathway from kindergarten to upper secondary in Robotics, Coding & AI, aligned with the national Digital Competency Framework (Circular 02/2025).', tag: 'Kindergarten → Grade 12' },
-    { id: 'sol-ngayhoi', num: '04', icon: 'megaphone', title: 'Experience festivals', desc: 'More than 50 festivals held across 200+ themes, welcoming up to 1,200+ students per event — lively, modern and inspiring.', tag: '50+ festivals' },
-    { id: 'sol-cuocthi', num: '05', icon: 'trophy', title: 'Competitions', desc: 'Academic competitions at school, provincial, national and international level — run with provincial education departments, the Institute of School Design, WEC and the Youth Union.', tag: 'Up to international level' },
-    { id: 'sol-tour', num: '06', icon: 'pin', title: 'Career discovery tours', desc: 'Taking students to industrial parks (Deep C, Bac Ninh…) to connect education with the job market and explore careers across many sectors.', tag: 'School – Career – Industry' },
-    { id: 'sol-huanluyen', num: '07', icon: 'terminal', title: 'Competition team coaching', desc: 'In-depth training for teams entering leading competitions: VEX Robotics, UBTECH, WRO, FLL, GreenMech, OhStem…', tag: 'Going international' },
-    { id: 'sol-traihe', num: '08', icon: 'camp', title: 'National technology summer camps', desc: 'STEM – AI camps for students aged 7–16: Robotics, Coding, VR and life skills — day camp, residential and international formats.', tag: 'Creative summers' },
-    { id: 'sol-doitac', num: '09', icon: 'users', title: 'Strategic partner network', desc: 'An ecosystem of 50+ academic and technology partners in Vietnam and abroad who co-develop, transfer and sponsor our programmes.', tag: '50+ partners' },
+    { id: 'sol-lab', hash: '#lab', num: '01', icon: 'lab', title: 'STEM – AI Lab', desc: 'A modern classroom model with AI robotics equipment, flexible space and an LMS platform — international standard, equipped in line with Circular 86/2026.', tag: 'Flagship solution' },
+    { id: 'sol-phtm', hash: '#phtm', num: '02', icon: 'screen', title: 'Smart Classroom', desc: 'Interactive displays, digital learning devices and classroom management software — turning every classroom into a digital teaching space.', tag: 'Digital classroom' },
+    { id: 'sol-ailab', hash: '#ai-lab', num: '03', icon: 'robot', title: 'AI Lab · AI Center', desc: 'An AI experience space with humanoid robots, computer vision and real AI projects for students and teachers.', tag: 'Humanoid AI' },
+    { id: 'sol-k12', hash: '#k12', num: '04', icon: 'book', title: 'STEM – AI K12 Curriculum', desc: 'A continuous pathway from kindergarten to upper secondary in Robotics, Coding & AI, aligned with the national Digital Competency Framework (Circular 02/2025).', tag: 'Kindergarten → Grade 12' },
+    { id: 'sol-ngayhoi', hash: '#san-choi', num: '05', icon: 'megaphone', title: 'Festivals & Competitions', desc: 'More than 100 festivals held with 30,000+ students taking part, plus competitions at school, provincial, national and international level.', tag: '100+ festivals' },
+    { id: 'sol-traihe', hash: '#tour-he', num: '06', icon: 'camp', title: 'Summer Tours & Tech Camps', desc: 'STEM – AI summer camps for students aged 7–16 and career discovery tours to industrial parks and technology companies.', tag: 'Creative summers' },
+    { id: 'sol-huanluyen', hash: '#huan-luyen', num: '07', icon: 'terminal', title: 'Competition team coaching', desc: 'In-depth training for teams entering leading competitions: VEX Robotics, UBTECH, WRO, FLL, GreenMech, OhStem…', tag: 'Going international' },
+    { id: 'sol-ihub', hash: '#innovation-hub', num: '08', icon: 'hub', title: 'Innovation Hub', desc: 'A nationwide network of future-ready learning centres: blended learning, online courses, active learning, workshops and weekend maker studios.', tag: 'ILH ecosystem' },
   ],
   awards: [
     { img: 'aw-sei', icon: 'star', label: '2023 Award', title: 'SEI Awards 2023', short: '"Educational Impact of the Year" — chosen from 200+ projects.', desc: '"Educational Impact of the Year" — a smart education initiative selected from more than 200 projects.' },
@@ -122,7 +153,7 @@ const en: Dict = {
     hero: {
       eyebrow: 'A STEM – AI – Robotics education ecosystem',
       title: '[[STEM – AI – Robotics]] for every school',
-      sub: 'Learn to Leap works with education authorities, schools and partners to design, deliver and run complete STEM – AI – Robotics education models: from learning spaces, curriculum and teacher development to hands-on experiences and national and international competitions.',
+      sub: 'Learn to Leap works with provincial Departments of Education and Training, schools and partners to design, deliver and run complete STEM – AI – Robotics education models in line with Circular 86/2026/TT-BGDĐT: from learning spaces, curriculum and teacher development to hands-on experiences and national and international competitions.',
       cta1: 'Book a consultation',
       rotate: ['STEM – AI – Robotics', 'AI robotics', 'Coding & AI', 'Smart classrooms', 'Global competitions'],
       cta2: 'What VTV1 says about LtL',
@@ -134,9 +165,10 @@ const en: Dict = {
       { n: 20, suf: '+', label: 'Provinces &amp; cities<br>reached' },
       { n: 50, suf: '+', label: 'Strategic<br>partners' },
       { n: 200, suf: '+', label: 'Hands-on themes<br>&amp; models' },
-      { n: 50, suf: '+', label: 'STEM – AI –<br>Robotics festivals' },
-      { n: 1200, suf: '+', label: 'Students at<br>each festival' },
+      { n: 100, suf: '+', label: 'STEM – AI –<br>Robotics festivals' },
+      { n: 30000, suf: '+', label: 'Students<br>taking part' },
     ],
+    partnersHead: { eyebrow: 'Partner network', title: 'Working with [[partners in Vietnam and abroad]]' },
     partnersStrip: 'Working with leading partners in Vietnam and abroad',
     publicStrip: 'With institutes, universities, colleges and schools',
     peeks: {
@@ -148,12 +180,12 @@ const en: Dict = {
     },
     doors: {
       eyebrow: 'Solutions for every partner',
-      title: '[[International-standard]] solutions, designed in line with Ministry of Education priorities',
+      title: 'Solutions built through [[international cooperation]], together with Vietnamese education experts',
       items: [
-        { who: 'Education departments', title: 'Province-wide STEM – AI programmes aligned with Resolution 57', img: 'proj-bacninh', page: 'partnership', hash: '' },
-        { who: 'Schools', title: 'Labs, curriculum and teachers — all in one', img: 'sol-lab', page: 'solutions', hash: '#lab' },
-        { who: 'Partners & businesses', title: 'Co-develop, transfer and host competitions together', img: 'hoi-thao', page: 'partnership', hash: '' },
-        { who: 'Parents & students', title: 'Festivals, competitions and tech summer camps', img: 'sol-ngayhoi', page: 'solutions', hash: '#san-choi' },
+        { who: 'Education departments', title: 'Province-wide digital transformation, smart education and STEM – AI programmes aligned with Resolutions 57 & 71', img: 'ky-ket-nghe-an', page: 'scheme', hash: '' },
+        { who: 'Schools', title: 'State-funded STEM programmes and private-investment programmes', img: 'khoi-dong-vinh-hung', page: 'xhh', hash: '' },
+        { who: 'Partners', title: 'Solution transfer and operation', img: 'hoi-thao', page: 'partnership', hash: '' },
+        { who: 'Teachers, parents & students', title: 'An ecosystem of festivals, competitions and training', img: 'sol-ngayhoi', page: 'solutions', hash: '#san-choi' },
       ],
     },
     pillars: {
@@ -162,9 +194,10 @@ const en: Dict = {
       lead: 'Learn to Leap delivers integrated solutions: from creating learning spaces and standardising curriculum to running hands-on events and competitions in Vietnam and abroad.',
       cta: 'Explore our solutions',
       items: [
-        { title: 'Learning spaces', img: 'sol-lab', hash: '#lab', list: ['STEM AI Robotics labs', 'Smart classrooms', 'Smart schools'] },
-        { title: 'Curriculum & people', img: 'sol-k12', hash: '#k12', list: ['Connected K-12 STEM – AI curriculum', 'Learn to Leap teachers in your school', 'Teacher training (TOT)'] },
-        { title: 'Competitions & experiences', img: 'sol-cuocthi', hash: '#san-choi', list: ['STEM – AI experience festivals', 'National & international competitions', 'Team coaching · Summer camps · Career tours'] },
+        { title: 'STEM Lab', img: 'sol-lab', hash: '#lab', list: ['STEM – AI Robotics labs under Circular 86', 'Equipment, furniture & LMS platform', 'Curriculum and teacher training included'] },
+        { title: 'Smart Classroom', img: 'sol-phtm', hash: '#phtm', list: ['Interactive displays, digital learning devices', 'Classroom management software', 'Smart schools'] },
+        { title: 'Competitions', img: 'sol-sanchoi', hash: '#san-choi', list: ['STEM – AI experience festivals', 'National & international competitions', 'Summer camps · Career tours'] },
+        { title: 'Humanoid AI Lab', img: 'sol-ailab', hash: '#ai-lab', list: ['AI humanoid robots', 'Computer vision & AI projects', 'AI Center for students and teachers'] },
       ],
     },
     robotic: {
@@ -185,8 +218,8 @@ const en: Dict = {
       eyebrow: 'How we deliver',
       title: 'A complete, [[lean and effective]] roll-out',
       lead: 'A transparent, coordinated 5-step process that strictly follows the Ministry of Education and Training’s standard frameworks.',
-      basisLabel: 'Policy & frameworks',
-      basis: ['2018 General Education Curriculum', 'Digital Competency Framework — Circular 02/2025', 'AI Competency Framework — Decision 3439', 'Resolution 57-NQ/TW', 'Resolution 71-NQ/TW'],
+      basisLabel: 'Policy roadmap',
+      basis: ['2018 General Education Curriculum', 'Resolutions 57-NQ/TW · 71-NQ/TW', 'Circular 86/2026/TT-BGDĐT', 'Decision 2422/QĐ-BGDĐT', 'Digital Competency Framework'],
       cta: 'Get our capability profile',
       cta2: 'Partnership options',
     },
@@ -195,6 +228,11 @@ const en: Dict = {
       title: 'Trusted and [[recognised]]',
       featureLabel: 'Featured project',
       cta: 'See capabilities & milestones',
+    },
+    projects: {
+      eyebrow: 'Featured projects',
+      title: 'Projects [[we have delivered]]',
+      cta: 'See all projects',
     },
     moments: {
       eyebrow: 'Learn to Leap moments',
@@ -240,6 +278,29 @@ const en: Dict = {
     quote: '"When schools, parents, authorities, partners and Learn to Leap work together, we build a sustainable education ecosystem — one where every student is inspired to be confident, creative and capable with technology."',
     quoteName: 'Le Van Tri',
     quoteRole: 'Founder & CEO, Learn to Leap',
+    founder: {
+      eyebrow: 'Founder',
+      title: 'The person who started [[the Learn to Leap journey]]',
+      name: 'Le Van Tri',
+      role: 'Founder & CEO',
+      photo: '',
+      bio: [
+        'Founded Learn to Leap in 2023 in the belief that technology education must never be a privilege for the few.',
+        'Leads the team bringing STEM – AI – Robotics models to 20+ provinces and cities, working with education departments, schools and international partners.',
+      ],
+    },
+    advisors: {
+      eyebrow: 'Leaders & strategic advisors',
+      title: 'The people [[guiding the way]]',
+      lead: 'Learn to Leap is led by a leadership team and advisors with deep experience in education, technology and management.',
+      pending: 'Coming soon',
+      items: [
+        { name: '', role: 'Strategic advisor — Education', desc: 'Advisor details coming soon.' },
+        { name: '', role: 'Strategic advisor — Technology & AI', desc: 'Advisor details coming soon.' },
+        { name: '', role: 'Strategic advisor — International cooperation', desc: 'Advisor details coming soon.' },
+        { name: '', role: 'Strategic advisor — Management', desc: 'Advisor details coming soon.' },
+      ],
+    },
     values: {
       eyebrow: 'Core values',
       title: 'Four values that guide [[every decision]]',
@@ -265,7 +326,7 @@ const en: Dict = {
 
   solutionsPage: {
     hero: {
-      title: 'One ecosystem — [[nine integrated solutions]]',
+      title: 'One ecosystem — [[eight integrated solutions]]',
       lead: 'From smart classrooms and a continuous curriculum to international competitions — Learn to Leap delivers turnkey solutions that adapt to the conditions and priorities of each school and locality.',
       cta: 'Get a tailored recommendation',
     },
@@ -319,28 +380,73 @@ const en: Dict = {
         { src: '/images/gallery/su-kien-32.webp', alt: 'Teacher training at Bac Hong Primary School' },
       ],
     },
-    ihub: {
-      eyebrow: 'Future learning centres',
-      title: 'Innovation Hub — a learning ecosystem [[for a new generation]]',
-      lead: 'Learn to Leap’s network of future-ready learning centres, combining blended learning, online courses, active learning, hands-on workshops, weekend maker studios and offline showcases.',
-      cards: [
-        { icon: 'screen', title: 'Teaching equipment', desc: 'Touch displays, tablets, robots & LEGO, 3D printers and laser cutters.' },
-        { icon: 'book', title: 'Platforms & programmes', desc: 'An integrated LMS and specialised software for STEM – AI, English and career guidance.' },
-      ],
+    blocks: {
+      phtm: {
+        id: 'phtm', img: 'sol-phtm',
+        eyebrow: 'Digital classroom',
+        title: '[[Smart]] Classroom',
+        lead: 'Turning traditional classrooms into digital teaching spaces: teachers present on interactive displays, students learn with digital devices and the school manages classes centrally — the foundation for a smart school.',
+        cards: [
+          { icon: 'screen', title: 'Interactive displays', desc: 'Large touch displays replace the blackboard for presenting, drawing and sharing content from students’ devices.' },
+          { icon: 'monitor', title: 'Digital learning devices', desc: 'Tablets, document cameras and classroom audio — for both in-person and online teaching.' },
+          { icon: 'database', title: 'Classroom management software', desc: 'Assign work, run quizzes, assess and track progress in real time.' },
+          { icon: 'school', title: 'Smart school', desc: 'Connecting smart classrooms, STEM labs and digital libraries into one school-wide ecosystem.' },
+        ],
+      },
+      ailab: {
+        id: 'ai-lab', img: 'sol-ailab',
+        eyebrow: 'Humanoid AI Lab',
+        title: 'AI Lab · [[AI Center]]',
+        lead: 'An artificial intelligence experience space for students and teachers: from full-size humanoid robots to coding robots, computer vision and AI projects that solve real problems.',
+        cards: [
+          { icon: 'robot', title: 'AI humanoid robots', desc: 'Full-size humanoid robots for demonstrations, research and inspiring students about embodied AI.' },
+          { icon: 'code', title: 'Python & AI coding robots', desc: 'Small humanoid robots that students program for voice, face and gesture recognition.' },
+          { icon: 'camera', title: 'Computer vision', desc: 'Kits for training recognition models and building AI into students’ STEM products.' },
+          { icon: 'hub', title: 'Local AI Center', desc: 'A shared AI centre for a cluster of schools, for teacher training and AI competitions.' },
+        ],
+      },
+      sanChoi: {
+        id: 'san-choi', img: 'sol-sanchoi',
+        eyebrow: 'Festivals & Competitions',
+        title: 'Real learning, real making, [[real competitions, real journeys]]',
+        lead: 'More than 100 festivals with 30,000+ students taking part, plus a system of competitions that helps students turn knowledge into products and confidence — from the classroom to the international stage.',
+        cards: [
+          { icon: 'megaphone', title: 'Experience festivals', desc: '100+ festivals, 200+ themes — lively, modern and inspiring for students at every level.' },
+          { icon: 'trophy', title: 'Competitions', desc: 'School → province → national → international; run with provincial education departments, the press, the Institute of School Design, WEC and the Youth Union.' },
+        ],
+      },
+      tourHe: {
+        id: 'tour-he', img: 'sol-traihe',
+        eyebrow: 'Summer tours',
+        title: 'Tech summer camps & [[career tours]]',
+        lead: 'Creative summers for students aged 7–16, and trips that bring students closer to the world of work.',
+        cards: [
+          { icon: 'camp', title: 'National technology summer camps', desc: 'Day, residential and international: Robotics, Coding, VR, life skills and creative projects.' },
+          { icon: 'pin', title: 'Career discovery tours', desc: 'Visits to industrial parks (Deep C, Bac Ninh…), connecting education with industry and exploring careers across sectors.' },
+        ],
+      },
+      huanLuyen: {
+        id: 'huan-luyen', img: 'sol-huanluyen',
+        eyebrow: 'Coaching',
+        title: 'Coaching teams [[for the world stage]]',
+        lead: 'In-depth training for school teams entering leading robotics and technology competitions.',
+        cards: [
+          { icon: 'terminal', title: 'Leading competitions', desc: 'VEX Robotics, UBTECH, WRO, FLL, GreenMech, OhStem…' },
+          { icon: 'trophy', title: 'International pathway', desc: "ROBOG and the Global Robotics Games (Stick'Em) — Vietnamese students won a Gold Award in 2025." },
+        ],
+      },
+      ihub: {
+        id: 'innovation-hub', img: 'sol-ihub',
+        eyebrow: 'Future learning centres',
+        title: 'Innovation Hub — a learning ecosystem [[for a new generation]]',
+        lead: 'Learn to Leap’s network of future-ready learning centres, combining blended learning, online courses, active learning, hands-on workshops, weekend maker studios and offline showcases.',
+        cards: [
+          { icon: 'screen', title: 'Teaching equipment', desc: 'Touch displays, tablets, robots & LEGO, 3D printers and laser cutters.' },
+          { icon: 'book', title: 'Platforms & programmes', desc: 'An integrated LMS and specialised software for STEM – AI, English and career guidance.' },
+        ],
+      },
     },
-    arena: {
-      eyebrow: 'Competitions & international pathways',
-      title: 'Real learning, real making, [[real competitions, real journeys]]',
-      lead: 'A system of events and competitions that helps students turn knowledge into products and confidence — from the classroom to the international stage.',
-      cards: [
-        { icon: 'megaphone', title: 'Experience festivals', desc: '50+ festivals, 200+ themes, up to 1,200+ students per event — lively, modern and inspiring.' },
-        { icon: 'trophy', title: 'Competitions', desc: 'School → province → national → international; run with provincial education departments, the press, the Institute of School Design, WEC and the Youth Union.' },
-        { icon: 'terminal', title: 'Competition team coaching', desc: "Coaching teams for VEX Robotics, UBTECH, WRO, FLL, GreenMech, OhStem… <strong>Our edge: a direct pathway to international events — ROBOG and the Global Robotics Game (Stick'Em).</strong>" },
-        { icon: 'camp', title: 'National technology summer camps', desc: 'Students aged 7–16 (day / residential / international): Robotics, Coding, VR, life skills and creative projects.' },
-        { icon: 'pin', title: 'Career discovery tours', desc: 'Visits to industrial parks (Deep C, Bac Ninh…), connecting education with the job market and exploring careers across sectors.' },
-      ],
-      promo: { title: 'Want an event at your school?', desc: 'Learn to Leap designs and runs STEM – AI – Robotics festivals and competitions at every level, end to end.', cta: 'Plan an event' },
-    },
+    promo: { title: 'Want an event at your school?', desc: 'Learn to Leap designs and runs STEM – AI – Robotics festivals and competitions at every level, end to end.', cta: 'Plan an event' },
     cta: {
       title: 'Find the right solution for your school',
       lead: 'The Learn to Leap team will survey your site, advise and propose a turnkey plan — from the Lab to the curriculum and competitions.',
@@ -358,9 +464,9 @@ const en: Dict = {
       { n: 20, suf: '+', label: 'Localities<br>reached' },
       { n: 50, suf: '+', label: 'Strategic<br>partners' },
       { n: 200, suf: '+', label: 'Themes &<br>models' },
-      { n: 50, suf: '+', label: 'Festivals<br>held' },
+      { n: 100, suf: '+', label: 'Festivals<br>held' },
       { n: 15, suf: '+', label: 'Campuses<br>in Hanoi' },
-      { n: 1200, suf: '+', label: 'Students per<br>festival' },
+      { n: 30000, suf: '+', label: 'Students<br>taking part' },
     ],
     map: {
       eyebrow: 'Where we work',
@@ -446,8 +552,9 @@ const en: Dict = {
         { code: 'NQ 57-NQ/TW', title: 'Resolution 57-NQ/TW (22 Dec 2024)', desc: 'Breakthroughs in science, technology, innovation & national digital transformation.' },
         { code: 'NQ 71-NQ/TW', title: 'Resolution 71-NQ/TW (22 Aug 2025)', desc: 'Breakthroughs in education & training to meet the demands of a new era.' },
         { code: 'GDPT 2018', title: '2018 General Education Curriculum (Circular 32/2018)', desc: '5 qualities and 10 competencies — the foundation for every programme’s content.' },
+        { code: 'TT 86/2026', title: 'STEM education (Circular 86/2026/TT-BGDĐT)', desc: 'Rules for organising STEM education in schools, with framework lists of STEM equipment for primary, lower and upper secondary.' },
+        { code: 'QĐ 2422', title: 'Decision 2422/QĐ-BGDĐT', desc: 'The AI education content framework for K-12 students — replacing the Decision 3439 pilot.' },
         { code: 'TT 02/2025', title: 'Digital Competency Framework (Circular 02/2025/TT-BGDĐT)', desc: '6 domains and 26 digital competencies for learners — the basis for curriculum design & assessment.' },
-        { code: 'QĐ 3439', title: 'AI Competency Framework for K-12 students (Decision 3439/QĐ-BGDĐT)', desc: 'The AI education content framework for K-12 students — currently being piloted.' },
         { code: 'TT 14/2025', title: 'Subject classrooms (Circular 14/2025/TT-BGDĐT)', desc: 'New regulations on subject classrooms — the basis for standardising STEM – AI Labs.' },
       ],
       note: '* Content relating to policy documents and high-level partnerships is carefully reviewed before official publication.',
@@ -457,6 +564,179 @@ const en: Dict = {
       lead: 'The Learn to Leap team is ready to listen to your needs and propose the best-fit plan for your organisation.',
       primary: 'Talk to us',
     },
+  },
+
+  products: {
+    hero: {
+      title: 'Our [[product]] groups for STEM – AI – Robotics',
+      lead: 'Five equipment groups that Learn to Leap supplies and transfers to schools — from AI humanoid robots to STEM – IoT materials, with curriculum and teacher training included.',
+      cta: 'Browse the Store',
+    },
+    levelLabel: 'School level',
+    usesLabel: 'Used for',
+    storeCta: 'See in the Store',
+    groups: [
+      { id: 'humanoid', bots: ['tienkung', 'cruzr'], kind: 'Humanoid · Embodied AI', name: 'AI humanoid robots', level: 'Lower & upper secondary · AI Center', desc: 'Full-size humanoid robots for demonstrations, research and inspiring students about embodied AI.', uses: ['Showcases at festivals and events', 'Embodied AI research', 'The core of a Humanoid AI Lab'], store: '#nhom-6' },
+      { id: 'lap-trinh', bots: ['yanshee', 'ukit-se'], kind: 'Coding · Engineering', name: 'AI coding robots', level: 'Lower & upper secondary', desc: 'Small humanoid robots for learning Python & AI, plus mechanical – electronic engineering kits.', uses: ['Python, voice and face recognition', 'Computer vision', 'Secondary AI curriculum'], store: '#nhom-5' },
+      { id: 'lap-ghep', bots: ['ugot-up', 'ugot-dog'], kind: 'Robotics · Transformable', name: 'Modular AI robots', level: 'Primary · Lower secondary', desc: 'One kit, many forms — car, robot dog, robotic arm — built creatively and coded with blocks.', uses: ['Block coding and creative building', 'Robotics competitions', 'Robotics clubs'], store: '#nhom-5' },
+      { id: 'steam', bots: ['stickem-robot', 'weeemake-kit'], kind: 'STEAM · Maker', name: 'STEAM & Maker', level: 'Primary · Lower secondary', desc: 'Construction materials and robot – IoT kits for hands-on STEAM projects, from idea to product.', uses: ['Themed STEAM projects', 'Engineering design and making', "Stick 'Em Dojo"], store: '#nhom-4' },
+      { id: 'stem-iot', bots: ['kt-smarthouse', 'kt-datalogger'], kind: 'STEM Science · IoT', name: 'STEM Science & IoT', level: 'Primary · Lower & upper secondary', desc: 'STEM activity materials, IoT models, smart homes and renewable energy.', uses: ['Sensor-based experiments', 'Smart home and IoT models', 'Renewable energy'], store: '#nhom-3' },
+    ],
+  },
+
+  scheme: {
+    hero: {
+      title: '[[Digital transformation]] & STEM – AI programmes',
+      lead: 'Learn to Leap works with provincial and district education departments and schools to build state-funded programmes — aligned with Resolutions 57-NQ/TW, 71-NQ/TW and Circular 86/2026/TT-BGDĐT, and practical to deliver.',
+      cta: 'Discuss a programme',
+    },
+    types: {
+      eyebrow: 'Programme types',
+      title: 'Programmes [[we advise on]]',
+      items: [
+        { icon: 'network', title: 'Digital transformation in education', desc: 'A sector-wide roadmap: infrastructure, digital learning materials and digital skills for teachers and students.' },
+        { icon: 'school', title: 'Smart education', desc: 'Smart schools, smart classrooms and digital libraries — rolled out in phases.' },
+        { icon: 'robot', title: 'Province-wide STEM – AI education', desc: 'STEM – AI for every school in a province, with targets, a roadmap and an evaluation model.' },
+        { icon: 'lab', title: 'State-funded school STEM labs', desc: 'STEM labs based on the Circular 86/2026 framework lists, with curriculum and teacher training.' },
+      ],
+    },
+    deliver: {
+      eyebrow: 'What we provide',
+      title: 'A [[complete, compliant]] programme dossier',
+      items: [
+        'Site survey and assessment report',
+        'Programme proposal, goals and targets aligned with Resolutions 57 and 71',
+        'Equipment list checked against Circular 86/2026, avoiding overlap with minimum teaching equipment lists',
+        'Phased cost estimate',
+        'Teacher training and development plan',
+        'Operating plan and post-investment evaluation',
+      ],
+    },
+    steps: {
+      eyebrow: 'Process',
+      title: 'From idea to [[an approved programme]]',
+      items: [
+        { title: 'Survey', desc: 'Assess facilities, staff and local needs.' },
+        { title: 'Build the proposal', desc: 'Goals, targets, roadmap and a delivery model that fits the budget.' },
+        { title: 'Review the list', desc: 'Check every item against Circular 86/2026 and related rules.' },
+        { title: 'Deliver & train', desc: 'Installation, curriculum transfer and teacher training.' },
+        { title: 'Evaluate', desc: 'Track targets, report results and adjust the next phase.' },
+      ],
+    },
+    basis: { eyebrow: 'Policy basis', title: 'Aligned with [[national policy]]' },
+    cta: { title: 'Need a programme for your province or school?', lead: 'The Learn to Leap team will survey, advise and help you complete the programme dossier.', primary: 'Talk to us about a programme', secondary: 'See the private-investment model' },
+  },
+
+  xhh: {
+    hero: {
+      title: '[[Private-investment]] STEM – AI programmes',
+      lead: 'When public funding isn’t ready, schools can still have a STEM – AI lab: a company invests in the equipment, and Learn to Leap transfers the curriculum and runs it together with the school.',
+      cta: 'Discuss the model',
+    },
+    roles: {
+      eyebrow: 'The model',
+      title: 'Three parties, [[one goal]]',
+      items: [
+        { icon: 'users', title: 'Investing company', desc: 'Funds the equipment and lab space under a plan approved by the school and education authority.' },
+        { icon: 'school', title: 'School', desc: 'Provides the room and timetable; oversees quality and safety of the learning activities.' },
+        { icon: 'cap', title: 'Learn to Leap', desc: 'Transfers the curriculum, provides teachers or trains school staff, and runs competitions.' },
+      ],
+    },
+    benefits: {
+      eyebrow: 'Benefits',
+      title: 'What [[each party]] gains',
+      items: [
+        { who: 'Schools', list: ['A standard STEM – AI lab without waiting for budget', 'Properly trained teaching staff', 'Higher education quality and school reputation'] },
+        { who: 'Parents & students', list: ['STEM – AI at school at a reasonable cost', 'Festivals and competitions at every level', 'Digital skills and technology thinking'] },
+        { who: 'Companies', list: ['Corporate social responsibility in education', 'A transparent model with regular reporting', 'A link to the local education ecosystem'] },
+      ],
+    },
+    opTitle: 'Indicative operating model',
+    steps: {
+      eyebrow: 'Process',
+      title: 'Delivered [[transparently and by the rules]]',
+      items: [
+        { title: 'Survey', desc: 'Assess the room and students’ needs.' },
+        { title: 'Propose', desc: 'Investment plan, curriculum and indicative fees.' },
+        { title: 'Approve & sign', desc: 'The school and authority review under current rules.' },
+        { title: 'Invest & install', desc: 'The company invests; Learn to Leap installs and transfers.' },
+        { title: 'Run & report', desc: 'Teaching, competitions and regular reports to the school.' },
+      ],
+    },
+    note: '* Fees, duration and the form of cooperation are agreed with each school, in line with local regulations.',
+    cta: { title: 'Want a STEM – AI lab through private investment?', lead: 'Learn to Leap will survey your school and propose a suitable plan.', primary: 'Book a site survey', secondary: 'See state-funded programmes' },
+  },
+
+  projectsPage: {
+    hero: {
+      title: 'Featured [[projects]]',
+      lead: 'A selection of projects Learn to Leap has delivered with education authorities, schools and partners across Vietnam.',
+    },
+    items: [
+      { img: 'proj-stem57', flagIcon: 'shield', flag: 'National project', title: 'STEM Innovation 57', desc: 'Labs presented at Cau Giay Secondary School (Hanoi) and Kim Lien High School (Nghe An) by the General Secretary of the Party — pioneering technology in teaching.', loc: 'Hanoi · Nghe An' },
+      { img: 'robog-mb', flagIcon: 'trophy', flag: 'Competition', title: 'ROBOG Northern Vietnam 2026', desc: 'The first AI robotics competition in northern Vietnam, bringing together teams from many provinces and cities.', loc: 'Northern Vietnam · 2026' },
+      { img: 'ky-ket-nghe-an', flagIcon: 'network', flag: 'Triple-helix partnership', title: 'Nghe An innovation ecosystem', desc: 'A "State – School – Business" partnership agreement to develop the innovation ecosystem of Nghe An Province.', loc: 'Nghe An · 06/2026' },
+      { img: 'thai-nguyen', flagIcon: 'megaphone', flag: 'Provincial competition', title: 'STEM – AI – Robotics Thai Nguyen', desc: 'An innovation conference with the Thai Nguyen Department of Education and Training, and a province-wide STEM – AI – Robotics competition.', loc: 'Thai Nguyen · 2025–2026' },
+      { img: 'khoi-dong-vinh-hung', flagIcon: 'lab', flag: 'Lab', title: 'Applied AI science lab', desc: 'Launch of an applied AI science lab at Vinh Hung Primary and Lower Secondary School.', loc: 'Vinh Hung, Hanoi' },
+      { img: 'dong-da', flagIcon: 'screen', flag: 'Digital transformation', title: 'Dong Da Ward Digital Transformation Day', desc: 'Partner of the 2026 Dong Da Ward Digital Transformation Festival on National Digital Transformation Day, 10 October.', loc: 'Dong Da, Hanoi · 10/2026' },
+      { img: 'proj-bacninh', flagIcon: 'trend', flag: 'Innovation', title: 'Impact in Bac Ninh', desc: 'STEM – AI experiences and a provincial innovation festival — one of 12 projects selected by the province for development support.', loc: 'Bac Ninh Province' },
+      { img: 'proj-intl', flagIcon: 'globe', flag: 'International schools', title: 'Hanoi international school network', desc: 'Robotics clubs, tech summer camps, team coaching & city-level STEM festivals at BVIS Hanoi, Tay Ha Noi, Victory and Hoang Long Tokyo.', loc: 'Hanoi · 15+ campuses' },
+      { img: 'grg-2025', flagIcon: 'star', flag: 'International', title: 'Global Robotics Games 2025', desc: "Vietnamese students won a Gold Award at the Global Robotics Games 2025 with Stick 'Em kits.", loc: 'International · 2025' },
+    ],
+    cta: { title: 'Deliver your next project with Learn to Leap', lead: 'Get our full capability profile with real-world case studies.', primary: 'Talk to us' },
+  },
+
+  store: {
+    hero: {
+      title: 'Store — solutions catalogue [[under Circular 86]]',
+      lead: 'STEM education solutions and equipment organised by the groups of Circular 86/2026/TT-BGDĐT. Each major category contains smaller solutions that schools choose to suit their needs.',
+    },
+    demo: 'Demo — an illustrative catalogue, not an official price list.',
+    navLabel: 'Categories',
+    quote: 'Request a quote',
+    quoteSubject: 'Quote request',
+    groups: [
+      { code: 'I', id: 'nhom-1', title: 'STEM spaces & furniture', desc: 'Furniture and flexible spaces for group and project work.', items: [
+        { img: '', icon: 'interior', name: 'Flexible STEM furniture', desc: 'Reconfigurable group tables, age-adjustable chairs.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: '', icon: 'cube', name: 'Storage & display units', desc: 'Group storage for materials and shelves to show student work.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: '', icon: 'lab', name: 'STEM lab design & fit-out', desc: '3D design and turnkey fit-out for your actual room.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+      ] },
+      { code: 'II', id: 'nhom-2', title: 'Shared digital platforms & devices', desc: 'Displays and digital learning platforms shared across the room.', items: [
+        { img: 'kt-screen', icon: 'screen', name: 'Interactive display', desc: 'A large touch display for teaching and project presentations.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: '', icon: 'database', name: 'LMS platform', desc: 'Class management, digital materials and real-time assessment.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: 'vr-quest', icon: 'monitor', name: 'VR headsets', desc: 'Explore science, history and geography in virtual reality.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+      ] },
+      { code: 'III', id: 'nhom-3', title: 'Scientific exploration, measurement & experiments', desc: 'Group 1 of the Circular 86 framework: measurement, sensors, experiments.', items: [
+        { img: 'kt-datalogger', icon: 'pulse', name: 'Data logger & sensors', desc: 'Measure temperature, light, force, electricity… and plot live graphs.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'kt-ph', icon: 'lab', name: 'Chemistry & pH sensors', desc: 'Measure pH and concentration in chemistry and biology experiments.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'kt-wind', icon: 'bolt', name: 'Renewable energy kit', desc: 'Wind and solar models; energy conversion.', lv: ['Primary', 'Lower sec.'] },
+        { img: 'ebd-stem5', icon: 'book', name: 'Themed STEM materials', desc: 'Hands-on materials for the curriculum’s STEM lessons.', lv: ['Primary'] },
+      ] },
+      { code: 'IV', id: 'nhom-4', title: 'Engineering design & making', desc: 'Group 2 of the Circular 86 framework: fabrication, making, construction.', items: [
+        { img: 'kt-3dprinter', icon: 'cube', name: 'Educational 3D printer', desc: 'Design and print 3D parts and products, safe for students.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'stickem-kit', icon: 'spark', name: "Stick 'Em kit", desc: 'Build models from chopsticks and connectors, add programmable boards.', lv: ['Primary'] },
+        { img: 'weeemake-kit', icon: 'cube', name: 'Mechanical – STEAM construction kit', desc: 'Mechanism and drive parts for engineering models.', lv: ['Primary', 'Lower sec.'] },
+        { img: 'ebd-stem8', icon: 'book', name: 'STEM construction materials', desc: 'Themed model-building sets for lower secondary STEM.', lv: ['Lower sec.'] },
+      ] },
+      { code: 'V', id: 'nhom-5', title: 'Coding & educational robots', desc: 'Group 3 of the Circular 86 framework: educational robots and coding.', items: [
+        { img: 'ugot-up', icon: 'robot', name: 'Transformable modular AI robot', desc: 'One kit becomes a car, robot dog or arm; block coding.', lv: ['Primary', 'Lower sec.'] },
+        { img: 'yanshee', icon: 'robot', name: 'Programmable humanoid robot', desc: 'Python coding, voice, face and gesture recognition.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'ukit-se', icon: 'robotLegs', name: 'Educational robot kit', desc: 'Basic robot building and coding for clubs and lessons.', lv: ['Primary', 'Lower sec.'] },
+        { img: 'weeemake-bot', icon: 'robot', name: 'STEAM robot', desc: 'A programmable robot car with line-following and obstacle sensors.', lv: ['Primary', 'Lower sec.'] },
+      ] },
+      { code: 'VI', id: 'nhom-6', title: 'Digital technology, AI & IoT', desc: 'Group 4 of the Circular 86 framework: AI, IoT and computer vision.', items: [
+        { img: 'tienkung', icon: 'robot', name: 'Full-size AI humanoid robot', desc: 'Embodied AI demonstrations and research for AI Labs and AI Centers.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'kt-smarthouse', icon: 'network', name: 'IoT smart home model', desc: 'Collect, transmit and display sensor data remotely.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'kt-wifi', icon: 'network', name: 'Themed IoT learning kit', desc: 'Wi-Fi connectivity and app-controlled devices.', lv: ['Lower sec.', 'Upper sec.'] },
+        { img: 'cruzr', icon: 'robot', name: 'AI service robot', desc: 'A greeting and guide robot showing AI in everyday life.', lv: ['Lower sec.', 'Upper sec.'] },
+      ] },
+      { code: 'VII', id: 'nhom-7', title: 'Curriculum, materials & training', desc: 'Alongside the equipment: curriculum, lesson plans and teacher training.', items: [
+        { img: '', icon: 'book', name: 'STEM – AI K12 curriculum', desc: 'A continuous pathway from kindergarten to Grade 12.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: '', icon: 'bookCheck', name: 'Sample lesson plans', desc: 'Themed lesson plans aligned with the 2018 curriculum.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+        { img: '', icon: 'cap', name: 'Teacher training (TOT)', desc: 'Training teachers to master the equipment and curriculum.', lv: ['Primary', 'Lower sec.', 'Upper sec.'] },
+      ] },
+    ],
+    cta: { title: 'Need an equipment list for your school’s STEM lab?', lead: 'Learn to Leap configures lists under Circular 86/2026 to fit your school’s budget.', primary: 'Get list advice' },
   },
 
   news: {

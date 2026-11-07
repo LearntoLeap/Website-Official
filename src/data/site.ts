@@ -63,6 +63,18 @@ export const IMAGES: Record<string, string> = {
   'aw-sei': '/images/gallery/su-kien-15.webp',
   'aw-top20': '',
   'hoi-thao': '/images/gallery/su-kien-07.webp',
+  /** Ảnh cho các mục thêm 07/11/2026 (Hệ sinh thái, lối vào, dự án). */
+  'sol-phtm': '/images/gallery/su-kien-22.webp',
+  'sol-ailab': '/images/gallery/su-kien-17.webp',
+  'sol-sanchoi': '/images/gallery/su-kien-20.webp',
+  'ky-ket-nghe-an': '/images/gallery/su-kien-14.webp',
+  'khoi-dong-vinh-hung': '/images/gallery/su-kien-18.webp',
+  'robog-mb': '/images/gallery/su-kien-04.webp',
+  'thai-nguyen': '/images/gallery/su-kien-01.webp',
+  'dong-da': '/images/gallery/su-kien-21.webp',
+  'lam-thao': '/images/gallery/su-kien-26.webp',
+  'bac-hong': '/images/gallery/su-kien-32.webp',
+  'grg-2025': '/images/gallery/su-kien-06.webp',
   /** Ảnh tĩnh của hero trang chủ (khung hình từ TVC LtL 2026), dùng khi chưa có / không phát phim nền. */
   'hero-poster': '/images/hero-poster.webp',
 };
