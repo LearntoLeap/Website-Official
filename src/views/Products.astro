@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Btn from '../components/Btn.astro';
+import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
-import { href, type Lang } from '../i18n/routes';
-import { bot } from '../data/site';
+import { href, withBase, type Lang } from '../i18n/routes';
+import { PARTS } from '../data/catalog';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -14,31 +15,80 @@ const p = t.products;
 ---
 <Base lang={lang} page="products" title={t.meta.products.title} description={t.meta.products.description}>
   <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.products} bots={['yanshee', 'ugot-up']}>
-    <Btn href={href('store', lang)} variant="glass" arrow>{p.hero.cta}</Btn>
+    <Btn href={href('contact', lang)} variant="glass" arrow>{p.hero.cta}</Btn>
   </PageHero>
 
-  {p.groups.map((g, i) => (
-    <section class:list={['sp', { 'bg-soft': i % 2 === 1 }]} id={g.id}>
-      <div class:list={['wrap split mid', { rev: i % 2 === 1 }]}>
-        <div class="pr-art blk-ph reveal" aria-hidden="true">
-          {g.bots.map((b, j) => <img class={`pr-${j}`} src={bot(b)} alt="" loading="lazy" decoding="async" />)}
-        </div>
-        <div class="reveal d2">
-          <span class="eyebrow">{g.kind}</span>
-          <h2 class="fd blk-t">{g.name}</h2>
-          <p class="lead">{g.desc}</p>
-          <dl class="pr-meta">
-            <dt>{p.levelLabel}</dt><dd>{g.level}</dd>
-            <dt>{p.usesLabel}</dt><dd><ul>{g.uses.map((u) => <li>{u}</li>)}</ul></dd>
-          </dl>
-          <Btn href={href('store', lang) + g.store} variant="ghost" arrow>{p.storeCta}</Btn>
+  <section class="sp pc">
+    <div class="wrap pc-layout">
+      <nav class="pc-nav" aria-label={p.navLabel}>
+        <p class="pc-nav-t">{p.navTitle}</p>
+        <ol>
+          {p.groups.map((g) => (
+            <li>
+              <a href={`#${g.id}`} data-pc={g.id}><b>{g.no}</b>{g.short}</a>
+              <ul>{g.blocks.map((b) => <li><a href={`#${g.id}-${b.id}`}>{b.title}</a></li>)}</ul>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="pc-main">
+        {p.groups.map((g) => (
+          <div class="pc-group" id={g.id}>
+            <header class="pc-gh reveal">
+              <span class="pc-no">{g.no}</span>
+              <div><h2>{g.title}</h2><p>{g.desc}</p></div>
+            </header>
+            {g.blocks.map((b) => (
+              <div class="pc-block" id={`${g.id}-${b.id}`}>
+                <div class="pc-bh">
+                  <h3>{b.title}</h3>
+                  <span class="pc-brand"><span>{p.brandLabel}:</span> {b.brands}</span>
+                </div>
+                {b.parts.map((pt) => {
+                  const items = PARTS[pt.id] ?? [];
+                  return (
+                    <div class="pc-part">
+                      {pt.title && <h4><Icon name="check" stroke={2.4} />{pt.title}</h4>}
+                      {items.length ? (
+                        <ul class="pc-items">
+                          {items.map((it, j) => (
+                            <li class:list={['pc-item reveal', `d${(j % 4) + 1}`]}>
+                              <span class:list={['pc-ph', { cover: it.fit === 'cover' }]}><img src={withBase(it.img)} alt={it.name} loading="lazy" decoding="async" /></span>
+                              <span class="pc-name">{it.name}</span>
+                              {(it.lv || it.brand) && <span class="pc-lv">{[it.brand, it.lv].filter(Boolean).join(' · ')}</span>}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : <p class="pc-pending">{p.pending}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ))}
+
+        <div class="pc-more reveal">
+          <Icon name="spark" />
+          <p>{p.more}</p>
+          <Btn href={href('contact', lang)} variant="ghost" arrow>{p.moreCta}</Btn>
         </div>
       </div>
-    </section>
-  ))}
+    </div>
+  </section>
 
   <CtaBand title={t.solutionsPage.cta.title} lead={t.solutionsPage.cta.lead}>
     <Btn href={href('contact', lang)} arrow>{t.solutionsPage.cta.primary}</Btn>
-    <Btn href={href('store', lang)} variant="glass">{p.storeCta}</Btn>
+    <Btn href={href('solutions', lang)} variant="glass">{t.common.nav.solutions}</Btn>
   </CtaBand>
 </Base>
+
+<script>
+  // Tô sáng nhóm đang xem trên thanh điều hướng dọc.
+  const links = new Map([...document.querySelectorAll<HTMLAnchorElement>('[data-pc]')].map((a) => [a.dataset.pc!, a]));
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => { if (e.isIntersecting) links.forEach((a, id) => a.classList.toggle('on', id === e.target.id)); });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  document.querySelectorAll('.pc-group').forEach((g) => io.observe(g));
+</script>

@@ -1,0 +1,16 @@
+---
+// Nút "Xem thêm" cho lưới dài: đặt ngay sau phần tử có class "clip" và style "--clip:<số mục hiện sẵn>".
+// Không có JS thì lưới vẫn rút gọn, nút mở toàn bộ khi bấm.
+interface Props { label: string; total: number; show: number }
+const { label, total, show } = Astro.props;
+---
+{total > show && <div class="more-wrap"><button type="button" class="btn ghost" data-unclip>{label}</button></div>}
+
+<script>
+  document.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLButtonElement>('[data-unclip]');
+    if (!b) return;
+    b.closest('.more-wrap')?.previousElementSibling?.classList.add('open');
+    b.closest('.more-wrap')?.remove();
+  });
+</script>

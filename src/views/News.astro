@@ -7,6 +7,7 @@ import SectionHead from '../components/SectionHead.astro';
 import BlogCard from '../components/BlogCard.astro';
 import VideoCard from '../components/VideoCard.astro';
 import ShortsRail from '../components/ShortsRail.astro';
+import ShowMore from '../components/ShowMore.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
@@ -67,21 +68,23 @@ const BLOG_PAGE = 9;
       {vids.length > 0 && (
         <div class="tl-sec" id="video">
           <SectionHead eyebrow={n.video.eyebrow} title={n.video.title} />
-          <div class="vid-grid featured">
+          <div class="vid-grid featured clip clip-7">
             {vids.map((it, i) => <VideoCard item={it} lang={lang} index={i} playLabel={n.video.play} />)}
           </div>
+          <ShowMore label={t.common.showMore} total={vids.length} show={7} />
         </div>
       )}
 
       {photos.length > 0 && (
         <div class="tl-sec" id="hinh-anh">
           <SectionHead eyebrow={n.photos.eyebrow} title={n.photos.title} />
-          <div class="gal-grid">
+          <div class="gal-grid clip clip-9">
             {photos.map((p) => {
               const title = titleOf(p, lang);
               return <button class="gcell" type="button" data-photo={p.image} data-title={title} aria-label={title}><img src={p.image} alt={title} loading="lazy" decoding="async" /></button>;
             })}
           </div>
+          <ShowMore label={t.common.showMore} total={photos.length} show={9} />
         </div>
       )}
     </div>

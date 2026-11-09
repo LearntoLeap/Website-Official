@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import HexBg from '../components/HexBg.astro';
-import { useT } from '../i18n';
+import { useT, keep } from '../i18n';
 import { withBase, type Lang } from '../i18n/routes';
 import { SITE } from '../data/site';
 
@@ -50,7 +50,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
       <div class="ct-grid">
         <div class="reveal">
           <span class="eyebrow light">{c.info.eyebrow}</span>
-          <h2 style="font-size:clamp(24px,3.2vw,34px);margin-top:14px">{lang === 'vi' ? SITE.legalName : SITE.legalNameEn}</h2>
+          <h2 style="font-size:clamp(24px,3.2vw,34px);margin-top:14px">{keep(lang === 'vi' ? SITE.legalName : SITE.legalNameEn)}</h2>
           <div class="ct-info">
             <div class="ct-item"><div class="ic"><Icon name="pin" /></div><div><div class="k">{c.info.address}</div><a class="v" href={mapLink} target="_blank" rel="noopener">{address}</a></div></div>
             <div class="ct-item"><div class="ic"><Icon name="phone" /></div><div><div class="k">{c.info.hotline}</div><a class="v" href={`tel:${SITE.phone}`}>{phone}</a></div></div>

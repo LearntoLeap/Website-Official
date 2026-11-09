@@ -8,12 +8,15 @@ import CtaBand from '../components/CtaBand.astro';
 import LogoStrip from '../components/LogoStrip.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
-import { SITE } from '../data/site';
+import { SITE, photo } from '../data/site';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const p = t.partnership;
+// Ảnh: Sở/Phòng · nhà trường · doanh nghiệp; cam kết: chất lượng · hỗ trợ dài hạn · linh hoạt địa phương.
+const AUD_PH = ['projects/hoi-thao-thai-nguyen.webp', 'gallery/su-kien-27.webp', 'projects/nghe-an-3-nha.webp'];
+const COM_PH = ['gallery/su-kien-31.webp', 'gallery/su-kien-16.webp', 'projects/can-tho.webp'];
 ---
 <Base lang={lang} page="partnership" title={t.meta.partnership.title} description={t.meta.partnership.description}>
   <PageHero lang={lang} title={p.hero.title} lead={p.hero.lead} crumb={t.common.nav.partnership} bots={['yanshee', 'ukit-transformer']} />
@@ -24,6 +27,7 @@ const p = t.partnership;
       <div class="g3 grid">
         {p.audiences.map((a, i) => (
           <div class:list={['aud reveal', `d${i + 1}`]}>
+            <img class="card-img" src={photo(AUD_PH[i])} alt="" loading="lazy" decoding="async" />
             <div class="ic"><Icon name={a.icon} /></div>
             <h3>{a.title}</h3>
             <div class="who">{a.who}</div>
@@ -52,7 +56,7 @@ const p = t.partnership;
       <SectionHead eyebrow={p.commitments.eyebrow} title={p.commitments.title} />
       <div class="g3 grid">
         {p.commitments.items.map((c, i) => (
-          <div class:list={['com reveal', `d${i + 1}`]}><div class="ic"><Icon name={c.icon} /></div><h3>{c.title}</h3><p>{c.desc}</p></div>
+          <div class:list={['com reveal', `d${i + 1}`]}><img class="card-img" src={photo(COM_PH[i])} alt="" loading="lazy" decoding="async" /><div class="ic"><Icon name={c.icon} /></div><h3>{c.title}</h3><p>{c.desc}</p></div>
         ))}
       </div>
     </div>

@@ -7,7 +7,7 @@ import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT, rich } from '../i18n';
 import { href, withBase, type Lang } from '../i18n/routes';
-import { img } from '../data/site';
+import { img, photo } from '../data/site';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -15,15 +15,17 @@ const t = useT(lang);
 const a = t.about;
 const aboutPhoto = img('about');
 const robog = img('robog');
-const f = a.founder;
-// Chữ viết tắt từ họ tên khi chưa có ảnh (Lê Văn Trí → LT).
-const initials = (n: string) => { const w = n.trim().split(/\s+/); return (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase(); };
+const fo = a.founders;
+const [main, ...cofounders] = fo.items;
+// Ảnh cho 4 giá trị cốt lõi.
+const VAL_PH = ['gallery/su-kien-25.webp', 'gallery/su-kien-12.webp', 'gallery/su-kien-10.webp', 'gallery/su-kien-17.webp'];
 ---
 <Base lang={lang} page="about" title={t.meta.about.title} description={t.meta.about.description}>
   <PageHero lang={lang} title={a.hero.title} crumb={t.common.nav.about} bots={['am-handsup', 'ukit-penguin']} />
 
+  <!-- Tầm nhìn – sứ mệnh cạnh ảnh ROBOG; câu chuyện cạnh ảnh tập thể (bố cục 2 hàng cân đối) -->
   <section class="sp">
-    <div class="wrap split">
+    <div class="wrap split mid">
       <div class="reveal">
         <h2 class="eyebrow">{a.vmEyebrow}</h2>
         <div class="vm">
@@ -31,55 +33,62 @@ const initials = (n: string) => { const w = n.trim().split(/\s+/); return (w[0][
             <div class="vm-card"><div class="ic"><Icon name={v.icon} /></div><h3>{v.title}</h3><p>{v.desc}</p></div>
           ))}
         </div>
-        <div style="margin-top:36px"><span class="eyebrow">{a.storyEyebrow}</span></div>
-        {aboutPhoto && <div class="about-photo" style={`background-image:url('${aboutPhoto}')`} role="img" aria-label="Learn to Leap"></div>}
-        <div class="about-body" style="margin-top:16px">
+      </div>
+      {robog && (
+        <figure class="fig reveal d2">
+          <img src={robog} alt={a.photoAlt} width="1200" height="799" loading="lazy" decoding="async" />
+          <figcaption>{a.photoCaption}</figcaption>
+        </figure>
+      )}
+    </div>
+    <div class="wrap split mid ab-story">
+      {aboutPhoto && <img class="ab-ph reveal" src={aboutPhoto} alt="Learn to Leap" loading="lazy" decoding="async" />}
+      <div class="reveal d2">
+        <span class="eyebrow">{a.storyEyebrow}</span>
+        <div class="about-body" style="margin-top:14px">
           {a.story.map((p) => <p set:html={p} />)}
         </div>
       </div>
-      <div class="reveal d2">
-        {robog && (
-          <figure class="fig">
-            <img src={robog} alt={a.photoAlt} width="1200" height="799" loading="lazy" decoding="async" />
-            <figcaption>{a.photoCaption}</figcaption>
-          </figure>
-        )}
+    </div>
+  </section>
+
+  <!-- ĐỘI NGŨ SÁNG LẬP: nhà sáng lập chính hiện lớn, các đồng sáng lập bên dưới -->
+  <section class="sp bg-soft" id="founders">
+    <div class="wrap">
+      <SectionHead eyebrow={fo.eyebrow} title={fo.title} lead={fo.lead} />
+      <div class="fd-grid">
+        <div class="fd-ph reveal"><img src={withBase(main.photo)} alt={main.name} loading="lazy" decoding="async" /></div>
+        <div class="reveal d2">
+          <div class="fd-name">{main.name}</div>
+          <div class="fd-role">{main.role}</div>
+          <ul class="fd-bio">{main.bio.map((b) => <li>{b}</li>)}</ul>
+          <blockquote class="quote">
+            <p>{a.quote}</p>
+            <div class="by">— <b>{a.quoteName}</b>, {a.quoteRole}</div>
+          </blockquote>
+        </div>
+      </div>
+      <div class="team-grid t5">
+        {cofounders.map((m, i) => (
+          <article class:list={['person reveal', `d${(i % 5) + 1}`]}>
+            <img src={withBase(m.photo)} alt={m.name} loading="lazy" decoding="async" />
+            <div class="pb"><h3>{m.name}</h3><div class="pr">{m.role}</div><ul>{m.bio.map((b) => <li>{b}</li>)}</ul></div>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- NHÀ SÁNG LẬP -->
-  <section class="sp bg-soft" id="founder">
-    <div class="wrap fd-grid">
-      <div class="fd-ph reveal">
-        {f.photo ? <img src={withBase(f.photo)} alt={f.name} loading="lazy" decoding="async" /> : <span class="fd-ini" aria-hidden="true">{initials(f.name)}</span>}
-      </div>
-      <div class="reveal d2">
-        <span class="eyebrow">{f.eyebrow}</span>
-        <h2 class="fd blk-t" set:html={rich(f.title)} />
-        <div class="fd-name">{f.name}</div>
-        <div class="fd-role">{f.role}</div>
-        <ul class="fd-bio">{f.bio.map((b) => <li>{b}</li>)}</ul>
-        <blockquote class="quote">
-          <p>{a.quote}</p>
-          <div class="by">— <b>{a.quoteName}</b>, {a.quoteRole}</div>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-
-  <!-- NHÂN VẬT & CỐ VẤN CHIẾN LƯỢC -->
+  <!-- CỐ VẤN & CHUYÊN GIA -->
   <section class="sp">
     <div class="wrap">
       <SectionHead eyebrow={a.advisors.eyebrow} title={a.advisors.title} lead={a.advisors.lead} />
-      <div class="g4 grid">
-        {a.advisors.items.map((p, i) => (
-          <div class:list={['card adv reveal', `d${i + 1}`]}>
-            <span class="adv-ph" aria-hidden="true"><Icon name="user" /></span>
-            <h3>{p.name || a.advisors.pending}</h3>
-            <div class="adv-role">{p.role}</div>
-            <p>{p.desc}</p>
-          </div>
+      <div class="team-grid t3">
+        {a.advisors.items.map((m, i) => (
+          <article class:list={['person row reveal', `d${(i % 3) + 1}`]}>
+            <img src={withBase(m.photo)} alt={m.name} loading="lazy" decoding="async" />
+            <div class="pb"><h3>{m.name}</h3><div class="pr">{m.role}</div><ul>{m.bio.map((b) => <li>{b}</li>)}</ul></div>
+          </article>
         ))}
       </div>
     </div>
@@ -91,6 +100,7 @@ const initials = (n: string) => { const w = n.trim().split(/\s+/); return (w[0][
       <div class="g4 grid">
         {a.values.items.map((v, i) => (
           <div class:list={['card val reveal', `d${i + 1}`]}>
+            <img class="card-img" src={photo(VAL_PH[i])} alt="" loading="lazy" decoding="async" />
             <div class="ic-box"><Icon name={v.icon} /></div>
             <h3>{v.title}</h3><p>{v.desc}</p>
           </div>

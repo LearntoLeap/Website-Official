@@ -6,44 +6,61 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
-import { SITE, bot } from '../data/site';
 
+/**
+ * Store dựng theo stem.learntoleap.vn: đọc trực tiếp dữ liệu của repo LearntoLeap/Shop
+ * (data/products.json, sửa bằng admin.html của Shop) nên web cập nhật ngay, không cần build lại.
+ * Không hiện giá; mỗi thẻ mở trang sản phẩm tương ứng trên stem.learntoleap.vn.
+ */
+const SHOP = 'https://stem.learntoleap.vn/';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const st = t.store;
-// shortcut: chưa có giỏ hàng/giá — nút "Nhận báo giá" mở email; thay bằng form/giỏ khi Store chạy thật.
-const quoteHref = (name: string) => `mailto:${SITE.email}?subject=${encodeURIComponent(`${st.quoteSubject}: ${name}`)}`;
+const stats = t.home.stats.slice(0, 4).map((s) => ({ v: s.n.toLocaleString(lang === 'vi' ? 'vi-VN' : 'en-US') + s.suf, k: s.label.replace(/<br>/g, ' ') }));
+const L = { ...st, shop: SHOP };
 ---
 <Base lang={lang} page="store" title={t.meta.store.title} description={t.meta.store.description}>
-  <PageHero lang={lang} title={st.hero.title} lead={st.hero.lead} crumb={t.common.nav.store} bots={['ukit-se', 'kt-3dprinter']} />
+  <PageHero lang={lang} title={st.hero.title} lead={st.hero.lead} crumb={t.common.nav.store} bots={['ukit-se', 'kt-3dprinter']}>
+    <Btn href="#sx-all" arrow>{st.hero.primary}</Btn>
+    <Btn href={SHOP} variant="ghost" icon="external">{st.source}</Btn>
+  </PageHero>
 
-  <section class="sp st-sec">
+  <section class="sp sx">
     <div class="wrap">
-      <p class="st-demo"><Icon name="tag" />{st.demo}</p>
-      <nav class="st-nav" aria-label={st.navLabel}>
-        {st.groups.map((g) => <a href={`#${g.id}`}><b>{g.code}</b>{g.title}</a>)}
-      </nav>
+      <p class="sx-chip"><Icon name="shieldCheck" />{st.hero.eyebrow}</p>
+      <ul class="sx-stats">
+        {stats.map((s) => <li><b>{s.v}</b><span set:html={s.k} /></li>)}
+      </ul>
 
-      {st.groups.map((g) => (
-        <div class="st-group" id={g.id}>
-          <div class="st-head reveal">
-            <span class="st-code">{g.code}</span>
-            <div><h2>{g.title}</h2><p>{g.desc}</p></div>
+      <div class="sx-feat" id="sx-feat" hidden>
+        <h2 class="sx-h"><Icon name="star" />{st.featured}</h2>
+        <div class="sx-grid" id="sx-feat-grid"></div>
+      </div>
+
+      <div class="sx-layout" id="sx-all">
+        <aside class="sx-side">
+          <div class="sx-tree">
+            <h2><Icon name="grid" />{st.cats}</h2>
+            <ul id="sx-cats"></ul>
           </div>
-          <div class="st-grid">
-            {g.items.map((it, i) => (
-              <article class:list={['st-item reveal', `d${(i % 4) + 1}`]}>
-                <div class="st-ph">{it.img ? <img src={bot(it.img)} alt={it.name} loading="lazy" decoding="async" /> : <Icon name={it.icon} />}</div>
-                <h3>{it.name}</h3>
-                <p>{it.desc}</p>
-                <ul class="st-lv">{it.lv.map((l) => <li>{l}</li>)}</ul>
-                <a class="st-quote" href={quoteHref(it.name)}>{st.quote}<Icon name="arrow" stroke={2.4} /></a>
-              </article>
-            ))}
+          <div class="sx-help">
+            <h3>{st.help.title}</h3>
+            <p>{st.help.desc}</p>
+            <a href={href('contact', lang)}>{st.help.cta}<Icon name="arrow" stroke={2.4} /></a>
           </div>
+        </aside>
+        <div class="sx-main">
+          <div class="sx-top">
+            <h2 class="sx-h" id="sx-title">{st.all}</h2>
+            <label class="sx-search"><Icon name="search" /><input id="sx-q" type="search" placeholder={st.search} aria-label={st.search} /></label>
+            <span class="sx-count"><b id="sx-n">0</b> {st.count}</span>
+          </div>
+          <div class="sx-grid" id="sx-grid" aria-live="polite"><p class="sx-msg">{st.loading}</p></div>
+          <nav class="sx-pager" id="sx-pager" aria-label="Pagination"></nav>
+          <p class="sx-src"><a href={SHOP} target="_blank" rel="noopener">{st.source}<Icon name="external" /></a></p>
         </div>
-      ))}
+      </div>
     </div>
   </section>
 
@@ -52,3 +69,89 @@ const quoteHref = (name: string) => `mailto:${SITE.email}?subject=${encodeURICom
     <Btn href={href('scheme', lang)} variant="glass">{t.common.nav.scheme}</Btn>
   </CtaBand>
 </Base>
+
+<script is:inline define:vars={{ L }}>
+(() => {
+  const SRC = [
+    'https://raw.githubusercontent.com/LearntoLeap/Shop/main/data/products.json',
+    'https://cdn.jsdelivr.net/gh/LearntoLeap/Shop@main/data/products.json',
+  ];
+  const PAGE = 24;
+  const S = { data: null, cat: 'all', q: '', page: 1 };
+  const $ = (id) => document.getElementById(id);
+  // Dữ liệu từ repo Shop do nhiều người nhập → luôn thoát HTML trước khi chèn.
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // Đường dẫn trang sản phẩm giống app.js của stem.learntoleap.vn: slug/<mã dự án>-<model> hoặc slug/<sku>.
+  const slugify = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const url = (p) => {
+    const tail = p.projectCode && p.model ? `${p.projectCode}-${p.model}` : p.sku || '';
+    return L.shop + (p.slug || slugify(p.name)) + (tail ? '/' + encodeURIComponent(tail) : '');
+  };
+  const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+  const catOf = (p) => S.data.categories.find((c) => c.id === p.category);
+  const meta = (p) => p.shortDescription || [p.brand && `${L.brand}: ${p.brand}`, p.model && `${L.model}: ${p.model}`, p.origin && `${L.origin}: ${p.origin}`].filter(Boolean).join(' · ');
+  const img = (p) => (p.images && p.images[0]) || '';
+
+  async function load() {
+    for (const u of SRC) {
+      try { const r = await fetch(u + '?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) return await r.json(); } catch (e) { /* thử nguồn sau */ }
+    }
+    throw new Error('no data');
+  }
+
+  function card(p) {
+    const c = catOf(p);
+    const im = img(p);
+    return `<a class="sx-card" href="${esc(url(p))}" target="_blank" rel="noopener">
+      <span class="sx-ph">${im ? `<img src="${esc(im)}" alt="" loading="lazy" decoding="async">` : `<span class="sx-noimg">${esc(c ? c.icon : '📦')}</span>`}${p.featured ? '<span class="sx-hot">HOT</span>' : ''}</span>
+      <span class="sx-cb">
+        <span class="sx-cat">${c ? esc(c.icon + ' ' + c.name) : ''}</span>
+        <span class="sx-name">${esc(p.name)}</span>
+        <span class="sx-meta">${esc(meta(p))}</span>
+        <span class="sx-go">${esc(L.view)} ↗</span>
+      </span></a>`;
+  }
+
+  const list = () => {
+    const all = S.data.products.slice().reverse();
+    const q = norm(S.q);
+    return all.filter((p) => (S.cat === 'all' || p.category === S.cat) && (!q || norm([p.name, p.brand, p.model, p.description, ...(p.tags || [])].join(' ')).includes(q)));
+  };
+
+  function renderCats() {
+    const P = S.data.products;
+    const items = [{ id: 'all', name: L.all, icon: '🗂' }, ...S.data.categories];
+    $('sx-cats').innerHTML = items.map((c) => {
+      const n = c.id === 'all' ? P.length : P.filter((p) => p.category === c.id).length;
+      return `<li><button type="button" data-cat="${esc(c.id)}" aria-pressed="${c.id === S.cat}"><span>${esc(c.icon)}</span>${esc(c.name)}<b>${n}</b></button></li>`;
+    }).join('');
+  }
+
+  function render() {
+    const L2 = list();
+    const pages = Math.max(1, Math.ceil(L2.length / PAGE));
+    S.page = Math.min(S.page, pages);
+    const from = (S.page - 1) * PAGE;
+    $('sx-n').textContent = L2.length;
+    $('sx-title').textContent = S.cat === 'all' ? L.all : (S.data.categories.find((c) => c.id === S.cat) || {}).name || L.all;
+    $('sx-grid').innerHTML = L2.length ? L2.slice(from, from + PAGE).map(card).join('') : `<p class="sx-msg">${esc(L.empty)}</p>`;
+    $('sx-pager').innerHTML = pages < 2 ? '' : Array.from({ length: pages }, (_, k) => `<button type="button" data-page="${k + 1}" aria-current="${k + 1 === S.page ? 'page' : 'false'}">${k + 1}</button>`).join('');
+    renderCats();
+  }
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-cat],[data-page]');
+    if (!t || !S.data) return;
+    if (t.dataset.cat) { S.cat = t.dataset.cat; S.page = 1; render(); }
+    else { S.page = +t.dataset.page; render(); $('sx-all').scrollIntoView({ behavior: 'smooth' }); }
+  });
+  let tm; $('sx-q').addEventListener('input', (e) => { clearTimeout(tm); tm = setTimeout(() => { S.q = e.target.value; S.page = 1; render(); }, 150); });
+
+  load().then((d) => {
+    S.data = d;
+    const feat = d.products.slice().reverse().filter((p) => p.featured).slice(0, 4);
+    if (feat.length) { $('sx-feat').hidden = false; $('sx-feat-grid').innerHTML = feat.map(card).join(''); }
+    render();
+  }).catch(() => { $('sx-grid').innerHTML = `<p class="sx-msg">${esc(L.error)}</p>`; });
+})();
+</script>

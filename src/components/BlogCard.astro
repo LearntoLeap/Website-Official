@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { useT } from '../i18n';
+import { useT, keep } from '../i18n';
 import { withBase, type Lang } from '../i18n/routes';
 import { postHref, readMinutes, fmtDate, type Post } from '../data/blog';
 // featured: thẻ đầu lưới Blog, chiếm 2 cột × 2 hàng như video nổi bật.
@@ -16,7 +16,7 @@ const d = post.data;
   </div>
   <div class="nc-body">
     <div class="nc-tag"><Icon name="tag" />{featured && `${b.featured} · `}{b.cats[d.category]}</div>
-    <h3>{d.title}</h3>
+    <h3>{keep(d.title)}</h3>
     <p class="bc-ex">{d.excerpt}</p>
     <div class="nc-more"><Icon name="calendar" />{fmtDate(d.date, lang)}<span aria-hidden="true">·</span>{readMinutes(post)} {b.minutes}</div>
   </div>

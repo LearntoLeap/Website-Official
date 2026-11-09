@@ -2,14 +2,21 @@
 import Icon from './Icon.astro';
 import { useT } from '../i18n';
 import { ROUTES, href, withBase, type Lang, type PageKey } from '../i18n/routes';
+import { PARTS } from '../data/catalog';
 interface Props { lang: Lang; page: PageKey | null; paths?: Record<Lang, string> }
 const { lang, page, paths } = Astro.props;
 const t = useT(lang);
 const other: Lang = lang === 'vi' ? 'en' : 'vi';
 const switchHref = withBase(paths ? paths[other] : page ? ROUTES[page][other] : ROUTES.home[other]);
-const main: PageKey[] = ['about', 'solutions', 'products', 'scheme', 'xhh', 'projects', 'store', 'news'];
-const all: PageKey[] = ['home', ...main, 'impact', 'partnership', 'contact'];
+// Menu ngang: "Sản phẩm" có mega menu, "Đề án" gom 2 trang Đề án theo NSNN và Đề án XHH.
+const before: PageKey[] = ['about', 'solutions'];
+const after: PageKey[] = ['projects', 'store', 'news'];
+const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh', 'projects', 'store', 'news', 'impact', 'partnership', 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
+const groups = t.products.groups;
+// Ảnh minh hoạ của một nhóm: lấy lần lượt từ các phần trong nhóm.
+const groupItems = (g: (typeof groups)[number]) => g.blocks.flatMap((b) => b.parts.flatMap((pt) => (PARTS[pt.id] ?? []).slice(0, 3))).slice(0, 6);
+const prodHref = (id: string) => `${href('products', lang)}#${id}`;
 ---
 <header class="site" id="hdr">
   <div class="wrap nav">
@@ -19,7 +26,34 @@ const cur = (k: PageKey) => (k === page ? 'page' : undefined);
     </a>
     <nav aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
       <ul class="nav-links">
-        {main.map((k) => <li><a href={href(k, lang)} aria-current={cur(k)}>{t.common.nav[k]}</a></li>)}
+        {before.map((k) => <li><a href={href(k, lang)} aria-current={cur(k)}>{t.common.nav[k]}</a></li>)}
+        <li class="dd mega">
+          <a href={href('products', lang)} aria-current={cur('products')}>{t.common.nav.products}<Icon name="chevron" class="dd-i" stroke={2.4} /></a>
+          <div class="dd-panel mega-panel">
+            <div class="mp-cats">
+              {groups.map((g, i) => <a class:list={['mp-cat', { on: i === 0 }]} href={prodHref(g.id)} data-mp={i}><span><b>{g.no}.</b> {g.short}</span><Icon name="chevron" stroke={2.4} /></a>)}
+              <a class="mp-all" href={href('products', lang)}>{t.common.menu.allProducts}<Icon name="arrow" stroke={2.4} /></a>
+            </div>
+            <div class="mp-items">
+              {groups.map((g, i) => (
+                <div class:list={['mp-grid', { on: i === 0 }]} data-mp-panel={i}>
+                  <div class="mp-head">{g.title}</div>
+                  {groupItems(g).map((m) => (
+                    <a href={prodHref(g.id)}><span class="mp-img"><img src={withBase(m.img)} alt="" loading="lazy" decoding="async" /></span><span>{m.name}</span></a>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </li>
+        <li class="dd">
+          <a href={href('scheme', lang)} aria-current={page === 'scheme' || page === 'xhh' ? 'page' : undefined}>{t.common.menu.scheme}<Icon name="chevron" class="dd-i" stroke={2.4} /></a>
+          <div class="dd-panel">
+            <a href={href('scheme', lang)}>{t.common.nav.scheme}</a>
+            <a href={href('xhh', lang)}>{t.common.nav.xhh}</a>
+          </div>
+        </li>
+        {after.map((k) => <li><a href={href(k, lang)} aria-current={cur(k)}>{t.common.nav[k]}</a></li>)}
       </ul>
     </nav>
     <div class="nav-cta">
@@ -41,3 +75,17 @@ const cur = (k: PageKey) => (k === page ? 'page' : undefined);
   </ul>
   <a class="btn" href={href('contact', lang)}>{t.common.ctaPartner}</a>
 </div>
+
+<script>
+  // Mega menu Sản phẩm: rê chuột / tab vào danh mục bên trái thì đổi nhóm sản phẩm bên phải.
+  document.querySelectorAll<HTMLElement>('[data-mp]').forEach((a) => {
+    const show = () => {
+      const panel = a.closest('.mega-panel');
+      if (!panel) return;
+      panel.querySelectorAll('[data-mp]').forEach((x) => x.classList.toggle('on', x === a));
+      panel.querySelectorAll<HTMLElement>('[data-mp-panel]').forEach((x) => x.classList.toggle('on', x.dataset.mpPanel === a.dataset.mp));
+    };
+    a.addEventListener('mouseenter', show);
+    a.addEventListener('focus', show);
+  });
+</script>

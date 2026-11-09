@@ -2,6 +2,7 @@
 import Icon from './Icon.astro';
 import { titleOf, ytId, ytThumb, type MediaItem } from '../data/media';
 import type { Lang } from '../i18n/routes';
+import { keep } from '../i18n';
 interface Props { item: MediaItem; lang: Lang; index: number; playLabel: string }
 const { item, lang, index, playLabel } = Astro.props;
 const title = titleOf(item, lang);
@@ -12,7 +13,7 @@ const title = titleOf(item, lang);
     <div class="vplay"><span><Icon name="play" /></span></div>
   </div>
   <div class="vbd">
-    <h3>{title}</h3>
+    <h3>{keep(title)}</h3>
     {item.source && <div class="vsrc">{item.source}</div>}
   </div>
 </button>

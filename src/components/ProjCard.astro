@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { img } from '../data/site';
+// Thẻ dự án (dữ liệu từ i18n projectsPage.items); i quyết định màu nền thay thế và độ trễ hiện dần.
+interface Props { x: { img: string; flagIcon: string; flag: string; title: string; desc: string; loc: string }; i: number }
+const { x, i } = Astro.props;
+---
+<article class:list={['proj reveal', `d${(i % 3) + 1}`]}>
+  <div class:list={['ph', ['a', 'b', 'c'][i % 3]]}>
+    <span class="flag"><Icon name={x.flagIcon} />{x.flag}</span>
+    {img(x.img) && <img src={img(x.img)} alt={x.title} loading="lazy" decoding="async" />}
+  </div>
+  <div class="bd"><h3>{x.title}</h3><p>{x.desc}</p><div class="loc"><Icon name="pin" />{x.loc}</div></div>
+</article>

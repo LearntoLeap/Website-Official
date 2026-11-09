@@ -5,6 +5,7 @@ import Btn from '../components/Btn.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Stats from '../components/Stats.astro';
+import ShowMore from '../components/ShowMore.astro';
 import CtaBand from '../components/CtaBand.astro';
 import VnMap from '../components/VnMap.astro';
 import { useT } from '../i18n';
@@ -77,19 +78,20 @@ const gallery = [
     <section class="sp">
       <div class="wrap">
         <SectionHead eyebrow={m.gallery.eyebrow} title={m.gallery.title} />
-        <div class="gal-grid reveal">
+        <div class="gal-grid clip clip-9 reveal">
           {gallery.map((g) => (
             <button class="gcell" type="button" data-photo={g.src} data-title={g.title} aria-label={g.title}>
               <img src={g.src} alt={g.title} loading="lazy" decoding="async" />
             </button>
           ))}
         </div>
+        <ShowMore label={t.common.showMore} total={gallery.length} show={9} />
       </div>
     </section>
   )}
 
   <CtaBand title={m.cta.title} lead={m.cta.lead}>
-    <Btn href={profileHref} arrow>{m.cta.primary}</Btn>
+    <Btn href={profileHref} icon="download" download={!!SITE.profilePdf}>{m.cta.primary}</Btn>
     <Btn href={href('partnership', lang)} variant="glass">{m.cta.secondary}</Btn>
   </CtaBand>
 </Base>

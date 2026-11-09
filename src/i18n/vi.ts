@@ -23,8 +23,8 @@ const vi = {
       about: 'Về chúng tôi',
       solutions: 'Giải pháp',
       products: 'Sản phẩm',
-      scheme: 'Đề án',
-      xhh: 'Xã hội hoá',
+      scheme: 'Đề án theo NSNN',
+      xhh: 'Đề án XHH',
       projects: 'Dự án tiêu biểu',
       store: 'Store',
       impact: 'Năng lực & Dấu ấn',
@@ -32,6 +32,9 @@ const vi = {
       news: 'Blog',
       contact: 'Liên hệ',
     },
+    /** Menu thả xuống ở thanh điều hướng. */
+    showMore: 'Xem thêm',
+    menu: { scheme: 'Đề án', allProducts: 'Xem tất cả sản phẩm', open: 'Mở menu con' },
     ctaPartner: 'Hợp tác cùng LtL',
     call: 'Gọi',
     menuOpen: 'Mở menu',
@@ -52,7 +55,7 @@ const vi = {
     close: 'Đóng',
   },
   footer: {
-    about: 'Phổ cập STEM AI — Học tập để nhảy vọt trong kỷ nguyên vươn mình. Đơn vị tư vấn & cung cấp giải pháp giáo dục STEM và Trí tuệ nhân tạo cho trường phổ thông Việt Nam.',
+    about: 'Phổ cập STEM – AI — Học tập để nhảy vọt trong kỷ nguyên vươn mình. Đơn vị tư vấn & cung cấp giải pháp giáo dục STEM và Trí tuệ nhân tạo cho trường phổ thông Việt Nam.',
     solutions: 'Giải pháp',
     company: 'Công ty',
     contact: 'Liên hệ',
@@ -64,7 +67,7 @@ const vi = {
       { label: 'Ngày hội & Sân chơi', hash: '#san-choi' },
       { label: 'Innovation Hub', hash: '#innovation-hub' },
     ],
-    profile: 'Nhận Hồ sơ năng lực',
+    profile: 'Tải Hồ sơ năng lực (PDF)',
     rights: 'Công ty Cổ phần Công nghệ Giáo dục Learn to Leap · MST',
     aligned: 'Đồng hành:',
   },
@@ -131,13 +134,13 @@ const vi = {
     { id: 'sol-ngayhoi', hash: '#san-choi', num: '05', icon: 'megaphone', title: 'Ngày hội & Sân chơi', desc: 'Hơn 100 ngày hội đã tổ chức với 30.000+ học sinh tham gia, cùng các cuộc thi cấp trường, tỉnh, quốc gia và quốc tế.', tag: '100+ ngày hội' },
     { id: 'sol-traihe', hash: '#tour-he', num: '06', icon: 'camp', title: 'Tour hè & Trại hè công nghệ', desc: 'Trại hè STEM – AI cho học sinh 7–16 tuổi và tour trải nghiệm hướng nghiệp tại các khu công nghiệp, doanh nghiệp công nghệ.', tag: 'Hè sáng tạo' },
     { id: 'sol-huanluyen', hash: '#huan-luyen', num: '07', icon: 'terminal', title: 'Huấn luyện đội tuyển', desc: 'Đào tạo chuyên sâu cho đội tuyển dự các đấu trường hàng đầu: VEX Robotics, UBTECH, WRO, FLL, GreenMech, OhStem…', tag: 'Vươn ra quốc tế' },
-    { id: 'sol-ihub', hash: '#innovation-hub', num: '08', icon: 'hub', title: 'Innovation Hub', desc: 'Chuỗi trung tâm học tập tương lai trên toàn quốc: Blended Learning, khóa học trực tuyến, Active Learning, workshop và xưởng sáng chế cuối tuần.', tag: 'Hệ sinh thái ILH' },
+    { id: 'sol-ihub', hash: '#innovation-hub', num: '08', icon: 'hub', title: 'Innovation Hub', desc: 'Chuỗi trung tâm học tập tương lai trên toàn quốc: Blended Learning, khoá học trực tuyến, Active Learning, workshop và xưởng sáng chế cuối tuần.', tag: 'Hệ sinh thái ILH' },
   ],
   awards: [
-    { img: 'aw-sei', icon: 'star', label: 'Giải thưởng 2023', title: 'SEI Awards 2023', short: '"Ảnh hưởng giáo dục của năm" — vượt 200+ dự án.', desc: '"Ảnh hưởng giáo dục của năm" — Sáng kiến giáo dục thông minh, vượt qua hơn 200 dự án.' },
+    { img: 'aw-sei', icon: 'star', label: 'Giải thưởng 2023 · 2025', title: 'SEI Awards 2023 & 2025', short: '"Ảnh hưởng giáo dục của năm" — vượt 200+ dự án.', desc: 'Vượt qua hơn 200 dự án, Learn to Leap được chọn là "Sáng kiến giáo dục thông minh" SEI Awards 2023 và 2025, hạng mục "Ảnh hưởng giáo dục của năm".' },
     { img: 'proj-stem57', icon: 'shieldCheck', label: 'Dự án quốc gia', title: 'STEM Innovation 57', short: 'Phòng Lab trao tặng bởi đồng chí Tổng Bí thư.', desc: 'Phòng Lab trao tặng tại THCS Cầu Giấy & THPT Kim Liên bởi đồng chí Tổng Bí thư.' },
     { img: 'proj-bacninh', icon: 'trend', label: 'Tỉnh Bắc Ninh', title: 'Top 12 dự án Bắc Ninh', short: 'Được tỉnh lựa chọn hỗ trợ phát triển.', desc: '1 trong 12 dự án xuất sắc được tỉnh Bắc Ninh lựa chọn hỗ trợ phát triển.' },
-    { img: 'aw-top20', icon: 'globe', label: 'Hà Nội · Quốc tế', title: 'Top 20 DN ĐMST Hà Nội', short: 'Viet Startup Interchange tại Thâm Quyến.', desc: 'Đại diện Hà Nội tham gia Viet Startup Interchange mùa 3 tại Thâm Quyến.' },
+    { img: 'aw-top20', icon: 'globe', label: 'Hà Nội · Đổi mới sáng tạo', title: 'Viet Startup Interchange 2024 & 2026', short: 'Doanh nghiệp ĐMST nổi bật của Hà Nội học tập, trao đổi quốc tế.', desc: 'Một trong những doanh nghiệp nổi bật về đổi mới sáng tạo của TP. Hà Nội được tham gia học tập và trao đổi trong chương trình Viet Startup Interchange (2024, 2026).' },
   ],
   portrait: {
     title: 'Năng lực cốt lõi kiến tạo nên [[công dân toàn cầu]]',
@@ -174,7 +177,7 @@ const vi = {
       { n: 20, suf: '+', label: 'Tỉnh, thành phố<br>đã triển khai' },
       { n: 50, suf: '+', label: 'Đối tác<br>chiến lược' },
       { n: 200, suf: '+', label: 'Chủ đề & mô hình<br>trải nghiệm' },
-      { n: 100, suf: '+', label: 'Ngày hội STEM –<br>AI – Robotics' },
+      { n: 100, suf: '+', label: 'Ngày hội<br>STEM – AI – Robotics' },
       { n: 30000, suf: '+', label: 'Học sinh<br>tham gia' },
     ],
     /** Mục logo đối tác (đã chuyển xuống gần cuối trang). */
@@ -204,7 +207,7 @@ const vi = {
     pillars: {
       eyebrow: 'Giải pháp',
       title: 'Hệ sinh thái giáo dục [[toàn diện]]',
-      lead: 'Learn to Leap cung cấp giải pháp đồng bộ: từ kiến tạo không gian, chuẩn hóa chương trình đến tổ chức các sân chơi trải nghiệm thực tế trong nước & quốc tế.',
+      lead: 'Learn to Leap cung cấp giải pháp đồng bộ: từ kiến tạo không gian, chuẩn hoá chương trình đến tổ chức các sân chơi trải nghiệm thực tế trong nước & quốc tế.',
       cta: 'Xem chi tiết giải pháp',
       items: [
         { title: 'STEM Lab', img: 'sol-lab', hash: '#lab', list: ['Phòng STEM – AI Robotics theo TT 86', 'Thiết bị, nội thất & nền tảng LMS', 'Chương trình và đào tạo giáo viên đi kèm'] },
@@ -213,17 +216,17 @@ const vi = {
         { title: 'Humanoid AI Lab', img: 'sol-ailab', hash: '#ai-lab', list: ['Robot hình người AI', 'Thị giác máy tính & dự án AI', 'AI Center cho học sinh, giáo viên'] },
       ],
     },
-    /** Mục 5 — Dải tối: 5 dòng thiết bị Robotic AI, chỉ ghi đặc trưng dòng, không ghi tên hãng.
+    /** Mục 5 — Dải tối: 5 dòng thiết bị Robotics – AI, chỉ ghi đặc trưng dòng, không ghi tên hãng.
      *  tab: nhãn nút chọn; giant: 2 dòng chữ lớn phía sau. */
     robotic: {
-      eyebrow: 'Hệ sinh thái Robotic AI',
+      eyebrow: 'Hệ sinh thái Robotics – AI',
       title: 'Trải nghiệm công nghệ hiện đại [[ngay tại lớp học]]',
       lead: 'Đối tác chính thức của các hãng robot giáo dục hàng đầu, Learn to Leap mang tinh hoa công nghệ thế giới vào lớp học với 5 dòng thiết bị tối tân – từ robot hình người AI đến hệ thống IoT.',
-      cta: 'Xem phòng STEM AI Robotics',
+      cta: 'Xem Phòng STEM – AI Lab',
       pickLabel: 'Chọn dòng sản phẩm',
       lines: [
         { tab: 'Robot hình người', kind: 'Humanoid · AI hiện thân', name: 'Robot hình người AI', desc: 'Robot hình người cỡ lớn — trình diễn, nghiên cứu và truyền cảm hứng về trí tuệ nhân tạo hiện thân.', tags: ['Humanoid', 'AI hiện thân', 'Trình diễn'], giant: ['HUMANOID', 'AI·ROBOT'] },
-        { tab: 'Robot lập trình', kind: 'Lập trình · Kỹ thuật', name: 'Robot lập trình AI', desc: 'Robot hình người cỡ nhỏ để học lập trình Python & AI, cùng bộ lắp ghép kỹ thuật cơ khí – điện tử.', tags: ['Python', 'Thị giác máy', 'Kỹ thuật'], giant: ['CODE·AI', 'ENGINEER'] },
+        { tab: 'Robot lập trình', kind: 'Lập trình · Kĩ thuật', name: 'Robot lập trình AI', desc: 'Robot hình người cỡ nhỏ để học lập trình Python & AI, cùng bộ lắp ghép kỹ thuật cơ khí – điện tử.', tags: ['Python', 'Thị giác máy', 'Kỹ thuật'], giant: ['CODE·AI', 'ENGINEER'] },
         { tab: 'Lắp ghép AI', kind: 'Robotics · Biến hình', name: 'Robot lắp ghép AI', desc: 'Một bộ robot biến hình nhiều dạng — xe, chó robot, cánh tay — lắp ghép sáng tạo, lập trình khối.', tags: ['Biến hình', 'Lập trình khối', 'Thi đấu'], giant: ['MODULAR', 'ROBOTICS'] },
         { tab: 'STEAM', kind: 'STEAM · Maker', name: 'STEAM & Maker', desc: 'Học liệu lắp ghép và bộ robot – IoT cho các dự án STEAM thực hành, từ ý tưởng đến sản phẩm.', tags: ['Lắp ghép', 'IoT', 'Dự án'], giant: ['STEAM', 'MAKER'] },
         { tab: 'STEM · IoT', kind: 'STEM Khoa học · IoT', name: 'STEM Khoa học & IoT', desc: 'Học liệu Hoạt động giáo dục STEM, mô hình IoT, nhà thông minh và năng lượng tái tạo.', tags: ['Học liệu', 'Cảm biến', 'Nhà thông minh'], giant: ['STEM', 'IOT·LAB'] },
@@ -237,7 +240,7 @@ const vi = {
       basisLabel: 'Lộ trình căn cứ',
       /** Xếp theo trình tự thời gian, hiển thị nối mũi tên. */
       basis: ['Chương trình GDPT 2018', 'Nghị quyết 57-NQ/TW · 71-NQ/TW', 'Thông tư 86/2026/TT-BGDĐT', 'Quyết định 2422/QĐ-BGDĐT', 'Khung năng lực số'],
-      cta: 'Nhận Hồ sơ năng lực',
+      cta: 'Tải Hồ sơ năng lực',
       cta2: 'Phương án hợp tác',
     },
     /** Mục 7 — Dấu ấn (thẻ lấy từ awards; awards[1] là dự án nổi bật). */
@@ -275,7 +278,7 @@ const vi = {
     /** Mục 9 — Hành động. */
     cta: {
       eyebrow: 'Đồng hành cùng Learn to Leap',
-      title: 'Cùng phổ cập [[STEM – Robotics – AI]] đến mọi miền tổ quốc',
+      title: 'Cùng phổ cập [[STEM – AI – Robotics]] đến mọi miền tổ quốc',
       lead: 'Đặt lịch làm việc để đội ngũ Learn to Leap khảo sát, tư vấn và gửi Hồ sơ năng lực đầy đủ.',
       book: 'Đặt lịch tư vấn',
     },
@@ -292,7 +295,7 @@ const vi = {
     storyEyebrow: 'Câu chuyện của chúng tôi',
     story: [
       'Ra đời năm 2023, Learn to Leap (LtL) khởi nguồn từ một niềm tin mãnh liệt: Trong kỷ nguyên số, khi Trí tuệ nhân tạo (AI) đang tái định hình thế giới, <strong>giáo dục công nghệ tuyệt đối không thể là đặc quyền của riêng ai</strong>. Chúng tôi khao khát mang cơ hội tiếp cận công nghệ đến mọi học sinh Việt Nam — từ những thành phố lớn đến các vùng miền còn khó khăn — để không một ai bị bỏ lại phía sau.',
-      'Để hiện thực hóa tầm nhìn đó, LtL tiên phong trở thành <strong>đơn vị tư vấn và cung cấp giải pháp giáo dục STEM & AI toàn diện</strong> cho các trường phổ thông. Mọi chương trình của chúng tôi đều được tinh chỉnh khắt khe, bám sát Chương trình GDPT 2018 và các khung năng lực số tiên tiến nhất.',
+      'Để hiện thực hoá tầm nhìn đó, LtL tiên phong trở thành <strong>đơn vị tư vấn và cung cấp giải pháp giáo dục STEM & AI toàn diện</strong> cho các trường phổ thông. Mọi chương trình của chúng tôi đều được tinh chỉnh khắt khe, bám sát Chương trình GDPT 2018 và các khung năng lực số tiên tiến nhất.',
       'LtL chọn cách trở thành người bạn đồng hành sâu sát, từ tư vấn chiến lược, chuyển giao mô hình, cho đến trực tiếp triển khai và sát cánh cùng nhà trường trên hành trình đánh thức tiềm năng của từng học sinh. Hơn thế nữa, LtL tự hào là <strong>đối tác chiến lược</strong> trong việc kết nối và thực thi các dự án trọng điểm quốc gia về STEM, AI và chuyển đổi số trong giáo dục.',
     ],
     photoAlt: 'Cuộc thi ROBOG Miền Bắc 2026 — Learn to Leap',
@@ -300,29 +303,32 @@ const vi = {
     quote: '"Sự đồng hành giữa Nhà trường, Phụ huynh, các cơ quan ban ngành, đối tác và Learn to Leap sẽ tạo nên một hệ sinh thái giáo dục bền vững — nơi mỗi học sinh được truyền cảm hứng để tự tin, sáng tạo và bản lĩnh công nghệ."',
     quoteName: 'Lê Văn Trí',
     quoteRole: 'Nhà sáng lập & Tổng Giám đốc, Learn to Leap',
-    /** Nhà sáng lập. photo: đường dẫn trong public/ (để trống thì hiện chữ viết tắt). Nội dung tạm — chờ CEO duyệt. */
-    founder: {
-      eyebrow: 'Nhà sáng lập',
-      title: 'Người khởi xướng [[hành trình Learn to Leap]]',
-      name: 'Lê Văn Trí',
-      role: 'Nhà sáng lập & Tổng Giám đốc',
-      photo: '',
-      bio: [
-        'Sáng lập Learn to Leap năm 2023 với niềm tin giáo dục công nghệ không thể là đặc quyền của riêng ai.',
-        'Dẫn dắt đội ngũ đưa mô hình STEM – AI – Robotics tới hơn 20 tỉnh, thành phố, cùng các Sở GD&ĐT, nhà trường và đối tác quốc tế.',
+    /** Đội ngũ sáng lập (HSNL trang 7). Người đầu tiên hiện lớn nhất. photo: ảnh trong public/images/team. */
+    founders: {
+      eyebrow: 'Đội ngũ sáng lập',
+      title: 'Những người [[khởi xướng Learn to Leap]]',
+      lead: 'Ban lãnh đạo Learn to Leap là những chuyên gia trong lĩnh vực giáo dục, công nghệ và quản trị chiến lược, với nhiều năm kinh nghiệm điều hành các tổ chức giáo dục trong nước và quốc tế.',
+      items: [
+        { name: 'Lê Văn Trí', role: 'Nhà sáng lập & Tổng Giám đốc (CEO)', photo: '/images/team/le-van-tri.webp', bio: ['12 năm kinh nghiệm trong lĩnh vực Giáo dục, STEM', 'Đồng sáng lập TEKY, ZIM Academy, Dino Đi học…'] },
+        { name: 'ThS. Ngô Thượng Huy', role: 'Đồng sáng lập · Giám đốc Vận hành (COO)', photo: '/images/team/ngo-thuong-huy.webp', bio: ['25 năm công tác, trong đó 10 năm tại cơ quan quản lý nhà nước', 'Tham gia tổ tư vấn cho nhiều dự án quốc gia'] },
+        { name: 'ThS. Phạm Quốc Hùng', role: 'Đồng sáng lập · Giám đốc Đầu tư (CIO)', photo: '/images/team/pham-quoc-hung.webp', bio: ['12 năm kinh nghiệm đầu tư, vận hành dự án Công nghệ, Giáo dục', 'Founder Aruna Holding, Indochina E&C…'] },
+        { name: 'Ông Ngô Thượng Kỷ', role: 'Đồng sáng lập · Giám đốc Phát triển kinh doanh (BDM)', photo: '/images/team/ngo-thuong-ky.webp', bio: ['15 năm kinh nghiệm trong lĩnh vực Sách và thiết bị trường học', 'TGĐ Sách và Thiết bị trường học Thái Nguyên'] },
+        { name: 'Bà Bùi Thị Hải Yến', role: 'Đồng sáng lập · Giám đốc Tài chính (CFO)', photo: '/images/team/bui-thi-hai-yen.webp', bio: ['20 năm kinh nghiệm trong lĩnh vực Giải pháp thiết bị Giáo dục', 'Chủ tịch HĐQT Phúc Nam Thành, AILIFE…'] },
+        { name: 'Bà Trần Thị Vân Anh', role: 'Đồng sáng lập · Giám đốc Dự án (PD)', photo: '/images/team/tran-thi-van-anh.webp', bio: ['05 năm kinh nghiệm trong lĩnh vực giáo dục trải nghiệm', 'TGĐ Trung tâm trải nghiệm Sáng tạo STEAM PARK'] },
       ],
     },
-    /** Nhân vật & cố vấn chiến lược. Nội dung tạm — chờ CEO gửi tên, chức danh, ảnh. name trống thì hiện chữ "Đang cập nhật". */
+    /** Hội đồng cố vấn / chuyên gia (HSNL trang 8, nội dung theo Sheet CEO). */
     advisors: {
-      eyebrow: 'Nhân vật & cố vấn chiến lược',
-      title: 'Những người [[đồng hành dẫn đường]]',
-      lead: 'Learn to Leap được dẫn dắt bởi đội ngũ lãnh đạo và các cố vấn giàu kinh nghiệm trong giáo dục, công nghệ và quản trị.',
-      pending: 'Đang cập nhật',
+      eyebrow: 'Cố vấn & chuyên gia',
+      title: 'Hội đồng [[cố vấn chiến lược]]',
+      lead: 'Hội đồng Cố vấn Learn to Leap gồm các chuyên gia giáo dục, kỹ sư công nghệ, nhà nghiên cứu chính sách đến từ các tổ chức quốc tế và trường đại học hàng đầu.',
       items: [
-        { name: '', role: 'Cố vấn chiến lược — Giáo dục', desc: 'Thông tin cố vấn đang được cập nhật.' },
-        { name: '', role: 'Cố vấn chiến lược — Công nghệ & AI', desc: 'Thông tin cố vấn đang được cập nhật.' },
-        { name: '', role: 'Cố vấn chiến lược — Hợp tác quốc tế', desc: 'Thông tin cố vấn đang được cập nhật.' },
-        { name: '', role: 'Cố vấn chiến lược — Quản trị', desc: 'Thông tin cố vấn đang được cập nhật.' },
+        { name: 'PGS.TS Tưởng Duy Hải', role: 'Cố vấn giáo dục cấp cao', photo: '/images/team/tuong-duy-hai.webp', bio: ['Cố vấn cấp cao về giáo dục STEM và Trí tuệ nhân tạo (AI)', 'Vai trò lãnh đạo, cố vấn tại các dự án quốc gia về giáo dục số'] },
+        { name: 'PGS.TS Nguyễn Chấn Hùng', role: 'Chuyên gia Giáo dục thông minh', photo: '/images/team/nguyen-chan-hung.webp', bio: ['Chủ tịch Cộng đồng Giáo dục Thông minh Việt Nam (VISEDU)'] },
+        { name: 'TS. Vũ Gia Luyện', role: 'Chuyên gia cấp cao về Khoa học Công nghệ', photo: '/images/team/vu-gia-luyen.webp', bio: ['Chủ tịch HĐQT ITS', 'Doanh nhân trẻ Khởi nghiệp xuất sắc'] },
+        { name: 'Ông Nguyễn Sỹ Nam', role: 'Chuyên gia giáo dục STEM, chuyển đổi số giáo dục', photo: '/images/team/nguyen-sy-nam.webp', bio: ['Giám đốc Trung tâm Chuyển đổi số — Viện Nghiên cứu Thiết kế Trường học, Bộ GD&ĐT'] },
+        { name: 'Bà Anh Nguyễn', role: 'Chuyên gia Giáo dục / Truyền thông', photo: '/images/team/anh-nguyen.webp', bio: ['Hơn 20 năm tư vấn chiến lược về giáo dục và truyền thông', 'Tổ chức nhiều cuộc thi quy mô quốc gia và quốc tế'] },
+        { name: 'Bà Nguyễn Tố Uyên', role: 'Chuyên gia Marcom / EdTech', photo: '/images/team/nguyen-to-uyen.webp', bio: ['15 năm kinh nghiệm trong lĩnh vực Marcom', '8 năm nghiên cứu giáo dục sớm, EdTech', 'Thành viên đề án Trường học thông minh Hà Nội'] },
       ],
     },
     values: {
@@ -341,7 +347,7 @@ const vi = {
       lead: 'Triết lý của Learn to Leap là <em>học qua làm, làm ra sản phẩm thật</em>. Mọi chương trình đều hướng đến đầu ra cụ thể — tư duy logic, kỹ năng giải quyết vấn đề, năng lực hợp tác và bản lĩnh công nghệ.',
     },
     cta: {
-      title: 'Cùng viết tiếp câu chuyện phổ cập STEM – Robotics – AI đến mọi miền tổ quốc',
+      title: 'Cùng viết tiếp câu chuyện phổ cập STEM – AI – Robotics đến mọi miền tổ quốc',
       lead: 'Nhận Hồ sơ năng lực đầy đủ và trao đổi phương án hợp tác phù hợp với đơn vị của bạn.',
       primary: 'Liên hệ hợp tác',
       secondary: 'Xem giải pháp',
@@ -372,7 +378,7 @@ const vi = {
         { v: '35–70', u: 'tiết', k: 'mỗi năm học' },
         { v: '08', u: 'nhóm', k: 'mỗi lớp học' },
         { v: '4–6', u: 'HS', k: 'mỗi nhóm thực hành' },
-        { v: '30K', u: 'đ/tiết', k: 'học phí dự kiến' },
+        { v: 'Thoả thuận', u: '', k: 'mức học phí' },
       ],
     },
     ladder: {
@@ -484,7 +490,7 @@ const vi = {
   /* ---------- Năng lực & Dấu ấn ---------- */
   impact: {
     hero: {
-      title: 'Hành trình phổ cập [[STEM – Robotics – AI]] đến mọi miền tổ quốc',
+      title: 'Hành trình phổ cập [[STEM – AI – Robotics]] đến mọi miền tổ quốc',
       lead: 'Learn to Leap không chỉ phát triển giải pháp, mà trực tiếp triển khai thành công với hệ sinh thái toàn diện — từ đào tạo giáo viên, tổ chức sự kiện đến xây dựng Lab thông minh.',
     },
     stats: [
@@ -515,7 +521,7 @@ const vi = {
     cta: {
       title: 'Xem chi tiết các case study triển khai thực tế',
       lead: 'Nhận Hồ sơ năng lực đầy đủ cùng các case study triển khai thực tế.',
-      primary: 'Nhận Hồ sơ năng lực',
+      primary: 'Tải Hồ sơ năng lực',
       secondary: 'Phương án hợp tác',
     },
   },
@@ -581,7 +587,7 @@ const vi = {
         { code: 'NQ 71-NQ/TW', title: 'Nghị quyết 71-NQ/TW (22/8/2025)', desc: 'Đột phá phát triển giáo dục & đào tạo, đáp ứng yêu cầu kỷ nguyên mới.' },
         { code: 'GDPT 2018', title: 'Chương trình GDPT 2018 (TT 32/2018)', desc: '5 phẩm chất, 10 năng lực — nền tảng định hướng nội dung mọi chương trình.' },
         { code: 'TT 86/2026', title: 'Tổ chức giáo dục STEM (TT 86/2026/TT-BGDĐT)', desc: 'Quy định tổ chức giáo dục STEM trong trường phổ thông, kèm danh mục khung thiết bị giáo dục STEM cấp Tiểu học, THCS, THPT.' },
-        { code: 'QĐ 2422', title: 'Quyết định 2422/QĐ-BGDĐT', desc: 'Khung nội dung giáo dục trí tuệ nhân tạo cho học sinh phổ thông — thay cho bản thí điểm QĐ 3439.' },
+        { code: 'QĐ 2422', title: 'Khung nội dung giáo dục AI (QĐ 2422/QĐ-BGDĐT, 18/8/2026)', desc: 'Phê duyệt Khung nội dung giáo dục trí tuệ nhân tạo (AI) cho học sinh phổ thông.' },
         { code: 'TT 02/2025', title: 'Khung Năng lực số (TT 02/2025/TT-BGDĐT)', desc: '6 miền, 26 năng lực số cho người học — cơ sở thiết kế chương trình & đánh giá.' },
         { code: 'TT 14/2025', title: 'Phòng học bộ môn (TT 14/2025/TT-BGDĐT)', desc: 'Quy định mới về phòng học bộ môn — cơ sở chuẩn hoá phòng STEM – AI Lab.' },
       ],
@@ -597,20 +603,43 @@ const vi = {
   /* ---------- Sản phẩm (tên mục chưa chốt) ---------- */
   products: {
     hero: {
-      title: 'Các nhóm [[sản phẩm]] STEM – AI – Robotics',
-      lead: 'Năm nhóm thiết bị Learn to Leap phân phối và chuyển giao cho nhà trường — từ robot hình người AI đến học liệu STEM – IoT, đi kèm chương trình và đào tạo giáo viên.',
-      cta: 'Xem danh mục trên Store',
+      title: 'Thiết bị, cấu phần [[theo Thông tư 86]]',
+      lead: 'Thiết bị cho Phòng STEM – AI Lab sắp theo bốn nhóm của Thông tư 86/2026/TT-BGDĐT, cùng các cấu phần giáo dục thông minh — từ các hãng trong và ngoài nước mà Learn to Leap phân phối, chuyển giao.',
+      cta: 'Nhận tư vấn & báo giá',
     },
-    levelLabel: 'Cấp học',
-    usesLabel: 'Ứng dụng',
-    storeCta: 'Xem trong Store',
-    /** bots: ảnh tách nền trong public/images/robots (ảnh đầu to nhất). store: neo nhóm trên trang Store. */
+    navLabel: 'Nhóm thiết bị',
+    navTitle: 'Thiết bị, cấu phần theo TT 86 · Phòng STEM – AI Lab',
+    brandLabel: 'Hãng',
+    pending: 'Thông tin sản phẩm đang được cập nhật.',
+    more: 'Và nhiều giải pháp sản phẩm Giáo dục thông minh khác',
+    moreCta: 'Liên hệ tư vấn',
+    /** Nhóm theo TT 86/2026. parts[].id là khoá sản phẩm minh hoạ trong src/data/catalog.ts. */
     groups: [
-      { id: 'humanoid', bots: ['tienkung', 'cruzr'], kind: 'Humanoid · AI hiện thân', name: 'Robot hình người AI', level: 'THCS · THPT · AI Center', desc: 'Robot hình người cỡ lớn — trình diễn, nghiên cứu và truyền cảm hứng về trí tuệ nhân tạo hiện thân.', uses: ['Trình diễn tại ngày hội, sự kiện', 'Nghiên cứu AI hiện thân', 'Hạt nhân của Humanoid AI Lab'], store: '#nhom-6' },
-      { id: 'lap-trinh', bots: ['yanshee', 'ukit-se'], kind: 'Lập trình · Kỹ thuật', name: 'Robot lập trình AI', level: 'THCS · THPT', desc: 'Robot hình người cỡ nhỏ để học lập trình Python & AI, cùng bộ lắp ghép kỹ thuật cơ khí – điện tử.', uses: ['Lập trình Python, nhận diện giọng nói, khuôn mặt', 'Thị giác máy tính', 'Chương trình AI THCS, THPT'], store: '#nhom-5' },
-      { id: 'lap-ghep', bots: ['ugot-up', 'ugot-dog'], kind: 'Robotics · Biến hình', name: 'Robot lắp ghép AI', level: 'Tiểu học · THCS', desc: 'Một bộ robot biến hình nhiều dạng — xe, chó robot, cánh tay — lắp ghép sáng tạo, lập trình khối.', uses: ['Lập trình khối, lắp ghép sáng tạo', 'Thi đấu robot', 'CLB Robotics'], store: '#nhom-5' },
-      { id: 'steam', bots: ['stickem-robot', 'weeemake-kit'], kind: 'STEAM · Maker', name: 'STEAM & Maker', level: 'Tiểu học · THCS', desc: 'Học liệu lắp ghép và bộ robot – IoT cho các dự án STEAM thực hành, từ ý tưởng đến sản phẩm.', uses: ['Dự án STEAM theo chủ đề', 'Thiết kế kĩ thuật và chế tạo', "Sân chơi Stick 'Em Dojo"], store: '#nhom-4' },
-      { id: 'stem-iot', bots: ['kt-smarthouse', 'kt-datalogger'], kind: 'STEM Khoa học · IoT', name: 'STEM Khoa học & IoT', level: 'Tiểu học · THCS · THPT', desc: 'Học liệu Hoạt động giáo dục STEM, mô hình IoT, nhà thông minh và năng lượng tái tạo.', uses: ['Thí nghiệm đo lường bằng cảm biến', 'Mô hình nhà thông minh, IoT', 'Năng lượng tái tạo'], store: '#nhom-3' },
+      { id: 'nhom-1', no: '1', short: 'Khám phá, đo lường & thực nghiệm', title: 'Nhóm thiết bị khám phá, đo lường và thực nghiệm khoa học', desc: 'Thiết bị thí nghiệm, đo lường và thu nhận số liệu cho các chủ đề Khoa học tự nhiên từ Tiểu học đến THPT.', blocks: [
+        { id: 'kit-khtn', title: 'Các bộ KIT STEM Khoa học tự nhiên', brands: 'EBD – NXB Giáo dục Việt Nam · CMA', parts: [
+          { id: 'khtn-chude', title: 'Thiết bị, dụng cụ, vật tư tiêu hao chủ đề từ Lớp 1–12' },
+          { id: 'khtn-cambien', title: 'Các cảm biến, kết nối' },
+        ] },
+        { id: 'thi-nghiem', title: 'Bộ thí nghiệm & thu nhận số liệu', brands: 'OhStem', parts: [{ id: 'g1-thinghiem', title: '' }] },
+      ] },
+      { id: 'nhom-2', no: '2', short: 'Thiết kế kĩ thuật & chế tạo', title: 'Nhóm thiết bị thiết kế kĩ thuật và chế tạo', desc: 'Mô hình kĩ thuật, bộ lắp ghép, dụng cụ chế tạo và máy in 3D để học sinh đi từ ý tưởng đến sản phẩm thật.', blocks: [
+        { id: 'mo-hinh', title: 'Mô hình STEM – IoT theo chủ đề', brands: 'Khang Thịnh', parts: [{ id: 'g2-mohinh', title: '' }] },
+        { id: 'che-tao', title: 'Lắp ghép, dụng cụ chế tạo & máy in 3D', brands: 'OhStem · Weeemake · Bambu Lab', parts: [{ id: 'g2-chetao', title: '' }] },
+      ] },
+      { id: 'nhom-3', no: '3', short: 'Lập trình & robot giáo dục', title: 'Nhóm thiết bị lập trình và robot giáo dục', desc: 'Robot lắp ghép, robot lập trình và robot hình người AI — từ lập trình khối ở Tiểu học đến Python, AI ở THPT.', blocks: [
+        { id: 'ubtech', title: 'Robot hình người & robot AI', brands: 'UBTECH Robotics', parts: [{ id: 'g3-ubtech', title: '' }] },
+        { id: 'stickem', title: "Robotics – STEAM Stick 'Em", brands: "Stick 'Em (Singapore)", parts: [{ id: 'g3-stickem', title: '' }] },
+        { id: 'robot-lap-trinh', title: 'Robot lập trình & thi đấu', brands: 'Weeemake · OhStem', parts: [{ id: 'g3-khac', title: '' }] },
+      ] },
+      { id: 'nhom-4', no: '4', short: 'Công nghệ số, AI & IoT', title: 'Nhóm thiết bị công nghệ số, trí tuệ nhân tạo và Internet vạn vật (IoT)', desc: 'Bộ trải nghiệm AI, kit IoT theo chủ đề và thiết bị thực tế ảo cho hoạt động công nghệ số.', blocks: [
+        { id: 'ai', title: 'Trải nghiệm & học máy AI', brands: 'OhStem · Weeemake · Meta', parts: [{ id: 'g4-ai', title: '' }] },
+        { id: 'iot', title: 'Kit IoT theo chủ đề', brands: 'OhStem · Weeemake', parts: [{ id: 'g4-iot', title: '' }] },
+      ] },
+      { id: 'nhom-5', no: '5', short: 'Các cấu phần khác', title: 'Các cấu phần khác', desc: 'Lớp học thông minh, thư viện số, màn hình tương tác và nền tảng AI — kết nối Phòng STEM – AI Lab với toàn trường.', blocks: [
+        { id: 'vdsmart', title: 'Lớp học thông minh & thư viện số AI', brands: 'VDSMART (VisEdu)', parts: [{ id: 'g5-vdsmart', title: '' }] },
+        { id: 'maxhub', title: 'Màn hình tương tác & thiết bị lớp học', brands: 'MAXHUB', parts: [{ id: 'g5-maxhub', title: '' }] },
+        { id: 'mysher', title: 'Giải pháp Mysher', brands: 'Mysher', parts: [{ id: 'g5-mysher', title: '' }] },
+      ] },
     ],
   },
 
@@ -621,40 +650,29 @@ const vi = {
       lead: 'Learn to Leap đồng hành cùng Sở, Phòng GD&ĐT và nhà trường xây dựng đề án từ ngân sách nhà nước — bám sát Nghị quyết 57-NQ/TW, 71-NQ/TW và Thông tư 86/2026/TT-BGDĐT, khả thi khi triển khai.',
       cta: 'Trao đổi về đề án',
     },
-    types: {
-      eyebrow: 'Loại đề án',
-      title: 'Các đề án [[Learn to Leap tư vấn]]',
-      items: [
-        { icon: 'network', title: 'Đề án Chuyển đổi số giáo dục', desc: 'Lộ trình chuyển đổi số toàn ngành: hạ tầng, học liệu số, năng lực số của giáo viên và học sinh.' },
-        { icon: 'school', title: 'Đề án Giáo dục thông minh', desc: 'Trường học thông minh, phòng học thông minh, thư viện số — triển khai theo từng giai đoạn.' },
-        { icon: 'robot', title: 'Đề án Giáo dục STEM – AI toàn tỉnh', desc: 'Phổ cập giáo dục STEM – AI quy mô tỉnh/thành, có chỉ tiêu, lộ trình và mô hình đánh giá.' },
-        { icon: 'lab', title: 'Đề án STEM cấp trường từ ngân sách', desc: 'Phòng STEM theo danh mục khung của TT 86/2026, kèm chương trình và đào tạo giáo viên.' },
-      ],
-    },
-    deliver: {
-      eyebrow: 'Learn to Leap cung cấp',
-      title: 'Hồ sơ đề án [[đầy đủ, đúng quy định]]',
-      items: [
-        'Khảo sát hiện trạng và báo cáo đánh giá',
-        'Thuyết minh đề án, mục tiêu và chỉ tiêu bám NQ 57, NQ 71',
-        'Danh mục thiết bị đối chiếu TT 86/2026, tránh trùng danh mục thiết bị dạy học tối thiểu',
-        'Dự toán kinh phí theo từng giai đoạn',
-        'Kế hoạch đào tạo, bồi dưỡng giáo viên',
-        'Phương án vận hành, đánh giá hiệu quả sau đầu tư',
-      ],
-    },
+    basis: { eyebrow: 'Căn cứ pháp lý', title: 'Căn cứ pháp lý [[thực hiện đề án]]' },
     steps: {
-      eyebrow: 'Quy trình',
-      title: 'Từ ý tưởng đến [[đề án được phê duyệt]]',
+      eyebrow: 'Quy trình thực hiện',
+      title: 'Từ khảo sát đến [[đề án được phê duyệt]]',
       items: [
-        { title: 'Khảo sát', desc: 'Đánh giá hiện trạng cơ sở vật chất, đội ngũ và nhu cầu của địa phương.' },
-        { title: 'Xây dựng đề án', desc: 'Mục tiêu, chỉ tiêu, lộ trình và mô hình triển khai phù hợp ngân sách.' },
-        { title: 'Thẩm định danh mục', desc: 'Rà soát từng hạng mục với TT 86/2026 và các quy định liên quan.' },
-        { title: 'Triển khai & đào tạo', desc: 'Lắp đặt, chuyển giao chương trình, tập huấn giáo viên.' },
-        { title: 'Đánh giá', desc: 'Theo dõi chỉ tiêu, báo cáo hiệu quả và điều chỉnh giai đoạn sau.' },
+        { title: 'Khảo sát', desc: 'Đánh giá hiện trạng cơ sở vật chất, đội ngũ và nhu cầu; lập báo cáo hiện trạng.' },
+        { title: 'Xây dựng đề án', desc: 'Thuyết minh mục tiêu, chỉ tiêu bám NQ 57, NQ 71; lộ trình và dự toán theo từng giai đoạn.' },
+        { title: 'Thẩm định danh mục', desc: 'Đối chiếu từng hạng mục với TT 86/2026, tránh trùng danh mục thiết bị dạy học tối thiểu.' },
+        { title: 'Triển khai & đào tạo', desc: 'Lắp đặt, chuyển giao chương trình, bồi dưỡng giáo viên theo kế hoạch.' },
+        { title: 'Vận hành & đánh giá', desc: 'Theo dõi chỉ tiêu, đánh giá hiệu quả sau đầu tư và điều chỉnh giai đoạn sau.' },
       ],
     },
-    basis: { eyebrow: 'Căn cứ', title: 'Bám sát [[chủ trương & chính sách]]' },
+    roles: {
+      eyebrow: 'Vai trò các bên',
+      title: 'Mỗi bên một vai trò, [[cùng một mục tiêu]]',
+      items: [
+        { icon: 'shield', title: 'Uỷ ban nhân dân các cấp', desc: 'Ban hành chủ trương, phê duyệt đề án và bố trí nguồn ngân sách nhà nước.' },
+        { icon: 'leader', title: 'Cơ quan quản lý giáo dục', desc: 'Chủ trì xây dựng, thẩm định chuyên môn; chỉ đạo và kiểm tra việc triển khai tại các trường.' },
+        { icon: 'school', title: 'Nhà trường', desc: 'Đề xuất nhu cầu, bố trí không gian và giáo viên; tổ chức dạy học, vận hành sau đầu tư.' },
+        { icon: 'users', title: 'Learn to Leap', desc: 'Khảo sát, tư vấn, xây dựng hồ sơ đề án; cung cấp thiết bị, chương trình, đào tạo giáo viên và đồng hành vận hành.' },
+      ],
+    },
+    projects: { eyebrow: 'Dự án', title: 'Các dự án [[đã thực hiện]]', all: 'Xem tất cả dự án' },
     cta: { title: 'Cần xây dựng đề án cho địa phương, nhà trường?', lead: 'Đội ngũ Learn to Leap khảo sát, tư vấn và cùng đơn vị hoàn thiện hồ sơ đề án.', primary: 'Liên hệ tư vấn đề án', secondary: 'Xem mô hình xã hội hoá' },
   },
 
@@ -665,27 +683,9 @@ const vi = {
       lead: 'Khi ngân sách chưa sẵn sàng, nhà trường vẫn có phòng STEM – AI: doanh nghiệp đầu tư thiết bị, Learn to Leap chuyển giao chương trình và cùng nhà trường vận hành.',
       cta: 'Trao đổi mô hình xã hội hoá',
     },
-    roles: {
-      eyebrow: 'Mô hình',
-      title: 'Ba bên cùng [[kiến tạo]]',
-      items: [
-        { icon: 'users', title: 'Doanh nghiệp đầu tư', desc: 'Đầu tư thiết bị, không gian phòng STEM – AI theo phương án được nhà trường và cơ quan quản lý chấp thuận.' },
-        { icon: 'school', title: 'Nhà trường', desc: 'Bố trí phòng học, thời khoá biểu; giám sát chất lượng và an toàn của hoạt động giáo dục.' },
-        { icon: 'cap', title: 'Learn to Leap', desc: 'Chuyển giao chương trình, giáo viên đứng lớp hoặc đào tạo giáo viên nhà trường, tổ chức sân chơi.' },
-      ],
-    },
-    benefits: {
-      eyebrow: 'Lợi ích',
-      title: 'Lợi ích [[cho từng bên]]',
-      items: [
-        { who: 'Nhà trường', list: ['Có phòng STEM – AI chuẩn mà không chờ ngân sách', 'Đội ngũ giáo viên được đào tạo bài bản', 'Nâng chất lượng giáo dục, thương hiệu nhà trường'] },
-        { who: 'Phụ huynh & học sinh', list: ['Học STEM – AI ngay tại trường, chi phí hợp lý', 'Tham gia ngày hội, cuộc thi các cấp', 'Phát triển năng lực số, tư duy công nghệ'] },
-        { who: 'Doanh nghiệp', list: ['Đồng hành trách nhiệm xã hội vì giáo dục', 'Mô hình vận hành minh bạch, có báo cáo', 'Kết nối hệ sinh thái giáo dục địa phương'] },
-      ],
-    },
-    opTitle: 'Mô hình vận hành tham khảo',
+    basis: { eyebrow: 'Căn cứ pháp lý', title: 'Căn cứ pháp lý [[thực hiện xã hội hoá]]' },
     steps: {
-      eyebrow: 'Quy trình',
+      eyebrow: 'Quy trình thực hiện',
       title: 'Triển khai [[minh bạch, đúng quy định]]',
       items: [
         { title: 'Khảo sát', desc: 'Đánh giá điều kiện phòng học, nhu cầu học sinh.' },
@@ -695,6 +695,32 @@ const vi = {
         { title: 'Vận hành & báo cáo', desc: 'Giảng dạy, sân chơi và báo cáo định kỳ cho nhà trường.' },
       ],
     },
+    roles: {
+      eyebrow: 'Vai trò các bên',
+      title: 'Mỗi bên một vai trò, [[cùng kiến tạo]]',
+      items: [
+        { icon: 'users', title: 'Doanh nghiệp đầu tư', desc: 'Đầu tư thiết bị, không gian phòng STEM – AI theo phương án được nhà trường và cơ quan quản lý chấp thuận.', list: ['Đồng hành trách nhiệm xã hội vì giáo dục', 'Mô hình vận hành minh bạch, có báo cáo', 'Kết nối hệ sinh thái giáo dục địa phương'] },
+        { icon: 'school', title: 'Nhà trường', desc: 'Bố trí phòng học, thời khoá biểu; giám sát chất lượng và an toàn của hoạt động giáo dục.', list: ['Có phòng STEM – AI chuẩn mà không chờ ngân sách', 'Đội ngũ giáo viên được đào tạo bài bản', 'Nâng chất lượng giáo dục, thương hiệu nhà trường'] },
+        { icon: 'user', title: 'Phụ huynh & học sinh', desc: 'Tự nguyện đăng ký tham gia; đóng góp chi phí theo mức đã thống nhất với nhà trường.', list: ['Học STEM – AI ngay tại trường, chi phí hợp lý', 'Tham gia ngày hội, cuộc thi các cấp', 'Phát triển năng lực số, tư duy công nghệ'] },
+        { icon: 'cap', title: 'Learn to Leap', desc: 'Chuyển giao chương trình, giáo viên đứng lớp hoặc đào tạo giáo viên nhà trường, tổ chức sân chơi.', list: ['Chương trình bám CT GDPT 2018 và TT 86/2026', 'Lắp đặt, bảo trì thiết bị trong thời gian hợp tác', 'Báo cáo định kỳ cho nhà trường'] },
+      ],
+    },
+    invest: {
+      eyebrow: 'Danh mục đầu tư',
+      title: 'Danh mục đầu tư [[cho Phòng STEM – AI]]',
+      lead: 'Doanh nghiệp đầu tư trọn gói theo các nhóm thiết bị của Thông tư 86/2026 và các hạng mục đi kèm; cấu hình điều chỉnh theo cấp học, diện tích phòng và số học sinh.',
+      items: [
+        { link: 'nhom-1', title: 'Thiết bị khám phá, đo lường và thực nghiệm khoa học', desc: 'Bộ KIT STEM Khoa học tự nhiên theo chủ đề, cảm biến và thiết bị thu nhận số liệu.' },
+        { link: 'nhom-2', title: 'Thiết bị thiết kế kĩ thuật và chế tạo', desc: 'Mô hình kĩ thuật, bộ lắp ghép, dụng cụ chế tạo và máy in 3D.' },
+        { link: 'nhom-3', title: 'Thiết bị lập trình và robot giáo dục', desc: 'Robot lắp ghép, robot lập trình và robot hình người AI.' },
+        { link: 'nhom-4', title: 'Thiết bị công nghệ số, AI và IoT', desc: 'Bộ trải nghiệm AI, kit IoT theo chủ đề và thiết bị thực tế ảo.' },
+        { link: '', title: 'Không gian & nội thất STEM', desc: 'Thiết kế, thi công phòng; bàn ghế học nhóm, tủ trưng bày sản phẩm học sinh.' },
+        { link: '', title: 'Chương trình, học liệu & đào tạo', desc: 'Chương trình STEM – AI, học liệu số, tập huấn giáo viên và hỗ trợ vận hành.' },
+      ],
+      more: 'Xem chi tiết thiết bị',
+    },
+    opTitle: 'Mô hình vận hành tham khảo',
+    projects: { eyebrow: 'Dự án', title: 'Các dự án [[đã thực hiện]]', all: 'Xem tất cả dự án' },
     note: '* Mức đóng góp, thời hạn và hình thức hợp tác cụ thể được thống nhất với từng nhà trường, theo quy định của địa phương.',
     cta: { title: 'Muốn có phòng STEM – AI theo mô hình xã hội hoá?', lead: 'Learn to Leap khảo sát và đề xuất phương án phù hợp với nhà trường.', primary: 'Đặt lịch khảo sát', secondary: 'Xem đề án ngân sách' },
   },
@@ -707,15 +733,19 @@ const vi = {
     },
     /** img: khoá ảnh trong data/site IMAGES. Trang chủ hiện các mục 2–4 (mục 1 STEM 57 đã ở phần Dấu ấn). */
     items: [
-      { img: 'proj-stem57', flagIcon: 'shield', flag: 'Dự án quốc gia', title: 'STEM Innovation 57', desc: 'Phòng Lab được trao tặng tại THCS Cầu Giấy (Hà Nội) và THPT Kim Liên (Nghệ An) bởi đồng chí Tổng Bí thư — tiên phong ứng dụng công nghệ trong dạy học.', loc: 'Hà Nội · Nghệ An' },
-      { img: 'robog-mb', flagIcon: 'trophy', flag: 'Cuộc thi', title: 'Cuộc thi ROBOG Miền Bắc 2026', desc: 'Sân chơi Robot AI đầu tiên tại khu vực miền Bắc, quy tụ đội thi từ nhiều tỉnh, thành phố.', loc: 'Miền Bắc · 2026' },
-      { img: 'ky-ket-nghe-an', flagIcon: 'network', flag: 'Hợp tác ba nhà', title: 'Hệ sinh thái đổi mới sáng tạo Nghệ An', desc: 'Ký kết hợp tác "Nhà nước – Nhà trường – Doanh nghiệp" phát triển hệ sinh thái đổi mới sáng tạo tỉnh Nghệ An.', loc: 'Nghệ An · 06/2026' },
-      { img: 'thai-nguyen', flagIcon: 'megaphone', flag: 'Sân chơi cấp tỉnh', title: 'STEM – AI – Robotics Thái Nguyên', desc: 'Hội thảo đổi mới sáng tạo cùng Sở GD&ĐT Thái Nguyên và sân chơi STEM – AI – Robotics cấp tỉnh.', loc: 'Thái Nguyên · 2025–2026' },
-      { img: 'khoi-dong-vinh-hung', flagIcon: 'lab', flag: 'Phòng Lab', title: 'Phòng thí nghiệm khoa học ứng dụng AI', desc: 'Lễ khởi động phòng thí nghiệm khoa học ứng dụng AI tại Trường Tiểu học và THCS Vĩnh Hưng.', loc: 'Vĩnh Hưng, Hà Nội' },
+      { img: 'proj-stem57', flagIcon: 'shield', flag: 'Dự án quốc gia', title: 'STEM Innovation 57', desc: 'Đồng hành cùng dự án STEM Innovation 57 của Tập đoàn PVN — phòng Lab được Tổng Bí thư Tô Lâm trao tặng tại Trường THPT Kim Liên (Nam Đàn, Nghệ An), tiên phong ứng dụng công nghệ trong dạy học và phát triển năng lực số thực tiễn.', loc: 'Nghệ An · 2025' },
+      { img: 'robog-mb-2026', flagIcon: 'trophy', flag: 'Cuộc thi khu vực', title: 'Chung kết ROBOG Miền Bắc 2026', desc: 'Vòng chung kết Robotics & AI đầu tiên tại miền Bắc, do Learn to Leap chủ trì cùng Sở KH&CN Hà Nội: 49 đội thi, hơn 240 học sinh từ 17 trường thuộc 4 tỉnh, thành. Các đội xuất sắc dự ROBOG Asia Cup 2026 tại Hong Kong.', loc: 'Hà Nội · 24/05/2026' },
+      { img: 'thai-nguyen-2026', flagIcon: 'megaphone', flag: 'Sân chơi cấp tỉnh', title: 'Sân chơi STEM · AI · Robotics Thái Nguyên 2026', desc: '500 học sinh Tiểu học từ 100 trường, hơn 600 học sinh và huấn luyện viên, tổng giải thưởng 133 triệu đồng. Viện NCTK Trường học – Bộ GD&ĐT phối hợp Sở GD&ĐT Thái Nguyên tổ chức; hơn 10 kênh báo chí đưa tin.', loc: 'Thái Nguyên · 2026' },
+      { img: 'ky-ket-nghe-an', flagIcon: 'network', flag: 'Mô hình 3 nhà', title: 'Hệ sinh thái đổi mới sáng tạo Nghệ An', desc: 'Ký kết thỏa thuận hợp tác ba bên cùng Trường Đại học Vinh và đơn vị quản lý nhà nước, theo mô hình liên kết "Nhà nước – Nhà trường – Doanh nghiệp", đưa STEM – AI đến gần hơn với học sinh, giáo viên và cộng đồng.', loc: 'Nghệ An · 06/2026' },
+      { img: 'san-kh-cn-ha-noi', flagIcon: 'lab', flag: 'Dấu mốc', title: 'Sàn giao dịch KH&CN TP. Hà Nội', desc: 'Learn to Leap chính thức tham gia Sàn giao dịch Khoa học và Công nghệ TP. Hà Nội với giải pháp "STEM – AI Lab tích hợp Phòng học thông minh".', loc: 'Hà Nội' },
+      { img: 'can-tho', flagIcon: 'hub', flag: 'Đổi mới sáng tạo', title: 'Trung tâm Đổi mới sáng tạo TP. Cần Thơ', desc: 'Đồng hành cùng TP. Cần Thơ phát triển mô hình Trung tâm Đổi mới sáng tạo, hướng tới trung tâm giáo dục STEM của Đồng bằng sông Cửu Long theo tinh thần Nghị quyết 57-NQ/TW.', loc: 'Cần Thơ' },
+      { img: 'hoi-thao-thai-nguyen', flagIcon: 'users', flag: 'Hội thảo', title: 'Hội thảo "Đổi mới sáng tạo cùng STEM · AI · Robotics"', desc: 'Cùng Sở GD&ĐT Thái Nguyên quy tụ nhà quản lý giáo dục, hiệu trưởng, giáo viên cốt cán và chuyên gia, thảo luận triển khai chuyển đổi số, giáo dục STEM theo Nghị quyết 57-NQ/TW và 71-NQ/TW.', loc: 'Thái Nguyên · 09/2025' },
+      { img: 'ha-tinh', flagIcon: 'school', flag: 'Làm việc cấp tỉnh', title: 'Làm việc với UBND tỉnh Hà Tĩnh', desc: 'Cùng Trường Cao đẳng Công nghệ cao Hà Nội làm việc với UBND tỉnh Hà Tĩnh và các Sở, ngành về hợp tác chuyển đổi số và giáo dục STEM – AI – Robotics.', loc: 'Hà Tĩnh · 18/05/2026' },
+      { img: 'grg-vn-2025', flagIcon: 'star', flag: 'Cuộc thi quốc gia', title: 'Chung kết GRG Vietnam 2025', desc: "Sân chơi Robotics cấp quốc gia, các đội thi dùng robot Stick 'Em đến từ Singapore — bước chạy đà cho Global Robotics Games tổ chức thường niên tại châu Á.", loc: 'Việt Nam · 2025' },
+      { img: 'khoi-dong-vinh-hung', flagIcon: 'lab', flag: 'Phòng Lab', title: 'Phòng thí nghiệm khoa học ứng dụng AI', desc: 'Lễ khởi động phòng thí nghiệm khoa học ứng dụng AI tại Trường Tiểu học và THCS Vĩnh Hưng; ngày hội trải nghiệm STEM – AI – Robotics tại THCS Vĩnh Hưng và THCS Thanh Trì.', loc: 'Vĩnh Hưng, Hà Nội' },
       { img: 'dong-da', flagIcon: 'screen', flag: 'Chuyển đổi số', title: 'Ngày hội Chuyển đổi số phường Đống Đa', desc: 'Đồng hành Ngày hội Chuyển đổi số phường Đống Đa năm 2026 nhân Ngày Chuyển đổi số quốc gia 10/10.', loc: 'Đống Đa, Hà Nội · 10/2026' },
       { img: 'proj-bacninh', flagIcon: 'trend', flag: 'Đổi mới sáng tạo', title: 'Dấu ấn tại Bắc Ninh', desc: 'Trải nghiệm STEM – AI, ngày hội đổi mới sáng tạo cấp tỉnh — 1 trong 12 dự án được tỉnh lựa chọn hỗ trợ phát triển.', loc: 'Tỉnh Bắc Ninh' },
       { img: 'proj-intl', flagIcon: 'globe', flag: 'Trường quốc tế', title: 'Mạng lưới trường quốc tế Hà Nội', desc: 'CLB Robotics, trại hè công nghệ, huấn luyện đội tuyển & ngày hội STEM tại BVIS Hà Nội, Tây Hà Nội, Thực nghiệm Victory, Hoàng Long Tokyo.', loc: 'Hà Nội · 15+ cơ sở' },
-      { img: 'grg-2025', flagIcon: 'star', flag: 'Quốc tế', title: 'Global Robotics Games 2025', desc: "Học sinh Việt Nam đạt Gold Award tại Global Robotics Games 2025 cùng bộ học liệu Stick 'Em.", loc: 'Quốc tế · 2025' },
     ],
     cta: { title: 'Triển khai dự án tiếp theo cùng Learn to Leap', lead: 'Nhận Hồ sơ năng lực đầy đủ cùng các case study triển khai thực tế.', primary: 'Liên hệ hợp tác' },
   },
@@ -723,62 +753,35 @@ const vi = {
   /* ---------- Store (bản demo, sắp theo TT 86/2026) ---------- */
   store: {
     hero: {
-      title: 'Store — danh mục giải pháp [[theo Thông tư 86]]',
-      lead: 'Danh mục giải pháp, thiết bị giáo dục STEM sắp theo các nhóm của Thông tư 86/2026/TT-BGDĐT. Mỗi hạng mục lớn gồm các giải pháp nhỏ để nhà trường chọn theo nhu cầu.',
+      eyebrow: 'Theo Nghị quyết 57-NQ/TW & 71-NQ/TW',
+      title: 'Giải pháp STEM – AI – Robotics [[cho trường học Việt Nam]]',
+      lead: 'Learn to Leap cung cấp kit học cụ, phòng STEM trọn gói, học liệu số và đào tạo giáo viên — đồng hành cùng các trường phổ thông trong hành trình chuyển đổi số giáo dục.',
+      primary: 'Xem sản phẩm',
+      secondary: 'Liên hệ đặt sản phẩm',
     },
-    demo: 'Bản demo — danh mục minh hoạ, chưa phải danh mục chào giá chính thức.',
-    navLabel: 'Hạng mục',
-    quote: 'Nhận báo giá',
-    quoteSubject: 'Yêu cầu báo giá',
-    /** img: ảnh tách nền trong public/images/robots (để trống thì hiện icon). lv: cấp học. */
-    groups: [
-      { code: 'I', id: 'nhom-1', title: 'Không gian & nội thất STEM', desc: 'Nội thất, không gian linh hoạt cho hoạt động nhóm và dự án.', items: [
-        { img: '', icon: 'interior', name: 'Bàn ghế STEM linh hoạt', desc: 'Bàn nhóm ghép linh hoạt, ghế điều chỉnh theo lứa tuổi.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: '', icon: 'cube', name: 'Tủ lưu trữ & kệ trưng bày', desc: 'Lưu trữ học liệu theo nhóm, trưng bày sản phẩm của học sinh.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: '', icon: 'lab', name: 'Thiết kế, thi công phòng STEM', desc: 'Thiết kế 3D, thi công trọn gói theo diện tích thực tế.', lv: ['TH', 'THCS', 'THPT'] },
-      ] },
-      { code: 'II', id: 'nhom-2', title: 'Nền tảng & thiết bị số dùng chung', desc: 'Thiết bị trình chiếu, nền tảng học tập số dùng chung trong phòng.', items: [
-        { img: 'kt-screen', icon: 'screen', name: 'Màn hình tương tác', desc: 'Màn cảm ứng cỡ lớn cho giảng dạy và trình bày dự án.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: '', icon: 'database', name: 'Nền tảng học tập LMS', desc: 'Quản lý lớp, học liệu số, đánh giá theo thời gian thực.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: 'vr-quest', icon: 'monitor', name: 'Kính thực tế ảo VR', desc: 'Trải nghiệm khoa học, lịch sử, địa lí bằng thực tế ảo.', lv: ['TH', 'THCS', 'THPT'] },
-      ] },
-      { code: 'III', id: 'nhom-3', title: 'Khám phá, đo lường & thực nghiệm khoa học', desc: 'Nhóm 1 của danh mục khung TT 86: đo lường, cảm biến, thí nghiệm.', items: [
-        { img: 'kt-datalogger', icon: 'pulse', name: 'Bộ thu nhận dữ liệu & cảm biến', desc: 'Đo nhiệt độ, ánh sáng, lực, điện… và vẽ đồ thị trực tiếp.', lv: ['THCS', 'THPT'] },
-        { img: 'kt-ph', icon: 'lab', name: 'Cảm biến hoá học, pH', desc: 'Thực hành đo độ pH, nồng độ trong thí nghiệm hoá – sinh.', lv: ['THCS', 'THPT'] },
-        { img: 'kt-wind', icon: 'bolt', name: 'Bộ khám phá năng lượng tái tạo', desc: 'Mô hình điện gió, điện mặt trời; chuyển hoá năng lượng.', lv: ['TH', 'THCS'] },
-        { img: 'ebd-stem5', icon: 'book', name: 'Học liệu STEM theo chủ đề', desc: 'Bộ học liệu thực hành theo bài học STEM của chương trình.', lv: ['TH'] },
-      ] },
-      { code: 'IV', id: 'nhom-4', title: 'Thiết kế kĩ thuật & chế tạo', desc: 'Nhóm 2 của danh mục khung TT 86: gia công, chế tạo, lắp ghép.', items: [
-        { img: 'kt-3dprinter', icon: 'cube', name: 'Máy in 3D giáo dục', desc: 'Thiết kế và in chi tiết, sản phẩm ba chiều an toàn cho học sinh.', lv: ['THCS', 'THPT'] },
-        { img: 'stickem-kit', icon: 'spark', name: "Bộ kit Stick 'Em", desc: 'Dựng mô hình từ đũa và khớp nối, gắn mạch lập trình được.', lv: ['TH'] },
-        { img: 'weeemake-kit', icon: 'cube', name: 'Bộ lắp ghép cơ khí – STEAM', desc: 'Chi tiết cơ cấu, truyền động cho mô hình kỹ thuật.', lv: ['TH', 'THCS'] },
-        { img: 'ebd-stem8', icon: 'book', name: 'Học liệu STEM lắp ráp', desc: 'Bộ lắp ráp mô hình theo chủ đề STEM cấp THCS.', lv: ['THCS'] },
-      ] },
-      { code: 'V', id: 'nhom-5', title: 'Lập trình & robot giáo dục', desc: 'Nhóm 3 của danh mục khung TT 86: robot giáo dục, lập trình.', items: [
-        { img: 'ugot-up', icon: 'robot', name: 'Robot lắp ghép AI biến hình', desc: 'Một bộ robot biến hình xe, chó robot, cánh tay; lập trình khối.', lv: ['TH', 'THCS'] },
-        { img: 'yanshee', icon: 'robot', name: 'Robot hình người lập trình', desc: 'Lập trình Python, nhận diện giọng nói, khuôn mặt, cử chỉ.', lv: ['THCS', 'THPT'] },
-        { img: 'ukit-se', icon: 'robotLegs', name: 'Bộ robot giáo dục', desc: 'Lắp ghép và lập trình robot cơ bản cho câu lạc bộ, tiết học.', lv: ['TH', 'THCS'] },
-        { img: 'weeemake-bot', icon: 'robot', name: 'Robot STEAM', desc: 'Robot xe lập trình được, cảm biến dò đường, tránh vật cản.', lv: ['TH', 'THCS'] },
-      ] },
-      { code: 'VI', id: 'nhom-6', title: 'Công nghệ số, trí tuệ nhân tạo & IoT', desc: 'Nhóm 4 của danh mục khung TT 86: AI, IoT, thị giác máy tính.', items: [
-        { img: 'tienkung', icon: 'robot', name: 'Robot hình người AI cỡ lớn', desc: 'Trình diễn và nghiên cứu AI hiện thân cho AI Lab, AI Center.', lv: ['THCS', 'THPT'] },
-        { img: 'kt-smarthouse', icon: 'network', name: 'Mô hình nhà thông minh IoT', desc: 'Thu thập, truyền và hiển thị dữ liệu cảm biến từ xa.', lv: ['THCS', 'THPT'] },
-        { img: 'kt-wifi', icon: 'network', name: 'Bộ học tập IoT theo chủ đề', desc: 'Kết nối Wi-Fi, điều khiển thiết bị qua ứng dụng.', lv: ['THCS', 'THPT'] },
-        { img: 'cruzr', icon: 'robot', name: 'Robot dịch vụ AI', desc: 'Robot tiếp đón, hướng dẫn; minh hoạ ứng dụng AI trong đời sống.', lv: ['THCS', 'THPT'] },
-      ] },
-      { code: 'VII', id: 'nhom-7', title: 'Chương trình, học liệu & đào tạo', desc: 'Đi kèm thiết bị: chương trình, kế hoạch bài dạy và tập huấn giáo viên.', items: [
-        { img: '', icon: 'book', name: 'Chương trình STEM – AI K12', desc: 'Khung chương trình liên thông Mầm non → THPT.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: '', icon: 'bookCheck', name: 'Kế hoạch bài dạy mẫu', desc: 'Kế hoạch bài dạy theo chủ đề, bám chương trình GDPT 2018.', lv: ['TH', 'THCS', 'THPT'] },
-        { img: '', icon: 'cap', name: 'Tập huấn giáo viên (TOT)', desc: 'Đào tạo giáo viên làm chủ thiết bị và chương trình.', lv: ['TH', 'THCS', 'THPT'] },
-      ] },
-    ],
+    search: 'Tìm sản phẩm, kit, học liệu…',
+    featured: 'Sản phẩm nổi bật',
+    cats: 'Danh mục sản phẩm',
+    all: 'Tất cả sản phẩm',
+    count: 'sản phẩm',
+    help: { title: 'Cần tư vấn?', desc: 'Liên hệ trực tiếp để được tư vấn giải pháp phù hợp với trường của bạn.', cta: 'Liên hệ ngay' },
+    brand: 'Hãng',
+    model: 'Model',
+    origin: 'Xuất xứ',
+    loading: 'Đang tải sản phẩm…',
+    empty: 'Không tìm thấy sản phẩm phù hợp.',
+    error: 'Chưa tải được dữ liệu sản phẩm. Vui lòng thử lại sau.',
+    view: 'Xem chi tiết',
+    source: 'Xem toàn bộ trên stem.learntoleap.vn',
+    prev: 'Trang trước',
+    next: 'Trang sau',
     cta: { title: 'Cần danh mục cho phòng STEM của trường?', lead: 'Learn to Leap tư vấn cấu hình danh mục theo TT 86/2026 và ngân sách của nhà trường.', primary: 'Nhận tư vấn danh mục' },
   },
 
   /* ---------- Blog ---------- */
   news: {
     hero: {
-      title: 'Hành trình phổ cập [[STEM – Robotics – AI]] tới mọi miền tổ quốc',
+      title: 'Hành trình phổ cập [[STEM – AI – Robotics]] tới mọi miền tổ quốc',
       lead: 'Theo chân Learn to Leap trên chặng đường phổ cập công nghệ giáo dục. Lắng nghe những câu chuyện chân thực từ lớp học, nhịp đập sôi động tại các cuộc thi và những góc nhìn chuyên môn sâu sắc do chính đội ngũ của chúng tôi chắp bút.',
     },
     blog: {
@@ -824,7 +827,7 @@ const vi = {
       call: { title: 'Gọi hotline', desc: 'Trao đổi trực tiếp với đội ngũ tư vấn.' },
       zalo: { title: 'Nhắn Zalo', desc: 'Gửi câu hỏi, hình ảnh hiện trạng phòng học.' },
       email: { title: 'Gửi email', desc: 'Phù hợp khi gửi công văn, đề án, yêu cầu báo giá.' },
-      profile: { title: 'Hồ sơ năng lực', desc: 'Nhận bộ Hồ sơ năng lực và case study triển khai.' },
+      profile: { title: 'Tải Hồ sơ năng lực', desc: 'Hồ sơ năng lực Learn to Leap 2026 (PDF, 60 trang).' },
       emailSubject: 'Yêu cầu tư vấn — Learn to Leap',
       profileSubject: 'Yêu cầu Hồ sơ năng lực Learn to Leap',
     },

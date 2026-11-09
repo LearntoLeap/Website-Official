@@ -58,13 +58,11 @@ const STAGE: { thumb: string; shots: Shot[] }[] = [
     { src: 'weeemake-kit', cx: 66, b: 0, w: 30 },
   ] },
   { thumb: 'kt-smarthouse', shots: [
-    { src: 'ebd-stem5', cx: 13, b: 17, w: 20, r: -7 },
-    { src: 'ebd-stem8', cx: 27, b: 15, w: 20, r: 3 },
-    { src: 'kt-wind', cx: 89, b: 14, h: 44 },
-    { src: 'kt-smarthouse', cx: 54, b: 8, w: 64 },
-    { src: 'kt-datalogger', cx: 22, b: 0, w: 32 },
-    { src: 'kt-ph', cx: 72, b: -2, w: 30 },
-    { src: 'kt-wifi', cx: 93, b: 0, w: 17 },
+    { src: 'ebd-stem5', cx: 15, b: 12, w: 22, r: -6 },
+    { src: 'ebd-stem8', cx: 30, b: 10, w: 22, r: 4 },
+    { src: 'kt-wind', cx: 88, b: 12, h: 46 },
+    { src: 'kt-smarthouse', cx: 60, b: 6, w: 56 },
+    { src: 'kt-wifi', cx: 79, b: 0, w: 17 },
   ] },
 ];
 const shotStyle = (s: Shot, i: number) =>
@@ -128,10 +126,10 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
         {h.doors.items.map((d, i) => (
           <a class:list={['door reveal', `d${i + 1}`]} href={pageHref(d.page, d.hash)}>
             <img src={img(d.img)} alt="" loading="lazy" decoding="async" />
+            <span class="go" aria-hidden="true"><Icon name="arrow" stroke={2.4} /></span>
             <span class="door-body">
               <span class="who">{d.who}</span>
               <span class="ttl">{d.title}</span>
-              <span class="go" aria-hidden="true"><Icon name="arrow" stroke={2.4} /></span>
             </span>
           </a>
         ))}
@@ -222,10 +220,10 @@ const pageHref = (page: string, hash = '') => href(page as PageKey, lang) + hash
       </ol>
       <div class="basis reveal">
         <span class="bl">{h.process.basisLabel}</span>
-        <ul>{h.process.basis.map((b, i) => <>{i > 0 && <li class="arr" aria-hidden="true">→</li>}<li>{b}</li></>)}</ul>
+        <ul>{h.process.basis.map((b) => <li>{b}</li>)}</ul>
       </div>
       <div class="center row-btns reveal">
-        <Btn href={profileHref} arrow>{h.process.cta}</Btn>
+        <Btn href={profileHref} icon="download" download={!!SITE.profilePdf}>{h.process.cta}</Btn>
         <Btn href={href('partnership', lang)} variant="ghost">{h.process.cta2}</Btn>
       </div>
     </div>

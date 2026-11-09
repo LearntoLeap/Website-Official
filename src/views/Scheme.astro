@@ -5,15 +5,23 @@ import Btn from '../components/Btn.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
+import ProjCard from '../components/ProjCard.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
+import { photo } from '../data/site';
 
+/** Trang Đề án theo NSNN, đi theo hành trình: căn cứ pháp lý → quy trình → vai trò các bên → dự án → liên hệ. */
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const d = t.scheme;
 // Căn cứ dùng chung với trang Hợp tác.
 const policy = t.partnership.policy;
+// Ảnh: UBND · cơ quan quản lý giáo dục · nhà trường · Learn to Leap.
+const ROLE_PH = ['projects/ha-tinh.webp', 'projects/hoi-thao-thai-nguyen.webp', 'gallery/su-kien-27.webp', 'gallery/su-kien-07.webp'];
+// Dự án gắn với đề án, chương trình của địa phương (khoá ảnh trong projectsPage.items).
+const PROJ = ['proj-stem57', 'thai-nguyen-2026', 'ky-ket-nghe-an', 'can-tho', 'hoi-thao-thai-nguyen', 'ha-tinh'];
+const projects = PROJ.map((k) => t.projectsPage.items.find((x) => x.img === k)).filter((x) => !!x);
 ---
 <Base lang={lang} page="scheme" title={t.meta.scheme.title} description={t.meta.scheme.description}>
   <PageHero lang={lang} title={d.hero.title} lead={d.hero.lead} crumb={t.common.nav.scheme} bots={['am-front', 'kt-smarthouse']}>
@@ -22,25 +30,16 @@ const policy = t.partnership.policy;
 
   <section class="sp">
     <div class="wrap">
-      <SectionHead eyebrow={d.types.eyebrow} title={d.types.title} />
-      <div class="g4 grid">
-        {d.types.items.map((x, i) => (
-          <div class:list={['card val reveal', `d${i + 1}`]}><div class="ic-box"><Icon name={x.icon} /></div><h3>{x.title}</h3><p>{x.desc}</p></div>
+      <SectionHead eyebrow={d.basis.eyebrow} title={d.basis.title} lead={policy.lead} />
+      <div class="grid g2">
+        {policy.items.map((x, i) => (
+          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{x.code}</div><div><h3>{x.title}</h3><p>{x.desc}</p></div></div>
         ))}
       </div>
     </div>
   </section>
 
   <section class="sp bg-soft">
-    <div class="wrap">
-      <SectionHead eyebrow={d.deliver.eyebrow} title={d.deliver.title} />
-      <ul class="chk-list reveal">
-        {d.deliver.items.map((x) => <li><Icon name="check" stroke={2.4} /><span>{x}</span></li>)}
-      </ul>
-    </div>
-  </section>
-
-  <section class="sp">
     <div class="wrap">
       <SectionHead eyebrow={d.steps.eyebrow} title={d.steps.title} />
       <ol class="proc">
@@ -51,14 +50,24 @@ const policy = t.partnership.policy;
     </div>
   </section>
 
-  <section class="sp bg-soft">
+  <section class="sp">
     <div class="wrap">
-      <SectionHead eyebrow={d.basis.eyebrow} title={d.basis.title} lead={policy.lead} />
-      <div class="grid g2">
-        {policy.items.map((x, i) => (
-          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{x.code}</div><div><h3>{x.title}</h3><p>{x.desc}</p></div></div>
+      <SectionHead eyebrow={d.roles.eyebrow} title={d.roles.title} />
+      <div class="g4 grid">
+        {d.roles.items.map((x, i) => (
+          <div class:list={['card val reveal', `d${i + 1}`]}><img class="card-img" src={photo(ROLE_PH[i])} alt="" loading="lazy" decoding="async" /><div class="ic-box"><Icon name={x.icon} /></div><h3>{x.title}</h3><p>{x.desc}</p></div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={d.projects.eyebrow} title={d.projects.title} />
+      <div class="g3 grid">
+        {projects.map((x, i) => <ProjCard x={x} i={i} />)}
+      </div>
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('projects', lang)} variant="ghost" arrow>{d.projects.all}</Btn></div>
     </div>
   </section>
 

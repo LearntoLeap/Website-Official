@@ -13,7 +13,7 @@ const socials = [
   { url: s.tiktok, icon: 'tiktok', label: 'TikTok' },
   { url: s.linkedin, icon: 'linkedin', label: 'LinkedIn' },
 ].filter((x) => x.url);
-const profileHref = SITE.profilePdf || `mailto:${SITE.email}?subject=${encodeURIComponent(t.contact.quick.profileSubject)}`;
+const profileHref = SITE.profilePdf ? withBase(SITE.profilePdf) : `mailto:${SITE.email}?subject=${encodeURIComponent(t.contact.quick.profileSubject)}`;
 const year = new Date().getFullYear();
 ---
 <footer class="site">
@@ -52,7 +52,7 @@ const year = new Date().getFullYear();
         <p>{lang === 'vi' ? SITE.address : SITE.addressEn}</p>
         <a href={`tel:${SITE.phone}`}>{lang === 'vi' ? SITE.phoneDisplay : `+84 ${SITE.phoneDisplay.slice(1)}`}</a>
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-        <a href={profileHref}>{t.footer.profile}</a>
+        <a href={profileHref} download={SITE.profilePdf ? '' : undefined}>{t.footer.profile}</a>
       </div>
     </div>
     <div class="ft-bottom">

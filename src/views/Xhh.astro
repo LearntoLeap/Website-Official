@@ -5,15 +5,25 @@ import Btn from '../components/Btn.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHead from '../components/SectionHead.astro';
 import CtaBand from '../components/CtaBand.astro';
+import ProjCard from '../components/ProjCard.astro';
 import { useT } from '../i18n';
 import { href, type Lang } from '../i18n/routes';
+import { photo } from '../data/site';
 
+/** Đề án xã hội hoá: cùng hành trình với Đề án NSNN (căn cứ → quy trình → vai trò → dự án) và thêm Danh mục đầu tư. */
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const x = t.xhh;
+const policy = t.partnership.policy;
 // Số liệu vận hành dùng chung với phòng STEM – AI Lab (trang Giải pháp).
 const opStats = t.solutionsPage.lab.opStats;
+// Ảnh: doanh nghiệp · nhà trường · phụ huynh & HS · Learn to Leap.
+const ROLE_PH = ['sol-doitac.webp', 'sol-lab.webp', 'gallery/su-kien-10.webp', 'gallery/su-kien-07.webp'];
+// Ảnh danh mục đầu tư: 4 nhóm TT 86 (ảnh sản phẩm, nền trắng) · nội thất · chương trình & đào tạo.
+const INV_PH = ['products/ebd-031.webp', 'products/khangthinh-001.webp', 'products/ubtech-007.webp', 'products/ohstem-031.webp', 'lab-photo.webp', 'gallery/su-kien-16.webp'];
+const PROJ = ['khoi-dong-vinh-hung', 'proj-intl', 'robog-mb-2026', 'grg-vn-2025', 'san-kh-cn-ha-noi', 'dong-da'];
+const projects = PROJ.map((k) => t.projectsPage.items.find((p) => p.img === k)).filter((p) => !!p);
 ---
 <Base lang={lang} page="xhh" title={t.meta.xhh.title} description={t.meta.xhh.description}>
   <PageHero lang={lang} title={x.hero.title} lead={x.hero.lead} crumb={t.common.nav.xhh} bots={['am-handsup', 'yanshee-2']}>
@@ -22,10 +32,55 @@ const opStats = t.solutionsPage.lab.opStats;
 
   <section class="sp">
     <div class="wrap">
+      <SectionHead eyebrow={x.basis.eyebrow} title={x.basis.title} lead={policy.lead} />
+      <div class="grid g2">
+        {policy.items.map((p, i) => (
+          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{p.code}</div><div><h3>{p.title}</h3><p>{p.desc}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={x.steps.eyebrow} title={x.steps.title} />
+      <ol class="proc">
+        {x.steps.items.map((s, i) => (
+          <li class:list={['proc-step reveal', `d${i + 1}`]}><div class="num">{i + 1}</div><h3>{s.title}</h3><p>{s.desc}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sp">
+    <div class="wrap">
       <SectionHead eyebrow={x.roles.eyebrow} title={x.roles.title} />
-      <div class="g3 grid">
+      <div class="g4 grid">
         {x.roles.items.map((r, i) => (
-          <div class:list={['com reveal', `d${i + 1}`]}><div class="ic"><Icon name={r.icon} /></div><h3>{r.title}</h3><p>{r.desc}</p></div>
+          <div class:list={['aud reveal', `d${i + 1}`]}>
+            <img class="card-img" src={photo(ROLE_PH[i])} alt="" loading="lazy" decoding="async" />
+            <div class="ic"><Icon name={r.icon} /></div>
+            <h3>{r.title}</h3>
+            <p>{r.desc}</p>
+            <ul>{r.list.map((li) => <li><Icon name="check" stroke={2.4} /><span>{li}</span></li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sp bg-soft" id="danh-muc">
+    <div class="wrap">
+      <SectionHead eyebrow={x.invest.eyebrow} title={x.invest.title} lead={x.invest.lead} />
+      <div class="g3 grid">
+        {x.invest.items.map((it, i) => (
+          <div class:list={['card inv reveal', `d${(i % 3) + 1}`]}>
+            <img class:list={['card-img', { fit: i < 4 }]} src={photo(INV_PH[i])} alt="" loading="lazy" decoding="async" />
+            {it.link && <span class="inv-no">TT 86 · {i + 1}</span>}
+            <h3>{it.title}</h3>
+            <p>{it.desc}</p>
+            {it.link && <a class="inv-go" href={`${href('products', lang)}#${it.link}`}>{x.invest.more}<Icon name="arrow" stroke={2.4} /></a>}
+          </div>
         ))}
       </div>
       <div class="op-card xhh-op reveal">
@@ -34,32 +89,17 @@ const opStats = t.solutionsPage.lab.opStats;
           {opStats.map((o) => <div class="op-stat"><div class="v">{o.v} <span>{o.u}</span></div><div class="k">{o.k}</div></div>)}
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="sp bg-soft">
-    <div class="wrap">
-      <SectionHead eyebrow={x.benefits.eyebrow} title={x.benefits.title} />
-      <div class="g3 grid">
-        {x.benefits.items.map((b, i) => (
-          <div class:list={['aud reveal', `d${i + 1}`]}>
-            <h3>{b.who}</h3>
-            <ul>{b.list.map((li) => <li><Icon name="check" stroke={2.4} /><span>{li}</span></li>)}</ul>
-          </div>
-        ))}
-      </div>
+      <p class="note">{x.note}</p>
     </div>
   </section>
 
   <section class="sp">
     <div class="wrap">
-      <SectionHead eyebrow={x.steps.eyebrow} title={x.steps.title} />
-      <ol class="proc">
-        {x.steps.items.map((s, i) => (
-          <li class:list={['proc-step reveal', `d${i + 1}`]}><div class="num">{i + 1}</div><h3>{s.title}</h3><p>{s.desc}</p></li>
-        ))}
-      </ol>
-      <p class="note">{x.note}</p>
+      <SectionHead eyebrow={x.projects.eyebrow} title={x.projects.title} />
+      <div class="g3 grid">
+        {projects.map((p, i) => <ProjCard x={p} i={i} />)}
+      </div>
+      <div class="center reveal" style="margin-top:40px"><Btn href={href('projects', lang)} variant="ghost" arrow>{x.projects.all}</Btn></div>
     </div>
   </section>
 

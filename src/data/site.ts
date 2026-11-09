@@ -20,13 +20,13 @@ export const SITE = {
   mapQuery: 'IPH 241 Xuân Thủy, Cầu Giấy, Hà Nội',
   social: {
     zalo: 'https://zalo.me/0777308883',
-    facebook: '',
-    youtube: '',
+    facebook: 'https://www.facebook.com/LearntoLeap.vn',
+    youtube: 'https://www.youtube.com/@learntoleapedu.2023',
     tiktok: '',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/company/learntoleap/',
   },
   /** File PDF Hồ sơ năng lực trong thư mục public/ (vd '/files/ho-so-nang-luc.pdf'). Để trống thì nút sẽ gửi email yêu cầu. */
-  profilePdf: '',
+  profilePdf: '/files/HSNL-Learn-to-Leap-2026.pdf',
 };
 
 /**
@@ -61,7 +61,7 @@ export const IMAGES: Record<string, string> = {
   'proj-bacninh': '/images/proj-bacninh.webp',
   /** Ảnh thẻ giải thưởng trang Năng lực (chưa có ảnh thì hiện icon). */
   'aw-sei': '/images/gallery/su-kien-15.webp',
-  'aw-top20': '',
+  'aw-top20': '/images/vsi-2026.webp',
   'hoi-thao': '/images/gallery/su-kien-07.webp',
   /** Ảnh cho các mục thêm 07/11/2026 (Hệ sinh thái, lối vào, dự án). */
   'sol-phtm': '/images/gallery/su-kien-22.webp',
@@ -75,9 +75,20 @@ export const IMAGES: Record<string, string> = {
   'lam-thao': '/images/gallery/su-kien-26.webp',
   'bac-hong': '/images/gallery/su-kien-32.webp',
   'grg-2025': '/images/gallery/su-kien-06.webp',
+  /** Ảnh dự án lấy từ HSNL 2026 (trang 44–53). */
+  'robog-mb-2026': '/images/projects/robog-mb-2026.webp',
+  'thai-nguyen-2026': '/images/projects/thai-nguyen-2026.webp',
+  'grg-vn-2025': '/images/projects/grg-vn-2025.webp',
+  'hoi-thao-thai-nguyen': '/images/projects/hoi-thao-thai-nguyen.webp',
+  'can-tho': '/images/projects/can-tho.webp',
+  'san-kh-cn-ha-noi': '/images/projects/san-kh-cn-ha-noi.webp',
+  'ha-tinh': '/images/projects/ha-tinh.webp',
   /** Ảnh tĩnh của hero trang chủ (khung hình từ TVC LtL 2026), dùng khi chưa có / không phát phim nền. */
   'hero-poster': '/images/hero-poster.webp',
 };
+
+/** Ảnh trong public/images theo đường dẫn tương đối (vd 'gallery/su-kien-01.webp'). */
+export const photo = (p: string) => withBase('/images/' + p);
 
 export const img = (key: string) => (IMAGES[key] ? withBase(IMAGES[key]) : '');
 
@@ -105,8 +116,7 @@ export const PARTNERS: { name: string; logo: string; group: PartnerGroup }[] = [
   { name: 'ETEK – Total Automation Solutions', logo: '/images/partners/etek.png', group: 'biz' },
   { name: 'Hanoi High Tech (HHT)', logo: '/images/partners/hht.png', group: 'biz' },
   { name: 'IED Hà Phương', logo: '/images/partners/ied-haphuong.png', group: 'biz' },
-  { name: 'ADC', logo: '/images/partners/adc.png', group: 'biz' },
-  { name: 'Đối tác giáo dục', logo: '/images/partners/doi-tac-mu.png', group: 'biz' },
+  { name: 'Công ty CP Phát triển Trí tuệ ADC Việt Nam', logo: '/images/partners/adc.png', group: 'biz' },
   { name: 'Bách Khoa Aptech', logo: '/images/partners/aptech.png', group: 'biz' },
   { name: 'Nexta', logo: '/images/partners/nexta.png', group: 'biz' },
   { name: 'Phúc Nam Thành', logo: '/images/partners/pnt.png', group: 'biz' },
