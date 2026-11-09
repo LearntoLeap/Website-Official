@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.learntoleap.edu.vn/sitemap-index.xml
