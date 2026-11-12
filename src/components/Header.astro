@@ -15,7 +15,8 @@ const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 const groups = t.products.groups;
 // Ảnh minh hoạ của một nhóm: lấy lần lượt từ các phần trong nhóm.
-const groupItems = (g: (typeof groups)[number]) => g.parts.flatMap((id) => (PARTS[id] ?? []).slice(0, 3)).slice(0, 6);
+// Tên theo hạng mục TT 86 nên nhiều sản phẩm trùng tên → mỗi tên chỉ lấy 1 ảnh.
+const groupItems = (g: (typeof groups)[number]) => g.parts.flatMap((id) => PARTS[id] ?? []).filter((m, i, a) => a.findIndex((x) => x.name === m.name) === i).slice(0, 6);
 const prodHref = (id: string) => `${href('products', lang)}#${id}`;
 ---
 <header class="site" id="hdr">

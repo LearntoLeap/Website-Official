@@ -1188,7 +1188,6 @@ body.menu-open .buddy,body:has(.lb.open) .buddy{display:none}
 .sx-cb{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
 .sx-cat{font:600 12px var(--f-ui);color:var(--accent)}
 .sx-name{font:700 15px/1.35 var(--f-ui);color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
-.sx-meta{font-size:12.5px;line-height:1.45;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .sx-card{text-decoration:none}
 .sx-go{margin-top:auto;padding-top:8px;font:600 13px var(--f-ui);color:var(--accent)}
 .sx-src{text-align:center;margin-top:24px}

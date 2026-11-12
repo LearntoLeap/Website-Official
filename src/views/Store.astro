@@ -10,7 +10,7 @@ import { href, type Lang } from '../i18n/routes';
 /**
  * Store dựng theo stem.learntoleap.vn: đọc trực tiếp dữ liệu của repo LearntoLeap/Shop
  * (data/products.json, sửa bằng admin.html của Shop) nên web cập nhật ngay, không cần build lại.
- * Không hiện giá; mỗi thẻ mở trang sản phẩm tương ứng trên stem.learntoleap.vn.
+ * Không hiện giá, không hiện hãng/model (tên sản phẩm theo hạng mục TT 86); mỗi thẻ mở trang sản phẩm tương ứng trên stem.learntoleap.vn.
  */
 const SHOP = 'https://stem.learntoleap.vn/';
 interface Props { lang: Lang }
@@ -99,7 +99,6 @@ const L = { ...st, shop: SHOP, groups };
   ];
   const groupId = (p) => { const n = String(p.name || '').toLowerCase(); return (RULES.find(([, re]) => re.test(n)) || ['nhom-5'])[0]; };
   const catOf = (p) => L.groups.find((g) => g.id === p._g);
-  const meta = (p) => p.shortDescription || [p.brand && `${L.brand}: ${p.brand}`, p.model && `${L.model}: ${p.model}`, p.origin && `${L.origin}: ${p.origin}`].filter(Boolean).join(' · ');
   const img = (p) => (p.images && p.images[0]) || '';
 
   async function load() {
@@ -117,7 +116,6 @@ const L = { ...st, shop: SHOP, groups };
       <span class="sx-cb">
         <span class="sx-cat">${c ? esc(c.name) : ''}</span>
         <span class="sx-name">${esc(p.name)}</span>
-        <span class="sx-meta">${esc(meta(p))}</span>
         <span class="sx-go">${esc(L.view)} ↗</span>
       </span></a>`;
   }
@@ -125,7 +123,7 @@ const L = { ...st, shop: SHOP, groups };
   const list = () => {
     const all = S.data.products.slice().reverse();
     const q = norm(S.q);
-    return all.filter((p) => (S.cat === 'all' || p._g === S.cat) && (!q || norm([p.name, p.brand, p.model, p.description, ...(p.tags || [])].join(' ')).includes(q)));
+    return all.filter((p) => (S.cat === 'all' || p._g === S.cat) && (!q || norm([p.name, ...(p.tags || [])].join(' ')).includes(q)));
   };
 
   function renderCats() {

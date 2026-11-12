@@ -43,7 +43,7 @@ const p = t.products;
                 <li class:list={['pc-item reveal', `d${(j % 4) + 1}`]}>
                   <span class:list={['pc-ph', { cover: it.fit === 'cover' }]}><img src={withBase(it.img)} alt={it.name} loading="lazy" decoding="async" /></span>
                   <span class="pc-name">{it.name}</span>
-                  {(it.lv || it.brand) && <span class="pc-lv">{[it.brand, it.lv].filter(Boolean).join(' · ')}</span>}
+                  {(it.sub || it.lv) && <span class="pc-lv">{[it.sub, it.lv].filter(Boolean).join(' · ')}</span>}
                 </li>
               ))}
             </ul>
