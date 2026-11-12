@@ -1,7 +1,7 @@
 export type Lang = 'vi' | 'en';
 export const LANGS: Lang[] = ['vi', 'en'];
 
-export type PageKey = 'home' | 'about' | 'solutions' | 'products' | 'scheme' | 'xhh' | 'projects' | 'store' | 'impact' | 'partnership' | 'news' | 'contact';
+export type PageKey = 'home' | 'about' | 'solutions' | 'products' | 'scheme' | 'xhh' | 'stickem' | 'projects' | 'store' | 'impact' | 'partnership' | 'news' | 'contact';
 
 /** Đường dẫn từng trang theo ngôn ngữ. Tiếng Việt là mặc định, nằm ở gốc. */
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -11,6 +11,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   products:    { vi: '/san-pham',    en: '/en/products' },
   scheme:      { vi: '/de-an',       en: '/en/public-programs' },
   xhh:         { vi: '/xa-hoi-hoa',  en: '/en/private-investment' },
+  stickem:     { vi: '/xa-hoi-hoa/stickem', en: '/en/private-investment/stickem' },
   projects:    { vi: '/du-an',       en: '/en/projects' },
   store:       { vi: '/store',       en: '/en/store' },
   impact:      { vi: '/nang-luc',    en: '/en/impact' },

@@ -23,6 +23,7 @@ const en: Dict = {
       products: 'Products',
       scheme: 'State-funded programmes',
       xhh: 'Private-investment programmes',
+      stickem: "Stick 'Em Lab",
       projects: 'Projects',
       store: 'Store',
       impact: 'Impact',
@@ -108,6 +109,10 @@ const en: Dict = {
     xhh: {
       title: 'Private-investment STEM – AI programmes — Learn to Leap',
       description: 'A private-investment model: a company funds the STEM – AI lab, Learn to Leap transfers and runs the programme together with the school.',
+    },
+    stickem: {
+      title: "The Stick 'Em Lab: a privately funded STEM – AI room — Learn to Leap",
+      description: "Learn to Leap funds the equipment, materials and Stick 'Em robot kits and trains teachers so primary and lower-secondary schools can run STEM – AI outside core lessons, in line with Circulars 85/2026 and 86/2026.",
     },
     projects: {
       title: 'Featured projects — Learn to Leap',
@@ -664,10 +669,232 @@ const en: Dict = {
       ],
       more: 'See equipment details',
     },
+    stickem: { title: "A [[Stick 'Em Lab]] for primary & lower-secondary schools", desc: "Learn to Leap funds the full Stick 'Em package, learning materials and teacher training; curriculum from grade 2 to grade 7.", cta: 'See the programme' },
     opTitle: 'Indicative operating model',
     projects: { eyebrow: 'Projects', title: 'Projects [[we have delivered]]', all: 'See all projects' },
     note: '* Fees, duration and the form of cooperation are agreed with each school, in line with local regulations.',
     cta: { title: 'Want a STEM – AI lab through private investment?', lead: 'Learn to Leap will survey your school and propose a suitable plan.', primary: 'Book a site survey', secondary: 'See state-funded programmes' },
+  },
+
+  /* ---------- Private investment: Stick 'Em STEM – AI Lab for primary & lower-secondary schools ---------- */
+  stickemLab: {
+    hero: {
+      title: "The [[Stick 'Em Lab]]: a privately funded STEM – AI room",
+      lead: "Learn to Leap invests in the curriculum, equipment, learning materials and Stick 'Em robot kits, and trains the school's own teachers to run the classes. Primary and lower-secondary students get a STEM – AI space without the school spending its budget on equipment.",
+      cta: 'Book a site survey',
+      cta2: 'See the curriculum',
+    },
+    intro: {
+      eyebrow: "About Stick 'Em",
+      title: 'Robotics [[from chopsticks]] and green materials',
+      lead: "Stick 'Em is a STEAM – AI education solution developed in Singapore. With bamboo chopsticks, 3D-printed connectors, servo motors and an electronics board, students build models and robots by hand, then control them from a Bluetooth app. The materials are familiar and affordable, so a school can run STEM – AI activities for every student.",
+      lead2: 'One kit supports lessons in design thinking, maths, science, robotics and coding, artificial intelligence, language, arts and humanities, social-emotional learning and future thinking.',
+      award: 'Supported and recognised by IMDA, the National Institute of Education Singapore (NIE), Temasek Foundation, Google and UNDP. Winner of the 2025 Hult Prize, worth US$1 million.',
+      stats: [
+        { n: 400, suf: '+', label: 'Schools using Stick \'Em' },
+        { n: 22, suf: '', label: 'Countries worldwide' },
+        { n: 1, suf: 'M USD', label: 'Hult Prize 2025' },
+      ],
+      photos: [
+        { src: '/images/stickem/lab/lop-hoc.webp', alt: "A STEM – AI class using Stick 'Em kits" },
+        { src: '/images/stickem/lab/hult.webp', alt: "The Stick 'Em team receiving the 2025 Hult Prize" },
+      ],
+    },
+    levels: {
+      eyebrow: "Stick 'Em Robotics Kit",
+      title: 'One platform [[for two school levels]]',
+      lead: 'Both versions share the ESP32 controller, 3 servo motors and a rechargeable power bank, and grow with the needs and abilities of students at each level.',
+      rows: { control: 'Controller', sensors: 'Sensors', apps: 'Models', level: 'Focus', use: 'Best for' },
+      items: [
+        { tag: 'Primary', title: 'First exploration', desc: 'Students meet mechanisms, levers, gears, simple vehicles and visual STEM models, building curiosity and design thinking.', parts: ['chopstick-set', 'piece-120t', 'board-v2', 'servo', 'power-bank'], control: 'ESP32 + 3 servos', sensors: 'None added', apps: 'Simple cars, grippers, lifting mechanisms', level: 'Basic and visual', use: 'STEM clubs, hands-on activities' },
+        { tag: 'Lower secondary', title: 'Building STEM skills', desc: 'From creative building to robot programming and cross-subject projects in maths, science, computing and technology, extended with advanced coding and real-world uses.', parts: ['board-v2', 'servo', 'sensor-ultrasonic', 'sensor-light', 'sensor-lcd', 'sensor-gyroscope'], control: 'ESP32 + 3 servos', sensors: 'Light, motion (MPU6050), ultrasonic, temperature and humidity; 0.96-inch display', apps: 'Autonomous robots, measuring, smart models', level: 'Advanced and practical', use: 'STEM Day, robotics contests, cross-subject projects' },
+      ],
+    },
+    model: {
+      eyebrow: 'Private-investment model',
+      title: 'Within the rules, [[no budget spent]] on equipment',
+      lead: "Learn to Leap invests in the full package and hands it over so the school's teachers lead the classes. Students learn with modern, international methods at their own school.",
+      items: [
+        { code: 'Circ. 85/2026', title: 'Activities chosen by learners', desc: 'Held outside core lessons and PE; students take part voluntarily, with their parents’ agreement.' },
+        { code: 'Transparent', title: 'Fees collected openly', desc: 'Charged by published item and never above the rate set by the provincial or city People’s Committee.' },
+        { code: 'Circ. 86/2026', title: 'No dedicated STEM room required', desc: "Stick 'Em kits are compact and work in the school's existing classrooms." },
+        { code: 'Teachers', title: 'Stronger teaching staff', desc: 'School teachers receive structured training so they can run STEM – AI lessons on their own for the long term.' },
+      ],
+    },
+    roles: {
+      eyebrow: 'Roles & responsibilities',
+      title: 'The school and Learn to Leap [[deliver it together]]',
+      items: [
+        { icon: 'school', title: 'The school', img: '/images/stickem/lab/lop-rong.webp', list: ['Provides 1–3 free classrooms after core lessons for the programme', 'Helps with communication, try-out sessions, sign-up forms and timetabling of participating classes', "Assigns teachers to take over the Stick 'Em STEM – AI programme and teach it outside core lessons"] },
+        { icon: 'cap', title: 'Learn to Leap', img: '/images/stickem/lab/tap-huan.webp', list: ["Invests in the curriculum, equipment, teaching aids, learning materials and Stick 'Em robot kits", 'Works with the school on communication, try-out sessions and enrolment', "Trains teachers and awards the international Stick 'Em STEM – AI certificate, with ongoing professional support"] },
+      ],
+    },
+    program: {
+      eyebrow: 'Curriculum',
+      title: 'A curriculum [[for each grade]]',
+      lead: 'Four connected programmes from grade 2 to grade 7, moving from model building and paper command cards to block coding, sensors and training computer-vision models.',
+      labels: { hw: 'Hardware', tools: 'Learning tools', know: 'Knowledge', skill: 'Skills', lessons: 'See the lesson list' },
+      items: [
+        {
+          grade: 'Grades 2–3 · Primary', title: 'The Shape-shifting Zoo', img: '/images/stickem/lab/hoc-sinh-mo-hinh.webp',
+          hw: 'Grade 2: Connector Kit, battery LEDs and craft materials. Grade 3: Robotics Kit, servos and sensor kit.',
+          tools: "Grade 2: paper command cards. Grade 3: Stick 'Em WebApp for control and block coding.",
+          know: 'How animals are built, behave and move; axles, hinges, cranks and how sensors collect data.',
+          skill: 'Build moving models and order command cards; block coding with loops and branches; test and present products.',
+          parts: [
+            { name: 'Grade 2 · The animal world', lessons: ['The Shape-shifting Zoo', 'Whose big mouth?', 'Cat’s eyes', 'A special friend: the owl', 'The talking elephant (2 parts)', 'The dog that wags its tail', 'Bird wings', 'We are all different'] },
+            { name: 'Grade 3 · Robotics and sensors', lessons: ['Me, robots and AI', 'The giraffe’s long neck', 'Snail antennae (2 parts)', 'Wonderful fish', 'The clever snake', 'Rulers of the Earth: dinosaurs (2 parts)', 'Homes of our friends', 'AI and me: staying safe with smart devices'] },
+          ],
+        },
+        {
+          grade: 'Grades 4–5 · Primary', title: 'AI in smart living', img: '/images/stickem/kids-car.webp',
+          hw: 'Robotics Kit with board, 3 servos, power bank and wheels; sensors, LEDs and buzzer used per lesson.',
+          tools: "Stick 'Em WebApp: block coding and remote control (RC).",
+          know: 'Tell automated devices from AI; how sensors and motors work together in home appliances, self-driving cars and sorting robots.',
+          skill: 'Build, code and test sensor devices; use branches and conditional loops; collect data and present projects.',
+          parts: [
+            { name: 'Grade 4 · Smart systems', lessons: ['What is "smart living"?', 'Smart desk lamp', 'Smart fan', 'Smart bin', 'Smart study corner', 'My smart flower garden', 'Smart clothes rack', 'Smart home project', 'AI around me: using AI safely and responsibly'] },
+            { name: 'Grade 5 · Life and traffic', lessons: ['Music player', 'Smart alarm bell', 'Smart cleaning car', 'Traffic police assistant', 'Self-driving rescue car parking contest', 'The sensor kit', 'Automatic door', 'Sorting robot arm', 'Life with AI: AI technology'] },
+          ],
+        },
+        {
+          grade: 'Grade 6 · Lower secondary', title: 'City Guardians 1', img: '/images/stickem/lab/truong-4.webp',
+          hw: "Stick 'Em Robotics Kit: board, servos, wheels; distance and light sensors.",
+          tools: "Stick 'Em WebApp: sequential blocks, conditions, loops, variables; hands-on computer-vision models.",
+          know: 'Meet AI and robots through the role of city guardians; how sensors and computer vision help robots rescue and patrol.',
+          skill: 'Build rescue cars, mechanical arms and agile vehicles; code rescue and patrol robots; teamwork, presenting and improving.',
+          parts: [
+            { name: 'Weeks 1–17 · Getting started and rescue', lessons: ['Introduction', 'Emergency rescue in the rubble', 'Crossing obstacles', 'Finding people by sound', 'Rescue'] },
+            { name: 'Weeks 18–35 · Moving and observing', lessons: ['Agile movement', 'Watchful eyes', 'Automatic patrol', 'Tracking and tracing', 'Review and term 2 test'] },
+          ],
+        },
+        {
+          grade: 'Grade 7 · Lower secondary', title: 'City Guardians 2', img: '/images/stickem/lab/truong-5.webp',
+          hw: "Stick 'Em Robotics Kit: board, servos, wheels, gripper; line-tracking sensor and practice mat.",
+          tools: "Stick 'Em WebApp: variables, custom functions, functions with parameters, logic operators; training computer-vision models.",
+          know: 'Train AI to recognise colours, images, symbols, traffic signs and human poses; understand data bias and responsible AI use.',
+          skill: 'Drive robots along single and double lines; sort goods with a gripper; run a community rescue scenario on the mat.',
+          parts: [
+            { name: 'Weeks 1–17 · Recognition and positioning', lessons: ['Introduction', 'Finding people in a crowd', 'Locating colours', 'Identifying images', 'Smooth movement'] },
+            { name: 'Weeks 18–35 · Applications and rescue', lessons: ['Sorting goods', 'Safe driving', 'Precise positioning', 'Community rescue', 'Review and final test'] },
+          ],
+        },
+      ],
+    },
+    kit: {
+      eyebrow: 'Investment list',
+      title: "What goes into [[a Stick 'Em Lab]]",
+      lead: 'Learn to Leap invests in the full package, worth from VND 200 million per room.',
+      cols: { name: 'Item', qty: 'Quantity' },
+      items: [
+        { icon: 'piece-120t', name: 'Connector Kit (SERK01-CK)', desc: 'Chopstick packet, straight and T connectors (60–180 mm), cross connectors, axles, wheels, cardboard clips, rubber bands, 4-inch pliers', qty: '12 sets' },
+        { icon: 'board-v2', name: 'Electronics Kit (SERK01-EK)', desc: 'ESP32 controller, 3 MG90R servo motors, 5000 mAh power bank with holder, USB-A to USB-C cable', qty: '12 sets' },
+        { icon: 'sensor-ultrasonic', name: 'Sensor Kit (SERK01-SK)', desc: '0.96-inch display, BH1750 light sensor, MPU6050 gyroscope, HC-SR04 ultrasonic sensor, AHT10 temperature and humidity sensor', qty: '12 sets' },
+        { icon: 'sticky-blue-tablet-chat', name: 'STEM – AI learning tablets', desc: 'For group robot control and coding', qty: '6 units' },
+        { icon: 'robot-car-top-view', name: 'Competition mat', desc: 'With international competition accessories', qty: '1 set' },
+        { icon: 'chappie-yellow-code-card', name: "Stick 'Em coding software", desc: 'With a library of STEM topics', qty: '1 system' },
+        { icon: 'sticky-pink-clipboard-chat', name: 'STEM – AI Lab decor', desc: 'Branded classroom space', qty: '1 package' },
+      ],
+      photo: { src: '/images/stickem/lab/lab-decor.webp', alt: "Rendering of a Stick 'Em Lab" },
+      opTitle: 'How it runs',
+      opStats: [
+        { v: '02', u: 'lessons/week', k: '70 lessons per school year' },
+        { v: '04–06', u: 'groups', k: 'per class' },
+        { v: '06–08', u: 'students', k: 'per group' },
+        { v: '150–200', u: 'students', k: 'per room · 1–3 rooms per campus' },
+        { v: '07', u: 'modules', k: 'teacher training: 2 days + 1 demo-lesson session' },
+        { v: 'As regulated', u: '', k: 'fees, at the provincial People’s Committee rate' },
+      ],
+    },
+    care: {
+      eyebrow: 'Free ongoing support',
+      title: '[[Long-term support]] for the school',
+      lead: 'On top of the curriculum, equipment and materials, Learn to Leap runs three core activities free of charge at partner schools.',
+      items: [
+        { icon: 'book', img: '/images/stickem/lab/tap-huan.webp', tag: 'Once per term', title: 'Teacher training', desc: 'Training that lets every teacher lead classes with confidence and keep the programme going.', list: ['STEM – AI, robotics and coding', 'Using AI tools to plan lessons and design materials', 'Digital transformation in teaching and class management', 'Integrating STEM into core subjects under Circular 86/2026'] },
+        { icon: 'spark', img: '/images/stickem/lab/ngay-hoi.webp', tag: 'Every year', title: 'Science, Technology & AI Day', desc: 'Every student gets hands-on with robots, AI, IoT, virtual reality, game coding, 3D printing and humanoid robots.', list: ['A STEM experience activity as defined in Circular 86/2026', 'Brings students, parents and the school together', 'Builds the image of a modern, forward-looking school'] },
+        { icon: 'trophy', img: '/images/stickem/lab/doi-tuyen.webp', tag: 'May–August', title: 'Competition team coaching', desc: 'A "learn – experience – compete" path: students from partner schools are coached for free and get priority entry.', list: ["Stick 'Em National Challenge, May–June each year", 'GRG Global in Singapore, July–August each year'] },
+      ],
+    },
+    contests: {
+      eyebrow: 'Competitions',
+      title: "Stick 'Em contests [[at home and abroad]]",
+      items: [
+        { src: '/images/stickem/lab/grg-2024.webp', alt: 'Global Robotics Games 2024' },
+        { src: '/images/stickem/lab/grg-vn-2025.webp', alt: "GRG Vietnam 2025 – Stick 'Em Robotics Challenge" },
+        { src: '/images/stickem/lab/rbw-2025.webp', alt: 'Robotics for a Better World 2025' },
+        { src: '/images/stickem/lab/grg-thai-2025.webp', alt: 'GRG Thailand National Round 2025' },
+      ],
+    },
+    gallery: {
+      eyebrow: 'In real classrooms',
+      title: 'Students and teachers [[in STEM – AI lessons]]',
+      lead: 'Classes, teacher training and STEM days Learn to Leap has run at schools. Click a photo to enlarge it.',
+      items: [
+        { src: '/images/stickem/thuc-te/anh-01.webp', alt: 'Students presenting the models they built' },
+        { src: '/images/stickem/thuc-te/anh-04.webp', alt: 'Students testing a model on the classroom floor' },
+        { src: '/images/stickem/thuc-te/anh-03.webp', alt: 'A STEM – AI class working in groups' },
+        { src: '/images/stickem/thuc-te/anh-06.webp', alt: 'Teacher training' },
+        { src: '/images/stickem/thuc-te/anh-08.webp', alt: 'Students controlling a robot from a tablet' },
+        { src: '/images/stickem/thuc-te/anh-02.webp', alt: 'Students watching a run on the competition mat' },
+        { src: '/images/stickem/thuc-te/anh-09.webp', alt: 'Trying virtual reality at a STEM day' },
+        { src: '/images/stickem/thuc-te/anh-05.webp', alt: 'A hands-on lesson in the classroom' },
+        { src: '/images/stickem/thuc-te/anh-07.webp', alt: 'Students around the competition mat' },
+        { src: '/images/stickem/thuc-te/anh-10.webp', alt: 'A STEM – AI – Robotics day' },
+        { src: '/images/stickem/thuc-te/anh-12.webp', alt: 'A robotics competition team' },
+        { src: '/images/stickem/thuc-te/anh-11.webp', alt: 'The Learn to Leap team with students' },
+      ],
+    },
+    basis: {
+      eyebrow: 'Legal basis',
+      title: 'The [[legal basis]] for delivery',
+      lead: 'From Party resolutions down to local rules, the model is backed at all four levels.',
+      tiers: [
+        { label: 'Party resolutions', items: [
+          { code: 'Res. 57-NQ/TW', title: 'Science, technology, innovation and national digital transformation' },
+          { code: 'Res. 71-NQ/TW', title: 'Breakthroughs in education and training; more STEM and AI in schools' },
+        ] },
+        { label: 'Curriculum & competence frameworks', items: [
+          { code: 'GEC 2018', title: 'General Education Curriculum (Circ. 32/2018): science, maths, computing, technology' },
+          { code: 'Circ. 02/2025', title: 'Digital competence framework for learners, with an AI area' },
+          { code: 'Dec. 2422', title: 'AI education framework; Letter 5588: 12 lessons per class per year from 2026–2027' },
+        ] },
+        { label: 'New in 2026', items: [
+          { code: 'Circ. 85/2026', title: 'Learner-chosen education: coding, robotics, advanced STEM; voluntary, outside core lessons. In force 15/11/2026' },
+          { code: 'Circ. 86/2026', title: 'STEM education at 3 equipment levels; schools encouraged to partner with businesses. In force 30/9/2026' },
+        ] },
+        { label: 'Local rules', items: [
+          { code: 'Province / city', title: 'Fee rules for learner-chosen education services' },
+        ] },
+      ],
+      docsTitle: '[[Learn to Leap’s]] licences',
+      docsLead: 'Three documents that allow Learn to Leap to deliver STEM – AI programmes in Viet Nam. Click a document to see the scan.',
+      docs: [
+        { img: '/images/stickem/phap-ly/chung-nhan-tham-dinh.webp', kind: 'Certificate', no: 'No. 2512/CN-NCTK · 25/12/2025', issuer: 'Institute for School Design Research – Ministry of Education and Training', title: 'Appraisal certificate for the STEM Artificial Intelligence programme', desc: 'Learn to Leap’s STEM AI education ecosystem and digital learning materials fit the 2018 General Education Curriculum and may be used in schools.' },
+        { img: '/images/stickem/phap-ly/qd-trung-tam-boi-duong.webp', kind: 'Decision', no: 'No. 1483/QĐ-SGDĐT · 24/02/2026', issuer: 'Ha Noi Department of Education and Training', title: 'Licence for a STEM AI Robotics training centre', desc: 'Permits the establishment of the Learn To Leap skills training centre.' },
+        { img: '/images/stickem/phap-ly/cv-trien-khai-stem-ai.webp', kind: 'Official letter', no: 'No. 5942/SGDĐT-GDTH · 21/10/2026', issuer: 'Ha Noi Department of Education and Training', title: 'Approval to deliver the STEM AI programme', desc: 'Learn to Leap may pilot learner-chosen education activities in Ha Noi primary schools in 2026–2027 and 2027–2028.' },
+      ],
+      view: 'View document',
+    },
+    schools: {
+      eyebrow: 'Already running',
+      title: 'Schools [[already on board]]',
+      lead: 'Learn to Leap’s STEM – AI – Robotics programmes are running in many primary and lower-secondary schools.',
+      stats: [
+        { n: 30, suf: '+', label: 'Primary & lower-secondary schools' },
+        { n: 50, suf: '+', label: 'Schools with a STEM AI Lab' },
+        { n: 30000, suf: '+', label: 'Students reached' },
+      ],
+      items: [
+        ['truong-01', 'TH Bắc Hồng'], ['truong-02', 'THCS Vĩnh Hưng'], ['truong-03', 'Trường Lương Ngọc Quyến'], ['truong-04', 'THCS Nam Từ Liêm'], ['truong-05', 'THCS Nguyễn Văn Tiệp'],
+        ['truong-06', 'THCS Chu Văn An'], ['truong-07', 'THCS Yên Sở'], ['truong-08', 'TH Phố Cò'], ['truong-09', 'TH&THCS Tây Hà Nội'], ['truong-10', 'THCS Nguyễn Văn Huyên'],
+        ['truong-11', 'THCS Tân Mai'], ['truong-12', 'THCS Xuân Đỉnh'], ['truong-13', 'THCS Tàm Xá'], ['truong-14', 'TH&THCS 915 Gia Sàng'], ['truong-15', 'THCS Thanh Trì'],
+        ['truong-16', 'THCS Trần Phú'], ['truong-17', 'THCS Chùa Hang II'], ['truong-18', 'THCS Quang Trung'], ['truong-19', 'TH Đội Cấn I'], ['truong-20', 'TH Nguyễn Thị Minh Khai'],
+        ['truong-21', 'TH Nguyễn Viết Xuân'], ['truong-22', 'THCS Nguyễn Du'], ['truong-23', 'THCS Hoàng Văn Thụ'], ['truong-24', 'THCS Phúc Xuân'], ['truong-25', 'THCS Độc Lập'],
+        ['truong-26', 'THCS Quyết Thắng'], ['truong-27', 'TH Trưng Vương'], ['truong-28', 'TH Sơn Cẩm I'], ['truong-29', 'TH Phúc Trìu'], ['truong-30', 'THCS Chiến Thắng'],
+      ],
+    },
+    cta: { title: "Bring a [[Stick 'Em Lab]] to your school", lead: 'Learn to Leap will survey your classrooms and propose a curriculum and rollout plan that fits your school.', primary: 'Book a site survey', secondary: 'See the private-investment model' },
   },
 
   projectsPage: {

@@ -11,7 +11,7 @@ const switchHref = withBase(paths ? paths[other] : page ? ROUTES[page][other] : 
 // Menu ngang: "Sản phẩm" có mega menu, "Đề án" gom 2 trang Đề án theo NSNN và Đề án XHH.
 const before: PageKey[] = ['about', 'solutions'];
 const after: PageKey[] = ['projects', 'store', 'news'];
-const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh', 'projects', 'store', 'news', 'impact', 'partnership', 'contact'];
+const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh', 'stickem', 'projects', 'store', 'news', 'impact', 'partnership', 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 const groups = t.products.groups;
 // Ảnh minh hoạ của một nhóm: lấy lần lượt từ các phần trong nhóm.
@@ -48,10 +48,11 @@ const prodHref = (id: string) => `${href('products', lang)}#${id}`;
           </div>
         </li>
         <li class="dd">
-          <a href={href('scheme', lang)} aria-current={page === 'scheme' || page === 'xhh' ? 'page' : undefined}>{t.common.menu.scheme}<Icon name="chevron" class="dd-i" stroke={2.4} /></a>
+          <a href={href('scheme', lang)} aria-current={page === 'scheme' || page === 'xhh' || page === 'stickem' ? 'page' : undefined}>{t.common.menu.scheme}<Icon name="chevron" class="dd-i" stroke={2.4} /></a>
           <div class="dd-panel">
             <a href={href('scheme', lang)}>{t.common.nav.scheme}</a>
             <a href={href('xhh', lang)}>{t.common.nav.xhh}</a>
+            <a href={href('stickem', lang)}>{t.common.nav.stickem}</a>
           </div>
         </li>
         {after.map((k) => <li><a href={href(k, lang)} aria-current={cur(k)}>{t.common.nav[k]}</a></li>)}

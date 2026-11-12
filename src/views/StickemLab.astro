@@ -1,0 +1,270 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Btn from '../components/Btn.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Stats from '../components/Stats.astro';
+import { useT, rich } from '../i18n';
+import { href, withBase, type Lang } from '../i18n/routes';
+
+/** Đề án XHH riêng cho Phòng STEM – AI Stick 'Em Lab (TH & THCS). Nội dung theo Sale kit LtL x Stick 'Em TH&THCS 2026;
+ *  hình minh hoạ (Stickies, khớp nối, linh kiện) lấy từ Stick 'Em Asset Pack 2 → public/images/stickem/asset. */
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const s = t.stickemLab;
+const lv = s.levels.rows;
+const pl = s.program.labels;
+const asset = (n: string) => withBase(`/images/stickem/asset/${n}.webp`);
+// Dải ảnh trường: chia 2 hàng chạy ngược chiều; mỗi hàng nhân đôi để vòng lặp liền mạch.
+const half = Math.ceil(s.schools.items.length / 2);
+const rows = [s.schools.items.slice(0, half), s.schools.items.slice(half)];
+---
+<Base lang={lang} page="stickem" title={t.meta.stickem.title} description={t.meta.stickem.description} lightbox>
+  <PageHero lang={lang} title={s.hero.title} lead={s.hero.lead} crumb={t.common.nav.stickem} bots={['stickem-robot', 'stickem-kit']}>
+    <Btn href={href('contact', lang)} variant="glass" arrow>{s.hero.cta}</Btn>
+    <Btn href="#chuong-trinh" variant="glass">{s.hero.cta2}</Btn>
+  </PageHero>
+
+  <!-- GIỚI THIỆU STICK 'EM -->
+  <section class="sp">
+    <div class="wrap split mid">
+      <div class="reveal">
+        <img class="se-logo" src={withBase('/images/stickem/logo.webp')} alt="Stick 'Em" width="400" height="364" loading="lazy" decoding="async" />
+        <span class="eyebrow">{s.intro.eyebrow}</span>
+        <h2 class="fd blk-t" set:html={rich(s.intro.title)} />
+        <p class="lead">{s.intro.lead}</p>
+        <p class="lead sl-lead2">{s.intro.lead2}</p>
+        <p class="sl-award"><Icon name="trophy" /><span>{s.intro.award}</span></p>
+      </div>
+      <div class="sl-pair reveal d2">
+        {s.intro.photos.map((p) => <img src={withBase(p.src)} alt={p.alt} loading="lazy" decoding="async" />)}
+        <img class="sl-fl f1" src={asset('piece-120t')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <img class="sl-fl f2" src={asset('piece-360')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <img class="sl-fl f3" src={asset('sticky-purple-120-pointing')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="wrap sl-stats"><Stats lang={lang} items={s.intro.stats} /></div>
+  </section>
+
+  <!-- MỘT NỀN TẢNG CHO HAI CẤP HỌC -->
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={s.levels.eyebrow} title={s.levels.title} lead={s.levels.lead} />
+      <div class="grid g2">
+        {s.levels.items.map((it, i) => (
+          <div class:list={['card sl-lv reveal', `d${i + 1}`]}>
+            <div class="sl-parts" aria-hidden="true">
+              {it.parts.map((p) => <img src={asset(p)} alt="" loading="lazy" decoding="async" />)}
+            </div>
+            <span class="pill">{it.tag}</span>
+            <h3>{it.title}</h3>
+            <p>{it.desc}</p>
+            <dl>
+              <div><dt>{lv.control}</dt><dd>{it.control}</dd></div>
+              <div><dt>{lv.sensors}</dt><dd>{it.sensors}</dd></div>
+              <div><dt>{lv.apps}</dt><dd>{it.apps}</dd></div>
+              <div><dt>{lv.level}</dt><dd>{it.level}</dd></div>
+              <div><dt>{lv.use}</dt><dd>{it.use}</dd></div>
+            </dl>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MÔ HÌNH XÃ HỘI HOÁ + VAI TRÒ -->
+  <section class="sp sl-rel">
+    <img class="sl-deco d-r" src={asset('sticky-duo-handshake')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <div class="wrap">
+      <SectionHead eyebrow={s.model.eyebrow} title={s.model.title} lead={s.model.lead} />
+      <div class="grid g2">
+        {s.model.items.map((p, i) => (
+          <div class:list={['pol reveal', `d${(i % 2) + 1}`]}><div class="code">{p.code}</div><div><h3>{p.title}</h3><p>{p.desc}</p></div></div>
+        ))}
+      </div>
+      <div class="sl-gap">
+        <SectionHead eyebrow={s.roles.eyebrow} title={s.roles.title} />
+        <div class="grid g2">
+          {s.roles.items.map((r, i) => (
+            <div class:list={['aud reveal', `d${i + 1}`]}>
+              <img class="card-img" src={withBase(r.img)} alt="" loading="lazy" decoding="async" />
+              <div class="ic"><Icon name={r.icon} /></div>
+              <h3>{r.title}</h3>
+              <ul>{r.list.map((li) => <li><Icon name="check" stroke={2.4} /><span>{li}</span></li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHƯƠNG TRÌNH THEO KHỐI LỚP -->
+  <section class="sp bg-soft sl-rel" id="chuong-trinh">
+    <img class="sl-deco d-l" src={asset('sticky-green-tools')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <div class="wrap">
+      <SectionHead eyebrow={s.program.eyebrow} title={s.program.title} lead={s.program.lead} />
+      <div class="grid g2">
+        {s.program.items.map((p, i) => (
+          <article class:list={['card sl-prog reveal', `d${(i % 2) + 1}`]}>
+            <img class="card-img" src={withBase(p.img)} alt="" loading="lazy" decoding="async" />
+            <span class="pill">{p.grade}</span>
+            <h3>{p.title}</h3>
+            <dl>
+              <div><dt>{pl.hw}</dt><dd>{p.hw}</dd></div>
+              <div><dt>{pl.tools}</dt><dd>{p.tools}</dd></div>
+              <div><dt>{pl.know}</dt><dd>{p.know}</dd></div>
+              <div><dt>{pl.skill}</dt><dd>{p.skill}</dd></div>
+            </dl>
+            <details>
+              <summary>{pl.lessons}<Icon name="chevron" stroke={2.4} /></summary>
+              {p.parts.map((part) => (
+                <div class="sl-part">
+                  <h4>{part.name}</h4>
+                  <ol>{part.lessons.map((l) => <li>{l}</li>)}</ol>
+                </div>
+              ))}
+            </details>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DANH MỤC PHÒNG + MÔ HÌNH VẬN HÀNH -->
+  <section class="sp" id="danh-muc">
+    <div class="wrap">
+      <SectionHead eyebrow={s.kit.eyebrow} title={s.kit.title} lead={s.kit.lead} />
+      <div class="split mid">
+        <div class="blk-ph reveal"><img src={withBase(s.kit.photo.src)} alt={s.kit.photo.alt} loading="lazy" decoding="async" /></div>
+        <table class="sl-kit reveal d2">
+          <thead><tr><th scope="col" colspan="2">{s.kit.cols.name}</th><th scope="col">{s.kit.cols.qty}</th></tr></thead>
+          <tbody>
+            {s.kit.items.map((k) => <tr><td class="ic"><img src={asset(k.icon)} alt="" loading="lazy" decoding="async" /></td><td><b>{k.name}</b><span>{k.desc}</span></td><td>{k.qty}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <div class="op-card sl-op reveal">
+        <h4>{s.kit.opTitle}</h4>
+        <div class="op-stats">
+          {s.kit.opStats.map((o) => <div class="op-stat"><div class="v">{o.v} <span>{o.u}</span></div><div class="k">{o.k}</div></div>)}
+        </div>
+      </div>
+      <p class="note">{t.xhh.note}</p>
+    </div>
+  </section>
+
+  <!-- ĐỒNG HÀNH MIỄN PHÍ + CUỘC THI -->
+  <section class="sp bg-soft sl-rel">
+    <img class="sl-deco d-r" src={asset('sticky-pink-trophy')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <div class="wrap">
+      <SectionHead eyebrow={s.care.eyebrow} title={s.care.title} lead={s.care.lead} />
+      <div class="grid g3">
+        {s.care.items.map((c, i) => (
+          <div class:list={['aud reveal', `d${i + 1}`]}>
+            <img class="card-img" src={withBase(c.img)} alt="" loading="lazy" decoding="async" />
+            <div class="who">{c.tag}</div>
+            <h3>{c.title}</h3>
+            <p>{c.desc}</p>
+            <ul>{c.list.map((li) => <li><Icon name="check" stroke={2.4} /><span>{li}</span></li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <div class="sl-gap">
+        <SectionHead eyebrow={s.contests.eyebrow} title={s.contests.title} />
+        <div class="se-photos">
+          {s.contests.items.map((ph, i) => <figure class:list={['reveal', `d${i + 1}`]}><img src={withBase(ph.src)} alt={ph.alt} loading="lazy" decoding="async" /><figcaption>{ph.alt}</figcaption></figure>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HÌNH ẢNH THỰC TẾ -->
+  <section class="sp">
+    <div class="wrap">
+      <SectionHead eyebrow={s.gallery.eyebrow} title={s.gallery.title} lead={s.gallery.lead} />
+      <div class="sl-gal">
+        {s.gallery.items.map((g, i) => (
+          <a class:list={['reveal', `d${(i % 4) + 1}`]} href={withBase(g.src)} data-photo={withBase(g.src)} data-title={g.alt}>
+            <img src={withBase(g.src)} alt={g.alt} loading="lazy" decoding="async" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CĂN CỨ PHÁP LÝ: THÁP 4 TẦNG + VĂN BẢN CỦA LEARN TO LEAP -->
+  <section class="sp bg-soft">
+    <div class="wrap">
+      <SectionHead eyebrow={s.basis.eyebrow} title={s.basis.title} lead={s.basis.lead} />
+      <ol class="sl-pyr">
+        {s.basis.tiers.map((tier, i) => (
+          <li class:list={['reveal', `t${i + 1}`, `d${i + 1}`]}>
+            <span class="lbl">{tier.label}</span>
+            <div class="row">
+              {tier.items.map((d) => <div class="doc"><b>{d.code}</b><span>{d.title}</span></div>)}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="sl-gap">
+        <SectionHead title={s.basis.docsTitle} lead={s.basis.docsLead} />
+        <div class="grid g3">
+          {s.basis.docs.map((d, i) => (
+            <a class:list={['sl-lic reveal', `d${i + 1}`]} href={withBase(d.img)} data-photo={withBase(d.img)} data-title={d.title}>
+              <span class="ph"><img src={withBase(d.img)} alt={d.title} loading="lazy" decoding="async" /></span>
+              <span class="kind">{d.kind}</span>
+              <h3>{d.title}</h3>
+              <span class="meta"><b>{d.issuer}</b>{d.no}</span>
+              <p>{d.desc}</p>
+              <span class="go">{s.basis.view}<Icon name="arrow" stroke={2.4} /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÁC TRƯỜNG HỌC ĐÃ TRIỂN KHAI -->
+  <section class="sp sl-rel sl-sch-sec">
+    <div class="wrap">
+      <SectionHead eyebrow={s.schools.eyebrow} title={s.schools.title} lead={s.schools.lead} />
+      <Stats lang={lang} items={s.schools.stats} class="sl-sch-stats" />
+    </div>
+    <div class="sl-mq reveal" data-mq>
+      <button class="ls-toggle" type="button" data-mq-toggle aria-pressed="false" aria-label={t.common.pauseMotion} data-pause={t.common.pauseMotion} data-play={t.common.playMotion}><Icon name="pause" class="i-pause" stroke={2.4} /><Icon name="play" class="i-play" /></button>
+      {rows.map((row, r) => (
+        <div class:list={['sl-mq-row', { rev: r === 1 }]}>
+          <ul class="sl-mq-track">
+            {[...row, ...row].map(([img, name], i) => (
+              <li aria-hidden={i >= row.length ? 'true' : undefined}>
+                <img src={withBase(`/images/stickem/truong/${img}.webp`)} alt="" loading="lazy" decoding="async" />
+                <span>{name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <img class="sl-crowd reveal" src={asset('group-five-friends')} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+  </section>
+
+  <CtaBand title={s.cta.title} lead={s.cta.lead} bot="stickem-robot">
+    <Btn href={href('contact', lang)} arrow>{s.cta.primary}</Btn>
+    <Btn href={href('xhh', lang)} variant="glass">{s.cta.secondary}</Btn>
+  </CtaBand>
+</Base>
+
+<script>
+  // Nút tạm dừng dải ảnh trường (dải chạy bằng CSS; WCAG 2.2.2).
+  document.querySelectorAll<HTMLElement>('[data-mq]').forEach((mq) => {
+    const btn = mq.querySelector<HTMLButtonElement>('[data-mq-toggle]');
+    btn?.addEventListener('click', () => {
+      const paused = mq.classList.toggle('paused');
+      btn.setAttribute('aria-pressed', String(paused));
+      btn.setAttribute('aria-label', (paused ? btn.dataset.play : btn.dataset.pause) || '');
+    });
+  });
+</script>

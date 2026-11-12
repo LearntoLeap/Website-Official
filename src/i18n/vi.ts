@@ -25,6 +25,7 @@ const vi = {
       products: 'Sản phẩm',
       scheme: 'Đề án theo NSNN',
       xhh: 'Đề án XHH',
+      stickem: "Stick 'Em Lab XHH",
       projects: 'Dự án tiêu biểu',
       store: 'Store',
       impact: 'Năng lực & Dấu ấn',
@@ -111,6 +112,10 @@ const vi = {
     xhh: {
       title: 'Đề án xã hội hoá giáo dục STEM – AI — Learn to Leap',
       description: 'Mô hình xã hội hoá: doanh nghiệp đầu tư phòng STEM – AI, Learn to Leap chuyển giao và vận hành chương trình cùng nhà trường.',
+    },
+    stickem: {
+      title: "Phòng STEM – AI Stick 'Em Lab theo mô hình xã hội hoá — Learn to Leap",
+      description: "Learn to Leap đầu tư thiết bị, học liệu, robot Stick 'Em và tập huấn giáo viên để trường Tiểu học, THCS triển khai STEM – AI ngoài giờ chính khoá theo TT 85/2026 và TT 86/2026.",
     },
     projects: {
       title: 'Dự án tiêu biểu — Learn to Leap',
@@ -697,10 +702,232 @@ const vi = {
       ],
       more: 'Xem chi tiết thiết bị',
     },
+    stickem: { title: "Phòng [[Stick 'Em Lab]] cho Tiểu học & THCS", desc: "Learn to Leap đầu tư trọn gói robot Stick 'Em, học liệu và tập huấn giáo viên; chương trình từ lớp 2 đến lớp 7.", cta: 'Xem chi tiết đề án' },
     opTitle: 'Mô hình vận hành tham khảo',
     projects: { eyebrow: 'Dự án', title: 'Các dự án [[đã thực hiện]]', all: 'Xem tất cả dự án' },
     note: '* Mức đóng góp, thời hạn và hình thức hợp tác cụ thể được thống nhất với từng nhà trường, theo quy định của địa phương.',
     cta: { title: 'Muốn có phòng STEM – AI theo mô hình xã hội hoá?', lead: 'Learn to Leap khảo sát và đề xuất phương án phù hợp với nhà trường.', primary: 'Đặt lịch khảo sát', secondary: 'Xem đề án ngân sách' },
+  },
+
+  /* ---------- Đề án XHH: Phòng STEM – AI Stick 'Em Lab cho TH & THCS (nguồn: Sale kit LtL x Stick 'Em TH&THCS 2026) ---------- */
+  stickemLab: {
+    hero: {
+      title: "Phòng STEM – AI [[Stick 'Em Lab]] theo mô hình xã hội hoá",
+      lead: "Learn to Leap đầu tư chương trình, thiết bị, học liệu và bộ robot Stick 'Em, tập huấn để giáo viên nhà trường trực tiếp đứng lớp. Nhà trường có không gian học STEM – AI cho học sinh Tiểu học và THCS mà không dùng ngân sách mua sắm thiết bị.",
+      cta: 'Đặt lịch khảo sát',
+      cta2: 'Xem chương trình học',
+    },
+    intro: {
+      eyebrow: "Giới thiệu Stick 'Em",
+      title: 'Robotics [[từ những chiếc đũa]] và vật liệu xanh',
+      lead: "Stick 'Em là giải pháp giáo dục STEAM – AI do Singapore phát triển. Từ đũa tre, khớp nối in 3D, động cơ servo và bo mạch điện tử, học sinh tự tay lắp mô hình, robot rồi điều khiển qua ứng dụng Bluetooth. Học liệu gần gũi, chi phí hợp lý nên nhà trường có thể tổ chức hoạt động STEM – AI cho mọi học sinh.",
+      lead2: 'Trên cùng một bộ học liệu, bài học trải rộng từ tư duy thiết kế, Toán, Khoa học, robotics – lập trình, trí tuệ nhân tạo đến ngôn ngữ, nghệ thuật – nhân văn, giáo dục cảm xúc – xã hội và tư duy tương lai.',
+      award: "Được IMDA, Viện Giáo dục Quốc gia Singapore (NIE), Temasek Foundation, Google và UNDP hỗ trợ, ghi nhận. Vô địch Hult Prize 2025 (Nobel Khởi nghiệp), trị giá 1 triệu USD.",
+      stats: [
+        { n: 400, suf: '+', label: 'Trường học đã triển khai' },
+        { n: 22, suf: '', label: 'Quốc gia trên toàn thế giới' },
+        { n: 1, suf: ' triệu USD', label: 'Giải Hult Prize 2025' },
+      ],
+      photos: [
+        { src: '/images/stickem/lab/lop-hoc.webp', alt: "Lớp học STEM – AI với bộ Stick 'Em" },
+        { src: '/images/stickem/lab/hult.webp', alt: "Đội Stick 'Em nhận giải Hult Prize 2025" },
+      ],
+    },
+    levels: {
+      eyebrow: "Stick 'Em Robotics Kit",
+      title: 'Một nền tảng [[cho hai cấp học]]',
+      lead: 'Cả hai phiên bản dùng chung mạch điều khiển ESP32, 3 động cơ servo và pin sạc dự phòng; phát triển theo nhu cầu và năng lực học sinh ở từng cấp học.',
+      rows: { control: 'Điều khiển', sensors: 'Cảm biến', apps: 'Mô hình', level: 'Định hướng', use: 'Phù hợp với' },
+      items: [
+        { tag: 'Tiểu học', title: 'Khám phá cơ bản', desc: 'Làm quen cơ cấu chuyển động, đòn bẩy, bánh răng, xe đơn giản và mô hình STEM trực quan; khơi gợi hứng thú và tư duy thiết kế.', parts: ['chopstick-set', 'piece-120t', 'board-v2', 'servo', 'power-bank'], control: 'ESP32 + 3 servo', sensors: 'Không bổ sung', apps: 'Xe đơn giản, tay gắp, cơ cấu nâng', level: 'Cơ bản – trực quan', use: 'CLB STEM, hoạt động trải nghiệm' },
+        { tag: 'THCS', title: 'Phát triển kỹ năng STEM', desc: 'Từ lắp ghép sáng tạo đến lập trình robot và dự án liên môn Toán – KHTN – Tin học – Công nghệ; mở rộng với lập trình nâng cao và ứng dụng thực tiễn.', parts: ['board-v2', 'servo', 'sensor-ultrasonic', 'sensor-light', 'sensor-lcd', 'sensor-gyroscope'], control: 'ESP32 + 3 servo', sensors: 'Ánh sáng, chuyển động (MPU6050), siêu âm, nhiệt độ – độ ẩm; màn hình 0,96 inch', apps: 'Robot tự hành, đo đạc, mô hình thông minh', level: 'Nâng cao – thực tiễn', use: 'STEM Day, thi đấu Robotics, dự án liên môn' },
+      ],
+    },
+    model: {
+      eyebrow: 'Mô hình xã hội hoá',
+      title: 'Đúng quy định, [[không dùng ngân sách]] mua sắm',
+      lead: "Learn to Leap đầu tư trọn gói và chuyển giao để giáo viên nhà trường đứng lớp. Học sinh tiếp cận phương pháp học hiện đại, chuẩn quốc tế ngay tại trường.",
+      items: [
+        { code: 'TT 85/2026', title: 'Hoạt động theo nhu cầu người học', desc: 'Tổ chức ngoài giờ chính khoá và hoạt động GDTC; học sinh tham gia trên cơ sở tự nguyện của người học và phụ huynh.' },
+        { code: 'Minh bạch', title: 'Kinh phí thu công khai', desc: 'Thu theo danh mục, công khai, không vượt mức thu do UBND tỉnh/thành phố quyết định.' },
+        { code: 'TT 86/2026', title: 'Không bắt buộc phòng STEM riêng', desc: "Bộ Stick 'Em gọn nhẹ, dùng ngay trong phòng học sẵn có của nhà trường." },
+        { code: 'Đội ngũ', title: 'Nâng cao năng lực giáo viên', desc: 'Giáo viên nhà trường được bồi dưỡng bài bản để chủ động tổ chức dạy học STEM – AI lâu dài.' },
+      ],
+    },
+    roles: {
+      eyebrow: 'Vai trò & trách nhiệm',
+      title: 'Nhà trường và Learn to Leap [[cùng triển khai]]',
+      items: [
+        { icon: 'school', title: 'Nhà trường', img: '/images/stickem/lab/lop-rong.webp', list: ['Bố trí 1–3 phòng học trống sau giờ chính khoá để triển khai chương trình', 'Phối hợp truyền thông, trải nghiệm, nhận đơn đăng ký và sắp xếp thời khoá biểu các lớp tham gia', "Cử giáo viên nhận chuyển giao chương trình STEM – AI Stick 'Em và đứng lớp ngoài giờ chính khoá"] },
+        { icon: 'cap', title: 'Learn to Leap', img: '/images/stickem/lab/tap-huan.webp', list: ["Đầu tư chương trình, thiết bị, học cụ, học liệu và các bộ robot Stick 'Em", 'Phối hợp cùng nhà trường truyền thông, tổ chức trải nghiệm và tuyển sinh', "Đào tạo, tập huấn và cấp chứng nhận STEM – AI Stick 'Em quốc tế cho giáo viên; đồng hành chuyên môn xuyên suốt"] },
+      ],
+    },
+    program: {
+      eyebrow: 'Chương trình học',
+      title: 'Chương trình [[theo từng khối lớp]]',
+      lead: 'Bốn chương trình nối tiếp từ lớp 2 đến lớp 7, đi từ lắp mô hình và thẻ lệnh giấy đến lập trình khối, cảm biến và huấn luyện mô hình thị giác máy tính.',
+      labels: { hw: 'Phần cứng', tools: 'Công cụ học', know: 'Kiến thức', skill: 'Kỹ năng', lessons: 'Xem danh sách bài học' },
+      items: [
+        {
+          grade: 'Lớp 2–3 · Tiểu học', title: 'Vườn thú biến hoá', img: '/images/stickem/lab/hoc-sinh-mo-hinh.webp',
+          hw: 'Lớp 2: Connector Kit, đèn LED pin và vật liệu thủ công. Lớp 3: Robotics Kit, servo và bộ cảm biến.',
+          tools: "Lớp 2: thẻ lệnh giấy. Lớp 3: Stick 'Em WebApp để điều khiển và lập trình khối.",
+          know: 'Cấu tạo, tập tính, cách di chuyển của động vật; trục quay, bản lề, tay quay và cách cảm biến thu dữ liệu.',
+          skill: 'Lắp mô hình chuyển động, sắp xếp thẻ lệnh theo trình tự; lập trình khối với lệnh lặp và rẽ nhánh; thử nghiệm, trình bày sản phẩm.',
+          parts: [
+            { name: 'Lớp 2 · Thế giới động vật', lessons: ['Vườn thú biến hoá', 'Cái miệng rộng của ai', 'Mắt mèo', 'Người bạn đặc biệt: Cú mèo', 'Bạn voi biết nói (2 phần)', 'Chú chó thích vẫy đuôi', 'Cánh chim', 'Chúng ta khác nhau'] },
+            { name: 'Lớp 3 · Robotics và cảm biến', lessons: ['Em và robot, AI', 'Chiếc cổ dài của hươu cao cổ', 'Râu của ốc sên (2 phần)', 'Loài cá diệu kỳ', 'Chú rắn tinh anh', 'Bá chủ địa cầu: Khủng long (2 phần)', 'Nhà của những người bạn', 'AI và em: an toàn khi dùng thiết bị thông minh'] },
+          ],
+        },
+        {
+          grade: 'Lớp 4–5 · Tiểu học', title: 'AI trong đời sống thông minh', img: '/images/stickem/kids-car.webp',
+          hw: 'Robotics Kit gồm bo mạch, 3 servo, pin sạc và bánh xe; bộ cảm biến, LED và loa/còi dùng theo từng bài.',
+          tools: "Stick 'Em WebApp: lập trình khối và điều khiển từ xa (RC).",
+          know: 'Phân biệt thiết bị tự động và AI; cách cảm biến và động cơ phối hợp trong thiết bị gia đình, xe tự hành và robot phân loại.',
+          skill: 'Lắp ráp, lập trình, thử nghiệm thiết bị dùng cảm biến; dùng rẽ nhánh, lặp có điều kiện; thu thập dữ liệu và trình bày dự án.',
+          parts: [
+            { name: 'Lớp 4 · Hệ thống thông minh', lessons: ['Thế nào là "đời sống thông minh"?', 'Đèn để bàn thông minh', 'Quạt điện thông minh', 'Thùng rác thông minh', 'Góc học tập thông minh', 'Vườn hoa thông minh của tôi', 'Giá phơi quần áo thông minh', 'Dự án Ngôi nhà thông minh', 'AI quanh em: dùng AI an toàn, có trách nhiệm'] },
+            { name: 'Lớp 5 · Đời sống và giao thông', lessons: ['Máy phát nhạc', 'Chuông báo thông minh', 'Xe quét dọn thông minh', 'Trợ lý cảnh sát giao thông', 'Thi đấu xe cứu hộ tự hành đỗ xe chính xác', 'Bộ cảm biến', 'Cửa điện', 'Cánh tay robot phân loại', 'Cuộc sống AI – Công nghệ AI'] },
+          ],
+        },
+        {
+          grade: 'Lớp 6 · THCS', title: 'Người bảo vệ thành phố 1', img: '/images/stickem/lab/truong-4.webp',
+          hw: "Robotics Kit Stick 'Em: bo mạch, servo, bánh xe; cảm biến khoảng cách và cảm biến ánh sáng.",
+          tools: "Stick 'Em WebApp: lập trình khối tuần tự, điều kiện, lặp, biến; trải nghiệm mô hình thị giác máy tính.",
+          know: 'Làm quen AI và robot qua vai trò người bảo vệ thành phố; cách cảm biến và thị giác máy tính giúp robot cứu hộ, tuần tra.',
+          skill: 'Lắp xe cứu hộ, cánh tay cơ khí, xe linh hoạt; lập trình robot cứu hộ, tuần tra; hợp tác, thuyết trình, cải tiến.',
+          parts: [
+            { name: 'Tuần 1–17 · Làm quen và cứu hộ', lessons: ['Giới thiệu chủ đề', 'Cứu hộ khẩn cấp trong đống đổ nát', 'Vượt chướng ngại vật', 'Tìm người bằng âm thanh', 'Cứu hộ'] },
+            { name: 'Tuần 18–35 · Di chuyển và quan sát', lessons: ['Di chuyển linh hoạt', 'Đôi mắt quan sát', 'Tuần tra tự động', 'Theo dõi và truy vết', 'Ôn tập – kiểm tra kỳ II'] },
+          ],
+        },
+        {
+          grade: 'Lớp 7 · THCS', title: 'Người bảo vệ thành phố 2', img: '/images/stickem/lab/truong-5.webp',
+          hw: "Robotics Kit Stick 'Em: bo mạch, servo, bánh xe, tay gắp; cảm biến dò đường và sa bàn thực hành.",
+          tools: "Stick 'Em WebApp: biến, hàm tự định nghĩa, hàm có tham số, toán tử logic; huấn luyện mô hình thị giác máy tính.",
+          know: 'Tự huấn luyện AI nhận diện màu sắc, hình ảnh, ký hiệu, biển báo, tư thế người; nhận thức về thiên vị dữ liệu và trách nhiệm khi dùng AI.',
+          skill: 'Điều khiển robot bám đường đơn, đường đôi; phân loại hàng hoá bằng tay gắp; thực hiện kịch bản cứu hộ cộng đồng trên sa bàn.',
+          parts: [
+            { name: 'Tuần 1–17 · Nhận diện và định vị', lessons: ['Giới thiệu', 'Tìm người trong đám đông', 'Định vị màu sắc', 'Xác định hình ảnh', 'Di chuyển mượt mà'] },
+            { name: 'Tuần 18–35 · Ứng dụng và cứu hộ', lessons: ['Phân loại hàng hoá', 'Lái xe an toàn', 'Định vị chính xác', 'Cứu hộ cộng đồng', 'Ôn tập – kiểm tra cuối kỳ'] },
+          ],
+        },
+      ],
+    },
+    kit: {
+      eyebrow: 'Danh mục đầu tư',
+      title: "Danh mục [[Phòng Stick 'Em Lab]]",
+      lead: 'Learn to Leap đầu tư trọn gói, giá trị từ 200 triệu đồng mỗi phòng.',
+      cols: { name: 'Hạng mục', qty: 'Số lượng' },
+      items: [
+        { icon: 'piece-120t', name: 'Bộ Connector Kit (SERK01-CK)', desc: 'Bộ đũa lắp ghép, khớp nối 60–180 mm thẳng và chữ T, khớp chữ thập, trục, bánh xe, kẹp giấy carton, dây thun, kìm 4 inch', qty: '12 bộ' },
+        { icon: 'board-v2', name: 'Bộ Electronics Kit (SERK01-EK)', desc: 'Mạch điều khiển ESP32, 3 động cơ servo MG90R, pin sạc dự phòng 5000 mAh kèm giá đỡ, cáp USB-A sang USB-C', qty: '12 bộ' },
+        { icon: 'sensor-ultrasonic', name: 'Bộ cảm biến (SERK01-SK)', desc: 'Màn hình 0,96 inch, cảm biến ánh sáng BH1750, con quay hồi chuyển MPU6050, siêu âm HC-SR04, nhiệt độ – độ ẩm AHT10', qty: '12 bộ' },
+        { icon: 'sticky-blue-tablet-chat', name: 'Máy tính bảng học tập STEM – AI', desc: 'Điều khiển và lập trình robot theo nhóm', qty: '06 bộ' },
+        { icon: 'robot-car-top-view', name: 'Sa bàn thi đấu', desc: 'Kèm phụ kiện thi đấu theo chuẩn quốc tế', qty: '01 bộ' },
+        { icon: 'chappie-yellow-code-card', name: "Phần mềm lập trình Stick 'Em", desc: 'Kèm kho thư viện chủ đề STEM', qty: '01 hệ thống' },
+        { icon: 'sticky-pink-clipboard-chat', name: 'Trang trí STEM – AI Lab', desc: 'Nhận diện không gian phòng học', qty: '01 gói' },
+      ],
+      photo: { src: '/images/stickem/lab/lab-decor.webp', alt: "Phối cảnh Phòng Stick 'Em Lab" },
+      opTitle: 'Mô hình vận hành',
+      opStats: [
+        { v: '02', u: 'tiết/tuần', k: '70 tiết mỗi năm học' },
+        { v: '04–06', u: 'nhóm', k: 'mỗi lớp' },
+        { v: '06–08', u: 'HS', k: 'mỗi nhóm' },
+        { v: '150–200', u: 'HS', k: 'mỗi phòng · 01–03 phòng/điểm trường' },
+        { v: '07', u: 'module', k: 'tập huấn GV: 02 ngày + 01 buổi duyệt giảng' },
+        { v: 'Theo quy định', u: '', k: 'học phí, theo mức của UBND tỉnh/thành phố' },
+      ],
+    },
+    care: {
+      eyebrow: 'Đồng hành miễn phí',
+      title: 'Đồng hành [[bền vững]] cùng nhà trường',
+      lead: 'Ngoài đầu tư chương trình, thiết bị và học liệu, Learn to Leap tổ chức miễn phí ba hoạt động trọng tâm tại các trường hợp tác.',
+      items: [
+        { icon: 'book', img: '/images/stickem/lab/tap-huan.webp', tag: '01 đợt mỗi học kỳ', title: 'Tập huấn, đào tạo giáo viên', desc: 'Bồi dưỡng để mỗi thầy cô tự tin đứng lớp và duy trì chương trình lâu dài.', list: ['Chuyên môn STEM – AI, robotics, lập trình', 'Dùng công cụ AI để soạn bài, thiết kế học liệu', 'Chuyển đổi số trong dạy học và quản lý lớp', 'Tích hợp STEM vào môn chính khoá theo TT 86/2026'] },
+        { icon: 'spark', img: '/images/stickem/lab/ngay-hoi.webp', tag: 'Hằng năm', title: 'Ngày hội Trải nghiệm KHCN & AI', desc: 'Toàn bộ học sinh tự tay điều khiển robot, khám phá AI, IoT, thực tế ảo, lập trình game, in 3D, robot hình người.', list: ['Đúng hình thức hoạt động trải nghiệm STEM theo TT 86/2026', 'Gắn kết học sinh, phụ huynh và nhà trường', 'Xây dựng hình ảnh trường học đổi mới, hội nhập'] },
+        { icon: 'trophy', img: '/images/stickem/lab/doi-tuyen.webp', tag: 'Tháng 5–8', title: 'Huấn luyện đội tuyển thi', desc: 'Lộ trình "học – trải nghiệm – thi đấu": học sinh trường đối tác được huấn luyện miễn phí và ưu tiên tham dự.', list: ["Sân chơi Stick 'Em Quốc gia, tháng 5–6 hằng năm", 'GRG Global tại Singapore, tháng 7–8 hằng năm'] },
+      ],
+    },
+    contests: {
+      eyebrow: 'Sân chơi',
+      title: "Cuộc thi Stick 'Em [[quốc gia & quốc tế]]",
+      items: [
+        { src: '/images/stickem/lab/grg-2024.webp', alt: 'Global Robotics Games 2024' },
+        { src: '/images/stickem/lab/grg-vn-2025.webp', alt: "GRG Vietnam 2025 – Stick 'Em Robotics Challenge" },
+        { src: '/images/stickem/lab/rbw-2025.webp', alt: 'Robotics for a Better World 2025' },
+        { src: '/images/stickem/lab/grg-thai-2025.webp', alt: 'GRG Thailand National Round 2025' },
+      ],
+    },
+    gallery: {
+      eyebrow: 'Hình ảnh thực tế',
+      title: 'Học sinh và giáo viên [[trong giờ STEM – AI]]',
+      lead: 'Lớp học, tập huấn và ngày hội Learn to Leap đã tổ chức tại các trường. Bấm vào ảnh để xem lớn.',
+      items: [
+        { src: '/images/stickem/thuc-te/anh-01.webp', alt: 'Học sinh trình bày mô hình tự lắp' },
+        { src: '/images/stickem/thuc-te/anh-04.webp', alt: 'Học sinh thử nghiệm mô hình trên sàn lớp' },
+        { src: '/images/stickem/thuc-te/anh-03.webp', alt: 'Lớp học STEM – AI theo nhóm' },
+        { src: '/images/stickem/thuc-te/anh-06.webp', alt: 'Tập huấn giáo viên' },
+        { src: '/images/stickem/thuc-te/anh-08.webp', alt: 'Học sinh điều khiển robot bằng máy tính bảng' },
+        { src: '/images/stickem/thuc-te/anh-02.webp', alt: 'Học sinh theo dõi phần thi trên sa bàn' },
+        { src: '/images/stickem/thuc-te/anh-09.webp', alt: 'Trải nghiệm thực tế ảo tại ngày hội' },
+        { src: '/images/stickem/thuc-te/anh-05.webp', alt: 'Giờ thực hành trong phòng học' },
+        { src: '/images/stickem/thuc-te/anh-07.webp', alt: 'Học sinh quanh sa bàn thi đấu' },
+        { src: '/images/stickem/thuc-te/anh-10.webp', alt: 'Ngày hội STEM – AI – Robotics' },
+        { src: '/images/stickem/thuc-te/anh-12.webp', alt: 'Đội tuyển thi đấu Robotics' },
+        { src: '/images/stickem/thuc-te/anh-11.webp', alt: 'Đội ngũ Learn to Leap cùng học sinh' },
+      ],
+    },
+    basis: {
+      eyebrow: 'Căn cứ pháp lý',
+      title: 'Căn cứ [[pháp lý triển khai]]',
+      lead: 'Từ chủ trương của Đảng đến quy định của địa phương, mô hình bám đủ bốn tầng văn bản.',
+      tiers: [
+        { label: 'Chủ trương của Đảng', items: [
+          { code: 'NQ 57-NQ/TW', title: 'Khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia' },
+          { code: 'NQ 71-NQ/TW', title: 'Đột phá phát triển giáo dục và đào tạo; đẩy mạnh STEM, AI trong nhà trường' },
+        ] },
+        { label: 'Chương trình & khung năng lực', items: [
+          { code: 'GDPT 2018', title: 'Chương trình GDPT (TT 32/2018): nền tảng Khoa học, Toán, Tin học, Công nghệ' },
+          { code: 'TT 02/2025', title: 'Khung năng lực số cho người học, có miền năng lực AI' },
+          { code: 'QĐ 2422', title: 'Khung nội dung giáo dục AI; CV 5588: 12 tiết/lớp/năm từ 2026–2027' },
+        ] },
+        { label: 'Văn bản mới 2026', items: [
+          { code: 'TT 85/2026', title: 'Giáo dục theo nhu cầu người học: lập trình, robot, STEM nâng cao; tự nguyện, ngoài giờ. Hiệu lực 15/11/2026' },
+          { code: 'TT 86/2026', title: 'Tổ chức giáo dục STEM theo 3 mức thiết bị; khuyến khích hợp tác với doanh nghiệp. Hiệu lực 30/9/2026' },
+        ] },
+        { label: 'Quy định địa phương', items: [
+          { code: 'UBND tỉnh/TP', title: 'Quy định mức thu dịch vụ giáo dục theo nhu cầu người học' },
+        ] },
+      ],
+      docsTitle: 'Cơ sở pháp lý của [[Learn to Leap]]',
+      docsLead: 'Ba văn bản cho phép Learn to Leap triển khai chương trình STEM – AI tại Việt Nam. Bấm vào văn bản để xem bản chụp.',
+      docs: [
+        { img: '/images/stickem/phap-ly/chung-nhan-tham-dinh.webp', kind: 'Giấy chứng nhận', no: 'Số 2512/CN-NCTK · 25/12/2025', issuer: 'Viện Nghiên cứu Thiết kế Trường học – Bộ GD&ĐT', title: 'Chứng nhận kết quả thẩm định Chương trình Giáo dục STEM Trí tuệ nhân tạo', desc: 'Hệ sinh thái Giáo dục STEM AI và Học liệu số của Learn to Leap phù hợp với Chương trình GDPT 2018 và được sử dụng trong các cơ sở giáo dục phổ thông.' },
+        { img: '/images/stickem/phap-ly/qd-trung-tam-boi-duong.webp', kind: 'Quyết định', no: 'Số 1483/QĐ-SGDĐT · 24/02/2026', issuer: 'Sở GD&ĐT Hà Nội', title: 'Giấy phép Trung tâm bồi dưỡng kiến thức STEM AI Robotics', desc: 'Cho phép thành lập Trung tâm bồi dưỡng kỹ năng Learn To Leap.' },
+        { img: '/images/stickem/phap-ly/cv-trien-khai-stem-ai.webp', kind: 'Công văn', no: 'Số 5942/SGDĐT-GDTH · 21/10/2026', issuer: 'Sở GD&ĐT Hà Nội', title: 'Giấy phép triển khai Chương trình STEM AI', desc: 'Learn to Leap triển khai thí điểm hoạt động giáo dục theo nhu cầu trong giáo dục Tiểu học tại Hà Nội, năm học 2026–2027 và 2027–2028.' },
+      ],
+      view: 'Xem văn bản',
+    },
+    schools: {
+      eyebrow: 'Đã triển khai',
+      title: 'Các trường học [[đã triển khai]]',
+      lead: 'Chương trình STEM – AI – Robotics của Learn to Leap đang chạy ở nhiều trường Tiểu học và THCS.',
+      stats: [
+        { n: 30, suf: '+', label: 'Trường Tiểu học & THCS' },
+        { n: 50, suf: '+', label: 'Trường có phòng STEM AI Lab' },
+        { n: 30000, suf: '+', label: 'Học sinh được phổ cập' },
+      ],
+      items: [
+        ['truong-01', 'TH Bắc Hồng'], ['truong-02', 'THCS Vĩnh Hưng'], ['truong-03', 'Trường Lương Ngọc Quyến'], ['truong-04', 'THCS Nam Từ Liêm'], ['truong-05', 'THCS Nguyễn Văn Tiệp'],
+        ['truong-06', 'THCS Chu Văn An'], ['truong-07', 'THCS Yên Sở'], ['truong-08', 'TH Phố Cò'], ['truong-09', 'TH&THCS Tây Hà Nội'], ['truong-10', 'THCS Nguyễn Văn Huyên'],
+        ['truong-11', 'THCS Tân Mai'], ['truong-12', 'THCS Xuân Đỉnh'], ['truong-13', 'THCS Tàm Xá'], ['truong-14', 'TH&THCS 915 Gia Sàng'], ['truong-15', 'THCS Thanh Trì'],
+        ['truong-16', 'THCS Trần Phú'], ['truong-17', 'THCS Chùa Hang II'], ['truong-18', 'THCS Quang Trung'], ['truong-19', 'TH Đội Cấn I'], ['truong-20', 'TH Nguyễn Thị Minh Khai'],
+        ['truong-21', 'TH Nguyễn Viết Xuân'], ['truong-22', 'THCS Nguyễn Du'], ['truong-23', 'THCS Hoàng Văn Thụ'], ['truong-24', 'THCS Phúc Xuân'], ['truong-25', 'THCS Độc Lập'],
+        ['truong-26', 'THCS Quyết Thắng'], ['truong-27', 'TH Trưng Vương'], ['truong-28', 'TH Sơn Cẩm I'], ['truong-29', 'TH Phúc Trìu'], ['truong-30', 'THCS Chiến Thắng'],
+      ],
+    },
+    cta: { title: "Đưa Phòng [[Stick 'Em Lab]] về trường của bạn", lead: 'Learn to Leap khảo sát phòng học, đề xuất chương trình và kế hoạch triển khai phù hợp với nhà trường.', primary: 'Đặt lịch khảo sát', secondary: 'Xem mô hình xã hội hoá' },
   },
 
   /* ---------- Dự án tiêu biểu ---------- */
