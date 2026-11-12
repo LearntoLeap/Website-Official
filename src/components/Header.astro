@@ -15,7 +15,7 @@ const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 const groups = t.products.groups;
 // Ảnh minh hoạ của một nhóm: lấy lần lượt từ các phần trong nhóm.
-const groupItems = (g: (typeof groups)[number]) => g.blocks.flatMap((b) => b.parts.flatMap((pt) => (PARTS[pt.id] ?? []).slice(0, 3))).slice(0, 6);
+const groupItems = (g: (typeof groups)[number]) => g.parts.flatMap((id) => (PARTS[id] ?? []).slice(0, 3)).slice(0, 6);
 const prodHref = (id: string) => `${href('products', lang)}#${id}`;
 ---
 <header class="site" id="hdr">

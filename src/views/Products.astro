@@ -26,7 +26,6 @@ const p = t.products;
           {p.groups.map((g) => (
             <li>
               <a href={`#${g.id}`} data-pc={g.id}><b>{g.no}</b>{g.short}</a>
-              <ul>{g.blocks.map((b) => <li><a href={`#${g.id}-${b.id}`}>{b.title}</a></li>)}</ul>
             </li>
           ))}
         </ol>
@@ -39,33 +38,15 @@ const p = t.products;
               <span class="pc-no">{g.no}</span>
               <div><h2>{g.title}</h2><p>{g.desc}</p></div>
             </header>
-            {g.blocks.map((b) => (
-              <div class="pc-block" id={`${g.id}-${b.id}`}>
-                <div class="pc-bh">
-                  <h3>{b.title}</h3>
-                  <span class="pc-brand"><span>{p.brandLabel}:</span> {b.brands}</span>
-                </div>
-                {b.parts.map((pt) => {
-                  const items = PARTS[pt.id] ?? [];
-                  return (
-                    <div class="pc-part">
-                      {pt.title && <h4><Icon name="check" stroke={2.4} />{pt.title}</h4>}
-                      {items.length ? (
-                        <ul class="pc-items">
-                          {items.map((it, j) => (
-                            <li class:list={['pc-item reveal', `d${(j % 4) + 1}`]}>
-                              <span class:list={['pc-ph', { cover: it.fit === 'cover' }]}><img src={withBase(it.img)} alt={it.name} loading="lazy" decoding="async" /></span>
-                              <span class="pc-name">{it.name}</span>
-                              {(it.lv || it.brand) && <span class="pc-lv">{[it.brand, it.lv].filter(Boolean).join(' · ')}</span>}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : <p class="pc-pending">{p.pending}</p>}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+            <ul class="pc-items">
+              {g.parts.flatMap((id) => PARTS[id] ?? []).map((it, j) => (
+                <li class:list={['pc-item reveal', `d${(j % 4) + 1}`]}>
+                  <span class:list={['pc-ph', { cover: it.fit === 'cover' }]}><img src={withBase(it.img)} alt={it.name} loading="lazy" decoding="async" /></span>
+                  <span class="pc-name">{it.name}</span>
+                  {(it.lv || it.brand) && <span class="pc-lv">{[it.brand, it.lv].filter(Boolean).join(' · ')}</span>}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
 

@@ -1,4 +1,4 @@
-/** Sản phẩm minh hoạ theo nhóm thiết bị TT 86 (sinh bằng gen_catalog.py từ Cẩm nang thiết bị LtL). Khoá = parts[].id trong i18n products.groups. */
+/** Sản phẩm minh hoạ theo nhóm thiết bị TT 86 (sinh bằng gen_catalog.py từ Cẩm nang thiết bị LtL). Khoá = parts[] (id) trong i18n products.groups. */
 export type CatalogItem = { name: string; lv: string; img: string; brand?: string; fit?: 'cover' };
 export const PARTS: Record<string, CatalogItem[]> = {
   "khtn-chude": [
@@ -104,7 +104,5 @@ export const PARTS: Record<string, CatalogItem[]> = {
     {"name": "Camera kép ghi hình lớp học, sinh viên", "lv": "Mọi cấp học", "img": "/images/products/maxhub-016.webp", "brand": "MAXHUB"},
     {"name": "Loa kèm micro họp trực tuyến", "lv": "Mọi cấp học", "img": "/images/products/maxhub-008.webp", "brand": "MAXHUB"},
     {"name": "Thiết bị thu và phát video trực tuyến", "lv": "Mọi cấp học", "img": "/images/products/maxhub-018.webp", "brand": "MAXHUB"},
-  ],
-  "g5-mysher": [
   ],
 };

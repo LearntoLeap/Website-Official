@@ -609,37 +609,15 @@ const vi = {
     },
     navLabel: 'Nhóm thiết bị',
     navTitle: 'Thiết bị, cấu phần theo TT 86 · Phòng STEM – AI Lab',
-    brandLabel: 'Hãng',
-    pending: 'Thông tin sản phẩm đang được cập nhật.',
     more: 'Và nhiều giải pháp sản phẩm Giáo dục thông minh khác',
     moreCta: 'Liên hệ tư vấn',
     /** Nhóm theo TT 86/2026. parts[].id là khoá sản phẩm minh hoạ trong src/data/catalog.ts. */
     groups: [
-      { id: 'nhom-1', no: '1', short: 'Khám phá, đo lường & thực nghiệm', title: 'Nhóm thiết bị khám phá, đo lường và thực nghiệm khoa học', desc: 'Thiết bị thí nghiệm, đo lường và thu nhận số liệu cho các chủ đề Khoa học tự nhiên từ Tiểu học đến THPT.', blocks: [
-        { id: 'kit-khtn', title: 'Các bộ KIT STEM Khoa học tự nhiên', brands: 'EBD – NXB Giáo dục Việt Nam · CMA', parts: [
-          { id: 'khtn-chude', title: 'Thiết bị, dụng cụ, vật tư tiêu hao chủ đề từ Lớp 1–12' },
-          { id: 'khtn-cambien', title: 'Các cảm biến, kết nối' },
-        ] },
-        { id: 'thi-nghiem', title: 'Bộ thí nghiệm & thu nhận số liệu', brands: 'OhStem', parts: [{ id: 'g1-thinghiem', title: '' }] },
-      ] },
-      { id: 'nhom-2', no: '2', short: 'Thiết kế kĩ thuật & chế tạo', title: 'Nhóm thiết bị thiết kế kĩ thuật và chế tạo', desc: 'Mô hình kĩ thuật, bộ lắp ghép, dụng cụ chế tạo và máy in 3D để học sinh đi từ ý tưởng đến sản phẩm thật.', blocks: [
-        { id: 'mo-hinh', title: 'Mô hình STEM – IoT theo chủ đề', brands: 'Khang Thịnh', parts: [{ id: 'g2-mohinh', title: '' }] },
-        { id: 'che-tao', title: 'Lắp ghép, dụng cụ chế tạo & máy in 3D', brands: 'OhStem · Weeemake · Bambu Lab', parts: [{ id: 'g2-chetao', title: '' }] },
-      ] },
-      { id: 'nhom-3', no: '3', short: 'Lập trình & robot giáo dục', title: 'Nhóm thiết bị lập trình và robot giáo dục', desc: 'Robot lắp ghép, robot lập trình và robot hình người AI — từ lập trình khối ở Tiểu học đến Python, AI ở THPT.', blocks: [
-        { id: 'ubtech', title: 'Robot hình người & robot AI', brands: 'UBTECH Robotics', parts: [{ id: 'g3-ubtech', title: '' }] },
-        { id: 'stickem', title: "Robotics – STEAM Stick 'Em", brands: "Stick 'Em (Singapore)", parts: [{ id: 'g3-stickem', title: '' }] },
-        { id: 'robot-lap-trinh', title: 'Robot lập trình & thi đấu', brands: 'Weeemake · OhStem', parts: [{ id: 'g3-khac', title: '' }] },
-      ] },
-      { id: 'nhom-4', no: '4', short: 'Công nghệ số, AI & IoT', title: 'Nhóm thiết bị công nghệ số, trí tuệ nhân tạo và Internet vạn vật (IoT)', desc: 'Bộ trải nghiệm AI, kit IoT theo chủ đề và thiết bị thực tế ảo cho hoạt động công nghệ số.', blocks: [
-        { id: 'ai', title: 'Trải nghiệm & học máy AI', brands: 'OhStem · Weeemake · Meta', parts: [{ id: 'g4-ai', title: '' }] },
-        { id: 'iot', title: 'Kit IoT theo chủ đề', brands: 'OhStem · Weeemake', parts: [{ id: 'g4-iot', title: '' }] },
-      ] },
-      { id: 'nhom-5', no: '5', short: 'Các cấu phần khác', title: 'Các cấu phần khác', desc: 'Lớp học thông minh, thư viện số, màn hình tương tác và nền tảng AI — kết nối Phòng STEM – AI Lab với toàn trường.', blocks: [
-        { id: 'vdsmart', title: 'Lớp học thông minh & thư viện số AI', brands: 'VDSMART (VisEdu)', parts: [{ id: 'g5-vdsmart', title: '' }] },
-        { id: 'maxhub', title: 'Màn hình tương tác & thiết bị lớp học', brands: 'MAXHUB', parts: [{ id: 'g5-maxhub', title: '' }] },
-        { id: 'mysher', title: 'Giải pháp Mysher', brands: 'Mysher', parts: [{ id: 'g5-mysher', title: '' }] },
-      ] },
+      { id: 'nhom-1', no: '1', short: 'Khám phá, đo lường & thực nghiệm', title: 'Nhóm thiết bị khám phá, đo lường và thực nghiệm khoa học', desc: 'Thiết bị thí nghiệm, đo lường và thu nhận số liệu cho các chủ đề Khoa học tự nhiên từ Tiểu học đến THPT.', parts: ['khtn-chude', 'khtn-cambien', 'g1-thinghiem'] },
+      { id: 'nhom-2', no: '2', short: 'Thiết kế kĩ thuật & chế tạo', title: 'Nhóm thiết bị thiết kế kĩ thuật và chế tạo', desc: 'Mô hình kĩ thuật, bộ lắp ghép, dụng cụ chế tạo và máy in 3D để học sinh đi từ ý tưởng đến sản phẩm thật.', parts: ['g2-mohinh', 'g2-chetao'] },
+      { id: 'nhom-3', no: '3', short: 'Lập trình & robot giáo dục', title: 'Nhóm thiết bị lập trình và robot giáo dục', desc: 'Robot lắp ghép, robot lập trình và robot hình người AI — từ lập trình khối ở Tiểu học đến Python, AI ở THPT.', parts: ['g3-ubtech', 'g3-stickem', 'g3-khac'] },
+      { id: 'nhom-4', no: '4', short: 'Công nghệ số, AI & IoT', title: 'Nhóm thiết bị công nghệ số, trí tuệ nhân tạo và Internet vạn vật (IoT)', desc: 'Bộ trải nghiệm AI, kit IoT theo chủ đề và thiết bị thực tế ảo cho hoạt động công nghệ số.', parts: ['g4-ai', 'g4-iot'] },
+      { id: 'nhom-5', no: '5', short: 'Các cấu phần khác', title: 'Các cấu phần khác', desc: 'Lớp học thông minh, thư viện số, màn hình tương tác và nền tảng AI — kết nối Phòng STEM – AI Lab với toàn trường.', parts: ['g5-vdsmart', 'g5-maxhub'] },
     ],
   },
 
@@ -761,7 +739,7 @@ const vi = {
     },
     search: 'Tìm sản phẩm, kit, học liệu…',
     featured: 'Sản phẩm nổi bật',
-    cats: 'Danh mục sản phẩm',
+    cats: 'Danh mục theo TT 86',
     all: 'Tất cả sản phẩm',
     count: 'sản phẩm',
     help: { title: 'Cần tư vấn?', desc: 'Liên hệ trực tiếp để được tư vấn giải pháp phù hợp với trường của bạn.', cta: 'Liên hệ ngay' },

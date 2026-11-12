@@ -18,7 +18,9 @@ const { lang } = Astro.props;
 const t = useT(lang);
 const st = t.store;
 const stats = t.home.stats.slice(0, 4).map((s) => ({ v: s.n.toLocaleString(lang === 'vi' ? 'vi-VN' : 'en-US') + s.suf, k: s.label.replace(/<br>/g, ' ') }));
-const L = { ...st, shop: SHOP };
+// Danh mục Store = các nhóm chung của TT 86 (không dùng danh mục riêng của repo Shop).
+const groups = t.products.groups.map((g) => ({ id: g.id, no: g.no, name: g.short, title: g.title }));
+const L = { ...st, shop: SHOP, groups };
 ---
 <Base lang={lang} page="store" title={t.meta.store.title} description={t.meta.store.description}>
   <PageHero lang={lang} title={st.hero.title} lead={st.hero.lead} crumb={t.common.nav.store} bots={['ukit-se', 'kt-3dprinter']}>
@@ -88,7 +90,15 @@ const L = { ...st, shop: SHOP };
     return L.shop + (p.slug || slugify(p.name)) + (tail ? '/' + encodeURIComponent(tail) : '');
   };
   const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
-  const catOf = (p) => S.data.categories.find((c) => c.id === p.category);
+  // shortcut: xếp nhóm TT 86 theo từ khoá trong tên (danh mục của Shop đang xếp lẫn); thêm danh mục TT 86 vào Shop thì đọc trực tiếp.
+  const RULES = [
+    ['nhom-1', /thí nghiệm|cảm biến|đo lường|dụng cụ đo|kính hiển vi|thu nhận|khám phá|vật tư tiêu hao|nguồn điện|biến áp/],
+    ['nhom-2', /in 3d|lắp ghép|chế tạo|mô hình|laser/],
+    ['nhom-3', /robot|lập trình|sân thi đấu/],
+    ['nhom-4', /thực tế ảo|vr|ai|iot|trí tuệ nhân tạo/],
+  ];
+  const groupId = (p) => { const n = String(p.name || '').toLowerCase(); return (RULES.find(([, re]) => re.test(n)) || ['nhom-5'])[0]; };
+  const catOf = (p) => L.groups.find((g) => g.id === p._g);
   const meta = (p) => p.shortDescription || [p.brand && `${L.brand}: ${p.brand}`, p.model && `${L.model}: ${p.model}`, p.origin && `${L.origin}: ${p.origin}`].filter(Boolean).join(' · ');
   const img = (p) => (p.images && p.images[0]) || '';
 
@@ -103,9 +113,9 @@ const L = { ...st, shop: SHOP };
     const c = catOf(p);
     const im = img(p);
     return `<a class="sx-card" href="${esc(url(p))}" target="_blank" rel="noopener">
-      <span class="sx-ph">${im ? `<img src="${esc(im)}" alt="" loading="lazy" decoding="async">` : `<span class="sx-noimg">${esc(c ? c.icon : '📦')}</span>`}${p.featured ? '<span class="sx-hot">HOT</span>' : ''}</span>
+      <span class="sx-ph">${im ? `<img src="${esc(im)}" alt="" loading="lazy" decoding="async">` : `<span class="sx-noimg">${esc(c ? c.no : '')}</span>`}${p.featured ? '<span class="sx-hot">HOT</span>' : ''}</span>
       <span class="sx-cb">
-        <span class="sx-cat">${c ? esc(c.icon + ' ' + c.name) : ''}</span>
+        <span class="sx-cat">${c ? esc(c.name) : ''}</span>
         <span class="sx-name">${esc(p.name)}</span>
         <span class="sx-meta">${esc(meta(p))}</span>
         <span class="sx-go">${esc(L.view)} ↗</span>
@@ -115,15 +125,15 @@ const L = { ...st, shop: SHOP };
   const list = () => {
     const all = S.data.products.slice().reverse();
     const q = norm(S.q);
-    return all.filter((p) => (S.cat === 'all' || p.category === S.cat) && (!q || norm([p.name, p.brand, p.model, p.description, ...(p.tags || [])].join(' ')).includes(q)));
+    return all.filter((p) => (S.cat === 'all' || p._g === S.cat) && (!q || norm([p.name, p.brand, p.model, p.description, ...(p.tags || [])].join(' ')).includes(q)));
   };
 
   function renderCats() {
     const P = S.data.products;
-    const items = [{ id: 'all', name: L.all, icon: '🗂' }, ...S.data.categories];
+    const items = [{ id: 'all', name: L.all, no: '•' }, ...L.groups];
     $('sx-cats').innerHTML = items.map((c) => {
-      const n = c.id === 'all' ? P.length : P.filter((p) => p.category === c.id).length;
-      return `<li><button type="button" data-cat="${esc(c.id)}" aria-pressed="${c.id === S.cat}"><span>${esc(c.icon)}</span>${esc(c.name)}<b>${n}</b></button></li>`;
+      const n = c.id === 'all' ? P.length : P.filter((p) => p._g === c.id).length;
+      return `<li><button type="button" data-cat="${esc(c.id)}" aria-pressed="${c.id === S.cat}"><span>${esc(c.no)}</span>${esc(c.name)}<b>${n}</b></button></li>`;
     }).join('');
   }
 
@@ -133,7 +143,7 @@ const L = { ...st, shop: SHOP };
     S.page = Math.min(S.page, pages);
     const from = (S.page - 1) * PAGE;
     $('sx-n').textContent = L2.length;
-    $('sx-title').textContent = S.cat === 'all' ? L.all : (S.data.categories.find((c) => c.id === S.cat) || {}).name || L.all;
+    $('sx-title').textContent = S.cat === 'all' ? L.all : (L.groups.find((g) => g.id === S.cat) || {}).title || L.all;
     $('sx-grid').innerHTML = L2.length ? L2.slice(from, from + PAGE).map(card).join('') : `<p class="sx-msg">${esc(L.empty)}</p>`;
     $('sx-pager').innerHTML = pages < 2 ? '' : Array.from({ length: pages }, (_, k) => `<button type="button" data-page="${k + 1}" aria-current="${k + 1 === S.page ? 'page' : 'false'}">${k + 1}</button>`).join('');
     renderCats();
@@ -148,6 +158,7 @@ const L = { ...st, shop: SHOP };
   let tm; $('sx-q').addEventListener('input', (e) => { clearTimeout(tm); tm = setTimeout(() => { S.q = e.target.value; S.page = 1; render(); }, 150); });
 
   load().then((d) => {
+    d.products.forEach((p) => { p._g = groupId(p); });
     S.data = d;
     const feat = d.products.slice().reverse().filter((p) => p.featured).slice(0, 4);
     if (feat.length) { $('sx-feat').hidden = false; $('sx-feat-grid').innerHTML = feat.map(card).join(''); }

@@ -579,36 +579,14 @@ const en: Dict = {
     },
     navLabel: 'Equipment groups',
     navTitle: 'Circular 86 equipment · STEM – AI Lab',
-    brandLabel: 'Brand',
-    pending: 'Product details coming soon.',
     more: 'And many more smart-education products and solutions',
     moreCta: 'Talk to us',
     groups: [
-      { id: 'nhom-1', no: '1', short: 'Discovery, measurement & experiments', title: 'Scientific discovery, measurement and experimentation equipment', desc: 'Experiment, measurement and data-logging equipment for science topics from primary to upper secondary.', blocks: [
-        { id: 'kit-khtn', title: 'Natural science STEM kits', brands: 'EBD – Vietnam Education Publishing House · CMA', parts: [
-          { id: 'khtn-chude', title: 'Theme-based equipment, tools and consumables for grades 1–12' },
-          { id: 'khtn-cambien', title: 'Sensors and interfaces' },
-        ] },
-        { id: 'thi-nghiem', title: 'Experiment sets & data loggers', brands: 'OhStem', parts: [{ id: 'g1-thinghiem', title: '' }] },
-      ] },
-      { id: 'nhom-2', no: '2', short: 'Engineering design & making', title: 'Engineering design and making equipment', desc: 'Engineering models, build kits, making tools and 3D printers so students go from idea to real product.', blocks: [
-        { id: 'mo-hinh', title: 'Theme-based STEM – IoT models', brands: 'Khang Thinh', parts: [{ id: 'g2-mohinh', title: '' }] },
-        { id: 'che-tao', title: 'Build kits, making tools & 3D printers', brands: 'OhStem · Weeemake · Bambu Lab', parts: [{ id: 'g2-chetao', title: '' }] },
-      ] },
-      { id: 'nhom-3', no: '3', short: 'Coding & educational robots', title: 'Coding and educational robot equipment', desc: 'Build robots, programmable robots and AI humanoids — from block coding in primary to Python and AI in upper secondary.', blocks: [
-        { id: 'ubtech', title: 'Humanoid & AI robots', brands: 'UBTECH Robotics', parts: [{ id: 'g3-ubtech', title: '' }] },
-        { id: 'stickem', title: "Stick 'Em Robotics – STEAM", brands: "Stick 'Em (Singapore)", parts: [{ id: 'g3-stickem', title: '' }] },
-        { id: 'robot-lap-trinh', title: 'Programmable & competition robots', brands: 'Weeemake · OhStem', parts: [{ id: 'g3-khac', title: '' }] },
-      ] },
-      { id: 'nhom-4', no: '4', short: 'Digital tech, AI & IoT', title: 'Digital technology, artificial intelligence and Internet of Things (IoT) equipment', desc: 'AI experience kits, theme-based IoT kits and virtual-reality devices for digital-technology activities.', blocks: [
-        { id: 'ai', title: 'AI experiences & machine learning', brands: 'OhStem · Weeemake · Meta', parts: [{ id: 'g4-ai', title: '' }] },
-        { id: 'iot', title: 'Theme-based IoT kits', brands: 'OhStem · Weeemake', parts: [{ id: 'g4-iot', title: '' }] },
-      ] },
-      { id: 'nhom-5', no: '5', short: 'Other components', title: 'Other components', desc: 'Smart classrooms, digital libraries, interactive displays and AI platforms — connecting the STEM – AI Lab with the whole school.', blocks: [
-        { id: 'vdsmart', title: 'Smart classrooms & AI digital library', brands: 'VDSMART (VisEdu)', parts: [{ id: 'g5-vdsmart', title: '' }] },
-        { id: 'maxhub', title: 'Interactive displays & classroom devices', brands: 'MAXHUB', parts: [{ id: 'g5-maxhub', title: '' }] },
-        { id: 'mysher', title: 'Mysher solutions', brands: 'Mysher', parts: [{ id: 'g5-mysher', title: '' }] },
-      ] },
+      { id: 'nhom-1', no: '1', short: 'Discovery, measurement & experiments', title: 'Scientific discovery, measurement and experimentation equipment', desc: 'Experiment, measurement and data-logging equipment for science topics from primary to upper secondary.', parts: ['khtn-chude', 'khtn-cambien', 'g1-thinghiem'] },
+      { id: 'nhom-2', no: '2', short: 'Engineering design & making', title: 'Engineering design and making equipment', desc: 'Engineering models, build kits, making tools and 3D printers so students go from idea to real product.', parts: ['g2-mohinh', 'g2-chetao'] },
+      { id: 'nhom-3', no: '3', short: 'Coding & educational robots', title: 'Coding and educational robot equipment', desc: 'Build robots, programmable robots and AI humanoids — from block coding in primary to Python and AI in upper secondary.', parts: ['g3-ubtech', 'g3-stickem', 'g3-khac'] },
+      { id: 'nhom-4', no: '4', short: 'Digital tech, AI & IoT', title: 'Digital technology, artificial intelligence and Internet of Things (IoT) equipment', desc: 'AI experience kits, theme-based IoT kits and virtual-reality devices for digital-technology activities.', parts: ['g4-ai', 'g4-iot'] },
+      { id: 'nhom-5', no: '5', short: 'Other components', title: 'Other components', desc: 'Smart classrooms, digital libraries, interactive displays and AI platforms — connecting the STEM – AI Lab with the whole school.', parts: ['g5-vdsmart', 'g5-maxhub'] },
     ],
   },
 
@@ -725,7 +703,7 @@ const en: Dict = {
     },
     search: 'Search products, kits, materials…',
     featured: 'Featured products',
-    cats: 'Product categories',
+    cats: 'Circular 86 categories',
     all: 'All products',
     count: 'products',
     help: { title: 'Need advice?', desc: 'Contact us directly for a solution that fits your school.', cta: 'Contact us' },
