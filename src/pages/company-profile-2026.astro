@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+// Hồ sơ năng lực 2026 xem thẳng từ Google Drive (file đã chia sẻ công khai). Đổi file: thay ID.
+const ID = '1XYM_xWeKc81Ihgcj0-e1-IzlD5NnTRGW';
+const view = `https://drive.google.com/file/d/${ID}/view`;
+---
+<Base lang="vi" page={null} title="Company Profile 2026 – Learn to Leap" description="Hồ sơ năng lực Learn to Leap 2026 – Company Profile.">
+  <section class="phero cp"><div class="wrap">
+    <div class="cp-bar">
+      <h1>Company Profile 2026</h1>
+      <a href={view} target="_blank" rel="noopener">Mở trên Google Drive ↗</a>
+    </div>
+    <iframe src={`https://drive.google.com/file/d/${ID}/preview`} title="Company Profile 2026 – Learn to Leap" allow="autoplay" allowfullscreen></iframe>
+  </div></section>
+</Base>
+
+<style>
+  .phero.cp { padding: 110px 0 40px; }
+  .cp-bar a { color: #e7ddff; }
+  .cp-bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+  .cp-bar h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0; }
+  .cp iframe { display: block; width: 100%; height: calc(100vh - 190px); min-height: 520px; border: 0; border-radius: 12px; background: #fff; }
+</style>
