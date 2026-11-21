@@ -14,6 +14,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'vi', locales: { vi: 'vi-VN', en: 'en-US' } },
+      filter: (p) => !/\/store\/?$/.test(p), // Store tạm ẩn
     }),
   ],
 });

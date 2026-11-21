@@ -10,8 +10,9 @@ const other: Lang = lang === 'vi' ? 'en' : 'vi';
 const switchHref = withBase(paths ? paths[other] : page ? ROUTES[page][other] : ROUTES.home[other]);
 // Menu ngang: "Sản phẩm" có mega menu, "Đề án" gom 2 trang Đề án theo NSNN và Đề án XHH.
 const before: PageKey[] = ['about', 'solutions'];
-const after: PageKey[] = ['projects', 'store', 'news'];
-const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh', 'stickem', 'projects', 'store', 'news', 'impact', 'partnership', 'contact'];
+// Store tạm ẩn khỏi menu, footer, sitemap (trang /store vẫn còn); bật lại: thêm 'store' vào after, all, Footer và bỏ filter sitemap.
+const after: PageKey[] = ['projects', 'news'];
+const all: PageKey[] = ['home', 'about', 'solutions', 'products', 'scheme', 'xhh', 'stickem', 'projects', 'news', 'impact', 'partnership', 'contact'];
 const cur = (k: PageKey) => (k === page ? 'page' : undefined);
 const groups = t.products.groups;
 // Ảnh minh hoạ của một nhóm: lấy lần lượt từ các phần trong nhóm.
